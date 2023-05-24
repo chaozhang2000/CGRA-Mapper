@@ -2,7 +2,7 @@
 
 ## 初次运行
 1. 根据README.md中，在build目录下的cmkae和make生成动态连接库文件
-2. 在CGRA\-Mapper/test目录下运行compile.sh脚本，利用clang-12编译器来将测试程序kernel.cpp编译成kernel.bc
+2. 在CGRA\-Mapper/test目录下运行compile.sh脚本，利用clang-12编译器来将测试程序kernel.cpp编译成kernel.bc,kernel.bc是一种格式的ir。ir是编译器前端处理后生成的文件，编译器后端会继续对其处理。这里利用了基于llvm的c编译器clang的前端对kernel.cpp源文件进行处理，生成ir，之后对ir进行处理的编译器的后端就是本工程CGRA-Mapper了。  
 	```
 	clang-12 -emit-llvm -fno-unroll-loops -O3 -o kernel.bc -c kernel.cpp
 	```
@@ -10,7 +10,7 @@
 	```
 	opt-12 -load ../build/src/libmapperPass.so -mapperPass kernel.bc
 	```
-	猜测是加载了动态链接库之后，利用自己编写的mapperPass来处理kernel.bc产生输出。于是出现了README中的演示效果
+	猜测是加载了动态链接库之后，利用自己编写的mapperPass来处理ir文件kernel.bc产生输出。于是出现了README中的演示效果
 
 ## 源码阅读 
 
