@@ -12,4 +12,14 @@
 	```
 	猜测是加载了动态链接库之后，利用自己编写的mapperPass来处理kernel.bc产生输出。于是出现了README中的演示效果
 
-## 源码阅读
+## 源码阅读 
+
+首先应该阅读mapperPass相关的源码，查看src/mapperPass.cpp，可以发现其中有很多和llvm相关的内容比如include了很多头文件  
+```c
+#include <llvm/IR/Function.h>
+#include <llvm/Pass.h>
+#include <llvm/Analysis/LoopInfo.h>
+#include <llvm/Analysis/LoopIterator.h>
+```
+mapperPass类也继承自FunctionPass类所以有必要先学习以下llvm，有一个基础的认识  
+LLVM的基础学习见[**LLVM学习笔记**](docs/LLVM.md)
