@@ -35,12 +35,12 @@ class DFG {
     bool m_CDFGFused;
     bool m_targetFunction;
     bool m_precisionAware;
-    list<DFGNode*>* m_orderedNodes;
-    list<Loop*>* m_targetLoops;
+    list<DFGNode*>* m_orderedNodes;//排序后的DFGNode
+    list<Loop*>* m_targetLoops; //目标循环
 
     //edges of data flow
-    list<DFGEdge*> m_DFGEdges;
-    list<DFGEdge*> m_ctrlEdges;
+    list<DFGEdge*> m_DFGEdges; //DFG箭头
+    list<DFGEdge*> m_ctrlEdges; //控制箭头
 
     string changeIns2Str(Instruction* ins);
     //get value's name or inst's content
@@ -86,9 +86,9 @@ class DFG {
 
   public:
     DFG(Function&, list<Loop*>*, bool, bool, bool, map<string, int>*, list<string>*);
-    list<list<DFGNode*>*>* m_cycleNodeLists;
+    list<list<DFGNode*>*>* m_cycleNodeLists;//时钟节点列表
     //initial ordering of insts
-    list<DFGNode*> nodes;
+    list<DFGNode*> nodes;//DFG 节点列表
 
     list<DFGNode*>* getBFSOrderedNodes();
     list<DFGNode*>* getDFSOrderedNodes();

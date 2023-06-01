@@ -360,5 +360,3 @@ void addDefaultKernels(map<string, list<int>*>* t_functionWithLoop) {
   // (*t_functionWithLoop)["_Z6kernelPfS_S_"] = new list<int>();
   // (*t_functionWithLoop)["_Z6kernelPfS_S_"]->push_back(0);
 }
-
-
