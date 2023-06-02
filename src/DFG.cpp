@@ -175,6 +175,9 @@ void DFG::combine(string t_opt0, string t_opt1) {
   }
 }
 
+//判断指令是否应该忽视
+//以下条件不应该忽视
+//属于目标Function或目标循环的个数为0或某个目标循环中含有该指令
 bool DFG::shouldIgnore(Instruction* t_inst) {
   if (m_targetFunction) {
     return false;
@@ -298,6 +301,7 @@ void DFG::construct(Function& t_F) {
   cout<<"*** current function: "<<t_F.getName().str()<<"\n";
 
   // FIXME: eleminate duplicated edges.
+	// first for loop遍历Function中的所有basicblock,为指令创建DFGnode，创建控制箭头;
   for (Function::iterator BB=t_F.begin(), BEnd=t_F.end();
       BB!=BEnd; ++BB) {
     BasicBlock *curBB = &*BB;
@@ -307,6 +311,7 @@ void DFG::construct(Function& t_F) {
     }
 
      // Construct DFG nodes.
+		 //遍历basicblock中的所有Instruction为每条不被忽视的Instruction都创建DFG node
     for (BasicBlock::iterator II=curBB->begin(),
         IEnd=curBB->end(); II!=IEnd; ++II) {
       Instruction* curII = &*II;
@@ -327,21 +332,24 @@ void DFG::construct(Function& t_F) {
       }
       cout<<" (ID: "<<dfgNode->getID()<<")\n";
     }
+		//getTerminator()方法是BasicBlock类的一个成员函数，返回指向该基本块终结指令的指针，
+		//基本块是LLVM中表示程序控制流的最小单元，是一系列指令的序列，只有一个入口和出口，出口是终结指令，是一种控制流指令，如分支跳转返回等，决定了程序跳转到哪个基本块
     Instruction* terminator = curBB->getTerminator();
 
+		//如果terminator可以忽略就不需要考虑下一个运行的基本块了,successors()可以获取后继的基本块的指针
     if (shouldIgnore(terminator))
       continue;
-//    DFGNode* dfgNodeTerm = new DFGNode(nodeID++, terminator, getValueName(terminator));
+		//遍历所有的后继基本块，将后继基本块的不可忽视的入口指令也添加到节点，并添加控制箭头，即从当前基本块的出口指令指向到后继基本块入口指令的箭头
     for (BasicBlock* sucBB : successors(curBB)) {
       // TODO: get the live-in nodes rather than front() and connect them
+			// 遍历每个后继基本块中的所有指令
       for (BasicBlock::iterator II=sucBB->begin(),
           IEnd=sucBB->end(); II!=IEnd; ++II) {
         Instruction* inst = &*II;
-
         // Ignore this IR if it is out of the scope.
         if (shouldIgnore(inst))
           continue;
-
+				//只处理后继模块的入口指令，为后继基本块的入口指令创建DFGNode节点
         if (isLiveInInst(sucBB, inst)) {
           errs()<<" check inst: "<<*inst<<"\n";
 
@@ -352,15 +360,7 @@ void DFG::construct(Function& t_F) {
             dfgNode = new DFGNode(nodeID++, m_precisionAware, inst, getValueName(inst));
             nodes.push_back(dfgNode);
           }
-    //      Instruction* first = &*(sucBB->begin());
-    //      if (!getNode(inst)->isPhi()) {
-    //
-    //        cout<<"!!!!!!! [avoid as a phi] construct ctrl flow: "<<*terminator<<"->"<<*inst<<"\n";
-    //        continue;
-    //      }
-    
           errs()<<"!!!!!!! construct ctrl flow: "<<*terminator<<"->"<<*inst<<"\n";
-    
           // Construct contrl flow edges.
           DFGEdge* ctrlEdge;
           if (hasCtrlEdge(getNode(terminator), dfgNode)) {
@@ -376,92 +376,10 @@ void DFG::construct(Function& t_F) {
     }
   }
 
-//      Instruction* inst = &(sucBB->front());
-////    for (Instruction* inst: sucBB) {
-//      // Ignore this IR if it is out of the scope.
-//      if (shouldIgnore(inst))
-//        continue;
-//      DFGNode* dfgNode;
-//      if (hasNode(inst)) {
-//        dfgNode = getNode(inst);
-//      } else {
-//        dfgNode = new DFGNode(nodeID++, inst, getValueName(inst));
-//        nodes.push_back(dfgNode);
-//      }
-////      Instruction* first = &*(sucBB->begin());
-////      if (!getNode(inst)->isPhi()) {
-////
-////        cout<<"!!!!!!! [avoid as a phi] construct ctrl flow: "<<*terminator<<"->"<<*inst<<"\n";
-////        continue;
-////      }
-//
-//      cout<<"!!!!!!! construct ctrl flow: "<<*terminator<<"->"<<*inst<<"\n";
-//
-//      // Construct contrl flow edges.
-//      DFGEdge* ctrlEdge;
-//      if (hasCtrlEdge(getNode(terminator), dfgNode)) {
-//        ctrlEdge = getCtrlEdge(getNode(terminator), dfgNode);
-//      }
-//      else {
-//        ctrlEdge = new DFGEdge(ctrlEdgeID++, getNode(terminator), dfgNode);
-//        m_ctrlEdges.push_back(ctrlEdge);
-//      }
-//    }
-//  }
  
-//      for (BasicBlock::iterator II=sucBB->begin(),
-//          IEnd=sucBB->end(); II!=IEnd; ++II) {
-//        Instruction* inst = &*II;
-////      for (Instruction* inst: sucBB) {
-//        // Ignore this IR if it is out of the scope.
-//        if (shouldIgnore(inst))
-//          continue;
-//        DFGNode* dfgNode;
-//        if (hasNode(inst)) {
-//          dfgNode = getNode(inst);
-//        } else {
-//          dfgNode = new DFGNode(nodeID++, inst, getValueName(inst));
-//          nodes.push_back(dfgNode);
-//        }
-////        Instruction* first = &*(sucBB->begin());
-//        if (!getNode(inst)->isPhi()) {
-//
-//          cout<<"!!!!!!! [avoid as a phi] construct ctrl flow: "<<*terminator<<"->"<<*inst<<"\n";
-//          continue;
-//        }
-//
-//        cout<<"!!!!!!! construct ctrl flow: "<<*terminator<<"->"<<*inst<<"\n";
-//
-//        // Construct contrl flow edges.
-//        DFGEdge* ctrlEdge;
-//        if (hasCtrlEdge(getNode(terminator), dfgNode)) {
-//          ctrlEdge = getCtrlEdge(getNode(terminator), dfgNode);
-//        }
-//        else {
-//          ctrlEdge = new DFGEdge(ctrlEdgeID++, getNode(terminator), dfgNode);
-//          m_ctrlEdges.push_back(ctrlEdge);
-//        }
-//      }
-//    }
-//  }
-
-//  // Construct contrl flow forward edges.
-//  for (list<DFGNode*>::iterator nodeItr=nodes.begin();
-//      nodeItr!=nodes.end(); ++nodeItr) {
-//    list<DFGNode*>::iterator next = nodeItr;
-//    ++next;
-//    if (next != nodes.end()) {
-//      DFGEdge* ctrlEdge;
-//      if (hasCtrlEdge(*nodeItr, *next))
-//        ctrlEdge = getCtrlEdge(*nodeItr, *next);
-//      else {
-//        ctrlEdge = new DFGEdge(ctrlEdgeID++, *nodeItr, *next);
-//        m_ctrlEdges.push_back(ctrlEdge);
-//      }
-//    }
-//  }
 
   // Construct data flow edges.
+	// second for loop
   for (DFGNode* node: nodes) {
 //    nodes.push_back(Node(curII, getValueName(curII)));
     Instruction* curII = node->getInst();
@@ -482,8 +400,6 @@ void DFG::construct(Function& t_F) {
           dfgEdge = new DFGEdge(dfgEdgeID++, getNode(loadValPtr), node);
           m_DFGEdges.push_back(dfgEdge);
         }
-//        getNode(loadValPtr)->setOutEdge(dfgEdge);
-//        (*nodeItr)->setInEdge(dfgEdge);
         break;
       }
       case llvm::Instruction::Store: {
@@ -501,23 +417,14 @@ void DFG::construct(Function& t_F) {
             dfgEdge1 = new DFGEdge(dfgEdgeID++, getNode(storeVal), node);
             m_DFGEdges.push_back(dfgEdge1);
           }
-//          getNode(storeVal)->setOutEdge(dfgEdge1);
-//          (*nodeItr)->setInEdge(dfgEdge1);
         }
         if (hasNode(storeValPtr)) {
-//          if (hasDFGEdge(*nodeItr, getNode(storeValPtr)))
           if (hasDFGEdge(getNode(storeValPtr), node))
-//            dfgEdge2 = getDFGEdge(*nodeItr, getNode(storeValPtr));
             dfgEdge2 = getDFGEdge(getNode(storeValPtr), node);
           else {
-//            dfgEdge2 = new DFGEdge(dfgEdgeID++, *nodeItr, getNode(storeValPtr));
             dfgEdge2 = new DFGEdge(dfgEdgeID++, getNode(storeValPtr), node);
             m_DFGEdges.push_back(dfgEdge2);
           }
-//          getNode(storeValPtr)->setOutEdge(dfgEdge2);
-//          (*nodeItr)->setInEdge(dfgEdge2);
-//          (*nodeItr)->setOutEdge(dfgEdge2);
-//          getNode(storeValPtr)->setInEdge(dfgEdge2);
         }
         break;
       }
@@ -525,10 +432,6 @@ void DFG::construct(Function& t_F) {
         for (Instruction::op_iterator op = curII->op_begin(), opEnd = curII->op_end(); op != opEnd; ++op) {
           Instruction* tempInst = dyn_cast<Instruction>(*op);
           if (tempInst and !shouldIgnore(tempInst)) {
-//            if(node->isBranch()) {
-//              cout<<"  the real branch's pred: "<<*tempInst<<"\n";
-//              int numSuccs = tempInst->getNumSuccessors();
-//            }
             DFGEdge* dfgEdge;
             if (hasNode(tempInst)) {
               if (hasDFGEdge(getNode(tempInst), node))
@@ -537,8 +440,6 @@ void DFG::construct(Function& t_F) {
                 dfgEdge = new DFGEdge(dfgEdgeID++, getNode(tempInst), node);
                 m_DFGEdges.push_back(dfgEdge);
               }
-//              getNode(tempInst)->setOutEdge(dfgEdge);
-//              (*nodeItr)->setInEdge(dfgEdge);
             }
           } else {
             // Original Branch node will take three
@@ -547,13 +448,6 @@ void DFG::construct(Function& t_F) {
               node->addConst();
           } 
         }
-//        if(node->isBranch()) {
-//          int numSuccs = curII->getNumSuccessors();
-//          cout<<"the succ of the branch: "<<*curII<<"; ("<<numSuccs<<")\n";
-//          for(int i=0; i<numSuccs; ++i) {
-//            BasicBlock* bb
-//          }
-//        }
         break;
       }
     }
@@ -562,11 +456,6 @@ void DFG::construct(Function& t_F) {
 
   calculateCycles();
 
-  // The mapping algorithm works on the DFG that is ordered in ASAP.
-  // reorderInASAP();
-  // The mapping algorithm works on the DFG that is ordered in ALAP.
-  // reorderInALAP();
-  // The mapping algorithm works on the DFG that is ordered along with the longest path.
   reorderInLongest();
   
 }

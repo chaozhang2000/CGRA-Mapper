@@ -7,7 +7,6 @@
  * Author : Cheng Tan
  *   Date : July 19, 2019
  */
-
 #ifndef DFGNode_H
 #define DFGNode_H
 
@@ -125,5 +124,4 @@ class DFGNode {
     bool isPipelinable();
     bool shareFU(DFGNode*);
 };
-
 #endif
