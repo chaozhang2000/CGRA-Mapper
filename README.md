@@ -138,4 +138,97 @@ construct(t_f);//Function& t_F  Function是llvm中的类,我门的IR就可以被
 
 现在我们知道DFG类可以根据IR生成数据流图了，结下来先进入CGRA和MAPPER类也对其进行初步了解。  
 
-## new title
+## CGRA
+
+回到mapperPass继续查看代码，可以发现在初始化DFG后马上初始化了CGRA，并且这两个对象作为参数被频繁地传递给mapper类中的函数。所以准备先看CGRA类，再看MAPPER类。  
+CGRA类相关的文件有：CGRA.cpp CGRA.h CGRALink.cpp CGRALink.h CGRANode.cpp CGRANode.h  
+且发现其也有Node和Link(DFG中是Edge)，有些类似，CGRA和DFG有什么相似之处？先存疑  
+阅读CGRA.h源码，发现CGRA类的结构比较简单，数据有FUCount，LinkCount,rows,columns等，还有CGRANode和CGRALink相关的指针。  
+先看CGRANode
+1. **CGRANode**
+CGRANode就相当于CGRA硬件中的Tile，其实有点模型的意思。看一下CGRANode类中的主要变量
+```cpp
+    int m_x;	// 当前node在nxn CGRA下的横坐标
+    int m_y;	//
+    int m_registerCount;	//CGRANode中寄存器的数量
+    list<float> m_registers;	//CGRANode中的寄存器
+    int m_ctrlMemSize;	//configuration memory的大小
+    int m_currentCtrlMemItems;	//
+    float* m_ctrlMem;	//configuration memory
+    list<CGRALink*> m_inLinks;	//CGRANode的输入CGRALink列表
+    list<CGRALink*> m_outLinks;	//CGRANode的输出CGRALink列表
+    list<CGRALink*>* m_occupiableInLinks;	//CGRANode未被占用的输入CGRALink列表
+    list<CGRALink*>* m_occupiableOutLinks;	//CGRANode未被占用的输出CGRALink列表
+    list<CGRANode*>* m_neighbors;	//CGRA节点的相邻节点
+    int* m_fuOccupied; //?
+    DFGNode** m_dfgNodes;	//?
+    map<CGRALink*,bool*> m_xbarOccupied;
+    bool m_canXXX; //能否进行某项运算
+    int** m_regs_duration; //?
+    int** m_regs_timing;	//?
+    vector<list<pair<DFGNode*, int>>*> m_dfgNodesWithOccupyStatus;	//?
+```
+
+对于CGRANode所对应的方法，师兄的笔记非常详细，在这里列举几个稍微能窥探以下CGRANode的功能  
+```cpp
+	void enableXXX();	//使能某个计算功能
+	void attachInLink(CGRALink*);	//绑定输入的CGRALink
+	void attachOutLink(CGRALink*);	//绑定输出的CGRALink
+	void configXbar(CGRALink*, int, int);	//配置CGRANode中的crossbar
+	void addRegisterValue(float); //往寄存器中添加值	
+```
+
+现在至少知道了CGRANode中也即CGRA的Tile中有寄存器，有crossbar，有configration memory，有fu。但现在对具体的硬件还不了解，先只能这样，后面若有CGRANode是如何工作的代码，应该能加深对其的理解，先往下阅读。  
+2. **CGRALink**
+查看了CGRALink.h中的变量和方法，发现和DFGEdge有些类似  
+```cpp
+    CGRANode *m_src;
+    CGRANode *m_dst;
+    int m_ctrlMemSize;
+    int m_bypassConstraint; //bypass 限制
+    int m_currentCtrlMemItems;  //正在加载的重构指令
+		bool	m_disabled; //CGRALink被禁用
+    bool* m_occupied; //CGRALink被占用
+    bool* m_bypassed;	//CGRALink被bypass
+
+    CGRANode*  getSrc();
+    CGRANode*  getDst();
+    void connect(CGRANode*, CGRANode*);
+    bool isReused(int); //CGRALink是否被重用了
+    void setCtrlMemConstraint(int);
+    void setBypassConstraint(int);
+    int getBypassConstraint();
+```
+
+现在我门知道CGRALink应该是能够被禁用，占用或bypass的，还可能能被重用，可能也和configration memory相关，有太多的细节我们还不了解，先看看CGRA类吧。  
+3. **CGRA**
+看CGRA类中的变量  
+```cpp
+    int m_FUCount;
+    int m_LinkCount;
+    int m_rows;
+    int m_columns;
+		CGRANode ***nodes;
+		CGRALink **links;
+```
+
+这些其实都不用解释，就是体现了CGRANode和CGRALink组成了CGRA现在还有个困惑就是CGRANode为什么是三维数组，CGRALink为什么是二维数组。  
+现在对CGRA里面具体有什么是什么结构还是很模糊,准备阅读以下CGRA的构造函数看看。  
+看到CGRA类的构造函数篇幅很大。  
+构造函数在mapperPass.cpp中的被这样调用。  
+```cpp
+      CGRA* cgra = new CGRA(rows, columns, diagonalVectorization, heterogeneity,parameterizableCGRA, additionalFunc);
+			//rows和columns是CGRA的行列数，都是mapperPass中从参数的json文件中读取的
+			//剩下的三个参数也同样从json文件中读取，具体含义暂时还不了解
+```
+
+开始CGRA构造函数阅读
+构造函数结构虽然长也比较简单。实际就是构建一定数量的CGRANode和CGRALink并对其进行一些配置。
+* 首先给m\_rows和m\_colums赋值，分别代表行列的数量。需要注意的是，FUCount等于rows x columns，即一个node也就是一个FU 
+* 进行CGRA对象的构造，有两种情况
+	* 如果parameterizableCGRA为真，则会根据paramCGRA.json读取CGRA相关的参数，然后进行构造。首先是构建CGRANode会先建一个m\_rows x m\_colums个CGRANode，然后根据paramCGRA.json中对每个CGRANode进行配置，这里主要配置的是将要disable的node全部disable，将不启用所有fu功能的node先disable所有的fu功能，然后根据是否有accessMEM功能来确定是否开启load和store功能。**这里在逻辑上感觉是不完善的及不启用所有fu功能==只启用load和store**。之后构造CGRALink，从paramCGRA.json读取links相关参数，根据param["links"]的大小，来确定CGRALink数量，然后对每个CGRALink配置，根据读取到的param["srcTile和dstTile"]注册src和dst node，同时为每个srcNode和dstNode，注册outlink和inlink。到此完成了这种情况下的CGRA构建。如果采用这种构建方式，构建会完全依赖paramCGRA.json来进行，程序没有任何默认的操作，因此必须再paramCGRA.json中明确列出所有要disable的node，不启用所有fu功能的node，所有links，所有links的srcTile和dstTile。给的示例使用的是另外一种构造方式。
+	* 如果采用非参数化的CGRANode进行初始化也可以理解为默认的构造方式，先进行CGRANode和CGRALink的构造，CGRANode的数量根据行列相乘来确定，CGRALink数量则由默认的连接方式来确定。默认的连接方式是：最外圈的node往里双向连接，其余的每个node都向上下左右双向连接的。然后会对CGRANode进行一些配置，首先配置load和store进行配置，若param.json中的additionalFunc规定了某个编号的node具有load和store则对对应的node开启对应的fu功能。若没有指定开启load或store的node，则会将第一列的所有node都开启load或store功能。对CGRANode的配置还包括:对所有的node开启call，根据是否使能了diagonalVectorization对部分node开启vectorization还是对全部开启,根据是否使能了heterogeneity来决定是否对奇偶数行列开启Complex()。对所有的node开启return。再配置CGRALink,同样也是配置src和dst node，和为nodes配置outlink和inlink，和上一种配置方法相同。  
+
+暂时不准备再往下阅读CGRA类相关的代码，想必很多读取CGRA信息或者修改CGRA的函数，以及读取DFG信息和修改DFG的函数都会在mapper的过程中被使用，MAPPER类应该是最为重要的部分。  
+
+## MAPPER

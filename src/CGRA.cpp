@@ -17,25 +17,31 @@ using json = nlohmann::json;
 CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
 	   bool t_heterogeneity, bool t_parameterizableCGRA,
 	   map<string, list<int>*>* t_additionalFunc) {
+	
+	//初始化行列和FUCount,FUCount就是rows乘columns给nodes分配空间。
   m_rows = t_rows;
   m_columns = t_columns;
   m_FUCount = t_rows * t_columns;
   nodes = new CGRANode**[t_rows];
 
+	//参数化地初始化CGRA
   if (t_parameterizableCGRA) {
-
+		//根据行列来初始化CGRANode
     int node_id = 0;
     map<int, CGRANode*> id2Node;
     for (int i=0; i<t_rows; ++i) {
       nodes[i] = new CGRANode*[t_columns];
       for (int j=0; j<t_columns; ++j) {
+							//CGRANode的构造函数很简单，只设置id和行列号。其他在其构造函数中都给了默认值
         nodes[i][j] = new CGRANode(node_id, j, i);
-	// nodes[i][j]->disableAllFUs();
 	id2Node[node_id] = nodes[i][j];
 	node_id += 1;
       }
     }
 
+		//从paramCGRA.json文件中读取参数，示例并没有采用这种方式。
+		//读取参数后对每个CGRANode进行配置，这里主要配置的是将要disable的node全部disable将不启用所有fu的node先disbale所有的fu，再根据是否有accessMEM功能来确定是否开启load和store功能。
+		//这里其实默认除了load和store外的所有fu功能都开启。
     ifstream paramCGRA("./paramCGRA.json");
     if (!paramCGRA.good()) {
       cout<<"Parameterizable CGRA design/mapping requires paramCGRA.json"<<endl;
@@ -66,6 +72,7 @@ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
       }
     }
 
+		//从param读取links相关的参数，初始化CGRALink,并对每个srcNode和dstNode注册对应的outlink和inlink，并在对应的link中注册src和dst node
     json paramLinks = param["links"];
     m_LinkCount = paramLinks.size();
     links = new CGRALink*[m_LinkCount];
@@ -88,8 +95,10 @@ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
       }
     }
 
+		//进行非参数化的CGRA配置
   } else {
 
+		//对行列中的CGRANode进行初始化。
     int node_id = 0;
     for (int i=0; i<t_rows; ++i) {
       nodes[i] = new CGRANode*[t_columns];
@@ -98,10 +107,19 @@ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
       }
     }
 
+		//这里LinkCount的数量不再是由paramCGRA中来读取，而是采用下面的方式来进行计算，可以发现，这是一种默认的链接方式。
+		//这是一种这样的连接方式:每个node的上下左右都双向连接，除了最外围的一圈只往里面连接
     m_LinkCount = 2 * (t_rows * (t_columns-1) + (t_rows-1) * t_columns);
     links = new CGRALink*[m_LinkCount];
 
     // Enable the load/store on specific CGRA nodes based on param.json.
+		//这里param.json中的格式例如
+		//
+  	//"additionalFunc"        : {
+    //                          "load" : [4],
+    //                         "store": [4]
+    //                        }
+		//其中的[4]表示CGRANode的编号，从第一行开始从左向右编号
     int loadCount = 0;
     int storeCount = 0;
     for (map<string, list<int>*>::iterator iter=t_additionalFunc->begin();
@@ -127,6 +145,7 @@ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
         }
       }
     }
+		//如果没有指定哪几个node来进行load和store会默认开启第一列的所有node可以load，store也是一样。
     if (storeCount == 0) {
       cout<<"Without customization in param.json, we enable store functionality on the left most column."<<endl;
       for (int r=0; r<t_rows; ++r) {
@@ -139,9 +158,9 @@ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
         nodes[r][0]->enableLoad();
       }
     }
-
-
+		
     // Some other basic operations that can be indicated in the param.json:
+		//如对所有的node开启call，根据是否使能了diagonalVectorization对部分node开启vectorization还是对全部开启,根据是否使能了heterogeneity来决定是否对奇偶数行列开启Complex()。对所有的node开启return。
     // Enable the specialized 'call' functionality.
     for (int r=0; r<t_rows; ++r) {
       for (int c=0; c<t_columns; ++c) {
@@ -219,40 +238,6 @@ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
 
     disableSpecificConnections();
   }
-
-/*
-  cout<<"[connection] horizontal and vertical."<<endl;
-  // Connect the CGRA nodes with diagonal links.
-  for (int i=0; i<t_rows-1; ++i) {
-    for (int j=0; j<t_columns-1; ++j) {
-      link = new CGRALink();
-      nodes[i][j]->attachOutLink(link, _RIGHT_UP);
-      nodes[i+1][j+1]->attachInLink(link, _LEFT_DOWN);
-      link->connect(nodes[i][j], nodes[i+1][j+1]);
-      m_links.push_back(link);
-
-      link = new CGRALink();
-      nodes[i+1][j+1]->attachOutLink(link, _LEFT_DOWN);
-      nodes[i][j]->attachInLink(link, _RIGHT_UP);
-      link->connect(nodes[i+1][j+1], nodes[i][j]);
-      m_links.push_back(link);
-
-      link = new CGRALink();
-      nodes[i][j+1]->attachOutLink(link, _RIGHT_DOWN);
-      nodes[i+1][j]->attachInLink(link, _LEFT_UP);
-      link->connect(nodes[i][j+1], nodes[i+1][j]);
-      m_links.push_back(link);
-
-      link = new CGRALink();
-      nodes[i+1][j]->attachOutLink(link, _LEFT_UP);
-      nodes[i][j+1]->attachInLink(link, _RIGHT_DOWN);
-      link->connect(nodes[i+1][j], nodes[i][j+1]);
-      m_links.push_back(link);
-    }
-  }
-  cout<<"[connection] diagonal."<<endl;
-*/
-
 }
 
 void CGRA::disableSpecificConnections() {
