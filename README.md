@@ -229,6 +229,38 @@ CGRANode就相当于CGRA硬件中的Tile，其实有点模型的意思。看一�
 	* 如果parameterizableCGRA为真，则会根据paramCGRA.json读取CGRA相关的参数，然后进行构造。首先是构建CGRANode会先建一个m\_rows x m\_colums个CGRANode，然后根据paramCGRA.json中对每个CGRANode进行配置，这里主要配置的是将要disable的node全部disable，将不启用所有fu功能的node先disable所有的fu功能，然后根据是否有accessMEM功能来确定是否开启load和store功能。**这里在逻辑上感觉是不完善的及不启用所有fu功能==只启用load和store**。之后构造CGRALink，从paramCGRA.json读取links相关参数，根据param["links"]的大小，来确定CGRALink数量，然后对每个CGRALink配置，根据读取到的param["srcTile和dstTile"]注册src和dst node，同时为每个srcNode和dstNode，注册outlink和inlink。到此完成了这种情况下的CGRA构建。如果采用这种构建方式，构建会完全依赖paramCGRA.json来进行，程序没有任何默认的操作，因此必须再paramCGRA.json中明确列出所有要disable的node，不启用所有fu功能的node，所有links，所有links的srcTile和dstTile。给的示例使用的是另外一种构造方式。
 	* 如果采用非参数化的CGRANode进行初始化也可以理解为默认的构造方式，先进行CGRANode和CGRALink的构造，CGRANode的数量根据行列相乘来确定，CGRALink数量则由默认的连接方式来确定。默认的连接方式是：最外圈的node往里双向连接，其余的每个node都向上下左右双向连接的。然后会对CGRANode进行一些配置，首先配置load和store进行配置，若param.json中的additionalFunc规定了某个编号的node具有load和store则对对应的node开启对应的fu功能。若没有指定开启load或store的node，则会将第一列的所有node都开启load或store功能。对CGRANode的配置还包括:对所有的node开启call，根据是否使能了diagonalVectorization对部分node开启vectorization还是对全部开启,根据是否使能了heterogeneity来决定是否对奇偶数行列开启Complex()。对所有的node开启return。再配置CGRALink,同样也是配置src和dst node，和为nodes配置outlink和inlink，和上一种配置方法相同。  
 
+除了构造函数之外还有几个方法需要了解一下，其出现在mapperPass.cpp中紧跟在CGRA对象被初始化之后。  
+```cpp
+      cgra->setRegConstraint(regConstraint);
+      cgra->setCtrlMemConstraint(ctrlMemConstraint);
+      cgra->setBypassConstraint(bypassConstraint);
+			//上面三个函数，参数都是int类型，这几个函数不复杂，都是遍历CGRA中所有的Node或者是Link，然后分别调用Node或Link的同名方法配置对应属性。
+			//目前还不太清楚这些属性对应的作用，估计是设置数量上限，比如寄存器数量上限。
+```
+
 暂时不准备再往下阅读CGRA类相关的代码，想必很多读取CGRA信息或者修改CGRA的函数，以及读取DFG信息和修改DFG的函数都会在mapper的过程中被使用，MAPPER类应该是最为重要的部分。  
 
 ## MAPPER
+阅读源码至此可以感觉到MAPPER应该是最为重要的一个类，也同样从最顶层开始阅读。  
+mapperPass中首先进行的是初始化mapper，然后是"Initialize the II"。
+```cpp
+mapper = new Mapper();
+//Initialize the II
+int ResMII = mapper->getResMII(dfg , cgra);
+int RecMII = mapper->getRecMII(dfg);
+int II = ResMII;
+if(II < RecMII)
+	II = RecMII;
+```
+
+看一下mapper类都有些什么
+```cpp
+    int m_maxMappingCycle;
+    map<DFGNode*, CGRANode*> m_mapping;
+    map<DFGNode*, int> m_mappingTiming;
+```
+
+其中的数据并不是很多，其中m\_mapping很容易引起注意，他是一个DFGNode\*和CGRANode\*的map，可以猜测DFGNode和CGRANode应该有关系，且很可能是一一对应的关系。  
+尝试看一下MAPPER的构造函数。然后会发现MAPPER类的构造函数是一个空函数，所以阅读的源码的过程直接跳过构造函数，接下来首先阅读和Initialize the II相关的两个函数。getResMII和getRecMII,这两个函数主要就是为了获取II的值，所谓II的值确定了一个循环在CGRA上几个时钟周期可以完成执行。   
+
+

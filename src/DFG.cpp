@@ -880,6 +880,7 @@ void DFG::generateDot(Function &t_F, bool t_isTrimmedDemo) {
 
 }
 
+//对每一个node都要遍历所有的edge找到所有的以这个node为src的edge，
 void DFG::DFS_on_DFG(DFGNode* t_head, DFGNode* t_current,
     list<DFGNode*>* t_visitedNodes, list<DFGEdge*>* t_erasedEdges,
     list<DFGEdge*>* t_currentCycle, list<list<DFGEdge*>*>* t_cycles) {
