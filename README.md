@@ -262,5 +262,64 @@ if(II < RecMII)
 
 其中的数据并不是很多，其中m\_mapping很容易引起注意，他是一个DFGNode\*和CGRANode\*的map，可以猜测DFGNode和CGRANode应该有关系，且很可能是一一对应的关系。  
 尝试看一下MAPPER的构造函数。然后会发现MAPPER类的构造函数是一个空函数，所以阅读的源码的过程直接跳过构造函数，接下来首先阅读和Initialize the II相关的两个函数。getResMII和getRecMII,这两个函数主要就是为了获取II的值，所谓II的值确定了一个循环在CGRA上几个时钟周期可以完成执行。   
+其中getResMII,比较简单，返回的值为dfg Node的数量除以cgra中FU的数量，显然这种计算II的方法是非常理想化的。   
+另外一个函数getRecMII采用的是遍历dfg的m\_cycleNodeLists中所有的cycle，并取最长的cycle的长度。所谓的cycle就是数据流图中的回路，从一个node出发，经过一系列的edge和node，最终回到最初的node,m\_cycleNodeLists也就是这些node所组成的List  
+初次阅读getRecMII函数的时候，不知道dfg中的m\_cycleNodeLists是什么，再次阅读DNF类中的函数来了解它是什么
+```cpp
+//构造函数
+DFG::DFG(Function& t_F, list<Loop*>* t_loops, bool t_targetFunction,
+         bool t_precisionAware, bool t_heterogeneity,
+         map<string, int>* t_execLatency, list<string>* t_pipelinedOpt) {
+  construct(t_F);
+}
+//construct函数
+void DFG::construct(Function& t_F) {
+//……
+  calculateCycles();
+}
+list<list<DFGEdge*>*>* DFG::calculateCycles() {
+  list<list<DFGEdge*>*>* cycleLists = new list<list<DFGEdge*>*>();
+  list<DFGEdge*>* currentCycle = new list<DFGEdge*>();
+  list<DFGNode*>* visitedNodes = new list<DFGNode*>();
+  list<DFGEdge*>* erasedEdges = new list<DFGEdge*>();
+  cycleLists->clear();
+  for (DFGNode* node: nodes) {
+    currentCycle->clear();
+    visitedNodes->clear();
+    visitedNodes->push_back(node);
+    DFS_on_DFG(node, node, visitedNodes, erasedEdges, currentCycle, cycleLists);
+  }
+//……就是根据cycleLists生成m_cycleNodeLists
+}
+```
 
+calculateCycles函数在DFG类的构造函数中被调用用来获取cycleLists，这个函数的关键是对每个DFGNode都调用函数DFS\_on\_DFG(),这个函数的作用是在一个有向图上进行深度优先搜索，调用的结果是搜索DFG中以DFGNode为起点的回路，如果有的话就会将回路加入cycleLists。  
+至于DFS\_on_\_DFG函数由于有点长，细节请阅读源码，其大致实现逻辑如下所示。  
+* t\_head: 一个DFGNode指针，表示搜索的起始节点。
+* t\_current: 一个DFGNode指针，表示当前正在访问的节点。
+* t\_visitedNodes: 一个DFGNode指针的列表，表示已经访问过的节点。
+* t\_erasedEdges: 一个DFGEdge指针的列表，表示已经删除的边。
+* t\_currentCycle: 一个DFGEdge指针的列表，表示当前搜索路径上的边。
+* t\_cycles: 一个DFGEdge指针的列表的列表，表示找到的所有环路。
+函数的主要逻辑如下：
+* 遍历所有的边，如果边已经被删除，跳过该边。
+* 检查边的源节点是否等于当前节点，如果是，继续执行以下步骤：
+	* 如果边已经在当前路径上，跳过该边。
+	* 将边加入当前路径。
+	* 如果边的目标节点等于起始节点，说明找到了一个环路，执行以下步骤:
+		* 打印出环路的信息。
+		* 创建一个新的列表，将当前路径上的边复制到该列表中。
+		* 将当前边加入已删除边的列表，以避免重复检测。
+		* 将新创建的列表加入环路的列表中。
+		* 将当前边从当前路径中移除。
+	* 否则，如果边的目标节点没有被访问过，执行以下步骤：
+		* 将目标节点加入已访问节点的列表。
+		* 如果当前路径的长度小于等于节点总数，递归地调用DFS_on_DFG函数，以目标节点为当前节点继续搜索。
+	* 否则，将当前边从当前路径中移除。
+* 如果当前路径不为空，将最后一条边弹出。
 
+寻找MAPPER中下一个重要的函数，回到mapperPass.cpp中，可以接下来出现的两个函数是
+```cpp
+II = mapper->heuristicMap(cgra, dfg, II, isStaticElasticCGRA);
+II = mapper->exhaustiveMap(cgra, dfg, II, isStaticElasticCGRA);
+```
