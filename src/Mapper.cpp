@@ -320,16 +320,12 @@ list<DFGNode*>* Mapper::getMappedDFGNodes(DFG* t_dfg, CGRANode* t_cgraNode) {
 //       same data delivery
 map<CGRANode*, int>* Mapper::calculateCost(CGRA* t_cgra, DFG* t_dfg,
     int t_II, DFGNode* t_dfgNode, CGRANode* t_fu) {
-  //cout<<"...calculateCost() for dfgNode "<<t_dfgNode->getID()<<" on tile "<<t_fu->getID()<<endl;
   map<CGRANode*, int>* path = NULL;
   list<DFGNode*>* predNodes = t_dfgNode->getPredNodes();
   int latest = -1;
   bool isAnyPredDFGNodeMapped = false;
   for(DFGNode* pre: *predNodes) {
-//      cout<<"[DEBUG] how dare to pre node: "<<pre->getID()<<"; CGRA node: "<<t_fu->getID()<<endl;
     if(m_mapping.find(pre) != m_mapping.end()) {
-      // Leverage Dijkstra algorithm to search the shortest path between
-      // the mapped 'CGRANode' of the 'pre' and the target 'fu'.
       map<CGRANode*, int>* tempPath = NULL;
       if (t_fu->canSupport(t_dfgNode))
         tempPath = dijkstra_search(t_cgra, t_dfg, t_II, pre,
@@ -359,19 +355,11 @@ map<CGRANode*, int>* Mapper::calculateCost(CGRA* t_cgra, DFG* t_dfg,
       if (t_fu->canOccupy(t_dfgNode, cycle, t_II)) {
         path = new map<CGRANode*, int>();
         (*path)[t_fu] = cycle;
-        //cout<<"DEBUG how dare to map DFG node: "<<t_dfgNode->getID()<<"; CGRA node: "<<t_fu->getID()<<" at cycle "<< cycle<<endl;
         return path;
       }
       ++cycle;
     }
-//    cout << "DEBUG: failed in mapping the starting DFG node "<<t_dfg->getID(t_dfgNode)<<" on CGRA node "<<t_fu->getID()<<endl;
   }
-//  cout<<".....in calculate cost path"<<endl;
-//  for (map<CGRANode*, int>::iterator iter=path->begin();
-//        iter!=path->end(); ++iter) {
-//    cout<<"(tile:"<<(*iter).first->getID()<<", cycle:"<<(*iter).second<<") --";
-//  }
-//  cout<<endl;
   return path;
 }
 
