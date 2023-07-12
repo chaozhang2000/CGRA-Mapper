@@ -1,0 +1,2 @@
+1. Mapper.cpp中的heuristicMap中创建constructMRRG其中用new申请了很多内存空间，当II不停++来进行尝试时，没有对尝试失败情况下的内存空间进行释放
+2. 当CGRANode中判断是否可以占用，canOccupy中判断是否能占用的时候是通过遍历m\_dfgNodesWithOccupyStatus来进行的,这里可能可以优化。

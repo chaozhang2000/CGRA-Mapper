@@ -57,3 +57,18 @@ run -load <path_to_your_pass_library> -<pass_name> <other_options> #<>内的内�
 ```
 
 ## GDB调试技巧
+
+### 1.常用技巧
+
+1. layout split 开启一个类似图形界面的模式可以看到代码
+2. gdb脚本 示例:在/CGRA-Mapper/gdb opt-12 -x script.gdb 
+```
+set breakpoint pending on
+break mapperPass::runOnFunction
+run -load ../build/src/libmapperPass.so -mapperPass kernel.bc
+```
+3. 断点
+	* 创建 break <行号，函数名……> 例: break file.c:line\_number if my\_variable == 10
+	* 禁用断点 disable <断点号> 启用断点 enable <断点号>
+	* 删除断点 delete <断点号>
+	* 显示断点信息 info breakpoints
