@@ -1,13 +1,9 @@
-/*
- * ======================================================================
- * mapperPass.cpp
- * ======================================================================
- * Mapper pass implementation.
- *
- *
- * Author : Cheng Tan
- *   Date : Aug 16, 2021
- */
+/**
+ * @file mapperPass.cpp
+ * @author Cheng Tan and Chao Zhang
+ * @brief the top file of mapper
+ * @version 0.1
+ */ 
 
 #include <llvm/IR/Function.h>
 #include <llvm/Pass.h>
@@ -41,13 +37,16 @@ namespace {
       AU.setPreservesAll();
     }
 
+		/**
+		 * Mapper enter at this function
+		 */
     bool runOnFunction(Function &t_F) override {
 
       // Initializes input parameters.
       int rows                      = 4;
       int columns                   = 4;
       bool targetEntireFunction     = false;
-      bool targetNested             = false;
+      bool targetNested             = true;
       bool doCGRAMapping            = true;
       bool isStaticElasticCGRA      = false;
       bool isTrimmedDemo            = true;
@@ -59,13 +58,13 @@ namespace {
       bool heterogeneity            = false;
       bool heuristicMapping         = true;
       bool parameterizableCGRA      = false;
-      map<string, int>* execLatency = new map<string, int>();
-      list<string>* pipelinedOpt    = new list<string>();
-      map<string, list<int>*>* additionalFunc = new map<string, list<int>*>();
+      map<string, int>* execLatency = new map<string, int>();	//lantancy of operations
+      list<string>* pipelinedOpt    = new list<string>();	//operations support pipeline
+      map<string, list<int>*>* additionalFunc = new map<string, list<int>*>(); //TODO:
 
       // Set the target function and loop.
-      map<string, list<int>*>* functionWithLoop = new map<string, list<int>*>();
-      addDefaultKernels(functionWithLoop);
+      map<string, list<int>*>* functionWithLoop = new map<string, list<int>*>();//record the functionwithLoop .map<name of function,pointer of the loop_number's list>
+      addDefaultKernels(functionWithLoop);//not important
 
       // Read the parameter JSON file.
       ifstream i("./param.json");
@@ -79,14 +78,13 @@ namespace {
         json param;
         i >> param;
  
-	// Check param exist or not.
+	// Check param exist or not. the name of param bellow must be include in param.json ,this will be checked in bellow try block
 	set<string> paramKeys;
 	paramKeys.insert("row");
 	paramKeys.insert("column");
 	paramKeys.insert("targetFunction");
 	paramKeys.insert("kernel");
 	paramKeys.insert("targetNested");
-	paramKeys.insert("targetLoopsID");
 	paramKeys.insert("isTrimmedDemo");
 	paramKeys.insert("doCGRAMapping");
 	paramKeys.insert("isStaticElasticCGRA");
@@ -112,15 +110,13 @@ namespace {
           cout<<"Please include related parameter in param.json: "<<e.what()<<endl;
 	  exit(0);
         }
+	//finished the param.json checking
 
+        // Configuration for customizable CGRA.(assign date from json to variables)
+				//1.assign value to functionWithLoop with kernel and targetLoopsID read from json file
         (*functionWithLoop)[param["kernel"]] = new list<int>();
-        json loops = param["targetLoopsID"];
-        for (int i=0; i<loops.size(); ++i) {
-          // cout<<"add index "<<loops[i]<<endl;
-          (*functionWithLoop)[param["kernel"]]->push_back(loops[i]);
-        }
-
-        // Configuration for customizable CGRA.
+        (*functionWithLoop)[param["kernel"]]->push_back(0);
+				//2. assign value to normal variable
         rows                  = param["row"];
         columns               = param["column"];
         targetEntireFunction  = param["targetFunction"];
@@ -136,7 +132,7 @@ namespace {
         heterogeneity         = param["heterogeneity"];
         heuristicMapping      = param["heuristicMapping"];
         parameterizableCGRA   = param["parameterizableCGRA"];
-        cout<<"Initialize opt latency for DFG nodes: "<<endl;
+				//3. assign value to execLatency , piplinedOpt,additionalFunc
         for (auto& opt : param["optLatency"].items()) {
           cout<<opt.key()<<" : "<<opt.value()<<endl;
           (*execLatency)[opt.key()] = opt.value();
@@ -145,7 +141,6 @@ namespace {
         for (int i=0; i<pipeOpt.size(); ++i) {
           pipelinedOpt->push_back(pipeOpt[i]);
         }
-        cout<<"Initialize additional functionality on CGRA nodes: "<<endl;
         for (auto& opt : param["additionalFunc"].items()) {
           (*additionalFunc)[opt.key()] = new list<int>();
           cout<<opt.key()<<" : "<<opt.value()<<": ";
@@ -156,8 +151,9 @@ namespace {
           cout<<endl;
         }
       }
+			//finished read data from param.json
 
-      // Check existance.
+      // Check existance. if the name of kernel read from param.json is in input .bc 
       if (functionWithLoop->find(t_F.getName().str()) == functionWithLoop->end()) {
         cout<<"[function \'"<<t_F.getName().str()<<"\' is not in our target list]\n";
         return false;
@@ -245,25 +241,26 @@ namespace {
 
       return false;
     }
+		//end of runOnFunction
 
-    /*
-     * Add the loops of each kernel. Target nested-loops if it is indicated.
-     */
+/**
+ * get the targetLoop,it will be the outmost loop,or innermost loop
+ * @param t_F function information of bc file
+ * @param t_functionWithLoop information of target function and loops
+ * @param t_targetNested if this param is True,when face the nested loop,the target loop is outmost loop,else the target loop is the innermost loop
+ */
     list<Loop*>* getTargetLoops(Function& t_F, map<string, list<int>*>* t_functionWithLoop, bool t_targetNested) {
-      int targetLoopID = 0;
       list<Loop*>* targetLoops = new list<Loop*>();
       // Since the ordering of the target loop id could be random, I use O(n^2) to search the target loop.
-      while((*t_functionWithLoop).at(t_F.getName().str())->size() > 0) {
-        targetLoopID = (*t_functionWithLoop).at(t_F.getName().str())->front();
-        (*t_functionWithLoop).at(t_F.getName().str())->pop_front();
+			// in this while loop ,target loopID of target function is poped from t_functionWithLoop's loopID list
+      if((*t_functionWithLoop).at(t_F.getName().str())->size() > 0) {
         LoopInfo &LI = getAnalysis<LoopInfoWrapperPass>().getLoopInfo();
-        int tempLoopID = 0;
         Loop* current_loop = NULL;
         for(LoopInfo::iterator loopItr=LI.begin();
             loopItr!= LI.end(); ++loopItr) {
           // targetLoops->push_back(*loopItr);
           current_loop = *loopItr;
-          if (tempLoopID == targetLoopID) {
+          if (current_loop->getParentLoop()==nullptr) {
             // Targets innermost loop if the param targetNested is not set.
             if (!t_targetNested) {
               while (!current_loop->getSubLoops().empty()) {
@@ -273,10 +270,9 @@ namespace {
               }
             }
             targetLoops->push_back(current_loop);
-            errs()<<"*** reach target loop ID: "<<tempLoopID<<"\n";
+            errs()<<"*** reach target loop <<\n";
             break;
           }
-          ++tempLoopID;
         }
         if (targetLoops->size() == 0) {
           errs()<<"... no loop detected in the target kernel ...\n";
@@ -284,16 +280,18 @@ namespace {
       }
       errs()<<"... done detected loops.size(): "<<targetLoops->size()<<"\n";
       return targetLoops;
-    }
-  };
-}
+    }//end of getTargetLoops
+  };//end of FucntionPass class
+}//end of namespace
 
 char mapperPass::ID = 0;
 static RegisterPass<mapperPass> X("mapperPass", "DFG Pass Analyse", false, false);
 
-/*
- * Add the kernel names of some popular applications.
- * Assume each kernel contains single loop.
+/**
+ * Add the kernel names of some popular applications.Assume each kernel contains single loop.
+ * @param t_functionWithLoop the pointer to data structure used to record the name of functions that contains loops and the labels of loops
+ * 
+ * the Name of kernel function need be add to functionWithLoop first.We can find kernel's name in kernel.ll,Actually we just need to add one kernel's name,but we need to test different kernels,so we add them here ahead of time. A better implementation is to pass the name of the kernel as a parameter.TODO
  */
 void addDefaultKernels(map<string, list<int>*>* t_functionWithLoop) {
 

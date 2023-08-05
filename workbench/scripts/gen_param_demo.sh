@@ -3,7 +3,6 @@ cat > param.json << EOF
   "kernel"                : "_Z6kernelPiS_S_",
   "targetFunction"        : false,
   "targetNested"          : true,
-  "targetLoopsID"         : [0],
   "doCGRAMapping"         : true,
   "row"                   : 4,
   "column"                : 4,

@@ -1,8 +1,7 @@
 {
-  "kernel"                : "_Z6kernelPiS_S_",
+  "kernel"                : "_Z6kernelPA20_iS0_S0_",
   "targetFunction"        : false,
   "targetNested"          : true,
-  "targetLoopsID"         : [0],
   "doCGRAMapping"         : true,
   "row"                   : 4,
   "column"                : 4,

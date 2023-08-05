@@ -45,3 +45,16 @@ make clean NAME=kernels_name # rm .build/kernel_name
 make cleanmapper #rm the mapper's build dir (../build)
 make cleanall # rm both mapper's and kernel's build dir 
 ```
+## Kernel
+I simplify the mapper,and cancel the original parameter "targetLoopID". Because it's hard to get targetLoopID.After the modify,we just support the kernels like below.Parallel loops are no longer supported
+```cpp
+... kernel(){
+for(){
+	for(){
+		fo……
+			……
+			
+			}
+		}
+}
+``` 
