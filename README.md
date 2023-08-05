@@ -8,7 +8,7 @@ Ubuntu22.04
 
 install dependency
 ```
-sudo apt-get install clang-12 make cmake build-essential llvm llvm-12-dev
+sudo apt-get install clang-12 make cmake build-essential llvm llvm-12-dev graphviz
 ```
 build the mapper,compile the kernel.cpp and do mapping
 ```
