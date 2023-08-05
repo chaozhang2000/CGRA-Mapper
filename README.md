@@ -6,11 +6,13 @@
 
 Ubuntu22.04
 
-install dependency
+1. install dependency
 ```
 sudo apt-get install clang-12 make cmake build-essential llvm llvm-12-dev graphviz
 ```
-build the mapper,compile the kernel.cpp and do mapping
+2. install [doxyfile](https://www.doxygen.nl/download.html) If you'd like to generate the html doc of CGRA-Mapper source code 
+
+3. build the mapper,compile the kernel.cpp and do mapping
 ```
 cd CGRA-Mapper/workbench
 make

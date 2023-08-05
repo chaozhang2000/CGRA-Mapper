@@ -37,6 +37,7 @@
 make NAME=kernels_name map	#build mapper,compile kernel_name.cpp,do mapping and generate dfg.png
 make NAME=kernels_name gdb	#build mapper with debug information,compile kernel_name.cpp and run through gdb
 make mapper	#build mapper
+make mapperdoc	#build html doc for mapper's source code
 make mappergdb #build mapper with debug information
 make NAME=kernels_name kernel # comile kernel_name.cpp
 make NAME=kernels_name dfg	#Generate kernels_name_dfg.png using .dot file.Only works when the .dot file exists in ./build/kernels_name

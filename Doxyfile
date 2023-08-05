@@ -1,0 +1,8 @@
+PROJECT_NAME = "CGRA-Mapper Project"
+RECURSIVE = YES
+GENERATE_LATEX = NO
+INPUT = ./src
+FILE_PATTERNS          = *.c \
+                         *.cpp \
+                         *.h
+OUTPUT_DIRECTORY = ./build/doc

@@ -6,6 +6,7 @@ MAPPER_GDB := $(MAPPER_BUILD_DIR)/src/libmapperPassgdb.so
 MAPPER_SRC_CPP := $(wildcard $(MAPPER_SRC_DIR)/*.cpp)
 MAPPER_SRC_H := $(wildcard $(MAPPER_SRC_DIR)/*.h)
 MAPPER_SRC_HPP := $(wildcard $(MAPPER_SRC_DIR)/*.hpp)
+MAPPER_DOC_DIR := $(MAPPER_BUILD_DIR)/doc
 
 WORK_DIR:= $(shell pwd)
 WORK_KERNEL_DIR:= $(WORK_DIR)/kernels
@@ -38,6 +39,10 @@ $(PARAM_JSON):
 kernel:$(KERNEL_BC)
 mapper:$(MAPPER)
 mappergdb:$(MAPPER_GDB)
+
+mapperdoc:
+	@mkdir -p $(MAPPER_DOC_DIR)
+	@cd .. && doxygen Doxyfile
 dfg:
 	@bash $(WORK_SCRIPT_DIR)/dot.sh $(WORK_BUILD_DIR)/$(NAME) $(NAME)_dfg
 clean:
