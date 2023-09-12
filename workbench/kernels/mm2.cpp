@@ -41,14 +41,22 @@ int B1[SIZE][SIZE] = {{400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 41
 	{760, 761, 762, 763, 764, 765, 766, 767, 768, 769, 770, 771, 772, 773, 774, 775, 776, 777, 778, 779},
 	{780, 781, 782, 783, 784, 785, 786, 787, 788, 789, 790, 791, 792, 793, 794, 795, 796, 797, 798, 799}};
 
-void kernel(int (*A1)[SIZE], int (*B1)[SIZE], int (*resultAB1)[SIZE]);
+void kernel(int (*A1)[SIZE], int (*B1)[SIZE], int (*resultAB1)[SIZE],long i,long j,long k);
 int resultAB1[SIZE][SIZE];
 int main()
 {
 
 //  input_dsp (input, NTAPS, 0);
-
-  kernel(A1, B1, resultAB1);
+  long i;
+  long j;
+  long k;
+  for (i=0;i<SIZE;i++){
+        for(j=0;j<SIZE;j++){
+                for(k=0;k<SIZE;k=k+2){
+  								kernel(A1, B1, resultAB1,i,j,k);
+                }
+        }
+  }
 
 //  output_dsp (input, NTAPS, 0);
 //  output_dsp (coefficients, NTAPS, 0);
@@ -56,19 +64,9 @@ int main()
   return 0;
 }
 
-void kernel(int (*A1)[SIZE], int (*B1)[SIZE], int (*resultAB1)[SIZE])
+void kernel(int (*A1)[SIZE], int (*B1)[SIZE], int (*resultAB1)[SIZE],long i,long j,long k)
 {
-  int i;
-  int j;
-  for (i=0;i<SIZE;i++){
-        for(j=0;j<SIZE;j++){
-                int k,sum=0;
-                for(k=0;k<SIZE;k++){
-                        sum += A1[i][k] * B1[k][j];
-                }
-                resultAB1[i][j] = sum;
-        }
-  }
+                        resultAB1[i][j]  += A1[i][k] * B1[k][j]+A1[i][k+1]*B1[k+1][j];
 
 }
 

@@ -6,3 +6,4 @@ FILE_PATTERNS          = *.c \
                          *.cpp \
                          *.h
 OUTPUT_DIRECTORY = ./build/doc
+EXTRACT_PRIVATE = YES

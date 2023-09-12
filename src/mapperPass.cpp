@@ -248,6 +248,7 @@ namespace {
  * @param t_F function information of bc file
  * @param t_functionWithLoop information of target function and loops
  * @param t_targetNested if this param is True,when face the nested loop,the target loop is outmost loop,else the target loop is the innermost loop
+ * @return return the list of targetLoops,now it will just be one loop.and will pass to the construction fuction of DFG,as a scope of the inst in IR.
  */
     list<Loop*>* getTargetLoops(Function& t_F, map<string, list<int>*>* t_functionWithLoop, bool t_targetNested) {
       list<Loop*>* targetLoops = new list<Loop*>();
@@ -261,17 +262,35 @@ namespace {
           // targetLoops->push_back(*loopItr);
           current_loop = *loopItr;
           if (current_loop->getParentLoop()==nullptr) {
+//debug begin print all the header of loops .need targetNested param is set false
+    			BasicBlock *curBB = current_loop->getHeader();
+      for (BasicBlock::iterator II=curBB->begin(),
+          IEnd=curBB->end(); II!=IEnd; ++II) {
+        Instruction* inst = &*II;
+          errs()<<" inst in header: "<<*inst<<"\n";
+			}
+         errs()<<"\n";
+//debug end
             // Targets innermost loop if the param targetNested is not set.
             if (!t_targetNested) {
               while (!current_loop->getSubLoops().empty()) {
                 errs()<<"[explore] nested loop ... subloop size: "<<current_loop->getSubLoops().size()<<"\n";
                 // TODO: might change '0' to a reasonable index
                 current_loop = current_loop->getSubLoops()[0];
+//debug begin print all the header of loops .need targetNested param is set false
+    			BasicBlock *curBB = current_loop->getHeader();
+      for (BasicBlock::iterator II=curBB->begin(),
+          IEnd=curBB->end(); II!=IEnd; ++II) {
+        Instruction* inst = &*II;
+          errs()<<" inst in header: "<<*inst<<"\n";
+			}
+         errs()<<"\n";
+//debug end
               }
             }
             targetLoops->push_back(current_loop);
             errs()<<"*** reach target loop <<\n";
-            break;
+            //break;
           }
         }
         if (targetLoops->size() == 0) {

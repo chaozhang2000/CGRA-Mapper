@@ -2,7 +2,7 @@ cat > param.json << EOF
 {
   "kernel"                : "_Z6kernelPiS_S_",
   "targetFunction"        : false,
-  "targetNested"          : true,
+  "targetNested"          : false,
   "doCGRAMapping"         : true,
   "row"                   : 4,
   "column"                : 4,
@@ -17,13 +17,13 @@ cat > param.json << EOF
   "ctrlMemConstraint"     : 200,
   "regConstraint"         : 8,
   "optLatency"            : {
-                              "load" : 2,
-                              "store": 2
+                              "load" : 1,
+                              "store": 1
                             },
   "optPipelined"          : ["load", "store"],
   "additionalFunc"        : {
-                              "load" : [4],
-                              "store": [4]
+                              "load" : [0,4,8,12],
+                              "store": [0,4,8,12]
                             }
 }
 EOF

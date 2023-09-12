@@ -1,11 +1,8 @@
-/*
- * ======================================================================
- * DFGNode.h
- * ======================================================================
- * DFG node implementation header file.
- *
- * Author : Cheng Tan
- *   Date : July 19, 2019
+/**
+ * @file DFGNode.h
+ * @author Cheng Tan 
+ * @brief  the defination of DFGNode class
+ * @version 0.1
  */
 #ifndef DFGNode_H
 #define DFGNode_H
@@ -62,7 +59,14 @@ class DFGNode {
     void setPatternRoot(DFGNode*);
 
   public:
-    DFGNode(int, bool, Instruction*, StringRef);
+		/**The constructor function of class DFGNode
+		 * @param t_id :the id that give the DFGNode
+		 * @param t_precisionAware :TODO
+		 * @param t_inst :The instruction corresponding to this DFGNode
+		 * @param t_stringRef :TODO
+		 */
+		DFGNode(int t_id, bool t_precisionAware, Instruction* t_inst,
+                 StringRef t_stringRef);
     int getID();
     void setID(int);
     void setLevel(int);

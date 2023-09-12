@@ -1,11 +1,8 @@
-/*
- * ======================================================================
- * DFG.cpp
- * ======================================================================
- * DFG implementation header file.
- *
- * Author : Cheng Tan
- *   Date : July 16, 2019
+/**
+ * @file DFG.h
+ * @author Cheng Tan 
+ * @brief  the defination of DFG class
+ * @version 0.1
  */
 
 #include <llvm/IR/Function.h>
@@ -28,7 +25,7 @@
 
 using namespace llvm;
 using namespace std;
-
+///the class of DFG
 class DFG {
   private:
     int m_num;
@@ -85,15 +82,32 @@ class DFG {
     bool isMinimumAndHasNotBeenVisited(set<DFGNode*>*, map<DFGNode*, int>*, DFGNode*);
 
   public:
-    DFG(Function&, list<Loop*>*, bool, bool, bool, map<string, int>*, list<string>*);
+		/**The constructor function of class DFG
+		 * @param t_F TODO
+		 * @param t_loops TODO
+		 * @param t_targetFunction if this param is true,generate the DFG for all inst in function,if this param is false generate the DFG only for the target loop in the function.
+		 * @param t_precisionAware TODO
+		 * @param t_heterogeneity TODO 
+		 */
+		DFG(Function& t_F, list<Loop*>* t_loops, bool t_targetFunction,
+         bool t_precisionAware, bool t_heterogeneity,
+         map<string, int>* t_execLatency, list<string>* t_pipelinedOpt);
+
+		/**TODO
+		 */
     list<list<DFGNode*>*>* m_cycleNodeLists;//时钟节点列表
-    //initial ordering of insts
+		/**TODO
+		 */
     list<DFGNode*> nodes;//DFG 节点列表
 
     list<DFGNode*>* getBFSOrderedNodes();
     list<DFGNode*>* getDFSOrderedNodes();
-    int getNodeCount();
+		/**Extract DFG from specific function 
+ 		* @param t_F the function pointer which the mapperPass is processing
+ 		*/
     void construct(Function&);
+    int getNodeCount();
+
     void setupCycles();
     list<list<DFGEdge*>*>* calculateCycles();
     list<list<DFGNode*>*>* getCycleLists();

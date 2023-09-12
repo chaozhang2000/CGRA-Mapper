@@ -1,16 +1,15 @@
-/*
- * ======================================================================
- * DFG.cpp
- * ======================================================================
- * DFG implementation.
- *
- * Author : Cheng Tan
- *   Date : July 16, 2019
+/**
+ * @file DFG.cpp
+ * @author Cheng Tan 
+ * @brief  the implementation of DFG class
+ * @version 0.1
  */
-
 #include <fstream>
 #include "DFG.h"
 
+/**
+ * How this function is implemented TODO
+ */
 DFG::DFG(Function& t_F, list<Loop*>* t_loops, bool t_targetFunction,
          bool t_precisionAware, bool t_heterogeneity,
          map<string, int>* t_execLatency, list<string>* t_pipelinedOpt) {
@@ -175,9 +174,16 @@ void DFG::combine(string t_opt0, string t_opt1) {
   }
 }
 
-//判断指令是否应该忽视
-//以下条件不应该忽视
 //属于目标Function或目标循环的个数为0或某个目标循环中含有该指令
+
+/** Used to determine whether the instruction should be ignored,An ignored instruction will not be reflected in the DFG
+ * @param t_inst instruction that need to be judged
+ * @return true if the inst should be ignored
+ * 
+ * what is in this function
+ * 1. if the m_targetFunction param is set, all inst in function will not be ignore,this function always return flase
+ * 2. else all inst is in target loops will not be ignore and other insts in function will be ignored. Not all inst in the function belong to target loop.For example, instructions for entering and exiting functions
+ */
 bool DFG::shouldIgnore(Instruction* t_inst) {
   if (m_targetFunction) {
     return false;
@@ -287,7 +293,13 @@ list<DFGNode*>* DFG::getBFSOrderedNodes() {
   return m_orderedNodes;
 }
 
-// extract DFG from specific function
+ /** what is in his function
+	* 1. Clear the data structions which is used to save nodes and edges
+	* 2. Traverse all basic block in target function 
+	* 3. Traverse all instructions of current basic block and create a dfgNode for each instruction
+	* 4. find terminator inst of current basic block and traverse all successor basic block of current basic,creat DFGEdge 
+	*
+ */
 void DFG::construct(Function& t_F) {
 
   m_DFGEdges.clear();
@@ -298,20 +310,20 @@ void DFG::construct(Function& t_F) {
   int ctrlEdgeID = 0;
   int dfgEdgeID = 0;
 
-  cout<<"*** current function: "<<t_F.getName().str()<<"\n";
+  cout<<"*** constructing DFG of current function: "<<t_F.getName().str()<<"\n";
 
   // FIXME: eleminate duplicated edges.
-	// first for loop遍历Function中的所有basicblock,为指令创建DFGnode，创建控制箭头;
   for (Function::iterator BB=t_F.begin(), BEnd=t_F.end();
       BB!=BEnd; ++BB) {
     BasicBlock *curBB = &*BB;
-    errs()<<"*** current basic block: "<<*curBB->begin()<<"\n";
+		errs()<<"----------------------------------\n";
+    errs()<<"*** current basic block beginning: "<<*curBB->begin()<<"\n";
+		//print all successor basic block of current basic block
     for (BasicBlock* sucBB : successors(curBB)) {
-      errs()<<"   ****** succ bb: "<<*sucBB->begin()<<"\n";
+      errs()<<"   ****** successor basic block beginning: "<<*sucBB->begin()<<"\n";
     }
 
      // Construct DFG nodes.
-		 //遍历basicblock中的所有Instruction为每条不被忽视的Instruction都创建DFG node
     for (BasicBlock::iterator II=curBB->begin(),
         IEnd=curBB->end(); II!=IEnd; ++II) {
       Instruction* curII = &*II;
@@ -330,7 +342,7 @@ void DFG::construct(Function& t_F) {
         dfgNode = new DFGNode(nodeID++, m_precisionAware, curII, getValueName(curII));
         nodes.push_back(dfgNode);
       }
-      cout<<" (ID: "<<dfgNode->getID()<<")\n";
+      errs()<<" (dfgNode ID: "<<dfgNode->getID()<<")\n";
     }
 		//getTerminator()方法是BasicBlock类的一个成员函数，返回指向该基本块终结指令的指针，
 		//基本块是LLVM中表示程序控制流的最小单元，是一系列指令的序列，只有一个入口和出口，出口是终结指令，是一种控制流指令，如分支跳转返回等，决定了程序跳转到哪个基本块
@@ -351,7 +363,7 @@ void DFG::construct(Function& t_F) {
           continue;
 				//只处理后继模块的入口指令，为后继基本块的入口指令创建DFGNode节点
         if (isLiveInInst(sucBB, inst)) {
-          errs()<<" check inst: "<<*inst<<"\n";
+          errs()<<" check inst: "<<*inst;//<<"\n";
 
           DFGNode* dfgNode;
           if (hasNode(inst)) {
@@ -360,6 +372,7 @@ void DFG::construct(Function& t_F) {
             dfgNode = new DFGNode(nodeID++, m_precisionAware, inst, getValueName(inst));
             nodes.push_back(dfgNode);
           }
+      errs()<<" (dfgNode ID: "<<dfgNode->getID()<<")\n";
           errs()<<"!!!!!!! construct ctrl flow: "<<*terminator<<"->"<<*inst<<"\n";
           // Construct contrl flow edges.
           DFGEdge* ctrlEdge;
@@ -685,7 +698,16 @@ void DFG::initPipelinedOpt(list<string>* t_pipelinedOpt) {
     cout<<"\033[0;31m\".\033[0m"<<endl;
   }
 }
-
+/**
+ * @param t_bb :input basic block
+ * @param t_inst :input inst
+ * @return 
+ *
+ * what is in this function:
+ * if the t_inst is the front inst of the t_bb return true
+ * else 
+ *
+ */
 bool DFG::isLiveInInst(BasicBlock* t_bb, Instruction* t_inst) {
   if (t_inst == &(t_bb->front())) {
     errs()<<"ctrl to: "<<*t_inst<<"; front: "<<(t_bb->front())<<"; ";
@@ -711,6 +733,11 @@ bool DFG::isLiveInInst(BasicBlock* t_bb, Instruction* t_inst) {
   return true;
 }
 
+/**Judge if the inst is in the basicblock
+ * @param t_bb :the input basic basicblock 
+ * @param t_inst :the input inst
+ * @return : true if t_inst is in t_bb
+ */
 bool DFG::containsInst(BasicBlock* t_bb, Instruction* t_inst) {
 
   for (BasicBlock::iterator II=t_bb->begin(),
@@ -990,6 +1017,10 @@ DFGNode* DFG::getNode(Value* t_value) {
   return NULL;
 }
 
+/** judge if the nodes for this inst have been created in nodes
+ * @param t_vlaue: the inst need to judge
+ * @return true:have existes in nodes false:...
+*/
 bool DFG::hasNode(Value* t_value) {
   for (DFGNode* node: nodes) {
     if (node->getInst() == t_value) {

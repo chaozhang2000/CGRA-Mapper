@@ -1,15 +1,17 @@
-/*
- * ======================================================================
- * DFGNode.cpp
- * ======================================================================
- * DFG node implementation.
- *
- * Author : Cheng Tan
- *   Date : Feb 12, 2020
+/**
+ * @file DFGNode.cpp
+ * @author Cheng Tan 
+ * @brief  the implementation of DFGNode class
+ * @version 0.1
  */
 
 #include "DFGNode.h"
 
+/**what is in this function:
+ * init the DFGNode for example init the id of DFGNode(m_id) = t_id
+ * get the OpcodeName form the t_inst and init the m_opcodeName and so on
+ *
+*/
 DFGNode::DFGNode(int t_id, bool t_precisionAware, Instruction* t_inst,
                  StringRef t_stringRef) {
   m_id = t_id;
