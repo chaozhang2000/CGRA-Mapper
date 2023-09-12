@@ -83,8 +83,8 @@ class DFG {
 
   public:
 		/**The constructor function of class DFG
-		 * @param t_F TODO
-		 * @param t_loops TODO
+		 * @param t_F the function processed by functionpass
+		 * @param the list of target loops in the t_F,which is produced by the getTargetLoops function in mapperPass.cpp.But now it is always empty because our test functions do not contain loops now.
 		 * @param t_targetFunction if this param is true,generate the DFG for all inst in function,if this param is false generate the DFG only for the target loop in the function.
 		 * @param t_precisionAware TODO
 		 * @param t_heterogeneity TODO 

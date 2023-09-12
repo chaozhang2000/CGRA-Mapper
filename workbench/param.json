@@ -1,5 +1,5 @@
 {
-  "kernel"                : "_Z6kerneli",
+  "kernel"                : "_Z6kernelPiS_S_lll",
   "targetFunction"        : false,
   "targetNested"          : false,
   "doCGRAMapping"         : true,

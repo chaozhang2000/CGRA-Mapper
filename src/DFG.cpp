@@ -302,6 +302,7 @@ list<DFGNode*>* DFG::getBFSOrderedNodes() {
  */
 void DFG::construct(Function& t_F) {
 
+	//1. Clear the data structions which is used to save nodes and edges
   m_DFGEdges.clear();
   nodes.clear();
   m_ctrlEdges.clear();
@@ -313,6 +314,9 @@ void DFG::construct(Function& t_F) {
   cout<<"*** constructing DFG of current function: "<<t_F.getName().str()<<"\n";
 
   // FIXME: eleminate duplicated edges.
+	
+
+	//2. Traverse all basic block in target function 
   for (Function::iterator BB=t_F.begin(), BEnd=t_F.end();
       BB!=BEnd; ++BB) {
     BasicBlock *curBB = &*BB;
