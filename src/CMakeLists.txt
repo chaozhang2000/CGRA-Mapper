@@ -7,40 +7,7 @@
 # Author : Cheng Tan
 #  Date : July 16, 2019
 #
-if (DEBUG)
-set(CMAKE_BUILD_TYPE Debug)
-add_library(mapperPassgdb MODULE
-    # List your source files here.
-    mapperPass.cpp
-    DFGNode.h
-    DFGNode.cpp
-    DFGEdge.h
-    DFGEdge.cpp
-    DFG.h
-    DFG.cpp
-    CGRANode.h
-    CGRANode.cpp
-    CGRALink.h
-    CGRALink.cpp
-    CGRA.h
-    CGRA.cpp
-    Mapper.h
-    Mapper.cpp
-)
 
-target_compile_options(mapperPassgdb PUBLIC -g) 
-
-set_target_properties(mapperPassgdb PROPERTIES
-    COMPILE_FLAGS "-fno-rtti"
-)
-
-if(APPLE)
-    set_target_properties(mapperPassgdb PROPERTIES
-        LINK_FLAGS "-undefined dynamic_lookup"
-    )   
-endif(APPLE)
-
-else ()
 add_library(mapperPass MODULE
     # List your source files here.
     mapperPass.cpp
@@ -78,4 +45,3 @@ if(APPLE)
         LINK_FLAGS "-undefined dynamic_lookup"
     )
 endif(APPLE)
-endif()

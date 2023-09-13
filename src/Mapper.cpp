@@ -320,12 +320,16 @@ list<DFGNode*>* Mapper::getMappedDFGNodes(DFG* t_dfg, CGRANode* t_cgraNode) {
 //       same data delivery
 map<CGRANode*, int>* Mapper::calculateCost(CGRA* t_cgra, DFG* t_dfg,
     int t_II, DFGNode* t_dfgNode, CGRANode* t_fu) {
-  map<CGRANode*, int>* path = NULL;//path的数据结构是CGRANode和时钟周期。
+  //cout<<"...calculateCost() for dfgNode "<<t_dfgNode->getID()<<" on tile "<<t_fu->getID()<<endl;
+  map<CGRANode*, int>* path = NULL;
   list<DFGNode*>* predNodes = t_dfgNode->getPredNodes();
   int latest = -1;
-  bool isAnyPredDFGNodeMapped = false;//对第一个DFGNode进行处理
-  for(DFGNode* pre: *predNodes) {//对所有之前的dfgNode进行遍历，……
-    if(m_mapping.find(pre) != m_mapping.end()) {//m_mapping 是一个DFGNode到CGRANode的映射
+  bool isAnyPredDFGNodeMapped = false;
+  for(DFGNode* pre: *predNodes) {
+//      cout<<"[DEBUG] how dare to pre node: "<<pre->getID()<<"; CGRA node: "<<t_fu->getID()<<endl;
+    if(m_mapping.find(pre) != m_mapping.end()) {
+      // Leverage Dijkstra algorithm to search the shortest path between
+      // the mapped 'CGRANode' of the 'pre' and the target 'fu'.
       map<CGRANode*, int>* tempPath = NULL;
       if (t_fu->canSupport(t_dfgNode))
         tempPath = dijkstra_search(t_cgra, t_dfg, t_II, pre,
@@ -355,11 +359,19 @@ map<CGRANode*, int>* Mapper::calculateCost(CGRA* t_cgra, DFG* t_dfg,
       if (t_fu->canOccupy(t_dfgNode, cycle, t_II)) {
         path = new map<CGRANode*, int>();
         (*path)[t_fu] = cycle;
+        //cout<<"DEBUG how dare to map DFG node: "<<t_dfgNode->getID()<<"; CGRA node: "<<t_fu->getID()<<" at cycle "<< cycle<<endl;
         return path;
       }
       ++cycle;
     }
+//    cout << "DEBUG: failed in mapping the starting DFG node "<<t_dfg->getID(t_dfgNode)<<" on CGRA node "<<t_fu->getID()<<endl;
   }
+//  cout<<".....in calculate cost path"<<endl;
+//  for (map<CGRANode*, int>::iterator iter=path->begin();
+//        iter!=path->end(); ++iter) {
+//    cout<<"(tile:"<<(*iter).first->getID()<<", cycle:"<<(*iter).second<<") --";
+//  }
+//  cout<<endl;
   return path;
 }
 
@@ -1158,8 +1170,8 @@ int Mapper::heuristicMap(CGRA* t_cgra, DFG* t_dfg, int t_II,
     cout<<"----------------------------------------\n";
     cout<<"[DEBUG] start heuristic algorithm with II="<<t_II<<"\n";
     int cycle = 0;
-    constructMRRG(t_dfg, t_cgra, t_II); //里面创建了很多变量，而且后面好像没有deleate导致内存爆炸
-    fail = false; //1174
+    constructMRRG(t_dfg, t_cgra, t_II);
+    fail = false;
     for (list<DFGNode*>::iterator dfgNode=t_dfg->nodes.begin();
         dfgNode!=t_dfg->nodes.end(); ++dfgNode) {
       list<map<CGRANode*, int>*> paths;
@@ -1167,7 +1179,7 @@ int Mapper::heuristicMap(CGRA* t_cgra, DFG* t_dfg, int t_II,
         for (int j=0; j<t_cgra->getColumns(); ++j) {
           CGRANode* fu = t_cgra->nodes[i][j];
           map<CGRANode*, int>* tempPath =
-              calculateCost(t_cgra, t_dfg, t_II, *dfgNode, fu); //最外层对DFGNode遍历，内层对cgra行列进行遍历,对每个DFGNode都要分配一个CGRANode，对所有的CGRANode遍历来寻找代价最小的那一个。
+              calculateCost(t_cgra, t_dfg, t_II, *dfgNode, fu);
           if(tempPath != NULL and tempPath->size() != 0) {
             paths.push_back(tempPath);
           } else {

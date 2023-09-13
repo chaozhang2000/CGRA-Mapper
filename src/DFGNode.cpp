@@ -1,17 +1,15 @@
-/**
- * @file DFGNode.cpp
- * @author Cheng Tan 
- * @brief  the implementation of DFGNode class
- * @version 0.1
+/*
+ * ======================================================================
+ * DFGNode.cpp
+ * ======================================================================
+ * DFG node implementation.
+ *
+ * Author : Cheng Tan
+ *   Date : Feb 12, 2020
  */
 
 #include "DFGNode.h"
 
-/**what is in this function:
- * init the DFGNode for example init the id of DFGNode(m_id) = t_id
- * get the OpcodeName form the t_inst and init the m_opcodeName and so on
- *
-*/
 DFGNode::DFGNode(int t_id, bool t_precisionAware, Instruction* t_inst,
                  StringRef t_stringRef) {
   m_id = t_id;
@@ -214,6 +212,30 @@ bool DFGNode::isBitcast() {
 
 bool DFGNode::isGetptr() {
   if (m_opcodeName.compare("getelementptr") == 0)
+    return true;
+  return false;
+}
+
+bool DFGNode::isSel() {
+  if (m_opcodeName.compare("select") == 0)
+    return true;
+  return false;
+}
+
+bool DFGNode::isMAC() {
+  if ((m_opcodeName.compare("getelementptr") == 0 or
+      m_opcodeName.compare("add") == 0  or
+      m_opcodeName.compare("fadd") == 0 or
+      m_opcodeName.compare("sub") == 0  or
+      m_opcodeName.compare("fsub") == 0) &&
+      (m_opcodeName.compare("fmul") == 0 or
+      m_opcodeName.compare("mul") == 0))
+    return true;
+  return false;
+}
+
+bool DFGNode::isLogic() {
+  if (m_opcodeName.compare("or") == 0 or m_opcodeName.compare("and") == 0)
     return true;
   return false;
 }

@@ -1,8 +1,11 @@
-/**
- * @file DFG.h
- * @author Cheng Tan 
- * @brief  the defination of DFG class
- * @version 0.1
+/*
+ * ======================================================================
+ * DFG.cpp
+ * ======================================================================
+ * DFG implementation header file.
+ *
+ * Author : Cheng Tan
+ *   Date : July 16, 2019
  */
 
 #include <llvm/IR/Function.h>
@@ -25,19 +28,19 @@
 
 using namespace llvm;
 using namespace std;
-///the class of DFG
+
 class DFG {
   private:
     int m_num;
     bool m_CDFGFused;
     bool m_targetFunction;
     bool m_precisionAware;
-    list<DFGNode*>* m_orderedNodes;//排序后的DFGNode
-    list<Loop*>* m_targetLoops; //目标循环
+    list<DFGNode*>* m_orderedNodes;
+    list<Loop*>* m_targetLoops;
 
     //edges of data flow
-    list<DFGEdge*> m_DFGEdges; //DFG箭头
-    list<DFGEdge*> m_ctrlEdges; //控制箭头
+    list<DFGEdge*> m_DFGEdges;
+    list<DFGEdge*> m_ctrlEdges;
 
     string changeIns2Str(Instruction* ins);
     //get value's name or inst's content
@@ -82,32 +85,15 @@ class DFG {
     bool isMinimumAndHasNotBeenVisited(set<DFGNode*>*, map<DFGNode*, int>*, DFGNode*);
 
   public:
-		/**The constructor function of class DFG
-		 * @param t_F the function processed by functionpass
-		 * @param the list of target loops in the t_F,which is produced by the getTargetLoops function in mapperPass.cpp.But now it is always empty because our test functions do not contain loops now.
-		 * @param t_targetFunction if this param is true,generate the DFG for all inst in function,if this param is false generate the DFG only for the target loop in the function.
-		 * @param t_precisionAware TODO
-		 * @param t_heterogeneity TODO 
-		 */
-		DFG(Function& t_F, list<Loop*>* t_loops, bool t_targetFunction,
-         bool t_precisionAware, bool t_heterogeneity,
-         map<string, int>* t_execLatency, list<string>* t_pipelinedOpt);
-
-		/**TODO
-		 */
-    list<list<DFGNode*>*>* m_cycleNodeLists;//时钟节点列表
-		/**TODO
-		 */
-    list<DFGNode*> nodes;//DFG 节点列表
+    DFG(Function&, list<Loop*>*, bool, bool, bool, map<string, int>*, list<string>*);
+    list<list<DFGNode*>*>* m_cycleNodeLists;
+    //initial ordering of insts
+    list<DFGNode*> nodes;
 
     list<DFGNode*>* getBFSOrderedNodes();
     list<DFGNode*>* getDFSOrderedNodes();
-		/**Extract DFG from specific function 
- 		* @param t_F the function pointer which the mapperPass is processing
- 		*/
-    void construct(Function&);
     int getNodeCount();
-
+    void construct(Function&);
     void setupCycles();
     list<list<DFGEdge*>*>* calculateCycles();
     list<list<DFGNode*>*>* getCycleLists();
