@@ -1,3 +1,8 @@
+/* 32-tap FIR filter processing 1 point */
+/* Modified to use arrays - SMP */
+
+//#include "traps.h"
+
 #define NTAPS 32
 
 float input[NTAPS];
@@ -28,11 +33,11 @@ void kernel(float input[], float output[], float coefficient[])
 /*   coefficient:      coefficient array */
 {
   int i;
-  int j = 0;
-
-//  for(j=0; j< NTAPS; ++j) {
-    for (i = 0; i < NTAPS; ++i) {
-      output[j] += input[i] * coefficient[i];
-    }
-//  }
+  float sum = 0.0;
+  #pragma clang loop unroll_count(4) vectorize_width(4)
+  for (i = 0; i < NTAPS; ++i) {
+    sum += input[i] * coefficient[i];
+  }
+  output[0] = sum;
 }
+
