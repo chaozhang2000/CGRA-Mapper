@@ -293,12 +293,13 @@ list<DFGNode*>* DFG::getBFSOrderedNodes() {
   return m_orderedNodes;
 }
 
- /** what is in his function
+ /** 
+	* what is in his function
 	* 1. Clear the data structions which is used to save nodes and edges
 	* 2. Traverse all basic block in target function 
 	* 3. Traverse all instructions of current basic block and create a dfgNode for each instruction
-	* 4. find terminator inst of current basic block and traverse all successor basic block of current basic,creat DFGEdge 
-	*
+	* 4. Traverse all DFGNodes and all operands of every instruction,create DFGEdge according to their operands 
+	* 5. connect all DFGNode to generate the DFG
  */
 void DFG::construct(Function& t_F) {
 
@@ -328,6 +329,7 @@ void DFG::construct(Function& t_F) {
     }
 
      // Construct DFG nodes.
+		 // !!!!!!!!!!!!!!!!!!!!!!330-350 is important
     for (BasicBlock::iterator II=curBB->begin(),
         IEnd=curBB->end(); II!=IEnd; ++II) {
       Instruction* curII = &*II;
@@ -348,6 +350,7 @@ void DFG::construct(Function& t_F) {
       }
       errs()<<" (dfgNode ID: "<<dfgNode->getID()<<")\n";
     }
+		// !!!!!!!352-396 和控制流的产生有关，目前不关心，不重要。
 		//getTerminator()方法是BasicBlock类的一个成员函数，返回指向该基本块终结指令的指针，
 		//基本块是LLVM中表示程序控制流的最小单元，是一系列指令的序列，只有一个入口和出口，出口是终结指令，是一种控制流指令，如分支跳转返回等，决定了程序跳转到哪个基本块
     Instruction* terminator = curBB->getTerminator();
@@ -448,7 +451,9 @@ void DFG::construct(Function& t_F) {
       default: {
         for (Instruction::op_iterator op = curII->op_begin(), opEnd = curII->op_end(); op != opEnd; ++op) {
           Instruction* tempInst = dyn_cast<Instruction>(*op);
+						//errs()<<*curII<<"\n";		
           if (tempInst and !shouldIgnore(tempInst)) {
+						//errs()<<*tempInst<<"\n";		
             DFGEdge* dfgEdge;
             if (hasNode(tempInst)) {
               if (hasDFGEdge(getNode(tempInst), node))
@@ -770,11 +775,19 @@ int DFG::getInstID(BasicBlock* t_bb, Instruction* t_inst) {
   return -1;
 }
 
+ /** 
+	* this function is used to connect DFGNodes to generate DFG
+	*
+	* what is in this function:
+ 	* 1. cut Edges of every DFGNode 
+ 	* 2. Traverse all DFGEdges ,setOutEdge for the src DFGNode and setInEdeg for the dst DFGNode
+ 	*/
 void DFG::connectDFGNodes() {
   for (DFGNode* node: nodes)
     node->cutEdges();
 
   // Incorporate ctrl flow into data flow.
+	// this is about ctrl flow,do not care about it now
   if (!m_CDFGFused) {
     for (DFGEdge* edge: m_ctrlEdges) {
       m_DFGEdges.push_back(edge);
@@ -911,7 +924,7 @@ void DFG::generateDot(Function &t_F, bool t_isTrimmedDemo) {
 
 }
 
-//对每一个node都要遍历所有的edge找到所有的以这个node为src的edge，这个edge会在当前始终周期处理，
+//对每一个node都要遍历所有的edge找到所有的以这个node为src的edge，这个edge会在当前时钟周期处理，
 void DFG::DFS_on_DFG(DFGNode* t_head, DFGNode* t_current,
     list<DFGNode*>* t_visitedNodes, list<DFGEdge*>* t_erasedEdges,
     list<DFGEdge*>* t_currentCycle, list<list<DFGEdge*>*>* t_cycles) {
@@ -1054,6 +1067,7 @@ bool DFG::hasCtrlEdge(DFGNode* t_src, DFGNode* t_dst) {
   }
   return false;
 }
+
 
 DFGEdge* DFG::getDFGEdge(DFGNode* t_src, DFGNode* t_dst) {
   for (DFGEdge* edge: m_DFGEdges) {

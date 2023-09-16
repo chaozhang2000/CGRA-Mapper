@@ -35,9 +35,11 @@ class DFG {
     list<DFGNode*>* m_orderedNodes;//排序后的DFGNode
     list<Loop*>* m_targetLoops; //目标循环
 
-    //edges of data flow
-    list<DFGEdge*> m_DFGEdges; //DFG箭头
-    list<DFGEdge*> m_ctrlEdges; //控制箭头
+		/**List to save the pointer of DFGEdges in DFG
+		 */
+    list<DFGEdge*> m_DFGEdges; 
+															 
+    list<DFGEdge*> m_ctrlEdges;
 
     string changeIns2Str(Instruction* ins);
     //get value's name or inst's content
@@ -46,10 +48,24 @@ class DFG {
         list<DFGEdge*>*, list<list<DFGEdge*>*>*);
     DFGNode* getNode(Value*);
     bool hasNode(Value*);
+
+		/**Get the pointer of DFGEdge from t_src to t_dst DFGNode.The DFGEdge must be confirmed to have been created.You can use hasDFGEdge() to check this.
+		 * @param t_src the pointer to the src DFGNode
+		 * @param t_dst the pointer to the dst DFGNode
+		 * @return DFGEdge* the pointer to DFGEdge we want to find.
+		 */
     DFGEdge* getDFGEdge(DFGNode*, DFGNode*);
+
     void deleteDFGEdge(DFGNode*, DFGNode*);
     void replaceDFGEdge(DFGNode*, DFGNode*, DFGNode*, DFGNode*);
-    bool hasDFGEdge(DFGNode*, DFGNode*);
+
+
+		/**Check if the DFGEdge from t_src to t_dst DFGNode has be created
+		 * @param t_src the pointer to the src DFGNode
+		 * @param t_dst the pointer to the dst DFGNode
+		 * @return true main the DFGEdge from t_src to t_dst is in m_DFGEdges,has been created in the past
+		 */
+    bool hasDFGEdge(DFGNode* t_src, DFGNode* t_dst);
     DFGEdge* getCtrlEdge(DFGNode*, DFGNode*);
     bool hasCtrlEdge(DFGNode*, DFGNode*);
     bool shouldIgnore(Instruction*);
@@ -96,9 +112,10 @@ class DFG {
 		/**TODO
 		 */
     list<list<DFGNode*>*>* m_cycleNodeLists;//时钟节点列表
-		/**TODO
+																						
+		/**List to save the pointer of DFGNodes in DFG
 		 */
-    list<DFGNode*> nodes;//DFG 节点列表
+    list<DFGNode*> nodes;
 
     list<DFGNode*>* getBFSOrderedNodes();
     list<DFGNode*>* getDFSOrderedNodes();
