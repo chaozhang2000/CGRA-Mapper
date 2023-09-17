@@ -9,6 +9,7 @@
  */
 
 #include <fstream>
+#include <iostream>
 #include "DFG.h"
 
 DFG::DFG(Function& t_F, list<Loop*>* t_loops, bool t_targetFunction,
@@ -568,6 +569,28 @@ void DFG::construct(Function& t_F) {
   // reorderInALAP();
   // The mapping algorithm works on the DFG that is ordered along with the longest path.
   reorderInLongest();
+
+
+	//ISCA 2014 
+	std::ofstream file("pre_suc.txt");
+	if(file.is_open()){
+		file<<"predecessor:"<<std::endl;
+		for(DFGNode* node:nodes){
+			file << node->getID() <<":";
+    	list<DFGNode*>* pres = node->getPredNodes();
+			for(DFGNode* prenode: *pres){
+				file << prenode->getID()<< std::endl;
+			}
+		}
+		file.close();
+	}
+//  for (DFGNode* e_node: nodes) {
+//    if (e_node != t_node and t_visited->find(e_node) == t_visited->end() and (*t_map)[e_node] < (*t_map)[t_node]) {
+//      return false;
+//    }
+//  }
+
+
   
 }
 
