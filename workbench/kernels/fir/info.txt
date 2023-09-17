@@ -1,0 +1,60 @@
+PlacementDone_Init:
+    res=["br0"] = 0
+    res=["add11"] = 0
+    res=["icmp12"] = 0
+    res=["br13"] = 0
+    res=["phi1"] = 0
+    res=["ret15"] = 0
+    res=["getelementptr3"] = 0
+    res=["getelementptr6"] = 0
+    res=["bitcast4"] = 0
+    res=["bitcast7"] = 0
+    res=["load5"] = 0
+    res=["load8"] = 0
+    res=["fmul9"] = 0
+    res=["fadd10"] = 0
+    res=["phi2"] = 0
+    res=["call14"] = 0
+    res=["store16"] = 0
+
+
+
+DependencyPredecessor_Init:
+    res=["br0"] = [N/A]
+    res=["add11"] = ["phi1"]
+    res=["icmp12"] = ["add11"]
+    res=["br13"] = ["icmp12"]
+    res=["phi1"] = ["add11", "br0", "br13"]
+    res=["ret15"] = ["br13"]
+    res=["getelementptr3"] = ["phi1"]
+    res=["getelementptr6"] = ["phi1"]
+    res=["bitcast4"] = ["getelementptr3"]
+    res=["bitcast7"] = ["getelementptr6"]
+    res=["load5"] = ["bitcast4"]
+    res=["load8"] = ["bitcast7"]
+    res=["fmul9"] = ["load5", "load8"]
+    res=["fadd10"] = ["phi2", "fmul9"]
+    res=["phi2"] = ["fadd10", "br0", "br13"]
+    res=["call14"] = ["fadd10", "br13"]
+    res=["store16"] = ["call14"]
+
+
+
+DependencySuccessor_Init:
+    res=["br0"] = ["phi1", "phi2"]
+    res=["add11"] = ["phi1", "icmp12"]
+    res=["icmp12"] = ["br13"]
+    res=["br13"] = ["call14", "ret15", "phi1", "phi2"]
+    res=["phi1"] = ["getelementptr3", "getelementptr6", "add11"]
+    res=["ret15"] = [N/A]
+    res=["getelementptr3"] = ["bitcast4"]
+    res=["getelementptr6"] = ["bitcast7"]
+    res=["bitcast4"] = ["load5"]
+    res=["bitcast7"] = ["load8"]
+    res=["load5"] = ["fmul9"]
+    res=["load8"] = ["fmul9"]
+    res=["fmul9"] = ["fadd10"]
+    res=["fadd10"] = ["phi2", "call14"]
+    res=["phi2"] = ["fadd10"]
+    res=["call14"] = ["store16"]
+    res=["store16"] = [N/A]

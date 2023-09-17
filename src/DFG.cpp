@@ -572,16 +572,54 @@ void DFG::construct(Function& t_F) {
 
 
 	//ISCA 2014 
-	std::ofstream file("pre_suc.txt");
+	std::ofstream file("info.txt");
 	if(file.is_open()){
-		file<<"predecessor:"<<std::endl;
+		//PlacementDone_Init
+		file<<"PlacementDone_Init:"<<std::endl;
 		for(DFGNode* node:nodes){
-			file << node->getID() <<":";
+			file << "    res=[\""<< node->getInst()->getOpcodeName()<<node->getID()<<"\"] " <<"= 0"<<std::endl;
+		}
+		file << "\n\n"<< std::endl;
+
+		//DependencyPredecessor_Init
+		file<<"DependencyPredecessor_Init:"<<std::endl;
+		for(DFGNode* node:nodes){
+			file << "    res=[\""<< node->getInst()->getOpcodeName()<<node->getID()<<"\"] " <<"= ";
     	list<DFGNode*>* pres = node->getPredNodes();
-			for(DFGNode* prenode: *pres){
-				file << prenode->getID()<< std::endl;
+			if(pres->size() == 0) file<< "[N/A]" << std::endl;
+			else{
+				file <<"[";
+				int num_of_prenode = pres->size();
+				int count = 0;
+				for(DFGNode* prenode: *pres){
+					count ++;
+					if (count == num_of_prenode)file << "\"" <<prenode->getInst()->getOpcodeName()<<prenode->getID()<<"\"";
+					else file << "\"" <<prenode->getInst()->getOpcodeName()<<prenode->getID()<<"\", ";
+				}
+				file << "]" <<std::endl;
 			}
 		}
+		file << "\n\n"<< std::endl;
+
+		//DependencySuccessor_Init
+		file<<"DependencySuccessor_Init:"<<std::endl;
+		for(DFGNode* node:nodes){
+			file << "    res=[\""<< node->getInst()->getOpcodeName()<<node->getID()<<"\"] " <<"= ";
+    	list<DFGNode*>* succs = node->getSuccNodes();
+			if(succs->size() == 0) file<< "[N/A]" << std::endl;
+			else{
+				file <<"[";
+				int num_of_prenode = succs->size();
+				int count = 0;
+				for(DFGNode* prenode: *succs){
+					count ++;
+					if (count == num_of_prenode)file << "\"" <<prenode->getInst()->getOpcodeName()<<prenode->getID()<<"\"";
+					else file << "\"" <<prenode->getInst()->getOpcodeName()<<prenode->getID()<<"\", ";
+				}
+				file << "]" <<std::endl;
+			}
+		}
+
 		file.close();
 	}
 //  for (DFGNode* e_node: nodes) {
