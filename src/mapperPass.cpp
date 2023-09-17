@@ -55,7 +55,6 @@ namespace {
       int regConstraint             = 8;
       bool precisionAware           = false;
       bool diagonalVectorization    = false;
-      bool heterogeneity            = false;
       bool heuristicMapping         = true;
       bool parameterizableCGRA      = false;
       map<string, int>* execLatency = new map<string, int>();	//lantancy of operations
@@ -93,7 +92,6 @@ namespace {
 	paramKeys.insert("regConstraint");
 	paramKeys.insert("precisionAware");
 	paramKeys.insert("diagonalVectorization");
-	paramKeys.insert("heterogeneity");
 	paramKeys.insert("heuristicMapping");
 	paramKeys.insert("parameterizableCGRA");
 
@@ -129,7 +127,6 @@ namespace {
         regConstraint         = param["regConstraint"];
         precisionAware        = param["precisionAware"];
         diagonalVectorization = param["diagonalVectorization"];
-        heterogeneity         = param["heterogeneity"];
         heuristicMapping      = param["heuristicMapping"];
         parameterizableCGRA   = param["parameterizableCGRA"];
 				//3. assign value to execLatency , piplinedOpt,additionalFunc
@@ -165,8 +162,8 @@ namespace {
       // TODO: will make a list of patterns/tiles to illustrate how the
       //       heterogeneity is
       DFG* dfg = new DFG(t_F, targetLoops, targetEntireFunction, precisionAware,
-                         heterogeneity, execLatency, pipelinedOpt);
-      CGRA* cgra = new CGRA(rows, columns, diagonalVectorization, heterogeneity,
+                         execLatency, pipelinedOpt);
+      CGRA* cgra = new CGRA(rows, columns, diagonalVectorization,
 		            parameterizableCGRA, additionalFunc);
       cgra->setRegConstraint(regConstraint);
       cgra->setCtrlMemConstraint(ctrlMemConstraint);

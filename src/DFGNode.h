@@ -43,8 +43,14 @@ class DFGNode {
 		 */
     list<DFGEdge*> m_outEdges;
 
+		/**the list to save the pointers of successor DFGNodes of this DFGNode
+		 */
     list<DFGNode*>* m_succNodes;
+
+		/**the list to save the pointers of previous DFGNodes of this DFGNode
+		 */
     list<DFGNode*>* m_predNodes;
+
     list<DFGNode*>* m_patternNodes;
     list<int>* m_cycleID;
     bool m_isMapped;
@@ -58,7 +64,11 @@ class DFGNode {
     bool m_combined;
     bool m_isPatternRoot;
     bool m_critical;
+
+		/** the var to save the value of DFGNode.
+		 */
     int m_level;
+
     int m_execLatency;
     bool m_pipelinable;
     // "m_predicated" indicates whether the execution of the node depends on
@@ -80,7 +90,11 @@ class DFGNode {
                  StringRef t_stringRef);
     int getID();
     void setID(int);
-    void setLevel(int);
+
+		/** Set the level of the DFGNode. set the m_level to the value of t_level.
+		 * @param t_level: the level we want to set for this DFGNode
+		 */
+    void setLevel(int t_level);
     int getLevel();
     bool isMapped();
     void setMapped();
@@ -104,8 +118,22 @@ class DFGNode {
     Instruction* getInst();
     StringRef getStringRef();
     string getOpcodeName();
+
+
+		/**
+		 * get the previous DFGnodes of this DFGNode
+		 * it will get information from m_succNodes.if m_preNodes is empty,the information will be get from m_inEdges
+		 * @return list<DFGNode*>* : a list of previous DFGnodes
+		 */
     list<DFGNode*>* getPredNodes();
+
+		/**
+		 * get the successor DFGnodes of this DFGNode
+		 * it will get information from m_succNodes.if m_succNodes is empty, the information will be get from m_outEdges
+		 * @return list<DFGNode*>* : a list of successor DFGnodes
+		 */
     list<DFGNode*>* getSuccNodes();
+
     bool isSuccessorOf(DFGNode*);
     bool isPredecessorOf(DFGNode*);
     bool isOneOfThem(list<DFGNode*>*);

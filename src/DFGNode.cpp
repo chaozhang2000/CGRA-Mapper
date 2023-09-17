@@ -447,6 +447,7 @@ list<DFGNode*>* DFGNode::getPredNodes() {
     assert(edge->getDst() == this);
     m_predNodes->push_back(edge->getSrc());
   }
+	//we don't consider branch so the code below is not necessory now
   if (isBranch()) {
     list<DFGNode*>* m_tempNodes = new list<DFGNode*>();
     for (DFGNode* node: *m_predNodes) {

@@ -7,7 +7,6 @@ cat > param.json << EOF
   "row"                   : 4,
   "column"                : 4,
   "precisionAware"        : true,
-  "heterogeneity"         : false,
   "isTrimmedDemo"         : true,
   "heuristicMapping"      : true,
   "parameterizableCGRA"   : false,

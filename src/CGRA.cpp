@@ -15,7 +15,7 @@
 using json = nlohmann::json;
 
 CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
-	   bool t_heterogeneity, bool t_parameterizableCGRA,
+	   bool t_parameterizableCGRA,
 	   map<string, list<int>*>* t_additionalFunc) {
 	
 	//初始化行列和FUCount,FUCount就是rows乘columns给nodes分配空间。
@@ -186,14 +186,14 @@ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
 
 
     // Enable the heterogeneity.
-    if (t_heterogeneity) {
+    /*if (t_heterogeneity) {
       for (int r=0; r<t_rows; ++r) {
         for (int c=0; c<t_columns; ++c) {
           if(r%2==1 and c%2 == 1)
             nodes[r][c]->enableComplex();
         }
       }
-    }
+    }*/
 
     for (int r=0; r<t_rows; ++r) {
       for (int c=0; c<t_columns; ++c) {

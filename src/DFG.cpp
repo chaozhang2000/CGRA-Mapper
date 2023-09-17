@@ -8,10 +8,13 @@
 #include "DFG.h"
 
 /**
- * How this function is implemented TODO
+ * How this function is implemented:
+ * 1. init some var
+ * 2. use construct() function to construct DFG
+ * 3. init exec latency and pipelined opt (not used now)
  */
 DFG::DFG(Function& t_F, list<Loop*>* t_loops, bool t_targetFunction,
-         bool t_precisionAware, bool t_heterogeneity,
+         bool t_precisionAware, 
          map<string, int>* t_execLatency, list<string>* t_pipelinedOpt) {
   m_num = 0;
   m_targetFunction = t_targetFunction;
@@ -22,27 +25,6 @@ DFG::DFG(Function& t_F, list<Loop*>* t_loops, bool t_targetFunction,
   m_precisionAware = t_precisionAware;
 
   construct(t_F);
-//  tuneForBranch();
-//  tuneForBitcast();
-//  tuneForLoad();
-  if (t_heterogeneity) {
-    calculateCycles();
-//    combine("phi", "add");
-    combine("and", "xor");
-//    combine("br", "phi");
-//    combine("add", "icmp");
-//    combine("xor", "add");
-    combineCmpBranch();
-    combine("icmp", "br");
-    combine("getelementptr", "load");
-    tuneForPattern();
-
-//    calculateCycles();
-////    combine("icmp", "br");
-//    combine("xor", "add");
-//    tuneForPattern();
-  }
-//  trimForStandalone();
   initExecLatency(t_execLatency);
   initPipelinedOpt(t_pipelinedOpt);
 
@@ -300,6 +282,7 @@ list<DFGNode*>* DFG::getBFSOrderedNodes() {
 	* 3. Traverse all instructions of current basic block and create a dfgNode for each instruction
 	* 4. Traverse all DFGNodes and all operands of every instruction,create DFGEdge according to their operands 
 	* 5. connect all DFGNode to generate the DFG
+	* 6. reorder the DFGNodes according the longest path in DFG
  */
 void DFG::construct(Function& t_F) {
 
@@ -476,7 +459,7 @@ void DFG::construct(Function& t_F) {
   }
   connectDFGNodes();
 
-  calculateCycles();
+  //calculateCycles();
 
   reorderInLongest();
   
@@ -521,9 +504,12 @@ void DFG::reorderInASAP() {
 }
 
 bool DFG::isMinimumAndHasNotBeenVisited(set<DFGNode*>* t_visited, map<DFGNode*, int>* t_map, DFGNode* t_node) {
+	//first，if this node has been set level it should be ignore
   if (t_visited->find(t_node) != t_visited->end()) {
     return false;
   }
+	//second, if this node hasn't been set level,we judge if it can be set level now
+	//we traverse every node, if we can find a node which hasn't be visited and  has fewer prenodes than the DFGNode we focus on,we should ifgnore our target node. because it is not the node with the min prenode now.
   for (DFGNode* e_node: nodes) {
     if (e_node != t_node and t_visited->find(e_node) == t_visited->end() and (*t_map)[e_node] < (*t_map)[t_node]) {
       return false;
@@ -532,22 +518,30 @@ bool DFG::isMinimumAndHasNotBeenVisited(set<DFGNode*>* t_visited, map<DFGNode*, 
   return true;
 }
 
-// Reorder the DFG nodes based on the longest path.
+/**
+ * what is in this function:
+ * 1. use reorderDFS() to get the longest Path in DFG
+ * 2. give every DFGNode a level, first handle the DFGNodes in longestPath 
+ * 3. chose the node hasn't been handled and with the fewest previous nodes and give it a level.until everynode is handled
+ * 4. clear the list nodes,and push DFGNodes in order from small to large
+ */
 void DFG::reorderInLongest() {
   list<DFGNode*>* longestPath = new list<DFGNode*>();
   list<DFGNode*>* currentPath = new list<DFGNode*>();
   set<DFGNode*>* visited = new set<DFGNode*>();
-  map<DFGNode*, int> indegree;
+  map<DFGNode*, int> indegree;//record every DFGNode have how many preNodes that have not been given a level
   for (DFGNode* node: nodes) {
     indegree[node] = node->getPredNodes()->size();
     currentPath->clear();
     visited->clear();
+		//get the longestPath
     reorderDFS(visited, longestPath, currentPath, node);
   }
 
   visited->clear();
   int level = 0;
   for (DFGNode* node: *longestPath) {
+		//errs()<<node->getID() <<*(node->getInst())<<"\n";
     node->setLevel(level);
     visited->insert(node);
     //cout<<"check longest path node: "<<node->getID()<<endl;
@@ -592,8 +586,13 @@ void DFG::reorderInLongest() {
     nodes.push_back(node);
     errs()<<"("<<node->getID()<<") "<<*(node->getInst())<<", level: "<<node->getLevel()<<"\n";
   }
+  delete longestPath;
+  delete currentPath;
+  delete visited;
 
 }
+
+//DFS(Depth-First Search) 深度优先搜索算法是一种用于遍历或搜索图的非线性数据结构的算法。它从起始顶点开始，沿着一条路径尽可能深入图中之前的每个未访问的顶点，直到达到最深的顶点为止。然后，回溯到上一个节点，继续探索其他分支直到所有节点都被访问到。
 
 void DFG::reorderDFS(set<DFGNode*>* t_visited, list<DFGNode*>* t_targetPath,
                      list<DFGNode*>* t_curPath, DFGNode* targetDFGNode) {
@@ -924,20 +923,16 @@ void DFG::generateDot(Function &t_F, bool t_isTrimmedDemo) {
 
 }
 
-//对每一个node都要遍历所有的edge找到所有的以这个node为src的edge，这个edge会在当前时钟周期处理，
 void DFG::DFS_on_DFG(DFGNode* t_head, DFGNode* t_current,
     list<DFGNode*>* t_visitedNodes, list<DFGEdge*>* t_erasedEdges,
     list<DFGEdge*>* t_currentCycle, list<list<DFGEdge*>*>* t_cycles) {
   for (DFGEdge* edge: m_DFGEdges) {
-    if (find(t_erasedEdges->begin(), t_erasedEdges->end(), edge) != t_erasedEdges->end())
-      continue;
+    if (find(t_erasedEdges->begin(), t_erasedEdges->end(), edge) != t_erasedEdges->end())continue;
     // check whether the IR is equal
     if (edge->getSrc() == t_current) {
       // skip the visited nodes/edges:
-      if (find(t_currentCycle->begin(), t_currentCycle->end(), edge) != t_currentCycle->end()) {
-        continue;
-      }
-      t_currentCycle->push_back(edge);
+      if (find(t_currentCycle->begin(), t_currentCycle->end(), edge) != t_currentCycle->end())continue;
+      t_currentCycle->push_back(edge);//push_back 是在列表的末尾添加一个元素。
 
       if (edge->getDst() == t_head) {
         cout << "==================================\n";
@@ -950,7 +945,7 @@ void DFG::DFS_on_DFG(DFGNode* t_head, DFGNode* t_current,
         }
         t_erasedEdges->push_back(edge);
         t_cycles->push_back(temp_cycle);
-        t_currentCycle->remove(edge);
+        t_currentCycle->remove(edge);//remove方法用于从列表中删除指定值的所有元素。
       } else {
         if (find(t_visitedNodes->begin(), t_visitedNodes->end(), edge->getDst()) == t_visitedNodes->end()) {
           t_visitedNodes->push_back(edge->getDst());
@@ -965,7 +960,7 @@ void DFG::DFS_on_DFG(DFGNode* t_head, DFGNode* t_current,
     }
   }
   if (t_currentCycle->size()!=0) {
-    t_currentCycle->pop_back();
+    t_currentCycle->pop_back();//pop_back是在列表的末尾删除一个元素。
   }
 }
 
