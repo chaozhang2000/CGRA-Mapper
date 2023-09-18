@@ -655,10 +655,16 @@ void Mapper::generateJSON(CGRA* t_cgra, DFG* t_dfg, int t_II,
   ofstream jsonFile;
   jsonFile.open("config.json");
   jsonFile<<"[\n";
-  if (!t_isStaticElasticCGRA) {
 
+	//////
+						ofstream placement;
+						placement.open("placement.txt");
+						placement<< "    res = [";
+	//////			
+  if (!t_isStaticElasticCGRA) {
     bool first = true;
     for (int t=0; t<t_II+1; ++t) {
+						placement<< "[";
       for (int i=0; i<t_cgra->getRows(); ++i) {
         for (int j=0; j<t_cgra->getColumns(); ++j) {
           CGRANode* currentCGRANode = t_cgra->nodes[i][j];
@@ -774,6 +780,11 @@ void Mapper::generateJSON(CGRA* t_cgra, DFG* t_dfg, int t_II,
           }
 
           jsonFile<<"    \"opt"<<"\"         : \""<<targetOpt<<"\",\n";
+					///ISCA
+					if(targetOpt != "OPT_NAH"){
+						placement<< "\""<<targetDFGNode->getInst()->getOpcodeName()<<targetDFGNode->getID()<<"\",";
+					}
+					//
           int predicated = 0;
           if (targetDFGNode != NULL and targetDFGNode->isPredicatee()) {
             predicated = 1;
@@ -816,9 +827,15 @@ void Mapper::generateJSON(CGRA* t_cgra, DFG* t_dfg, int t_II,
           jsonFile<<"  }";
         }
       }
+			//ISCA
+			placement.seekp(-1,ios::end);
+			if (t == t_II) placement<< "]]";
+			else placement<<"],";
     }
     jsonFile<<"\n]\n";
     jsonFile.close();
+		//ISCA
+		placement.close();
 
     return;
   }
@@ -974,6 +991,9 @@ void Mapper::generateJSON(CGRA* t_cgra, DFG* t_dfg, int t_II,
       }
       jsonFile<<"    \"dvfs\"      : "<<"\"nominal\""<<"\n";
       jsonFile<<"  }";
+
+			///
+			///
     }
   }
   jsonFile<<"\n]\n";

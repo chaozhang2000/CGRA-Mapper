@@ -572,7 +572,7 @@ void DFG::construct(Function& t_F) {
 
 
 	//ISCA 2014 
-	std::ofstream file("info.txt");
+	std::ofstream file("link.txt");
 	if(file.is_open()){
 		//PlacementDone_Init
 		file<<"PlacementDone_Init:"<<std::endl;
