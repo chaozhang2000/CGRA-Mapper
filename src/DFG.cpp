@@ -869,7 +869,7 @@ void DFG::generateDot(Function &t_F, bool t_isTrimmedDemo) {
   StringRef fileName(file_name);
   raw_fd_ostream file(fileName, error, sys::fs::OF_None);
 
-  file << "digraph \"DFG for'" + t_F.getName() + "\' function\" {\n";
+  file << "digraph \"DFG for'"  << t_F.getName() << "\' function\" {\n";
 
   //Dump DFG nodes.
   for (DFGNode* node: nodes) {
