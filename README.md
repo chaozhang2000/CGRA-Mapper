@@ -1,6 +1,6 @@
 # README
 
-**Ignore the README.md in ./workbench just read this README
+**Ignore the README.md in ./workbench just read this README**
 
 **For more information, please visit the author Tan's [Repositories](https://github.com/tancheng/CGRA-Mapper). I have not yet integrated the original README here**
 
