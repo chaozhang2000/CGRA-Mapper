@@ -1,0 +1,105 @@
+PlacementDone_Init:
+    res=["phi0"] = 0
+    res=["trunc22"] = 0
+    res=["add29"] = 0
+    res=["icmp30"] = 0
+    res=["br31"] = 0
+    res=["add1"] = 0
+    res=["add13"] = 0
+    res=["add23"] = 0
+    res=["getelementptr2"] = 0
+    res=["getelementptr7"] = 0
+    res=["getelementptr10"] = 0
+    res=["getelementptr14"] = 0
+    res=["add24"] = 0
+    res=["bitcast3"] = 0
+    res=["bitcast8"] = 0
+    res=["bitcast11"] = 0
+    res=["bitcast15"] = 0
+    res=["sext25"] = 0
+    res=["load4"] = 0
+    res=["load9"] = 0
+    res=["load12"] = 0
+    res=["load16"] = 0
+    res=["getelementptr26"] = 0
+    res=["sub5"] = 0
+    res=["icmp17"] = 0
+    res=["bitcast27"] = 0
+    res=["call6"] = 0
+    res=["select18"] = 0
+    res=["icmp19"] = 0
+    res=["select20"] = 0
+    res=["add21"] = 0
+    res=["store28"] = 0
+
+
+
+DependencyPredecessor_Init:
+    res=["phi0"] = ["add29", "br31"]
+    res=["trunc22"] = ["phi0"]
+    res=["add29"] = ["phi0"]
+    res=["icmp30"] = ["add29"]
+    res=["br31"] = ["icmp30"]
+    res=["add1"] = ["phi0", "br31"]
+    res=["add13"] = ["phi0", "br31"]
+    res=["add23"] = ["trunc22", "br31"]
+    res=["getelementptr2"] = ["add1"]
+    res=["getelementptr7"] = ["add1", "br31"]
+    res=["getelementptr10"] = ["add1", "br31"]
+    res=["getelementptr14"] = ["add13", "br31"]
+    res=["add24"] = ["add23"]
+    res=["bitcast3"] = ["getelementptr2"]
+    res=["bitcast8"] = ["getelementptr7"]
+    res=["bitcast11"] = ["getelementptr10"]
+    res=["bitcast15"] = ["getelementptr14"]
+    res=["sext25"] = ["add24"]
+    res=["load4"] = ["bitcast3"]
+    res=["load9"] = ["bitcast8"]
+    res=["load12"] = ["bitcast11"]
+    res=["load16"] = ["bitcast15"]
+    res=["getelementptr26"] = ["sext25", "br31"]
+    res=["sub5"] = ["load4", "br31"]
+    res=["icmp17"] = ["load9", "load12"]
+    res=["bitcast27"] = ["getelementptr26"]
+    res=["call6"] = ["sub5"]
+    res=["select18"] = ["icmp17", "load9", "load12"]
+    res=["icmp19"] = ["select18", "load16"]
+    res=["select20"] = ["icmp19", "load16", "select18"]
+    res=["add21"] = ["select20", "call6"]
+    res=["store28"] = ["add21", "bitcast27"]
+
+
+
+DependencySuccessor_Init:
+    res=["phi0"] = ["add1", "add13", "trunc22", "add29"]
+    res=["trunc22"] = ["add23"]
+    res=["add29"] = ["phi0", "icmp30"]
+    res=["icmp30"] = ["br31"]
+    res=["br31"] = ["phi0", "add1", "sub5", "getelementptr7", "getelementptr10", "add13", "getelementptr14", "add23", "getelementptr26"]
+    res=["add1"] = ["getelementptr2", "getelementptr7", "getelementptr10"]
+    res=["add13"] = ["getelementptr14"]
+    res=["add23"] = ["add24"]
+    res=["getelementptr2"] = ["bitcast3"]
+    res=["getelementptr7"] = ["bitcast8"]
+    res=["getelementptr10"] = ["bitcast11"]
+    res=["getelementptr14"] = ["bitcast15"]
+    res=["add24"] = ["sext25"]
+    res=["bitcast3"] = ["load4"]
+    res=["bitcast8"] = ["load9"]
+    res=["bitcast11"] = ["load12"]
+    res=["bitcast15"] = ["load16"]
+    res=["sext25"] = ["getelementptr26"]
+    res=["load4"] = ["sub5"]
+    res=["load9"] = ["icmp17", "select18"]
+    res=["load12"] = ["icmp17", "select18"]
+    res=["load16"] = ["icmp19", "select20"]
+    res=["getelementptr26"] = ["bitcast27"]
+    res=["sub5"] = ["call6"]
+    res=["icmp17"] = ["select18"]
+    res=["bitcast27"] = ["store28"]
+    res=["call6"] = ["add21"]
+    res=["select18"] = ["icmp19", "select20"]
+    res=["icmp19"] = ["select20"]
+    res=["select20"] = ["add21"]
+    res=["add21"] = ["store28"]
+    res=["store28"] = [N/A]
