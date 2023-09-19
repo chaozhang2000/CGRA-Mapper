@@ -148,7 +148,21 @@ class DFG {
     int getID(DFGNode*);
     bool isLoad(DFGNode*);
     bool isStore(DFGNode*);
+
+		/** Print the information of DFG.
+		 * Print the name and number of occurrences of each operation that appears in the data flow graph
+		 * Print the number of DFGNodes and DFGLinks in the DFG
+		 */
     void showOpcodeDistribution();
-    void generateDot(Function&, bool);
+
+		/** Generate the Dot file according the DFG
+		 * we can latter use dot tool to generate the png file of DFG.
+ 		 * @param t_F : the function pointer which the mapperPass is processing
+ 		 * @param t_isTrimmedDemo : use to control the generation of different dot(png) files. If this value is true , the name of the DFGNode in the dot(png) is the opcode of the inst,but if this value is false ,the name will be the complete instruction. this value is given from the "isTrimmedDemo" param in param.json.
+		 */
+		void generateDot(Function &t_F, bool t_isTrimmedDemo);
+
+		/** Generate the JSON file according the DFG
+		 */
     void generateJSON();
 };

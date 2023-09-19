@@ -61,7 +61,6 @@ class DFGNode {
 
     string m_optType;
     string m_fuType;
-    bool m_combined;
     bool m_isPatternRoot;
     bool m_critical;
 
@@ -112,7 +111,6 @@ class DFGNode {
     bool isGetptr();
     bool isOpt(string);
     bool isVectorized();
-    bool hasCombined();
     void setCombine();
     void addPatternPartner(DFGNode*);
     Instruction* getInst();

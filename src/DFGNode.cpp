@@ -24,7 +24,6 @@ DFGNode::DFGNode(int t_id, bool t_precisionAware, Instruction* t_inst,
   m_isMapped = false;
   m_numConst = 0;
   m_optType = "";
-  m_combined = false;
   m_isPatternRoot = false;
   m_patternRoot = NULL;
   m_critical = false;
@@ -216,14 +215,6 @@ bool DFGNode::isGetptr() {
   if (m_opcodeName.compare("getelementptr") == 0)
     return true;
   return false;
-}
-
-bool DFGNode::hasCombined() {
-  return m_combined;
-}
-
-void DFGNode::setCombine() {
-  m_combined = true;
 }
 
 void DFGNode::addPatternPartner(DFGNode* t_patternNode) {

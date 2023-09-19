@@ -81,7 +81,12 @@ class CGRALink
     bool isReused(int);
     DFGNode* getMappedDFGNode(int);
     void setCtrlMemConstraint(int);
-    void setBypassConstraint(int);
+		/** TODO: there may be a misunderstanding of this function. and why this function is only defined in CGRALink is not clear. 
+		 * set the number of CGRAlinks(bypass channel) that each CGRAnode interacts with surrounding nodes.
+		 * set m_bypassConstraint the value of t_bypassConstraint,this value comes from "bypassConstraint" param in param.json.
+		 * @param t_bypassConstraint : the number of the bypass channel.
+		 */
+		void setBypassConstraint(int t_bypassConstraint);
     int getBypassConstraint();
     void disable();
 };

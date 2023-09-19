@@ -28,6 +28,9 @@ class Mapper {
         DFGNode*, list<map<CGRANode*, int>*>*);
 
   public:
+		/**The constructor function of class Mapper
+		 * use the C++ default construct function
+		 */
     Mapper(){}
     int getResMII(DFG*, CGRA*);
     int getRecMII(DFG*);

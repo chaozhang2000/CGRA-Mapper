@@ -55,7 +55,24 @@ class CGRA {
     int getRows() { return m_rows; }
     int getColumns() { return m_columns; }
     CGRALink* getLink(CGRANode*, CGRANode*);
-    void setBypassConstraint(int);
-    void setCtrlMemConstraint(int);
-    void setRegConstraint(int);
+
+		/**The function to set the number of bypass channel in every CGRALink of the CGRA.
+		 * Traverse every CGRALink in the CGRA and call CGRALink.setBypassConstraint for every CGRALink.
+		 * TODO why setBypassConstraint is a function of CGRALink but not CGRANode ?
+		 * @param t_bypassConstraint : the size of bypass channel
+		 */
+		void setBypassConstraint(int t_bypassConstraint);
+
+		/**The function to set the size of regs in every CGRANode and CGRALink of the CGRA.
+		 * Traverse every CGRANode in the CGRA and call CGRANode.setCtrlMemConstraint CGRALink.setCtrlMemConstraint for every CGRANode and CGRALink.
+		 * TODO why CGRALink need setCtrlMemConstraint ?
+		 * @param t_ctrlMemConstraint : the size of ctrlMem 
+		 */
+		void setCtrlMemConstraint(int t_ctrlMemConstraint);
+
+		/**The function to set the number of regs in every CGRANode of the CGRA.
+		 * Traverse every CGRANode in the CGRA and call CGRANode.setRegConstraint for every CGRANode.
+		 * @param t_registerConstraint : the number of regs
+		 */
+		void setRegConstraint(int t_regConstraint);
 };

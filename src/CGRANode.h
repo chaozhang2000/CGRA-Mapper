@@ -35,9 +35,17 @@ class CGRANode {
     int m_id;
     int m_x;
     int m_y;
+
+		/**the value to record the number of regs in a CGRANode
+		 */
     int m_registerCount;
+
     list<float> m_registers;
+
+		/**the value to record the size of ctrlMem in a CGRANode
+		 */
     int m_ctrlMemSize;
+
     int m_currentCtrlMemItems;
     float* m_ctrlMem;
 
@@ -89,8 +97,20 @@ class CGRANode {
 		 */
 		CGRANode(int t_id, int t_x, int t_y);
 
-    void setRegConstraint(int);
-    void setCtrlMemConstraint(int);
+		/**The function to set the number of regs in a CGRANode.
+		 * set the m_registerCount the value of t_registerConstraint
+		 * the number of regs in a CGRANode comes from the param "regConstraint" in param.json
+		 * @param t_registerConstraint : the number of regs
+		 */
+		void setRegConstraint(int t_registerConstraint);
+
+		/**The function to set the size of ctrlMem in a CGRANode.
+		 * set the m_ctrlMemSize the value of t_ctrlMemConstraint
+		 * the size of ctrlMem in a CGRANode comes from the param "ctrlMemConstraint" in param.json
+		 * @param t_ctrlMemConstraint : the size of ctrlMem
+		 */
+		void setCtrlMemConstraint(int t_ctrlMemConstraint);
+
     void setID(int);
     void setLocation(int, int);
     int getID();
