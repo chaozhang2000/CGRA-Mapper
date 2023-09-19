@@ -14,34 +14,37 @@
 
 using json = nlohmann::json;
 
-CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
+/**
+ * What is in this Function:
+ * 1. init some var,like m_rows、m_columns、m_FUCount and so on.
+ * 2. Depending on whether parameter a is true or false, decide whether to use paramCGRA.json or default parameters to initialize CGRA.
+ * 3. 
+ */
+CGRA::CGRA(int t_rows, int t_columns,
 	   bool t_parameterizableCGRA,
 	   map<string, list<int>*>* t_additionalFunc) {
 	
-	//初始化行列和FUCount,FUCount就是rows乘columns给nodes分配空间。
+  //1. init some var,like m_rows、m_columns、m_FUCount and so on.
   m_rows = t_rows;
   m_columns = t_columns;
   m_FUCount = t_rows * t_columns;
   nodes = new CGRANode**[t_rows];
 
-	//参数化地初始化CGRA
+  //2. Depending on whether parameter a is true or false, decide whether to use paramCGRA.json or default parameters to initialize CGRA.
   if (t_parameterizableCGRA) {
-		//根据行列来初始化CGRANode
+		//create CGRANode for CGRA and give them node_id and (x,y)
     int node_id = 0;
     map<int, CGRANode*> id2Node;
     for (int i=0; i<t_rows; ++i) {
       nodes[i] = new CGRANode*[t_columns];
       for (int j=0; j<t_columns; ++j) {
-							//CGRANode的构造函数很简单，只设置id和行列号。其他在其构造函数中都给了默认值
         nodes[i][j] = new CGRANode(node_id, j, i);
 	id2Node[node_id] = nodes[i][j];
 	node_id += 1;
       }
     }
 
-		//从paramCGRA.json文件中读取参数，示例并没有采用这种方式。
-		//读取参数后对每个CGRANode进行配置，这里主要配置的是将要disable的node全部disable将不启用所有fu的node先disbale所有的fu，再根据是否有accessMEM功能来确定是否开启load和store功能。
-		//这里其实默认除了load和store外的所有fu功能都开启。
+		//read paramCGRA.json
     ifstream paramCGRA("./paramCGRA.json");
     if (!paramCGRA.good()) {
       cout<<"Parameterizable CGRA design/mapping requires paramCGRA.json"<<endl;
@@ -50,6 +53,14 @@ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
     json param;
     paramCGRA >> param;
     
+		//traverse all CGRANodes
+		//disable nodes which need to be disabled
+		//disable AllFUs if the supportALLFUs param is false, else enableLoad and enableStore of the CGRANode according the accessMem param.
+		//in the below code we support three kinds of CGRANode
+		//1. with param disabled==true	:nouse CGRANode
+		//2. with disabled == false,supportAllFUs == true,accessMem == true : support all function
+		//3. with disabled == false,supportALLFUs == true,accessMem == false: support all function except load and store
+		//4. with disabled == false,supportALLFUs == false,accessMem == true : support only load and store
     int numOfNodes = t_rows * t_columns;
     for (int nodeID = 0; nodeID < numOfNodes; ++nodeID) {
       bool disabled = param["tiles"][to_string(nodeID)]["disabled"];
@@ -57,22 +68,22 @@ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
         id2Node[nodeID]->disable();
       } else {
         bool supportAllFUs = param["tiles"][to_string(nodeID)]["supportAllFUs"];
-	if (!supportAllFUs) {
-	  id2Node[nodeID]->disableAllFUs();
-	}
-	if (param["tiles"][to_string(nodeID)].contains("accessMem")) {
-	  if (param["tiles"][to_string(nodeID)]["accessMem"]) {
-	    id2Node[nodeID]->enableLoad();
-	    id2Node[nodeID]->enableStore();
-	  }
-	}
-
-	// TODO: need to take care of supportedFUs:
-	//
-      }
+				if (!supportAllFUs) {
+	  			id2Node[nodeID]->disableAllFUs();
+				}
+				if (param["tiles"][to_string(nodeID)].contains("accessMem")) {
+	  			if (param["tiles"][to_string(nodeID)]["accessMem"]) {
+	    			id2Node[nodeID]->enableLoad();
+	    			id2Node[nodeID]->enableStore();
+	  			}
+				}
+     	}
     }
 
 		//从param读取links相关的参数，初始化CGRALink,并对每个srcNode和dstNode注册对应的outlink和inlink，并在对应的link中注册src和dst node
+
+		//read the params about CGRALinks from paramCGRA.json and create CGRALink
+		//connect the CGRANodes and CGRA Links to the CGRA
     json paramLinks = param["links"];
     m_LinkCount = paramLinks.size();
     links = new CGRALink*[m_LinkCount];
@@ -168,33 +179,6 @@ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
       }
     }
 
-    // Enable the vectorization.
-    if (t_diagonalVectorization) {
-      for (int r=0; r<t_rows; ++r) {
-        for (int c=0; c<t_columns; ++c) {
-          if((r+c)%2 == 0)
-            nodes[r][c]->enableVectorization();
-        }
-      }
-    } else {
-      for (int r=0; r<t_rows; ++r) {
-        for (int c=0; c<t_columns; ++c) {
-          nodes[r][c]->enableVectorization();
-        }
-      }
-    }
-
-
-    // Enable the heterogeneity.
-    /*if (t_heterogeneity) {
-      for (int r=0; r<t_rows; ++r) {
-        for (int c=0; c<t_columns; ++c) {
-          if(r%2==1 and c%2 == 1)
-            nodes[r][c]->enableComplex();
-        }
-      }
-    }*/
-
     for (int r=0; r<t_rows; ++r) {
       for (int c=0; c<t_columns; ++c) {
         nodes[r][c]->enableReturn();
@@ -235,37 +219,7 @@ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
         }
       }
     }
-
-    disableSpecificConnections();
   }
-}
-
-void CGRA::disableSpecificConnections() {
-//  nodes[0][0]->disable();
-//  nodes[0][1]->disable();
-//  nodes[0][2]->disable();
-//  nodes[0][3]->disable();
-//  nodes[0][4]->disable();
-//  nodes[1][0]->disable();
-//  nodes[1][1]->disable();
-//  nodes[1][2]->disable();
-//  nodes[1][4]->disable();
-//  nodes[1][3]->disable();
-//  nodes[2][0]->disable();
-//  nodes[2][1]->disable();
-//  nodes[2][2]->disable();
-//  nodes[2][3]->disable();
-//  nodes[2][4]->disable();
-//  nodes[3][1]->disable();
-//  nodes[3][2]->disable();
-//  nodes[3][2]->disable();
-//  nodes[3][3]->disable();
-//  nodes[3][4]->disable();
-//  nodes[4][1]->disable();
-//  nodes[4][2]->disable();
-//  nodes[4][3]->disable();
-//  nodes[4][4]->disable();
-
 }
 
 void CGRA::setRegConstraint(int t_regConstraint) {

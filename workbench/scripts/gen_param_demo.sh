@@ -10,7 +10,6 @@ cat > param.json << EOF
   "isTrimmedDemo"         : true,
   "heuristicMapping"      : true,
   "parameterizableCGRA"   : false,
-  "diagonalVectorization" : false,
   "bypassConstraint"      : 4,
   "isStaticElasticCGRA"   : false,
   "ctrlMemConstraint"     : 200,

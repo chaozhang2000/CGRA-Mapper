@@ -29,7 +29,6 @@ CGRANode::CGRANode(int t_id, int t_x, int t_y) {
   m_disabled = false;
   m_canStore = false;
   m_canLoad = false;
-  m_supportComplex = false;
   m_x = t_x;
   m_y = t_y;
   m_neighbors = NULL;
@@ -188,9 +187,7 @@ bool CGRANode::canSupport(DFGNode* t_opt) {
   if ((t_opt->isLoad()       and !canLoad())  or
       (t_opt->isStore()      and !canStore()) or
       (t_opt->isReturn()     and !canReturn()) or
-      (t_opt->isCall()       and !canCall())  or
-      (t_opt->isVectorized() and !supportVectorization()) or
-      (t_opt->hasCombined()  and !supportComplex() )){
+      (t_opt->isCall()       and !canCall())){
     return false;
   }
   return true;
@@ -407,8 +404,6 @@ bool CGRANode::enableFunctionality(string t_func) {
     enableReturn();
   } else if (t_func.compare("call")) {
     enableCall();
-  } else if (t_func.compare("complex")) {
-    enableComplex();
   } else {
     return false;
   }
@@ -429,14 +424,6 @@ void CGRANode::enableLoad() {
 
 void CGRANode::enableCall() {
   m_canCall = true;
-}
-
-void CGRANode::enableComplex() {
-  m_supportComplex = true;
-}
-
-void CGRANode::enableVectorization() {
-  m_supportVectorization = true;
 }
 
 void CGRANode::enableAdd() {
@@ -473,15 +460,6 @@ void CGRANode::enableLogic() {
 
 void CGRANode::enableBr() {
   m_canBr = true;
-}
-
-
-bool CGRANode::supportComplex() {
-  return m_supportComplex;
-}
-
-bool CGRANode::supportVectorization() {
-  return m_supportVectorization;
 }
 
 bool CGRANode::canCall() {
@@ -568,6 +546,4 @@ void CGRANode::disableAllFUs() {
   m_canMAC = false;
   m_canLogic = false;
   m_canBr = false;
-  m_supportComplex = false;
-  m_supportVectorization = false;
 }

@@ -54,7 +54,6 @@ namespace {
       int bypassConstraint          = 4;
       int regConstraint             = 8;
       bool precisionAware           = false;
-      bool diagonalVectorization    = false;
       bool heuristicMapping         = true;
       bool parameterizableCGRA      = false;
       map<string, int>* execLatency = new map<string, int>();	//lantancy of operations
@@ -91,7 +90,6 @@ namespace {
 	paramKeys.insert("bypassConstraint");
 	paramKeys.insert("regConstraint");
 	paramKeys.insert("precisionAware");
-	paramKeys.insert("diagonalVectorization");
 	paramKeys.insert("heuristicMapping");
 	paramKeys.insert("parameterizableCGRA");
 
@@ -126,7 +124,6 @@ namespace {
         bypassConstraint      = param["bypassConstraint"];
         regConstraint         = param["regConstraint"];
         precisionAware        = param["precisionAware"];
-        diagonalVectorization = param["diagonalVectorization"];
         heuristicMapping      = param["heuristicMapping"];
         parameterizableCGRA   = param["parameterizableCGRA"];
 				//3. assign value to execLatency , piplinedOpt,additionalFunc
@@ -163,7 +160,7 @@ namespace {
       //       heterogeneity is
       DFG* dfg = new DFG(t_F, targetLoops, targetEntireFunction, precisionAware,
                          execLatency, pipelinedOpt);
-      CGRA* cgra = new CGRA(rows, columns, diagonalVectorization,
+      CGRA* cgra = new CGRA(rows, columns,
 		            parameterizableCGRA, additionalFunc);
       cgra->setRegConstraint(regConstraint);
       cgra->setCtrlMemConstraint(ctrlMemConstraint);

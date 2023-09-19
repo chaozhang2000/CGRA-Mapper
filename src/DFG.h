@@ -68,10 +68,6 @@ class DFG {
 		 */
     DFGEdge* getDFGEdge(DFGNode* t_src, DFGNode* t_dst);
 
-    void deleteDFGEdge(DFGNode*, DFGNode*);
-    void replaceDFGEdge(DFGNode*, DFGNode*, DFGNode*, DFGNode*);
-
-
 		/**Check if the DFGEdge from t_src to t_dst DFGNode has be created
 		 * @param t_src the pointer to the src DFGNode
 		 * @param t_dst the pointer to the dst DFGNode
@@ -81,27 +77,11 @@ class DFG {
     DFGEdge* getCtrlEdge(DFGNode*, DFGNode*);
     bool hasCtrlEdge(DFGNode*, DFGNode*);
     bool shouldIgnore(Instruction*);
-    void tuneForBranch();
-    void tuneForBitcast();
-    void tuneForLoad();
-    void tuneForPattern();
-    void combineCmpBranch();
-    void combineMulAdd();
     void combinePhiAdd();
-    void combine(string, string);
-    void trimForStandalone();
-    void detectMemDataDependency();
-    void eliminateOpcode(string);
-    bool searchDFS(DFGNode*, DFGNode*, list<DFGNode*>*);
     void connectDFGNodes();
     bool isLiveInInst(BasicBlock*, Instruction*);
     bool containsInst(BasicBlock*, Instruction*);
     int getInstID(BasicBlock*, Instruction*);
-    // Reorder the DFG nodes (initial CPU execution ordering) in
-    // ASAP (as soon as possible) or ALAP (as last as possible)
-    // for mapping.
-    void reorderInASAP();
-    void reorderInALAP();
 
 		/** this function Reorder the DFG nodes based on the longest path
 		 * the public var nodes(list<DFGNode*> nodes)will be clean and rebuild in this function
@@ -136,7 +116,6 @@ class DFG {
 		 * @param the list of target loops in the t_F,which is produced by the getTargetLoops function in mapperPass.cpp.But now it is always empty because our test functions do not contain loops now.
 		 * @param t_targetFunction if this param is true,generate the DFG for all inst in function,if this param is false generate the DFG only for the target loop in the function.
 		 * @param t_precisionAware TODO
-		 * @param t_heterogeneity TODO 
 		 */
 		DFG(Function& t_F, list<Loop*>* t_loops, bool t_targetFunction,
          bool t_precisionAware,
@@ -151,8 +130,6 @@ class DFG {
 		 */
     list<DFGNode*> nodes;
 
-    list<DFGNode*>* getBFSOrderedNodes();
-    list<DFGNode*>* getDFSOrderedNodes();
 		/**Extract DFG from specific function 
  		* @param t_F the function pointer which the mapperPass is processing
  		*/

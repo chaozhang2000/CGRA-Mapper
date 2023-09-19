@@ -26,8 +26,15 @@ class CGRALink
 {
   private:
     int m_id;
+
+		/**record the pointer of src CGRANode
+		 */
     CGRANode *m_src;
+
+		/**record the pointer of dst CGRANode
+		 */
     CGRANode *m_dst;
+		
     int m_II;
     int m_ctrlMemSize;
     int m_bypassConstraint;
@@ -43,12 +50,23 @@ class CGRALink
     bool satisfyBypassConstraint(int, int);
 
   public:
-    CGRALink(int);
+		/**The constructor function of class CGRALink
+		 * this function init CGRANode's ID according the params,other var is init by default value.
+		 * @param t_linkId : the id of the CGRALink
+		 */
+		CGRALink(int t_linkId);
+
     void setID(int);
     int getID();
     CGRANode*  getSrc();
     CGRANode*  getDst();
-    void connect(CGRANode*, CGRANode*);
+
+		/**Connect the CGRALink to src and dst CGRANodes,by set m_src=t_src and m_dst=t_dst
+		 * @param t_src : the pointer to the src CGRAnode
+		 * @param t_dst : the pointer to the dst CGRAnode
+		 */
+		void connect(CGRANode* t_src, CGRANode* t_dst);
+
     CGRANode* getConnectedNode(CGRANode*);
 
     void constructMRRG(int, int);

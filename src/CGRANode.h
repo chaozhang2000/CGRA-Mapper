@@ -40,8 +40,14 @@ class CGRANode {
     int m_ctrlMemSize;
     int m_currentCtrlMemItems;
     float* m_ctrlMem;
+
+		/**the list to record input CGRALinks of this CGRANode
+		 */
     list<CGRALink*> m_inLinks;
+		/**the list to record output CGRALinks of this CGRANode
+		 */
     list<CGRALink*> m_outLinks;
+
     list<CGRALink*>* m_occupiableInLinks;
     list<CGRALink*>* m_occupiableOutLinks;
     list<CGRANode*>* m_neighbors;
@@ -51,7 +57,11 @@ class CGRANode {
     int* m_fuOccupied;
     DFGNode** m_dfgNodes;
     map<CGRALink*,bool*> m_xbarOccupied;
+
+		/**true main disable the CGRANode
+		 */
     bool m_disabled;
+
     bool m_canReturn;
     bool m_canStore;
     bool m_canLoad;
@@ -65,27 +75,37 @@ class CGRANode {
     bool m_canMAC;
     bool m_canLogic;
     bool m_canBr;
-    bool m_supportComplex;
-    bool m_supportVectorization;
     int** m_regs_duration;
     int** m_regs_timing;
     vector<list<pair<DFGNode*, int>>*> m_dfgNodesWithOccupyStatus;
 
   public:
-    CGRANode(int, int, int);
-//    CGRANode(int, int, int, int, int);
+		/**The constructor function of class CGRANode
+		 * this function init CGRANode's ID,x and y according the params,other var is init by default value.
+		 * the function add,mul,shift and so on is turned on by default,but the load and store is turned off default
+		 * @param t_id : the id of the CGRANode
+		 * @param t_x : the x of the CGRANode
+		 * @param t_y : the y of the CGRANode 
+		 */
+		CGRANode(int t_id, int t_x, int t_y);
+
     void setRegConstraint(int);
     void setCtrlMemConstraint(int);
     void setID(int);
     void setLocation(int, int);
     int getID();
-    bool enableFunctionality(string);
+
+		/**The function to enable Function of the CGRANode according to the string of func name
+		 * the store,load,return,call,complex is supported now
+		 * @param t_func : the function want to enable
+		 * @return true mains enable successfully
+		 */
+		bool enableFunctionality(string t_func);
+
     void enableReturn();
     void enableStore();
     void enableLoad();
     void enableCall();
-    void enableComplex();
-    void enableVectorization();
     void enableAdd();
     void enableMul();
     void enableShift();
@@ -96,8 +116,16 @@ class CGRANode {
     void enableLogic();
     void enableBr();
 
-    void attachInLink(CGRALink*);
-    void attachOutLink(CGRALink*);
+		/**add the CGRALink to the list of this CGRANode's InCGRALinks
+		 * @param t_link : the pointer of the in CGRALink
+		 */
+		void attachInLink(CGRALink* t_link);
+
+		/**add the CGRALink to the list of this CGRANode's outCGRALinks
+		 * @param t_link : the pointer of the out CGRALink
+		 */
+		void attachOutLink(CGRALink* t_link);
+
     list<CGRALink*>* getInLinks();
     list<CGRALink*>* getOutLinks();
     CGRALink* getInLink(CGRANode*);
@@ -123,8 +151,6 @@ class CGRANode {
     bool canStore();
     bool canLoad();
     bool canCall();
-    bool supportComplex();
-    bool supportVectorization();
     bool canAdd();
     bool canMul();
     bool canShift();
@@ -139,7 +165,16 @@ class CGRANode {
     void allocateReg(CGRALink*, int, int, int);
     void allocateReg(int, int, int, int);
     int* getRegsAllocation(int);
+
+		/**disable the CGRANode
+		 * set the m_disabled true, main this CGRANode is disabled
+		 * disable all in CGRALinks and out CGRALinks
+		 */
     void disable();
+
+		/**disable all function of the CGRANode
+		 * set m_canReturn,m_canStore,m_canLoad and so on the value flase
+		 */
     void disableAllFUs();
 };
 

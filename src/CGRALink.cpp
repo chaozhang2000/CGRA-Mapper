@@ -12,7 +12,7 @@
 #include <assert.h>
 
 CGRALink::CGRALink(int t_linkId) {
-  setID(t_linkId);
+	m_id = t_linkId;
   m_currentCtrlMemItems = 0;
   m_occupied = new bool[1];
   m_dfgNodes = new DFGNode*[1];
