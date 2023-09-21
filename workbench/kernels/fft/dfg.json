@@ -84,7 +84,7 @@
     "fu"         : "Alu",
     "id"         : 18,
     "org_opt"    : "bitcast",
-    "JSON_opt"   : "OPT_NAH",
+    "JSON_opt"   : "OPT_Bitcast",
     "in_const"   : [],
     "pre"         : [17],
     "succ"       : [[19]]
@@ -93,7 +93,7 @@
     "fu"         : "Alu",
     "id"         : 23,
     "org_opt"    : "bitcast",
-    "JSON_opt"   : "OPT_NAH",
+    "JSON_opt"   : "OPT_Bitcast",
     "in_const"   : [],
     "pre"         : [17],
     "succ"       : [[24]]
@@ -102,7 +102,7 @@
     "fu"         : "Alu",
     "id"         : 26,
     "org_opt"    : "bitcast",
-    "JSON_opt"   : "OPT_NAH",
+    "JSON_opt"   : "OPT_Bitcast",
     "in_const"   : [],
     "pre"         : [17],
     "succ"       : [[27]]
@@ -111,7 +111,7 @@
     "fu"         : "Alu",
     "id"         : 29,
     "org_opt"    : "bitcast",
-    "JSON_opt"   : "OPT_NAH",
+    "JSON_opt"   : "OPT_Bitcast",
     "in_const"   : [],
     "pre"         : [28],
     "succ"       : [[30]]
@@ -120,7 +120,7 @@
     "fu"         : "Alu",
     "id"         : 34,
     "org_opt"    : "bitcast",
-    "JSON_opt"   : "OPT_NAH",
+    "JSON_opt"   : "OPT_Bitcast",
     "in_const"   : [],
     "pre"         : [28],
     "succ"       : [[35]]
@@ -129,7 +129,7 @@
     "fu"         : "Alu",
     "id"         : 37,
     "org_opt"    : "bitcast",
-    "JSON_opt"   : "OPT_NAH",
+    "JSON_opt"   : "OPT_Bitcast",
     "in_const"   : [],
     "pre"         : [28],
     "succ"       : [[38]]
@@ -201,7 +201,7 @@
     "fu"         : "Alu",
     "id"         : 6,
     "org_opt"    : "bitcast",
-    "JSON_opt"   : "OPT_NAH",
+    "JSON_opt"   : "OPT_Bitcast",
     "in_const"   : [],
     "pre"         : [5],
     "succ"       : [[7]]
@@ -210,7 +210,7 @@
     "fu"         : "Alu",
     "id"         : 10,
     "org_opt"    : "bitcast",
-    "JSON_opt"   : "OPT_NAH",
+    "JSON_opt"   : "OPT_Bitcast",
     "in_const"   : [],
     "pre"         : [9],
     "succ"       : [[11]]
@@ -219,7 +219,7 @@
     "fu"         : "Alu",
     "id"         : 21,
     "org_opt"    : "bitcast",
-    "JSON_opt"   : "OPT_NAH",
+    "JSON_opt"   : "OPT_Bitcast",
     "in_const"   : [],
     "pre"         : [5],
     "succ"       : [[22]]
@@ -228,7 +228,7 @@
     "fu"         : "Alu",
     "id"         : 32,
     "org_opt"    : "bitcast",
-    "JSON_opt"   : "OPT_NAH",
+    "JSON_opt"   : "OPT_Bitcast",
     "in_const"   : [],
     "pre"         : [9],
     "succ"       : [[33]]

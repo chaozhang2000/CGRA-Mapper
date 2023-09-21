@@ -1,0 +1,7 @@
+    res = [["fmul35","phi0","getelementptr9","getelementptr8","load32","insertelement16"],
+        ["store38","getelementptr26","or1","getelementptr4","getelementptr29","load19","or2","insertelement33","insertelement17"],
+        ["bitcast27","load11","bitcast5","bitcast37","load13","or3","bitcast30","load14","add39"],
+        ["load28","fadd36","load6","insertelement15","insertelement18","store25","bitcast24","icmp40","insertelement20"],
+        ["shufflevector34","fmul22","shufflevector21","load12","br41"],
+        ["fadd23","load31","getelementptr7","getelementptr10"],
+        ["fmul35","phi0","getelementptr9","getelementptr8","load32","insertelement16"]]

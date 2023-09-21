@@ -1,0 +1,6 @@
+    res = [["store22","getelementptr28","fadd36","store33","trunc2","phi0","fmul15","getelementptr17","fsub20"],
+        ["bitcast29","bitcast34","load7","add3","add39","bitcast23","bitcast26","fadd25"],
+        ["load30","bitcast18","icmp40","bitcast37","fmul8","sext4","store38","fmul12"],
+        ["fadd16","load19","fmul14","getelementptr9","br41","getelementptr5"],
+        ["load35","bitcast32","load11","fsub31","add1","bitcast10","load24","fsub13","store27","bitcast6","bitcast21"],
+        ["store22","getelementptr28","fadd36","store33","trunc2","phi0","fmul15","getelementptr17","fsub20"]]

@@ -66,7 +66,7 @@
     "fu"         : "Alu",
     "id"         : 5,
     "org_opt"    : "bitcast",
-    "JSON_opt"   : "OPT_NAH",
+    "JSON_opt"   : "OPT_Bitcast",
     "in_const"   : [],
     "pre"         : [4],
     "succ"       : [[6]]
@@ -75,7 +75,7 @@
     "fu"         : "Alu",
     "id"         : 24,
     "org_opt"    : "bitcast",
-    "JSON_opt"   : "OPT_NAH",
+    "JSON_opt"   : "OPT_Bitcast",
     "in_const"   : [],
     "pre"         : [4],
     "succ"       : [[25]]
@@ -84,7 +84,7 @@
     "fu"         : "Alu",
     "id"         : 27,
     "org_opt"    : "bitcast",
-    "JSON_opt"   : "OPT_NAH",
+    "JSON_opt"   : "OPT_Bitcast",
     "in_const"   : [],
     "pre"         : [26],
     "succ"       : [[28]]
@@ -93,7 +93,7 @@
     "fu"         : "Alu",
     "id"         : 37,
     "org_opt"    : "bitcast",
-    "JSON_opt"   : "OPT_NAH",
+    "JSON_opt"   : "OPT_Bitcast",
     "in_const"   : [],
     "pre"         : [26],
     "succ"       : [[38]]
@@ -246,7 +246,7 @@
     "fu"         : "Alu",
     "id"         : 30,
     "org_opt"    : "bitcast",
-    "JSON_opt"   : "OPT_NAH",
+    "JSON_opt"   : "OPT_Bitcast",
     "in_const"   : [],
     "pre"         : [29],
     "succ"       : [[31]]
