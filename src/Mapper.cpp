@@ -830,7 +830,7 @@ void Mapper::generateJSON(CGRA* t_cgra, DFG* t_dfg, int t_II,
 			//ISCA
 			placement.seekp(-1,ios::end);
 			if (t == t_II) placement<< "]]";
-			else placement<<"],";
+			else placement<<"],\n        ";
     }
     jsonFile<<"\n]\n";
     jsonFile.close();

@@ -577,14 +577,14 @@ void DFG::construct(Function& t_F) {
 		//PlacementDone_Init
 		file<<"PlacementDone_Init:"<<std::endl;
 		for(DFGNode* node:nodes){
-			file << "    res=[\""<< node->getInst()->getOpcodeName()<<node->getID()<<"\"] " <<"= 0"<<std::endl;
+			file << "    res[\""<< node->getInst()->getOpcodeName()<<node->getID()<<"\"] " <<"= 0"<<std::endl;
 		}
 		file << "\n\n"<< std::endl;
 
 		//DependencyPredecessor_Init
 		file<<"DependencyPredecessor_Init:"<<std::endl;
 		for(DFGNode* node:nodes){
-			file << "    res=[\""<< node->getInst()->getOpcodeName()<<node->getID()<<"\"] " <<"= ";
+			file << "    res[\""<< node->getInst()->getOpcodeName()<<node->getID()<<"\"] " <<"= ";
     	list<DFGNode*>* pres = node->getPredNodes();
 			if(pres->size() == 0) file<< "[N/A]" << std::endl;
 			else{
