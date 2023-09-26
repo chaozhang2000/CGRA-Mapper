@@ -53,6 +53,9 @@ class DFGNode {
 
     list<DFGNode*>* m_patternNodes;
     list<int>* m_cycleID;
+
+		/**this variable is used to record if this DFGNode have been mapped
+		 */
     bool m_isMapped;
 
 		/**this variable is used to record how many constants there are in the operands of the current DFG node
@@ -97,7 +100,11 @@ class DFGNode {
     int getLevel();
     bool isMapped();
     void setMapped();
+
+		/** clear the m_isMapped var of this DFGNode
+		 */
     void clearMapped();
+
     bool isLoad();
     bool isStore();
     bool isReturn();

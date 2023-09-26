@@ -40,13 +40,26 @@ class CGRALink
     int m_bypassConstraint;
     int m_currentCtrlMemItems;
 
+		/** The same as the m_cycleBoundary in CGRANode class
+		 */
     int m_cycleBoundary;
     bool m_disabled;
+		/**TODO:this value has appeared in CGRALink::constructMRRG() but it's meaning is not clear yet.
+		 */
     bool* m_occupied;
+		/**TODO:this value has appeared in CGRALink::constructMRRG() but it's meaning is not clear yet.
+		 */
     bool* m_bypassed;
+		/**TODO:this value has appeared in CGRALink::constructMRRG() but it's meaning is not clear yet.
+		 */
     bool* m_generatedOut;
+		/**TODO:this value has appeared in CGRALink::constructMRRG() but it's meaning is not clear yet.
+		 */
     bool* m_arrived;
+		/**TODO:this value has appeared in CGRALink::constructMRRG() but it's meaning is not clear yet.
+		 */
     DFGNode** m_dfgNodes;
+
     bool satisfyBypassConstraint(int, int);
 
   public:
@@ -69,7 +82,12 @@ class CGRALink
 
     CGRANode* getConnectedNode(CGRANode*);
 
-    void constructMRRG(int, int);
+		/**The function to construct MRRG in CGRALink Class
+		 * @param t_CGRANodeCount : the number of FU in CGRA
+		 * @param t_II : the Value of II
+		 */
+		void constructMRRG(int t_CGRANodeCount, int t_II);
+
     bool canOccupy(int, int);
     bool isOccupied(int);
     bool isOccupied(int, int, bool);

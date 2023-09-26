@@ -152,8 +152,14 @@ list<CGRANode*>* CGRANode::getNeighbors() {
   return m_neighbors;
 }
 
+/**
+ * What is in this Function:
+ * 1. set m_cycleBoundary a big value
+ * 2. init a space for m_dfgNodesWithOccupyStatus according the m_cycleBoundary
+ * 3. init space for m_regs_duration and m_regs_timing according the m_cycleBoundary
+ */
 void CGRANode::constructMRRG(int t_CGRANodeCount, int t_II) {
-  m_cycleBoundary = t_CGRANodeCount*t_II*t_II;
+  m_cycleBoundary = t_CGRANodeCount*t_II*t_II; //give a big value
   m_currentCtrlMemItems = 0;
   m_registers.clear();
   // Delete all these local arrays to avoid memory leakage.
@@ -163,7 +169,6 @@ void CGRANode::constructMRRG(int t_CGRANodeCount, int t_II) {
     }
   }
   m_dfgNodesWithOccupyStatus.clear();
-  // m_dfgNodesWithOccupyStatus = new list<list<pair<DFGNode*, int>>*>();
   for (int i=0; i<m_cycleBoundary; ++i) {
     m_dfgNodesWithOccupyStatus.push_back(new list<pair<DFGNode*, int>>());
   }

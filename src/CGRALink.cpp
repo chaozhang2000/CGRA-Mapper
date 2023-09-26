@@ -52,10 +52,15 @@ void CGRALink::setID(int t_id) {
   m_id = t_id;
 }
 
+/**
+ * What is in this Function:
+ * 1. set m_cycleBoundary a big value
+ * 2. init a space for m_occupied,m_dfgNodes,m_bypassed,m_generatedOut and m_arrived according the m_cycleBoundary
+ */
 void CGRALink::constructMRRG(int t_CGRANodeCount, int t_II) {
   m_II = t_II;
   m_cycleBoundary = t_CGRANodeCount*t_II*t_II;
-  delete[] m_occupied;
+  delete[] m_occupied;//释放动态分配的数组内存
   m_occupied = new bool[m_cycleBoundary];
   delete[] m_dfgNodes;
   m_dfgNodes = new DFGNode*[m_cycleBoundary];

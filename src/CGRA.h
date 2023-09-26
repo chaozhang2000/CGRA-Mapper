@@ -51,7 +51,13 @@ class CGRA {
     int getFUCount();
     int getLinkCount();
     void getRoutingResource();
-    void constructMRRG(int);
+
+		/**The function to construct MRRG
+		 * this function traverse all CGRANodes and CGRALinks in CGRA,and call their constructMRRG method
+		 * @param t_II : the value of II
+		 */
+		void constructMRRG(int t_II);
+
     int getRows() { return m_rows; }
     int getColumns() { return m_columns; }
     CGRALink* getLink(CGRANode*, CGRANode*);

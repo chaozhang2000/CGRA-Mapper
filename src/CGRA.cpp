@@ -18,7 +18,8 @@ using json = nlohmann::json;
  * What is in this Function:
  * 1. init some var,like m_rows、m_columns、m_FUCount and so on.
  * 2. Depending on whether parameter a is true or false, decide whether to use paramCGRA.json or default parameters to initialize CGRA.
- * 3. 
+ * 3. init the CGRANode and CGRALink according to paramCGRA.json or default value.
+ * 4. connect the CGRANode and CGRALink to Generate the CGRA.
  */
 CGRA::CGRA(int t_rows, int t_columns,
 	   bool t_parameterizableCGRA,

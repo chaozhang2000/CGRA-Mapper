@@ -40,6 +40,14 @@ int Mapper::getRecMII(DFG* t_dfg) {
   return ceil(RecMII);
 }
 
+/**
+ * what is in this function:
+ * clear mapping and call CGRA constructMRRG function.
+ * 1. clear the mapping
+ * 2. call the constructMRRG method of the CGRA class
+ * 3. set the maxMappingCycle to a big number. TODO:this may be a misunderstanding.
+ * 4. clearMapped for every dfgNode in DFG
+ */
 void Mapper::constructMRRG(DFG* t_dfg, CGRA* t_cgra, int t_II) {
   m_mapping.clear();
   m_mappingTiming.clear();
@@ -66,21 +74,6 @@ map<CGRANode*, int>* Mapper::dijkstra_search(CGRA* t_cgra, DFG* t_dfg,
       distance[node] = m_maxMappingCycle;
       timing[node] = m_mappingTiming[t_srcDFGNode];
       timing[node] += t_srcDFGNode->getExecLatency() - 1;
-//      if (t_srcDFGNode->isLoad() or t_srcDFGNode->isStore()) {
-//        timing[node] += 1;
-//      }
-      // TODO: should also consider the xbar here?
-//      if (!cgra->nodes[i][j]->canOccupyFU(timing[node], II)) {
-//        int temp_cycle = timing[node];
-//        timing[node] = m_maxMappingCycle;
-//        while (temp_cycle < m_maxMappingCycle) {
-//          if (cgra->nodes[i][j]->canOccupyFU(temp_cycle, II)) {
-//            timing[node] = temp_cycle;
-//            break;
-//          }
-//          ++temp_cycle;
-//        }
-//      }
       previous[node] = NULL;
       searchPool.push_back(t_cgra->nodes[i][j]);
     }
@@ -318,12 +311,22 @@ list<DFGNode*>* Mapper::getMappedDFGNodes(DFG* t_dfg, CGRANode* t_cgraNode) {
 
 // TODO: will grant award for the overuse the same link for the
 //       same data delivery
+
+/**
+ * what is in this function:
+ * 1. get previous DFGNodes of t_dfgNode
+ * 2. Traverse each predNodes,check if any predNodes has been mapped,if true, try to map t_dfgNode to t_fu, use dijkstra_search to find a path, if the path is legal, return the path.else return NULL.
+ * 3. TODO:if none of predNodes has been mapped, if t_fu can support t_dfgNode, add clock cycle until t_fu canOccupy be occupyed. But I can't understand why the dfgNode can be mapped before their previous dfgNode.Perhaps it is because DFGNode has already been sorted and the traversal order has been determined. 
+ *
+ */
 map<CGRANode*, int>* Mapper::calculateCost(CGRA* t_cgra, DFG* t_dfg,
     int t_II, DFGNode* t_dfgNode, CGRANode* t_fu) {
+  //1. get previous DFGNodes of t_dfgNode
   map<CGRANode*, int>* path = NULL;//path的数据结构是CGRANode和时钟周期。
   list<DFGNode*>* predNodes = t_dfgNode->getPredNodes();
   int latest = -1;
   bool isAnyPredDFGNodeMapped = false;//对第一个DFGNode进行处理
+  // 2. Traverse each predNodes,check if any predNodes has been mapped,if true, try to map t_dfgNode to t_fu, use dijkstra_search to find a path, if the path is legal, return the path.else return NULL.
   for(DFGNode* pre: *predNodes) {//对所有之前的dfgNode进行遍历，……
     if(m_mapping.find(pre) != m_mapping.end()) {//m_mapping 是一个DFGNode到CGRANode的映射
       map<CGRANode*, int>* tempPath = NULL;
@@ -1151,6 +1154,14 @@ bool Mapper::tryToRoute(CGRA* t_cgra, DFG* t_dfg, int t_II,
   return true;
 }
 
+/**
+ * what is in  this function:
+ * 1. Try mapping when II is equal to certain value.
+ * 2. First construct MRRG.
+ * 3. Traverse each DFGNodes in t_dfg, attempt to map each DFGNode.
+ * 4. For each DFGNodes, Traverse each CGRANodes in CGRA to find possible paths. the DFGNode to each CGRANode is a path: map<CGRANode*,int>,the int is clock cycles, the paths is a list list<map<CGRANode*,int>> 
+ * 4. For each DFGNodes, find the path with min cost and constraints from paths
+ */
 int Mapper::heuristicMap(CGRA* t_cgra, DFG* t_dfg, int t_II,
     bool t_isStaticElasticCGRA) {
   bool fail = false;
@@ -1159,15 +1170,17 @@ int Mapper::heuristicMap(CGRA* t_cgra, DFG* t_dfg, int t_II,
     cout<<"[DEBUG] start heuristic algorithm with II="<<t_II<<"\n";
     int cycle = 0;
     constructMRRG(t_dfg, t_cgra, t_II); //里面创建了很多变量，而且后面好像没有deleate导致内存爆炸
-    fail = false; //1174
+    fail = false;
+ 		// 3. Traverse each DFGNodes in t_dfg, attempt to map each DFGNode.
     for (list<DFGNode*>::iterator dfgNode=t_dfg->nodes.begin();
         dfgNode!=t_dfg->nodes.end(); ++dfgNode) {
       list<map<CGRANode*, int>*> paths;
+ 			// 4. For each DFGNodes, Traverse each CGRANodes in CGRA to find possible paths.
       for (int i=0; i<t_cgra->getRows(); ++i) {
         for (int j=0; j<t_cgra->getColumns(); ++j) {
           CGRANode* fu = t_cgra->nodes[i][j];
           map<CGRANode*, int>* tempPath =
-              calculateCost(t_cgra, t_dfg, t_II, *dfgNode, fu); //最外层对DFGNode遍历，内层对cgra行列进行遍历,对每个DFGNode都要分配一个CGRANode，对所有的CGRANode遍历来寻找代价最小的那一个。
+              calculateCost(t_cgra, t_dfg, t_II, *dfgNode, fu); 
           if(tempPath != NULL and tempPath->size() != 0) {
             paths.push_back(tempPath);
           } else {

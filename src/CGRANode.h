@@ -40,6 +40,8 @@ class CGRANode {
 		 */
     int m_registerCount;
 
+		/**the list of regs in CGRANode(PE)
+		 */
     list<float> m_registers;
 
 		/**the value to record the size of ctrlMem in a CGRANode
@@ -61,7 +63,11 @@ class CGRANode {
     list<CGRANode*>* m_neighbors;
 
     // functional unit occupied with cycle going on
+		
+		/**the value to save the maximum number of clock cycles, the best value is II.This value also comes into play when building the MRRG.But we don't know the value of II before finishing Mapping,so we chose a big enough value. 
+		 */
     int m_cycleBoundary;
+
     int* m_fuOccupied;
     DFGNode** m_dfgNodes;
     map<CGRALink*,bool*> m_xbarOccupied;
@@ -83,8 +89,19 @@ class CGRANode {
     bool m_canMAC;
     bool m_canLogic;
     bool m_canBr;
+		/**TODO:this value has appeared in CGRANode::constructMRRG() but it's meaning is not clear yet.
+		 */
     int** m_regs_duration;
+
+		/**TODO:this value has appeared in CGRANode::constructMRRG() but it's meaning is not clear yet.
+		 */
     int** m_regs_timing;
+
+		/**this value record the dfgNodes which has been Occupy and their Occupy status.
+		 * the pair<DFGNode*,int> record the DFGNode which is Occupyed and it's Occupy status (SINGLE OCCUPY,START_PIPE_OCCUPY and so on)
+		 * the list is used to record the Occupyed DFGNode in the same clock cycle.
+		 * the vector is used to record the different clock cycle's Occupyed DFGNodes.
+		 */
     vector<list<pair<DFGNode*, int>>*> m_dfgNodesWithOccupyStatus;
 
   public:
@@ -152,7 +169,11 @@ class CGRANode {
     CGRALink* getOutLink(CGRANode*);
     list<CGRANode*>* getNeighbors();
 
-    void constructMRRG(int, int);
+		/**The function to construct MRRG in CGRANode Class
+		 * @param t_CGRANodeCount : the number of FU in CGRA
+		 * @param t_II : the Value of II
+		 */
+		void constructMRRG(int t_CGRANodeCount, int t_II);
     bool canSupport(DFGNode*);
     bool isOccupied(int, int);
     // bool canOccupy(int, int);
