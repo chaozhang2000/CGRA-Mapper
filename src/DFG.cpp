@@ -586,7 +586,7 @@ void DFG::construct(Function& t_F) {
 		for(DFGNode* node:nodes){
 			file << "    res[\""<< node->getInst()->getOpcodeName()<<node->getID()<<"\"] " <<"= ";
     	list<DFGNode*>* pres = node->getPredNodes();
-			if(pres->size() == 0) file<< "[N/A]" << std::endl;
+			if(pres->size() == 0) file<< "[\"N/A\"]" << std::endl;
 			else{
 				file <<"[";
 				int num_of_prenode = pres->size();
@@ -604,9 +604,9 @@ void DFG::construct(Function& t_F) {
 		//DependencySuccessor_Init
 		file<<"DependencySuccessor_Init:"<<std::endl;
 		for(DFGNode* node:nodes){
-			file << "    res=[\""<< node->getInst()->getOpcodeName()<<node->getID()<<"\"] " <<"= ";
+			file << "    res[\""<< node->getInst()->getOpcodeName()<<node->getID()<<"\"] " <<"= ";
     	list<DFGNode*>* succs = node->getSuccNodes();
-			if(succs->size() == 0) file<< "[N/A]" << std::endl;
+			if(succs->size() == 0) file<< "[\"N/A\"]" << std::endl;
 			else{
 				file <<"[";
 				int num_of_prenode = succs->size();

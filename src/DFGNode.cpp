@@ -383,7 +383,7 @@ void DFGNode::initType() {
     m_optType = "OPT_EQ";
     m_fuType = "Comp";
   } else if (isBitcast()) {
-    m_optType = "OPT_NAH";
+    m_optType = "OPT_Bitcast";
     m_fuType = "Alu";
   } else if (isGetptr()) {
     m_optType += "OPT_ADD";
