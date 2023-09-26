@@ -40,6 +40,7 @@ int Mapper::getRecMII(DFG* t_dfg) {
   return ceil(RecMII);
 }
 
+
 /**
  * what is in this function:
  * clear mapping and call CGRA constructMRRG function.
