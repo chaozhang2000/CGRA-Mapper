@@ -190,6 +190,7 @@ CGRA::CGRA(int t_rows, int t_columns,
     int link_id = 0;
     for (int i=0; i<t_rows; ++i) {
       for (int j=0; j<t_columns; ++j) {
+				//right
         if (i < t_rows - 1) {
           links[link_id] = new CGRALink(link_id);
           nodes[i][j]->attachOutLink(links[link_id]);
@@ -197,6 +198,7 @@ CGRA::CGRA(int t_rows, int t_columns,
           links[link_id]->connect(nodes[i][j], nodes[i+1][j]);
           ++link_id;
         }
+				//left
         if (i > 0) {
           links[link_id] = new CGRALink(link_id);
           nodes[i][j]->attachOutLink(links[link_id]);
@@ -204,6 +206,7 @@ CGRA::CGRA(int t_rows, int t_columns,
           links[link_id]->connect(nodes[i][j], nodes[i-1][j]);
           ++link_id;
         }
+				//down
         if (j < t_columns - 1) {
           links[link_id] = new CGRALink(link_id);
           nodes[i][j]->attachOutLink(links[link_id]);
@@ -211,13 +214,48 @@ CGRA::CGRA(int t_rows, int t_columns,
           links[link_id]->connect(nodes[i][j], nodes[i][j+1]);
           ++link_id;
         }
+				//up
         if (j > 0) {
           links[link_id] = new CGRALink(link_id);
           nodes[i][j]->attachOutLink(links[link_id]);
           nodes[i][j-1]->attachInLink(links[link_id]);
           links[link_id]->connect(nodes[i][j], nodes[i][j-1]);
           ++link_id;
+				}
+				/*//每个tile与周期8个tile连接的时，取消下面代码的注释
+				//up right
+        if (i < t_rows-1 && j < t_columns-1) {
+          links[link_id] = new CGRALink(link_id);
+          nodes[i][j]->attachOutLink(links[link_id]);
+          nodes[i+1][j+1]->attachInLink(links[link_id]);
+          links[link_id]->connect(nodes[i][j], nodes[i+1][j+1]);
+          ++link_id;
         }
+				//up left
+        if (i < t_rows-1 && j>0) {
+          links[link_id] = new CGRALink(link_id);
+          nodes[i][j]->attachOutLink(links[link_id]);
+          nodes[i+1][j-1]->attachInLink(links[link_id]);
+          links[link_id]->connect(nodes[i][j], nodes[i+1][j-1]);
+          ++link_id;
+        }
+				//down right
+        if (i>0 && j < t_columns - 1) {
+          links[link_id] = new CGRALink(link_id);
+          nodes[i][j]->attachOutLink(links[link_id]);
+          nodes[i-1][j+1]->attachInLink(links[link_id]);
+          links[link_id]->connect(nodes[i][j], nodes[i-1][j+1]);
+          ++link_id;
+        }
+				//down left
+        if (i > 0 && j > 0) {
+          links[link_id] = new CGRALink(link_id);
+          nodes[i][j]->attachOutLink(links[link_id]);
+          nodes[i-1][j-1]->attachInLink(links[link_id]);
+          links[link_id]->connect(nodes[i][j], nodes[i-1][j-1]);
+          ++link_id;
+        }
+				*/
       }
     }
   }
