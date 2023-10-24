@@ -89,7 +89,9 @@ class CGRANode {
     bool m_canMAC;
     bool m_canLogic;
     bool m_canBr;
-		/**TODO:this value has appeared in CGRANode::constructMRRG() but it's meaning is not clear yet.
+
+		/** This value record during a certain clock cycle, a register is occupied by data from a certain port
+		 * m_regs_duration[cycle+d][i] = t_port_id
 		 */
     int** m_regs_duration;
 
@@ -178,7 +180,16 @@ class CGRANode {
     bool isOccupied(int, int);
     // bool canOccupy(int, int);
     bool canOccupy(DFGNode*, int, int);
-    void setDFGNode(DFGNode*, int, int, bool);
+
+		/**The function to record the DFGNode mapped to this CGRANode.
+		 * 1. give value to m_dfgNodesWithOccupyStatus according to the t_cycle and t_opt.
+		 * 2. call t_opt's setMapped method.
+		 * @param t_opt : the DFGNode which mapped to this CGRANode
+		 * @param t_cycle : the clock cycle when map the DFGnode(t_opt) to this CGRANode
+		 * @param t_II : the value of II
+		 * @param t_isStaticElasticCGRA : now is always false
+		 */
+		void setDFGNode(DFGNode* t_opt, int t_cycle, int t_II, bool t_isStaticElasticCGRA);
     void configXbar(CGRALink*, int, int);
     void addRegisterValue(float);
     list<CGRALink*>* getOccupiableInLinks(int, int);
@@ -203,8 +214,17 @@ class CGRANode {
     bool canBr();
     DFGNode* getMappedDFGNode(int);
     bool containMappedDFGNode(DFGNode*, int);
-    void allocateReg(CGRALink*, int, int, int);
-    void allocateReg(int, int, int, int);
+
+		/**The function used to allocate Reg for CGRALink(t_link). 
+		 * get reg_id from t_link using t_link->getDirectionID() then call the allocateReg(int,int,int,int) function. 
+		 * @param t_link : 
+		 * @param t_cycle : 
+		 * @param t_duration : 
+		 * @param t_II : 
+		 */
+		void allocateReg(CGRALink* t_link, int t_cycle, int t_duration, int t_II);
+		void allocateReg(int t_port_id, int t_cycle, int t_duration, int t_II);
+
     int* getRegsAllocation(int);
 
 		/**disable the CGRANode

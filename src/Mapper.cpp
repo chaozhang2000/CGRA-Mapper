@@ -140,6 +140,12 @@ map<CGRANode*, int>* Mapper::dijkstra_search(CGRA* t_cgra, DFG* t_dfg,
   return path;
 }
 
+/**
+ * what is in this function:
+ * 1. define the pathsWithCost to record path and it's cost.
+ * 2. Traverse every path in t_paths,and calculate the cost of each path,and record in pathsWithCost.
+ * 3. reorder the path in descending order of cost and return the reorderd pathes.
+ */
 list<map<CGRANode*, int>*>* Mapper::getOrderedPotentialPaths(CGRA* t_cgra,
     DFG* t_dfg, int t_II, DFGNode* t_dfgNode, list<map<CGRANode*, int>*>* t_paths) {
   map<map<CGRANode*, int>*, float>* pathsWithCost =
@@ -149,22 +155,16 @@ list<map<CGRANode*, int>*>* Mapper::getOrderedPotentialPaths(CGRA* t_cgra,
     if ((*path)->size() == 0)
       continue;
 
+		//this step is not necessory.just convert the map<CGRANode*,int> to map<int,CGRANode*>
     map<int, CGRANode*>* reorderPath = getReorderPath(*path);
-//    for (map<CGRANode*, int>::iterator rp=(*path)->begin(); rp!=(*path)->end(); ++rp)
-//      reorderPath[(*rp).second] = (*rp).first;
-//    assert(reorderPath.size() == (*path)->size());
 
-    map<int, CGRANode*>::reverse_iterator riter=reorderPath->rbegin();
+    map<int, CGRANode*>::reverse_iterator riter=reorderPath->rbegin();//建立一个反向迭代器
 
-    int distanceCost = (*riter).first;
+    int distanceCost = (*riter).first;//将最大的时钟周期作为距离代价
     CGRANode* targetCGRANode = (*riter).second;
     int targetCycle = (*riter).first;
     if (distanceCost >= m_maxMappingCycle)
       continue;
-//    if (t_dfgNode->getID() == 2 or t_dfgNode->getID() == 1) {
-//      cout<<"DEBUG what?! distance: "<<distanceCost<<"; target CGRA node: "<<targetCGRANode->getID()<<endl;
-//    }
-    // Consider the cost of the distance.
     float cost = distanceCost + 1;
 
     // Consider the same tile mapped with continuously two DFG nodes.
@@ -209,22 +209,6 @@ list<map<CGRANode*, int>*>* Mapper::getOrderedPotentialPaths(CGRA* t_cgra,
         }
       }
     }
-
-    /*
-    // Prefer to map the DFG nodes from left to right rather than
-    // always picking CGRA node at left.
-    if (t_dfgNode->getPredNodes()->size() > 0) {
-      list<DFGNode*>* tempPredNodes = t_dfgNode->getPredNodes();
-      for (DFGNode* predDFGNode: *tempPredNodes) {
-        if (m_mapping.find(predDFGNode) != m_mapping.end()) {
-          if (m_mapping[predDFGNode]->getX() > targetCGRANode->getX() or
-              m_mapping[predDFGNode]->getY() > targetCGRANode->getY()) {
-            cost += 0.5;
-          }
-        }
-      }
-    }
-    */
 
     // Consider the cost of that the DFG node with multiple successor
     // might potentially occupy the surrounding CGRA nodes.
@@ -370,16 +354,19 @@ map<CGRANode*, int>* Mapper::calculateCost(CGRA* t_cgra, DFG* t_dfg,
 // Schedule is based on the modulo II, the 'path' contains one
 // predecessor that can be definitely mapped, but the pathes
 // containing other predecessors have possibility to fail in mapping.
+
+/**
+ * what is in  this function:
+ * 1.map the t_dfgNode to the right CGRANode.which CGRANode the dfgNode should mapped to is record at the end of t_path.
+ * 2.
+ */
 bool Mapper::schedule(CGRA* t_cgra, DFG* t_dfg, int t_II,
     DFGNode* t_dfgNode, map<CGRANode*, int>* t_path, bool t_isStaticElasticCGRA) {
 
+	//this step is not necessory.just convert the map<CGRANode*,int> to map<int,CGRANode*>
   map<int, CGRANode*>* reorderPath = getReorderPath(t_path);
-//
 //  // Since cycle on path increases gradually, re-order will not miss anything.
-//  for (map<CGRANode*, int>::iterator iter=t_path->begin(); iter!=t_path->end(); ++iter)
-//    reorderPath[(*iter).second] = (*iter).first;
-//  assert(reorderPath.size() == t_path->size());
-
+	//这里创建了一个反向迭代器，用来从最后一个元素开始反向遍历路径。
   map<int, CGRANode*>::reverse_iterator ri = reorderPath->rbegin();
   CGRANode* fu = (*ri).second;
   cout<<"[DEBUG] schedule dfg node["<<t_dfg->getID(t_dfgNode)<<"] onto fu["<<fu->getID()<<"] at cycle "<<(*t_path)[fu]<<" within II: "<<t_II<<endl;
@@ -388,12 +375,11 @@ bool Mapper::schedule(CGRA* t_cgra, DFG* t_dfg, int t_II,
   m_mapping[t_dfgNode] = fu;
   fu->setDFGNode(t_dfgNode, (*t_path)[fu], t_II, t_isStaticElasticCGRA);
   m_mappingTiming[t_dfgNode] = (*t_path)[fu];
-
   // Route the dataflow onto the CGRA links across cycles.
-  CGRANode* onePredCGRANode;
-  int onePredCGRANodeTiming;
-  map<int, CGRANode*>::iterator previousIter;
-  map<int, CGRANode*>::iterator next;
+  CGRANode* onePredCGRANode;//TODO: what is this
+  int onePredCGRANodeTiming;//TODO: what is this
+  map<int, CGRANode*>::iterator previousIter;//TODO: what is this
+  map<int, CGRANode*>::iterator next;//TODO: what is this
   if (reorderPath->size() > 0) {
     next = reorderPath->begin();
     if (next != reorderPath->end())
@@ -411,8 +397,7 @@ bool Mapper::schedule(CGRA* t_cgra, DFG* t_dfg, int t_II,
       // Distinguish the bypassed and utilized data delivery on xbar.
       bool isBypass = false;
       int duration = (t_II+((*iter).first-(*previousIter).first)%t_II)%t_II;
-      if ((*riter).second != (*iter).second and
-          (*previousIter).first+1 == (*iter).first)
+      if ((*riter).second != (*iter).second and(*previousIter).first+1 == (*iter).first)
         isBypass = true;
       else
         duration = (m_mappingTiming[t_dfgNode]-(*previousIter).first)%t_II;

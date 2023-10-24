@@ -97,8 +97,12 @@ class DFGNode {
 		 * @param t_level: the level we want to set for this DFGNode
 		 */
     void setLevel(int t_level);
+
     int getLevel();
     bool isMapped();
+
+		/** This function set m_isMapped true
+		 */
     void setMapped();
 
 		/** clear the m_isMapped var of this DFGNode

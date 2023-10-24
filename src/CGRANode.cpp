@@ -56,11 +56,15 @@ CGRANode::CGRANode(int t_id, int t_x, int t_y) {
 
 // FIXME: should handle the case that the data is maintained in the registers
 //        for multiple cycles.
+        
+/**
+ * What is in allocateReg(int,int,int,int):
+ * 1. 
+ */
 void CGRANode::allocateReg(CGRALink* t_link, int t_cycle, int t_duration, int t_II) {
   int reg_id = t_link->getDirectionID(this);
   allocateReg(reg_id, t_cycle, t_duration, t_II);
 }
-
 void CGRANode::allocateReg(int t_port_id, int t_cycle, int t_duration, int t_II) {
   bool allocated = false;
   for (int i=0; i<m_registerCount; ++i) {

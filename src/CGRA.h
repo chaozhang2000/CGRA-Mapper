@@ -60,7 +60,14 @@ class CGRA {
 
     int getRows() { return m_rows; }
     int getColumns() { return m_columns; }
-    CGRALink* getLink(CGRANode*, CGRANode*);
+
+		/**The function to get CGRALink from CGRANode t_n1 to CGRANode t_n2
+		 * this function traverse each CGRALinks in CGRA to check if the src is t_n1 and dst is t_n2.
+		 * @param t_n1 : the src CGRANode
+		 * @param t_n2 : the dst CGRANode
+		 * @return : if the CGRALink is found, return the pointer of this CGRALink,else return NULL.
+		 */
+		CGRALink* getLink(CGRANode* t_n1, CGRANode* t_n2);
 
 		/**The function to set the number of bypass channel in every CGRALink of the CGRA.
 		 * Traverse every CGRALink in the CGRA and call CGRALink.setBypassConstraint for every CGRALink.

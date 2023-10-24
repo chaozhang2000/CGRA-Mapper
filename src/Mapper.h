@@ -14,8 +14,14 @@
 class Mapper {
   private:
     int m_maxMappingCycle;
+		/** This value record the mapping result(which DFGNode is map to which CGRANode).
+		 */
     map<DFGNode*, CGRANode*> m_mapping;
+
+		/** This value record the mapping result(which DFGNode is map at which clock cycle,the int means clock cycle).
+		 */
     map<DFGNode*, int> m_mappingTiming;
+
     map<CGRANode*, int>* dijkstra_search(CGRA*, DFG*, int, DFGNode*,
                                          DFGNode*, CGRANode*);
     int getMaxMappingCycle();
@@ -24,8 +30,18 @@ class Mapper {
     list<DFGNode*>* getMappedDFGNodes(DFG*, CGRANode*);
     map<int, CGRANode*>* getReorderPath(map<CGRANode*, int>*);
     bool DFSMap(CGRA*, DFG*, int, list<DFGNode*>*, list<map<CGRANode*, int>*>*, bool);
-    list<map<CGRANode*, int>*>* getOrderedPotentialPaths(CGRA*, DFG*, int,
-        DFGNode*, list<map<CGRANode*, int>*>*);
+
+		/** This function reorder the paths according the cost
+		 * TODO:just return the path with lowest cost may be a better choice
+		 * @param t_caga : the pointer to the CGRA 
+		 * @param t_dfg : the pointer to the DFG
+		 * @param t_II : the value of II
+		 * @param t_dfgNode : the dfgNode need to be mapped
+		 * @param t_paths: the posible paths from the fu which process previous DFGNode to the fu process t_dfgNode.
+		 * @return : the reordered paths
+		 */
+		list<map<CGRANode*, int>*>* getOrderedPotentialPaths(CGRA* t_cgra,
+    		DFG* t_dfg, int t_II, DFGNode* t_dfgNode, list<map<CGRANode*, int>*>* t_paths);
 
   public:
 		/**The constructor function of class Mapper
@@ -89,7 +105,16 @@ class Mapper {
 		map<CGRANode*, int>* getPathWithMinCostAndConstraints(CGRA* t_cgra,
     	DFG* t_dfg, int t_II, DFGNode* t_dfgNode, list<map<CGRANode*, int>*>* t_paths);
 
-    bool schedule(CGRA*, DFG*, int, DFGNode*, map<CGRANode*, int>*, bool);
+		/** TODO:
+		 * @param t_caga : the pointer to the CGRA 
+		 * @param t_dfg : the pointer to the DFG
+		 * @param t_II : the value of II
+		 * @param t_dfgNode : the dfgNode need to be mapped
+		 * @param t_paths: the posible paths from the fu which process previous DFGNode to the fu process t_dfgNode.
+		 * @param t_isStaticElasticCGRA: true mean is StaticElasticCGRA, now is always false.
+		 * @return : the best path
+		 */
+		bool schedule(CGRA* t_cgra, DFG* t_dfg, int t_II, DFGNode* t_dfgNode, map<CGRANode*, int>* t_path, bool t_isStaticElasticCGRA);
     void showSchedule(CGRA*, DFG*, int, bool, bool);
     void generateJSON(CGRA*, DFG*, int, bool);
 };
