@@ -93,7 +93,7 @@
     "fu"         : "Alu",
     "id"         : 7,
     "org_opt"    : "bitcast",
-    "JSON_opt"   : "OPT_NAH",
+    "JSON_opt"   : "OPT_Bitcast",
     "in_const"   : [],
     "pre"         : [6],
     "succ"       : [[8]]
@@ -102,7 +102,7 @@
     "fu"         : "Alu",
     "id"         : 10,
     "org_opt"    : "bitcast",
-    "JSON_opt"   : "OPT_NAH",
+    "JSON_opt"   : "OPT_Bitcast",
     "in_const"   : [],
     "pre"         : [9],
     "succ"       : [[11]]

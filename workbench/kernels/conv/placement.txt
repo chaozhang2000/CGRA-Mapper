@@ -1,1 +1,5 @@
-    res = [["add14","udiv2","phi1","urem3"],["load8","icmp15","zext4","load11"],["br16","zext5","mul12"],["getelementptr6","phi0","getelementptr9","add13"],["add14","udiv2","phi1","urem3"]]
+    res = [["bitcast7","add14","udiv2","phi1","urem3"],
+        ["load8","icmp15","zext4","load11","bitcast10"],
+        ["br16","zext5","mul12"],
+        ["getelementptr6","phi0","getelementptr9","add13"],
+        ["bitcast7","add14","udiv2","phi1","urem3"]]
