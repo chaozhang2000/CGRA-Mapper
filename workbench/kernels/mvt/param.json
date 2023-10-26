@@ -12,10 +12,10 @@
   "heuristicMapping"      : true,
   "parameterizableCGRA"   : true,
   "diagonalVectorization" : false,
-  "bypassConstraint"      : 4,
+  "bypassConstraint"      : 8,
   "isStaticElasticCGRA"   : false,
   "ctrlMemConstraint"     : 200,
-  "regConstraint"         : 8,
+  "regConstraint"         : 12,
   "optLatency"            : {
                               "load" : 1,
                               "store": 1

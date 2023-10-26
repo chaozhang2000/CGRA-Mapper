@@ -63,7 +63,21 @@ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
 	}
 
 	// TODO: need to take care of supportedFUs:
+	if (param["tiles"][to_string(nodeID)].contains("supportedFUs")) {
+	id2Node[nodeID]->enablePhi();
+	id2Node[nodeID]->enableAdd();
+	id2Node[nodeID]->enableShift();
+	id2Node[nodeID]->enableSel();
+	id2Node[nodeID]->enableCmp();
+	id2Node[nodeID]->enableMAC();
+	id2Node[nodeID]->enableReturn();
+	id2Node[nodeID]->enableMul();
+	id2Node[nodeID]->enableLogic();
+	id2Node[nodeID]->enableBr();
+  id2Node[nodeID]->enableCall();//yes
+          id2Node[nodeID]->enableVectorization(); //yes
 	//
+	}
       }
     }
 
@@ -146,7 +160,7 @@ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
     // Enable the specialized 'call' functionality.
     for (int r=0; r<t_rows; ++r) {
       for (int c=0; c<t_columns; ++c) {
-        nodes[r][c]->enableCall();
+        nodes[r][c]->enableCall();//yes
       }
     }
 
@@ -161,7 +175,7 @@ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
     } else {
       for (int r=0; r<t_rows; ++r) {
         for (int c=0; c<t_columns; ++c) {
-          nodes[r][c]->enableVectorization();
+          nodes[r][c]->enableVectorization(); //yes
         }
       }
     }
