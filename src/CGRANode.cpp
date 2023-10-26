@@ -193,13 +193,24 @@ bool CGRANode::canSupport(DFGNode* t_opt) {
   if (m_disabled) 
     return false;
   // Check whether this CGRA node supports the required functionality.
-  if ((t_opt->isLoad()       and !canLoad())  or
-      (t_opt->isStore()      and !canStore()) or
-      (t_opt->isReturn()     and !canReturn()) or
-      (t_opt->isCall()       and !canCall())){
-    return false;
+//  if ((t_opt->isLoad()       and !canLoad())  or
+//      (t_opt->isStore()      and !canStore()) or
+//      (t_opt->isReturn()     and !canReturn()) or
+//      (t_opt->isCall()       and !canCall())){
+//    return false;
+//  }
+  if ((t_opt->isLoad()       and canLoad())  or
+      (t_opt->isStore()      and canStore()) or
+      (t_opt->isReturn()     and canReturn()) or
+      (t_opt->isCall()       and canCall())  or
+      (t_opt->isAdd()        and canAdd()) or 
+      (t_opt->isMul()        and canMul()) or 
+      (t_opt->isPhi()        and canPhi()) or 
+      (t_opt->isBranch()     and canBr()) or 
+      (t_opt->isCmp()        and canCmp()) ){ 
+    return true;
   }
-  return true;
+  return false;
 }
 
 bool CGRANode::canOccupy(DFGNode* t_opt, int t_cycle, int t_II) {
