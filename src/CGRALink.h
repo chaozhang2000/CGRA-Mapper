@@ -107,7 +107,7 @@ class CGRALink
     bool canOccupy(DFGNode*, CGRANode*, int, int);
 
 		/** occupy the CGRALink,add value to m_dfgNodes,m_arrived,m_generatedOut,m_bypassed,m_occupyed.according to the params of function.
-		 * call m_dst's allocateReg() method
+		 * call m_dst's allocateReg() method if is not bypass,to allocate reg in CGRANode.
 		 * @param t_srcDFGNode : the srcDFGNode which will occupy this CGRALink
 		 * @param t_cycle : the clock cycle now
 		 * @param t_duration : 

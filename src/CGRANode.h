@@ -212,11 +212,17 @@ class CGRANode {
     bool canMAC();
     bool canLogic();
     bool canBr();
-    DFGNode* getMappedDFGNode(int);
+		/**The function get MappedDFGNode in this CGRANode by searching in m_dfgNodesWithOccupyStatus 
+		 * @param t_cycle : the value of cycle 
+		 * @return : the pointer of the mappedDFGNode in this CGRANode at t_cycle. if not find, return NULL
+		 */
+    DFGNode* getMappedDFGNode(int t_cycle);
+
     bool containMappedDFGNode(DFGNode*, int);
 
 		/**The function used to allocate Reg for CGRALink(t_link). 
 		 * get reg_id from t_link using t_link->getDirectionID() then call the allocateReg(int,int,int,int) function. 
+		 * allocateReg(int,int,int,int)function, Traverse each reg in this CGRANode, to find a reg which can be occupied according to the m_regs_duration,then occupied it by setting the m_regs_duration.
 		 * @param t_link : 
 		 * @param t_cycle : 
 		 * @param t_duration : 

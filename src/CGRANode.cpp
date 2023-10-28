@@ -69,6 +69,8 @@ void CGRANode::allocateReg(int t_port_id, int t_cycle, int t_duration, int t_II)
   bool allocated = false;
   for (int i=0; i<m_registerCount; ++i) {
     bool reg_occupied = false;
+
+		//Two for loops below is used to check if the reg have been occupied, if has been occupied, set reg_occupied true. 
     for (int cycle=t_cycle; cycle<m_cycleBoundary; cycle+=t_II) {
       for (int d=0; d<t_duration; ++d) {
         if (cycle+d<m_cycleBoundary and m_regs_duration[cycle+d][i] != -1)
