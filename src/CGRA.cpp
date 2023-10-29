@@ -17,24 +17,7 @@ using json = nlohmann::json;
 CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
 	   bool t_heterogeneity, bool t_parameterizableCGRA,
 	   map<string, list<int>*>* t_additionalFunc) {
-  m_rows = t_rows;
-  m_columns = t_columns;
-  m_FUCount = t_rows * t_columns;
-  nodes = new CGRANode**[t_rows];
-
   if (t_parameterizableCGRA) {
-
-    int node_id = 0;
-    map<int, CGRANode*> id2Node;
-    for (int i=0; i<t_rows; ++i) {
-      nodes[i] = new CGRANode*[t_columns];
-      for (int j=0; j<t_columns; ++j) {
-        nodes[i][j] = new CGRANode(node_id, j, i);
-	// nodes[i][j]->disableAllFUs();
-	id2Node[node_id] = nodes[i][j];
-	node_id += 1;
-      }
-    }
 
     ifstream paramCGRA("./paramCGRA.json");
     if (!paramCGRA.good()) {
@@ -43,9 +26,30 @@ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
       return;
     }
     json param;
-    paramCGRA >> param;
+    paramCGRA >> param;	
+  
+	
+	int rows = param["rc"]["rows"];
+	int columns = param["rc"]["cols"];
+	m_rows = rows;
+  m_columns = columns;
+  m_FUCount = rows * columns;
+  nodes = new CGRANode**[rows];
+
+    int node_id = 0;
+    map<int, CGRANode*> id2Node;
+    for (int i=0; i<rows; ++i) {
+      nodes[i] = new CGRANode*[columns];
+      for (int j=0; j<columns; ++j) {
+        nodes[i][j] = new CGRANode(node_id, j, i);
+	// nodes[i][j]->disableAllFUs();
+	id2Node[node_id] = nodes[i][j];
+	node_id += 1;
+      }
+    }
+
     
-    int numOfNodes = t_rows * t_columns;
+    int numOfNodes = rows * columns;
     for (int nodeID = 0; nodeID < numOfNodes; ++nodeID) {
       bool disabled = param["tiles"][to_string(nodeID)]["disabled"];
       if (disabled) {
@@ -104,6 +108,10 @@ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
     }
 
   } else {
+  m_rows = t_rows;
+  m_columns = t_columns;
+  m_FUCount = t_rows * t_columns;
+  nodes = new CGRANode**[t_rows];
 
     int node_id = 0;
     for (int i=0; i<t_rows; ++i) {

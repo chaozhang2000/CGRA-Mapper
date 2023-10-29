@@ -12,17 +12,12 @@
   "heuristicMapping"      : true,
   "parameterizableCGRA"   : true,
   "diagonalVectorization" : false,
-  "bypassConstraint"      : 8,
+  "bypassConstraint"      : 4,
   "isStaticElasticCGRA"   : false,
   "ctrlMemConstraint"     : 200,
-  "regConstraint"         : 12,
-  "optLatency"            : {
-                              "load" : 1,
-                              "store": 1
-                            },
-  "optPipelined"          : ["load", "store"],
+  "regConstraint"         : 8,
   "additionalFunc"        : {
-                              "load" : [0,4,8,12],
-                              "store": [0,4,8,12]
+                              "load" : [0,6,12,18,24,30],
+                              "store": [0,6,12,18,24,30]
                             }
 }

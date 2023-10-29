@@ -4,8 +4,7 @@
             "disabled": false,
             "supportAllFUs": true,
             "accessMem": true
-        },
-        "1": {
+        },"1": {
             "disabled": false,
             "supportAllFUs": false,
             "supportedFUs": [
@@ -19,8 +18,7 @@
                 "Mul",
                 "Logic",
                 "Br"
-            ]
-        },
+            ]},
         "2": {
             "disabled": false,
             "supportAllFUs": false,
