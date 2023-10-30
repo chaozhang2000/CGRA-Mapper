@@ -4,52 +4,18 @@
             "disabled": false,
             "supportAllFUs": true,
             "accessMem": true
-        },"1": {
+        },
+        "1": {
             "disabled": false,
-            "supportAllFUs": false,
-            "supportedFUs": [
-                "Phi",
-                "Add",
-                "Shift",
-                "Sel",
-                "Cmp",
-                "MAC",
-                "Ret",
-                "Mul",
-                "Logic",
-                "Br"
-            ]},
+            "supportAllFUs": true
+        },
         "2": {
             "disabled": false,
-            "supportAllFUs": false,
-            "supportedFUs": [
-                "Phi",
-                "Add",
-                "Shift",
-                "Sel",
-                "Cmp",
-                "MAC",
-                "Ret",
-                "Mul",
-                "Logic",
-                "Br"
-            ]
+            "supportAllFUs": true
         },
         "3": {
             "disabled": false,
-            "supportAllFUs": false,
-            "supportedFUs": [
-                "Phi",
-                "Add",
-                "Shift",
-                "Sel",
-                "Cmp",
-                "MAC",
-                "Ret",
-                "Mul",
-                "Logic",
-                "Br"
-            ]
+            "supportAllFUs": true
         },
         "4": {
             "disabled": false,
@@ -58,51 +24,15 @@
         },
         "5": {
             "disabled": false,
-            "supportAllFUs": false,
-            "supportedFUs": [
-                "Phi",
-                "Add",
-                "Shift",
-                "Sel",
-                "Cmp",
-                "MAC",
-                "Ret",
-                "Mul",
-                "Logic",
-                "Br"
-            ]
+            "supportAllFUs": true
         },
         "6": {
             "disabled": false,
-            "supportAllFUs": false,
-            "supportedFUs": [
-                "Phi",
-                "Add",
-                "Shift",
-                "Sel",
-                "Cmp",
-                "MAC",
-                "Ret",
-                "Mul",
-                "Logic",
-                "Br"
-            ]
+            "supportAllFUs": true
         },
         "7": {
             "disabled": false,
-            "supportAllFUs": false,
-            "supportedFUs": [
-                "Phi",
-                "Add",
-                "Shift",
-                "Sel",
-                "Cmp",
-                "MAC",
-                "Ret",
-                "Mul",
-                "Logic",
-                "Br"
-            ]
+            "supportAllFUs": true
         },
         "8": {
             "disabled": false,
@@ -111,51 +41,15 @@
         },
         "9": {
             "disabled": false,
-            "supportAllFUs": false,
-            "supportedFUs": [
-                "Phi",
-                "Add",
-                "Shift",
-                "Sel",
-                "Cmp",
-                "MAC",
-                "Ret",
-                "Mul",
-                "Logic",
-                "Br"
-            ]
+            "supportAllFUs": true
         },
         "10": {
             "disabled": false,
-            "supportAllFUs": false,
-            "supportedFUs": [
-                "Phi",
-                "Add",
-                "Shift",
-                "Sel",
-                "Cmp",
-                "MAC",
-                "Ret",
-                "Mul",
-                "Logic",
-                "Br"
-            ]
+            "supportAllFUs": true
         },
         "11": {
             "disabled": false,
-            "supportAllFUs": false,
-            "supportedFUs": [
-                "Phi",
-                "Add",
-                "Shift",
-                "Sel",
-                "Cmp",
-                "MAC",
-                "Ret",
-                "Mul",
-                "Logic",
-                "Br"
-            ]
+            "supportAllFUs": true
         },
         "12": {
             "disabled": false,
@@ -164,51 +58,15 @@
         },
         "13": {
             "disabled": false,
-            "supportAllFUs": false,
-            "supportedFUs": [
-                "Phi",
-                "Add",
-                "Shift",
-                "Sel",
-                "Cmp",
-                "MAC",
-                "Ret",
-                "Mul",
-                "Logic",
-                "Br"
-            ]
+            "supportAllFUs": true
         },
         "14": {
             "disabled": false,
-            "supportAllFUs": false,
-            "supportedFUs": [
-                "Phi",
-                "Add",
-                "Shift",
-                "Sel",
-                "Cmp",
-                "MAC",
-                "Ret",
-                "Mul",
-                "Logic",
-                "Br"
-            ]
+            "supportAllFUs": true
         },
         "15": {
             "disabled": false,
-            "supportAllFUs": false,
-            "supportedFUs": [
-                "Phi",
-                "Add",
-                "Shift",
-                "Sel",
-                "Cmp",
-                "MAC",
-                "Ret",
-                "Mul",
-                "Logic",
-                "Br"
-            ]
+            "supportAllFUs": true
         }
     },
     "links": [
