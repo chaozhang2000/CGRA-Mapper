@@ -1,0 +1,268 @@
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+[function 'main' is not in our target list]
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+[function 'init_array' is not in our target list]
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+==================================
+[function 'kernel_mvt' is one of our targets]
+*** current function: kernel_mvt
+ (ID: 0)
+ (ID: 1)
+ (ID: 2)
+ (ID: 3)
+ (ID: 4)
+ (ID: 5)
+ (ID: 6)
+ (ID: 7)
+ (ID: 8)
+ (ID: 9)
+ (ID: 10)
+ (ID: 11)
+ (ID: 12)
+ (ID: 13)
+ (ID: 14)
+ (ID: 15)
+ (ID: 16)
+ (ID: 17)
+ (ID: 18)
+ (ID: 19)
+ (ID: 20)
+ (ID: 21)
+ (ID: 22)
+ (ID: 23)
+ (ID: 24)
+ (ID: 25)
+ (ID: 26)
+ (ID: 27)
+ (ID: 28)
+ (ID: 29)
+ (ID: 30)
+ (ID: 31)
+ (ID: 32)
+ (ID: 33)
+ (ID: 34)
+ (ID: 35)
+ (ID: 36)
+ (ID: 37)
+ (ID: 38)
+ (ID: 39)
+ (ID: 40)
+ (ID: 41)
+==================================
+==================================
+[reorder DFG along with the longest path]
+==================================
+[show opcode count]
+add : 1
+bitcast : 5
+br : 1
+fadd : 2
+fmul : 2
+getelementptr : 7
+icmp : 1
+insertelement : 6
+load : 9
+or : 3
+phi : 1
+shufflevector : 2
+store : 2
+DFG node count: 42; DFG edge count: 57; SIMD node count: 22
+==================================
+[generate dot for DFG]
+==================================
+[generate JSON for DFG]
+==================================
+[ResMII: 3]
+... number of cycles: 2 ...
+==================================
+[RecMII: 4]
+==================================
+[heuristic]
+----------------------------------------
+[DEBUG] start heuristic algorithm with II=4
+[DEBUG] no available path for DFG node 0 on CGRA node 0 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 0 on CGRA node 1 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 0 on CGRA node 4 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 0 on CGRA node 5 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 0 on CGRA node 6 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 0 on CGRA node 7 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 0 on CGRA node 8 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 0 on CGRA node 9 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 0 on CGRA node 10 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 0 on CGRA node 11 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 0 on CGRA node 12 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 0 on CGRA node 13 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 0 on CGRA node 14 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 0 on CGRA node 15 within II 4; path size: 2.
+[DEBUG] schedule dfg node[0] onto fu[2] at cycle 0 within II: 4
+[DEBUG] setDFGNode 0 onto CGRANode 2 at cycle: 0
+[DEBUG] success in schedule()
+[DEBUG] no available path for DFG node 1 on CGRA node 0 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 1 on CGRA node 1 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 1 on CGRA node 4 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 1 on CGRA node 5 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 1 on CGRA node 6 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 1 on CGRA node 7 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 1 on CGRA node 8 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 1 on CGRA node 9 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 1 on CGRA node 10 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 1 on CGRA node 11 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 1 on CGRA node 12 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 1 on CGRA node 13 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 1 on CGRA node 14 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 1 on CGRA node 15 within II 4; path size: 2.
+[DEBUG] schedule dfg node[1] onto fu[3] at cycle 1 within II: 4
+[DEBUG] setDFGNode 1 onto CGRANode 3 at cycle: 1
+[DEBUG] in allocateReg() t_cycle: 0; i: 0 CGRA node: 3; link: 2 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[2]-->[3] (bypass:0) dfgNode: 0 at cycle 0
+[DEBUG] skip predecessor routing -- dfgNode: 0
+[DEBUG] success in schedule()
+[DEBUG] no available path for DFG node 2 on CGRA node 0 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 2 on CGRA node 1 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 2 on CGRA node 4 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 2 on CGRA node 5 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 2 on CGRA node 6 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 2 on CGRA node 7 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 2 on CGRA node 8 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 2 on CGRA node 9 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 2 on CGRA node 10 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 2 on CGRA node 11 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 2 on CGRA node 12 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 2 on CGRA node 13 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 2 on CGRA node 14 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 2 on CGRA node 15 within II 4; path size: 2.
+[DEBUG] schedule dfg node[2] onto fu[2] at cycle 1 within II: 4
+[DEBUG] setDFGNode 2 onto CGRANode 2 at cycle: 1
+[DEBUG] tryToRoute -- srcDFGNode: 0, srcCGRANode: 2; dstDFGNode: 2, dstCGRANode: 2; backEdge: 0
+[DEBUG] check route size: 1
+[DEBUG] allocate for local reg maintain... duration=1 last cycle: 0
+[DEBUG] in allocateReg() t_cycle: 0; i: 0 CGRA node: 2; link: 4 duration 1
+[DEBUG] done reg allocation
+[DEBUG] success in schedule()
+[DEBUG] no available path for DFG node 3 on CGRA node 0 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 3 on CGRA node 1 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 3 on CGRA node 4 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 3 on CGRA node 5 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 3 on CGRA node 6 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 3 on CGRA node 7 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 3 on CGRA node 8 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 3 on CGRA node 9 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 3 on CGRA node 10 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 3 on CGRA node 11 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 3 on CGRA node 12 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 3 on CGRA node 13 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 3 on CGRA node 14 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 3 on CGRA node 15 within II 4; path size: 2.
+[DEBUG] schedule dfg node[3] onto fu[3] at cycle 2 within II: 4
+[DEBUG] setDFGNode 3 onto CGRANode 3 at cycle: 2
+[DEBUG] in allocateReg() t_cycle: 0; i: 1 CGRA node: 3; link: 2 duration 2
+[DEBUG] done reg allocation
+[DEBUG] occupy link[2]-->[3] (bypass:0) dfgNode: 0 at cycle 0
+[DEBUG] skip predecessor routing -- dfgNode: 0
+[DEBUG] success in schedule()
+[DEBUG] no available path for DFG node 4 on CGRA node 0 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 4 on CGRA node 1 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 4 on CGRA node 4 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 4 on CGRA node 5 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 4 on CGRA node 6 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 4 on CGRA node 7 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 4 on CGRA node 8 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 4 on CGRA node 9 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 4 on CGRA node 10 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 4 on CGRA node 11 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 4 on CGRA node 12 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 4 on CGRA node 13 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 4 on CGRA node 14 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 4 on CGRA node 15 within II 4; path size: 2.
+[DEBUG] schedule dfg node[4] onto fu[2] at cycle 2 within II: 4
+[DEBUG] setDFGNode 4 onto CGRANode 2 at cycle: 2
+[DEBUG] tryToRoute -- srcDFGNode: 0, srcCGRANode: 2; dstDFGNode: 4, dstCGRANode: 2; backEdge: 0
+[DEBUG] check route size: 1
+[DEBUG] allocate for local reg maintain... duration=2 last cycle: 0
+[DEBUG] in allocateReg() t_cycle: 0; i: 1 CGRA node: 2; link: 4 duration 2
+[DEBUG] done reg allocation
+[DEBUG] success in schedule()
+[DEBUG] no available path for DFG node 26 on CGRA node 0 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 26 on CGRA node 1 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 26 on CGRA node 4 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 26 on CGRA node 5 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 26 on CGRA node 6 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 26 on CGRA node 7 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 26 on CGRA node 8 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 26 on CGRA node 9 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 26 on CGRA node 10 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 26 on CGRA node 11 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 26 on CGRA node 12 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 26 on CGRA node 13 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 26 on CGRA node 14 within II 4; path size: 2.
+[DEBUG] no available path for DFG node 26 on CGRA node 15 within II 4; path size: 2.
+[DEBUG] schedule dfg node[26] onto fu[2] at cycle 3 within II: 4
+[DEBUG] setDFGNode 26 onto CGRANode 2 at cycle: 3
+[DEBUG] tryToRoute -- srcDFGNode: 0, srcCGRANode: 2; dstDFGNode: 26, dstCGRANode: 2; backEdge: 0
+[DEBUG] check route size: 1
+[DEBUG] allocate for local reg maintain... duration=3 last cycle: 0
+[DEBUG] in allocateReg() t_cycle: 0; i: 2 CGRA node: 2; link: 4 duration 3
+[DEBUG] done reg allocation
+[DEBUG] success in schedule()
+[DEBUG] no available path for DFG node 39 on CGRA node 0 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 39 on CGRA node 1 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 39 on CGRA node 2 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 39 on CGRA node 4 within II 4; path size: 1.
+[DEBUG] no available path for DFG node 39 on CGRA node 5 within II 4; path size: 1.
+[DEBUG] no available path for DFG node 39 on CGRA node 6 within II 4; path size: 1.
+[DEBUG] no available path for DFG node 39 on CGRA node 7 within II 4; path size: 1.
+[DEBUG] no available path for DFG node 39 on CGRA node 8 within II 4; path size: 1.
+[DEBUG] no available path for DFG node 39 on CGRA node 9 within II 4; path size: 1.
+[DEBUG] no available path for DFG node 39 on CGRA node 10 within II 4; path size: 1.
+[DEBUG] no available path for DFG node 39 on CGRA node 11 within II 4; path size: 1.
+[DEBUG] no available path for DFG node 39 on CGRA node 12 within II 4; path size: 1.
+[DEBUG] no available path for DFG node 39 on CGRA node 13 within II 4; path size: 1.
+[DEBUG] no available path for DFG node 39 on CGRA node 14 within II 4; path size: 1.
+[DEBUG] no available path for DFG node 39 on CGRA node 15 within II 4; path size: 1.
+[DEBUG] schedule dfg node[39] onto fu[3] at cycle 3 within II: 4
+[DEBUG] setDFGNode 39 onto CGRANode 3 at cycle: 3
+[DEBUG] in allocateReg() t_cycle: 0; i: 2 CGRA node: 3; link: 2 duration 3
+[DEBUG] done reg allocation
+[DEBUG] occupy link[2]-->[3] (bypass:0) dfgNode: 0 at cycle 0
+[DEBUG] skip predecessor routing -- dfgNode: 0
+[DEBUG] in shareSameCycle is true: node 39
+[DEBUG] tryToRoute -- srcDFGNode: 39, srcCGRANode: 3; dstDFGNode: 0, dstCGRANode: 2; backEdge: 1
+[DEBUG] in shareSameCycle is true: node 0
+[DEBUG] check route size: 2
+[DEBUG] reset duration: 1 t_dstCycle: 0 previous: 3 II: 4
+[DEBUG] in allocateReg() t_cycle: 3; i: 0 CGRA node: 2; link: 3 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[3]-->[2] (bypass:0) dfgNode: 39 at cycle 3
+[DEBUG] success in schedule()
+[DEBUG] no available path for DFG node 5 on CGRA node 0 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 5 on CGRA node 1 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 5 on CGRA node 2 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 5 on CGRA node 3 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 5 on CGRA node 4 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 5 on CGRA node 5 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 5 on CGRA node 6 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 5 on CGRA node 7 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 5 on CGRA node 8 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 5 on CGRA node 9 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 5 on CGRA node 10 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 5 on CGRA node 11 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 5 on CGRA node 12 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 5 on CGRA node 13 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 5 on CGRA node 14 within II 4; path size: 0.
+[DEBUG] no available path for DFG node 5 on CGRA node 15 within II 4; path size: 0.
+[DEBUG] *else* no available path for DFG node 5 within II 4.
+----------------------------------------
+[DEBUG] start heuristic algorithm with II=5
+[DEBUG] no available path for DFG node 0 on CGRA node 0 within II 5; path size: 0.
+[DEBUG] no available path for DFG node 0 on CGRA node 1 within II 5; path size: 0.
+[DEBUG] no available path for DFG node 0 on CGRA node 4 within II 5; path size: 2.

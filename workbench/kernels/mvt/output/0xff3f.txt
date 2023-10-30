@@ -1,0 +1,11 @@
+1 1 1 1 
+1 1 1 1 
+0 0 1 1 
+1 1 1 1 
+links = 36
+4nodes = 1
+3nodes = 7
+2nodes = 5
+1nodes = 1
+
+II = 6

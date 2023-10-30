@@ -1,0 +1,286 @@
+diff --git a/src/CGRA.cpp b/src/CGRA.cpp
+index 997a36c..cfe73e1 100644
+--- a/src/CGRA.cpp
++++ b/src/CGRA.cpp
+@@ -17,11 +17,13 @@ using json = nlohmann::json;
+ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
+ 	   bool t_heterogeneity, bool t_parameterizableCGRA,
+ 	   map<string, list<int>*>* t_additionalFunc) {
+-  if (t_parameterizableCGRA) {
+   m_rows = t_rows;
+   m_columns = t_columns;
+   m_FUCount = t_rows * t_columns;
+   nodes = new CGRANode**[t_rows];
++
++  if (t_parameterizableCGRA) {
++
+     int node_id = 0;
+     map<int, CGRANode*> id2Node;
+     for (int i=0; i<t_rows; ++i) {
+@@ -37,11 +39,10 @@ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
+     ifstream paramCGRA("./paramCGRA.json");
+     if (!paramCGRA.good()) {
+       cout<<"Parameterizable CGRA design/mapping requires paramCGRA.json"<<endl;
+-			exit(0);
+       return;
+     }
+     json param;
+-    paramCGRA >> param;	
++    paramCGRA >> param;
+     
+     int numOfNodes = t_rows * t_columns;
+     for (int nodeID = 0; nodeID < numOfNodes; ++nodeID) {
+@@ -61,21 +62,7 @@ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
+ 	}
+ 
+ 	// TODO: need to take care of supportedFUs:
+-	if (param["tiles"][to_string(nodeID)].contains("supportedFUs")) {
+-	id2Node[nodeID]->enablePhi();
+-	id2Node[nodeID]->enableAdd();
+-	id2Node[nodeID]->enableShift();
+-	id2Node[nodeID]->enableSel();
+-	id2Node[nodeID]->enableCmp();
+-	id2Node[nodeID]->enableMAC();
+-	id2Node[nodeID]->enableReturn();
+-	id2Node[nodeID]->enableMul();
+-	id2Node[nodeID]->enableLogic();
+-	id2Node[nodeID]->enableBr();
+-  id2Node[nodeID]->enableCall();//yes
+-          id2Node[nodeID]->enableVectorization(); //yes
+ 	//
+-	}
+       }
+     }
+ 
+@@ -102,10 +89,7 @@ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
+     }
+ 
+   } else {
+-  m_rows = t_rows;
+-  m_columns = t_columns;
+-  m_FUCount = t_rows * t_columns;
+-  nodes = new CGRANode**[t_rows];
++
+     int node_id = 0;
+     for (int i=0; i<t_rows; ++i) {
+       nodes[i] = new CGRANode*[t_columns];
+@@ -161,7 +145,7 @@ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
+     // Enable the specialized 'call' functionality.
+     for (int r=0; r<t_rows; ++r) {
+       for (int c=0; c<t_columns; ++c) {
+-        nodes[r][c]->enableCall();//yes
++        nodes[r][c]->enableCall();
+       }
+     }
+ 
+@@ -176,7 +160,7 @@ CGRA::CGRA(int t_rows, int t_columns, bool t_diagonalVectorization,
+     } else {
+       for (int r=0; r<t_rows; ++r) {
+         for (int c=0; c<t_columns; ++c) {
+-          nodes[r][c]->enableVectorization(); //yes
++          nodes[r][c]->enableVectorization();
+         }
+       }
+     }
+diff --git a/src/CGRANode.cpp b/src/CGRANode.cpp
+index 323e401..b8a5b89 100644
+--- a/src/CGRANode.cpp
++++ b/src/CGRANode.cpp
+@@ -185,39 +185,23 @@ bool CGRANode::canSupport(DFGNode* t_opt) {
+   if (m_disabled) 
+     return false;
+   // Check whether this CGRA node supports the required functionality.
+-//  if ((t_opt->isLoad()       and !canLoad())  or
+-//      (t_opt->isStore()      and !canStore()) or
+-//      (t_opt->isReturn()     and !canReturn()) or
+-//      (t_opt->isCall()       and !canCall())  or
+-//      (t_opt->isVectorized() and !supportVectorization()) or
+-//      (t_opt->hasCombined()  and !supportComplex()) or
+-//      (t_opt->isAdd()        and !canAdd()) or 
+-//      (t_opt->isMul()        and !canMul()) or 
+-//      (t_opt->isPhi()        and !canPhi()) or 
+-//      (t_opt->isSel()        and !canSel()) or 
+-//      (t_opt->isMAC()        and !canMAC()) or 
+-//      (t_opt->isLogic()      and !canLogic()) or 
+-//      (t_opt->isBranch()     and !canBr()) or 
+-//      (t_opt->isCmp()        and !canCmp()) ){ 
+-//    return false;
+-//  }
+-  if ((t_opt->isLoad()       and canLoad())  or
+-      (t_opt->isStore()      and canStore()) or
+-      (t_opt->isReturn()     and canReturn()) or
+-      (t_opt->isCall()       and canCall())  or
+-      (t_opt->isVectorized() and supportVectorization()) or
+-      (t_opt->hasCombined()  and supportComplex()) or
+-      (t_opt->isAdd()        and canAdd()) or 
+-      (t_opt->isMul()        and canMul()) or 
+-      (t_opt->isPhi()        and canPhi()) or 
+-      (t_opt->isSel()        and canSel()) or 
+-      (t_opt->isMAC()        and canMAC()) or 
+-      (t_opt->isLogic()      and canLogic()) or 
+-      (t_opt->isBranch()     and canBr()) or 
+-      (t_opt->isCmp()        and canCmp()) ){ 
+-    return true;
++  if ((t_opt->isLoad()       and !canLoad())  or
++      (t_opt->isStore()      and !canStore()) or
++      (t_opt->isReturn()     and !canReturn()) or
++      (t_opt->isCall()       and !canCall())  or
++      (t_opt->isVectorized() and !supportVectorization()) or
++      (t_opt->hasCombined()  and !supportComplex()) or
++      (t_opt->isAdd()        and !canAdd()) or 
++      (t_opt->isMul()        and !canMul()) or 
++      (t_opt->isPhi()        and !canPhi()) or 
++      (t_opt->isSel()        and !canSel()) or 
++      (t_opt->isMAC()        and !canMAC()) or 
++      (t_opt->isLogic()      and !canLogic()) or 
++      (t_opt->isBranch()     and !canBr()) or 
++      (t_opt->isCmp()        and !canCmp()) ){ 
++    return false;
+   }
+-  return false;
++  return true;
+ }
+ 
+ bool CGRANode::canOccupy(DFGNode* t_opt, int t_cycle, int t_II) {
+diff --git a/src/DFG.cpp b/src/DFG.cpp
+index f21308a..1463dbb 100644
+--- a/src/DFG.cpp
++++ b/src/DFG.cpp
+@@ -586,7 +586,7 @@ void DFG::construct(Function& t_F) {
+ 		for(DFGNode* node:nodes){
+ 			file << "    res[\""<< node->getInst()->getOpcodeName()<<node->getID()<<"\"] " <<"= ";
+     	list<DFGNode*>* pres = node->getPredNodes();
+-			if(pres->size() == 0) file<< "[\"N/A\"]" << std::endl;
++			if(pres->size() == 0) file<< "[N/A]" << std::endl;
+ 			else{
+ 				file <<"[";
+ 				int num_of_prenode = pres->size();
+@@ -604,9 +604,9 @@ void DFG::construct(Function& t_F) {
+ 		//DependencySuccessor_Init
+ 		file<<"DependencySuccessor_Init:"<<std::endl;
+ 		for(DFGNode* node:nodes){
+-			file << "    res[\""<< node->getInst()->getOpcodeName()<<node->getID()<<"\"] " <<"= ";
++			file << "    res=[\""<< node->getInst()->getOpcodeName()<<node->getID()<<"\"] " <<"= ";
+     	list<DFGNode*>* succs = node->getSuccNodes();
+-			if(succs->size() == 0) file<< "[\"N/A\"]" << std::endl;
++			if(succs->size() == 0) file<< "[N/A]" << std::endl;
+ 			else{
+ 				file <<"[";
+ 				int num_of_prenode = succs->size();
+diff --git a/src/DFGNode.cpp b/src/DFGNode.cpp
+index fdc1368..8c24ab2 100644
+--- a/src/DFGNode.cpp
++++ b/src/DFGNode.cpp
+@@ -383,7 +383,7 @@ void DFGNode::initType() {
+     m_optType = "OPT_EQ";
+     m_fuType = "Comp";
+   } else if (isBitcast()) {
+-    m_optType = "OPT_Bitcast";
++    m_optType = "OPT_NAH";
+     m_fuType = "Alu";
+   } else if (isGetptr()) {
+     m_optType += "OPT_ADD";
+diff --git a/src/Mapper.cpp b/src/Mapper.cpp
+index c9c4272..9dfa1ea 100644
+--- a/src/Mapper.cpp
++++ b/src/Mapper.cpp
+@@ -17,14 +17,10 @@
+ #include <map>
+ #include <vector>
+ #include <fstream>
+-#include <sstream>
+ 
+ //#include <nlohmann/json.hpp>
+ using json = nlohmann::json;
+ 
+-Mapper::Mapper(string fileName){
+-	m_filename = fileName;
+-}
+ int Mapper::getResMII(DFG* t_dfg, CGRA* t_cgra) {
+   int ResMII = ceil(float(t_dfg->getNodeCount()) / t_cgra->getFUCount());
+   return ResMII;
+@@ -644,19 +640,7 @@ void Mapper::showSchedule(CGRA* t_cgra, DFG* t_dfg, int t_II,
+     ++cycle;
+   }
+   cout<<"[Mapping II: "<<t_II<<"]"<<endl;
+-	ifstream filer("./output/"+m_filename);
+-	if(filer.good()){
+-	stringstream buffer;
+-	buffer << filer.rdbuf();
+-	string content = buffer.str();
+-	ofstream file("./output/"+m_filename);
+-	if(file.is_open()){
+-		file.seekp(0,std::ios::end);
+-		file << content << endl;
+-		file<<"II = "<<t_II;
+-		file.close();
+-	}
+-	}
++
+   if (t_parameterizableCGRA) {
+     jsonTilesLinks["tiles"] = jsonTiles;
+     jsonTilesLinks["links"] = jsonLinks;
+diff --git a/src/Mapper.h b/src/Mapper.h
+index 82d6774..4605c6b 100644
+--- a/src/Mapper.h
++++ b/src/Mapper.h
+@@ -14,7 +14,6 @@
+ class Mapper {
+   private:
+     int m_maxMappingCycle;
+-		string m_filename;
+     map<DFGNode*, CGRANode*> m_mapping;
+     map<DFGNode*, int> m_mappingTiming;
+     map<CGRANode*, int>* dijkstra_search(CGRA*, DFG*, int, DFGNode*,
+@@ -29,7 +28,7 @@ class Mapper {
+         DFGNode*, list<map<CGRANode*, int>*>*);
+ 
+   public:
+-    Mapper(string);
++    Mapper(){}
+     int getResMII(DFG*, CGRA*);
+     int getRecMII(DFG*);
+     void constructMRRG(DFG*, CGRA*, int);
+diff --git a/src/mapperPass.cpp b/src/mapperPass.cpp
+index 2b525fe..71704b5 100644
+--- a/src/mapperPass.cpp
++++ b/src/mapperPass.cpp
+@@ -43,7 +43,6 @@ namespace {
+     bool runOnFunction(Function &t_F) override {
+ 
+       // Initializes input parameters.
+-			string filename;
+       int rows                      = 4;
+       int columns                   = 4;
+       bool targetEntireFunction     = false;
+@@ -136,21 +135,6 @@ namespace {
+         heterogeneity         = param["heterogeneity"];
+         heuristicMapping      = param["heuristicMapping"];
+         parameterizableCGRA   = param["parameterizableCGRA"];
+-				if(parameterizableCGRA){
+-      		ifstream i1("./paramCGRA.json");
+-      		if (!i1.good()) {
+-									cout<<"can't open paramCGRA.json"<<endl;
+-									return 1;
+-					}
+-					else{
+-        		json param1;
+-        i1 >> param1;
+-						rows = param1["rc"]["rows"];
+-					columns	 = param1["rc"]["cols"];
+-						filename = param1["filename"];
+-						
+-					}
+-				}
+         cout<<"Initialize opt latency for DFG nodes: "<<endl;
+         for (auto& opt : param["optLatency"].items()) {
+           cout<<opt.key()<<" : "<<opt.value()<<endl;
+@@ -190,7 +174,7 @@ namespace {
+       cgra->setRegConstraint(regConstraint);
+       cgra->setCtrlMemConstraint(ctrlMemConstraint);
+       cgra->setBypassConstraint(bypassConstraint);
+-      mapper = new Mapper(filename);
++      mapper = new Mapper();
+ 
+       // Show the count of different opcodes (IRs).
+       cout << "==================================\n";

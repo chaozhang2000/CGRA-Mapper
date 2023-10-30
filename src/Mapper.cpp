@@ -1205,6 +1205,7 @@ int Mapper::heuristicMap(CGRA* t_cgra, DFG* t_dfg, int t_II,
   while (1) {
     cout<<"----------------------------------------\n";
     cout<<"[DEBUG] start heuristic algorithm with II="<<t_II<<"\n";
+		if(t_II >= 50){cout<<"II>50 break";assert(0);}
     int cycle = 0;
     constructMRRG(t_dfg, t_cgra, t_II);
     fail = false;
