@@ -135,6 +135,20 @@ namespace {
         heterogeneity         = param["heterogeneity"];
         heuristicMapping      = param["heuristicMapping"];
         parameterizableCGRA   = param["parameterizableCGRA"];
+				if(parameterizableCGRA){
+      		ifstream i1("./paramCGRA.json");
+      		if (!i1.good()) {
+									cout<<"can't open paramCGRA.json"<<endl;
+									return 1;
+					}
+					else{
+        		json param1;
+        i1 >> param1;
+						rows = param1["rc"]["rows"];
+					columns	 = param1["rc"]["cols"];
+						
+					}
+				}
         cout<<"Initialize opt latency for DFG nodes: "<<endl;
         for (auto& opt : param["optLatency"].items()) {
           cout<<opt.key()<<" : "<<opt.value()<<endl;

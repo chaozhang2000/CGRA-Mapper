@@ -4,7 +4,7 @@
   "targetFunction"        : false,
   "targetNested"          : false,
   "doCGRAMapping"         : true,
-  "row"                   : 4,
+  "row"                   : 3,
   "column"                : 4,
   "precisionAware"        : true,
   "heterogeneity"         : false,
