@@ -43,6 +43,7 @@ namespace {
     bool runOnFunction(Function &t_F) override {
 
       // Initializes input parameters.
+			string filename;
       int rows                      = 4;
       int columns                   = 4;
       bool targetEntireFunction     = false;
@@ -146,6 +147,7 @@ namespace {
         i1 >> param1;
 						rows = param1["rc"]["rows"];
 					columns	 = param1["rc"]["cols"];
+						filename = param1["filename"];
 						
 					}
 				}
@@ -188,7 +190,7 @@ namespace {
       cgra->setRegConstraint(regConstraint);
       cgra->setCtrlMemConstraint(ctrlMemConstraint);
       cgra->setBypassConstraint(bypassConstraint);
-      mapper = new Mapper();
+      mapper = new Mapper(filename);
 
       // Show the count of different opcodes (IRs).
       cout << "==================================\n";

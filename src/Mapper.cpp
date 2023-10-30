@@ -17,10 +17,14 @@
 #include <map>
 #include <vector>
 #include <fstream>
+#include <sstream>
 
 //#include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
+Mapper::Mapper(string fileName){
+	m_filename = fileName;
+}
 int Mapper::getResMII(DFG* t_dfg, CGRA* t_cgra) {
   int ResMII = ceil(float(t_dfg->getNodeCount()) / t_cgra->getFUCount());
   return ResMII;
@@ -640,7 +644,19 @@ void Mapper::showSchedule(CGRA* t_cgra, DFG* t_dfg, int t_II,
     ++cycle;
   }
   cout<<"[Mapping II: "<<t_II<<"]"<<endl;
-
+	ifstream filer("./output/"+m_filename);
+	if(filer.good()){
+	stringstream buffer;
+	buffer << filer.rdbuf();
+	string content = buffer.str();
+	ofstream file("./output/"+m_filename);
+	if(file.is_open()){
+		file.seekp(0,std::ios::end);
+		file << content << endl;
+		file<<"II = "<<t_II;
+		file.close();
+	}
+	}
   if (t_parameterizableCGRA) {
     jsonTilesLinks["tiles"] = jsonTiles;
     jsonTilesLinks["links"] = jsonLinks;

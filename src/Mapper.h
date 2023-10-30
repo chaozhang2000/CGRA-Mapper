@@ -14,6 +14,7 @@
 class Mapper {
   private:
     int m_maxMappingCycle;
+		string m_filename;
     map<DFGNode*, CGRANode*> m_mapping;
     map<DFGNode*, int> m_mappingTiming;
     map<CGRANode*, int>* dijkstra_search(CGRA*, DFG*, int, DFGNode*,
@@ -28,7 +29,7 @@ class Mapper {
         DFGNode*, list<map<CGRANode*, int>*>*);
 
   public:
-    Mapper(){}
+    Mapper(string);
     int getResMII(DFG*, CGRA*);
     int getRecMII(DFG*);
     void constructMRRG(DFG*, CGRA*, int);
