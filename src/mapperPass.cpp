@@ -16,6 +16,7 @@
 #include <fstream>
 #include <iostream>
 #include <set>
+#include <unistd.h>
 #include "json.hpp"
 #include "Mapper.h"
 
@@ -41,7 +42,6 @@ namespace {
     }
 
     bool runOnFunction(Function &t_F) override {
-
       // Initializes input parameters.
 			string filename;
       int rows                      = 4;

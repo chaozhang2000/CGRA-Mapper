@@ -1,9 +1,0 @@
-0 0 0 0 
-0 0 0 0 
-0 0 0 0 
-0 0 1 1 
-links = 2
-4nodes = 0
-3nodes = 0
-2nodes = 0
-1nodes = 2

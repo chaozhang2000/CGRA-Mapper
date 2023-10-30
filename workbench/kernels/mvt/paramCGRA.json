@@ -1,5 +1,5 @@
 {
-"filename": "0x0003.txt","rc": {
+"filename": "0x36.txt","rc": {
 "rows": 4,
 "cols": 4
 },
@@ -8,7 +8,9 @@
 "disabled": true
 },
 "1": {
-"disabled": true
+"disabled": false,
+"supportAllFUs": true,
+"accessMem": true
 },
 "2": {
 "disabled": false,
@@ -16,9 +18,7 @@
 "accessMem": true
 },
 "3": {
-"disabled": false,
-"supportAllFUs": true,
-"accessMem": true
+"disabled": true
 },
 "4": {
 "disabled": true
@@ -27,10 +27,14 @@
 "disabled": true
 },
 "6": {
-"disabled": true
+"disabled": false,
+"supportAllFUs": true,
+"accessMem": true
 },
 "7": {
-"disabled": true
+"disabled": false,
+"supportAllFUs": true,
+"accessMem": true
 },
 "8": {
 "disabled": true
@@ -59,11 +63,27 @@
 },
 "links": [
 {
-"srcTile":2,
-"dstTile":3
+"srcTile":1,
+"dstTile":2
 },
 {
-"srcTile":3,
+"srcTile":2,
+"dstTile":6
+},
+{
+"srcTile":2,
+"dstTile":1
+},
+{
+"srcTile":6,
 "dstTile":2
+},
+{
+"srcTile":6,
+"dstTile":7
+},
+{
+"srcTile":7,
+"dstTile":6
 }]
 }

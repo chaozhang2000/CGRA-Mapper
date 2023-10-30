@@ -18,6 +18,8 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <unistd.h>
+#include <cstdio>
 
 //#include <nlohmann/json.hpp>
 using json = nlohmann::json;
@@ -1205,7 +1207,18 @@ int Mapper::heuristicMap(CGRA* t_cgra, DFG* t_dfg, int t_II,
   while (1) {
     cout<<"----------------------------------------\n";
     cout<<"[DEBUG] start heuristic algorithm with II="<<t_II<<"\n";
-		if(t_II >= 50){cout<<"II>50 break";assert(0);}
+		if(t_II >= 50){
+						cout<<"II>50 break";
+						ifstream src("./output/"+m_filename);
+						ofstream dst("./err/"+m_filename);
+						if(src&&dst){
+										dst << src.rdbuf();
+										src.close();
+										dst.close();
+										string filename ="./output/"+m_filename; 
+										remove(filename.c_str());
+						}
+						assert(0);}
     int cycle = 0;
     constructMRRG(t_dfg, t_cgra, t_II);
     fail = false;
