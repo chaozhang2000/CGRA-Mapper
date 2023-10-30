@@ -1,12 +1,6 @@
-    res = [["insertelement16","phi0","fmul35"],
-        ["or2","insertelement17","getelementptr4","or1"],
-        ["add39","or3","getelementptr26","fadd36"],
-        ["bitcast5","bitcast24","store38"],
-        ["load6","bitcast27","insertelement18","icmp40"],
-        ["load28","bitcast37","fmul22","br41"],
-        ["getelementptr9","getelementptr7","load19","getelementptr8"],
-        ["getelementptr10","getelementptr29","load11","load32"],
-        ["load14","insertelement20","load12","bitcast30","load13"],
-        ["fadd23","insertelement33","load31","insertelement15"],
-        ["store25","shufflevector34","shufflevector21"],
-        ["insertelement16","phi0","fmul35"]]
+    res = [["store38","shufflevector21","insertelement16","shufflevector34","phi0","getelementptr7","fadd23"],
+        ["getelementptr29","or3","getelementptr8","getelementptr9","or1","getelementptr4","store25","getelementptr10","getelementptr26","load19"],
+        ["load11","load32","or2","bitcast24","load12","bitcast5","add39","load13","bitcast27","bitcast37"],
+        ["fmul35","insertelement17","load6","load14","icmp40","bitcast30","load28","insertelement18"],
+        ["insertelement20","fadd36","insertelement15","insertelement33","br41","load31","fmul22"],
+        ["store38","shufflevector21","insertelement16","shufflevector34","phi0","getelementptr7","fadd23"]]

@@ -1,11 +1,13 @@
 {
-"filename": "0x36.txt","rc": {
+"filename": "0xe.txt","rc": {
 "rows": 4,
 "cols": 4
 },
 "tiles": {
 "0": {
-"disabled": true
+"disabled": false,
+"supportAllFUs": true,
+"accessMem": true
 },
 "1": {
 "disabled": false,
@@ -27,14 +29,10 @@
 "disabled": true
 },
 "6": {
-"disabled": false,
-"supportAllFUs": true,
-"accessMem": true
+"disabled": true
 },
 "7": {
-"disabled": false,
-"supportAllFUs": true,
-"accessMem": true
+"disabled": true
 },
 "8": {
 "disabled": true
@@ -63,27 +61,19 @@
 },
 "links": [
 {
+"srcTile":0,
+"dstTile":1
+},
+{
+"srcTile":1,
+"dstTile":0
+},
+{
 "srcTile":1,
 "dstTile":2
 },
 {
 "srcTile":2,
-"dstTile":6
-},
-{
-"srcTile":2,
 "dstTile":1
-},
-{
-"srcTile":6,
-"dstTile":2
-},
-{
-"srcTile":6,
-"dstTile":7
-},
-{
-"srcTile":7,
-"dstTile":6
 }]
 }
