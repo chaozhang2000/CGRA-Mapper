@@ -212,6 +212,8 @@ bool CGRANode::canSupport(DFGNode* t_opt) {
       (t_opt->isCmp()        and canCmp()) ){ 
     return true;
   }
+	//TODO: opt not meet these opt will cause errors
+	//should print the infomation and stop the program
   return false;
 }
 

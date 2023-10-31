@@ -366,7 +366,7 @@ bool Mapper::schedule(CGRA* t_cgra, DFG* t_dfg, int t_II,
 	//this step is not necessory.just convert the map<CGRANode*,int> to map<int,CGRANode*>
   map<int, CGRANode*>* reorderPath = getReorderPath(t_path);
 //  // Since cycle on path increases gradually, re-order will not miss anything.
-	//这里创建了一个反向迭代器，用来从最后一个元素开始反向遍历路径。
+	//这里创建了一个反向迭代器，用来从最后一个元素开始反向遍历路径,路径的最后一个其实就是本次要布的DFG节点。
   map<int, CGRANode*>::reverse_iterator ri = reorderPath->rbegin();
   CGRANode* fu = (*ri).second;
   cout<<"[DEBUG] schedule dfg node["<<t_dfg->getID(t_dfgNode)<<"] onto fu["<<fu->getID()<<"] at cycle "<<(*t_path)[fu]<<" within II: "<<t_II<<endl;
@@ -385,8 +385,9 @@ bool Mapper::schedule(CGRA* t_cgra, DFG* t_dfg, int t_II,
     if (next != reorderPath->end())
       ++next;
   }
-  map<int, CGRANode*>::reverse_iterator riter=reorderPath->rbegin();
+  map<int, CGRANode*>::reverse_iterator riter=reorderPath->rbegin();//要布的DFG和在path中对应的cycle
   bool generatedOut = true;
+	//对path从头向后布，直到最后的DFGNode,path的begin是上一个DFGNode
   for (map<int, CGRANode*>::iterator iter=reorderPath->begin();
       iter!=reorderPath->end(); ++iter) {
     if (iter != reorderPath->begin()) {
@@ -397,9 +398,13 @@ bool Mapper::schedule(CGRA* t_cgra, DFG* t_dfg, int t_II,
       // Distinguish the bypassed and utilized data delivery on xbar.
       bool isBypass = false;
       int duration = (t_II+((*iter).first-(*previousIter).first)%t_II)%t_II;
+			//Bypass的判断条件是当前遍历的路径上的CGRANode不是最终目标DFGNode要布到的CGRANode，且路径上上一个节点的cycle+1,等于当前节点的cycle.
+			//总结，不是直接到最终的CGRANode,且周期只差1被认为是Bypass.
+			//TODO:我认为这里考虑不完全，如果下个节点不是目标节点，但是cycle差大于1怎么算，duration不应该是else中的内容吧。
       if ((*riter).second != (*iter).second and(*previousIter).first+1 == (*iter).first)
         isBypass = true;
       else
+				//应该是被认为除去上面的情况就是直接从路径的倒数第二个节点到最后一个节点
         duration = (m_mappingTiming[t_dfgNode]-(*previousIter).first)%t_II;
       l->occupy(srcCGRANode->getMappedDFGNode(srcCycle),
                 (*previousIter).first, duration,
@@ -411,8 +416,10 @@ bool Mapper::schedule(CGRA* t_cgra, DFG* t_dfg, int t_II,
     }
     previousIter = iter;
   }
+	//对path布完，可以删除路径了
   delete reorderPath;
 
+	//考虑是否目标DFG节点的父节点是否已经被布，如果已被布则要进行操作
   // Try to route the path with other predecessors.
   // TODO: should consider the timing for static CGRA (two branches should
   //       joint at the same time or the register file size equals to 1)
@@ -433,6 +440,7 @@ bool Mapper::schedule(CGRA* t_cgra, DFG* t_dfg, int t_II,
     }
   }
 
+	//考虑是否目标DFG节点的子节点已被布，如果已被布则要进行操作。
   // Try to route the path with the mapped successors that are only in
   // certain cycle.
   for (DFGNode* node: *t_dfgNode->getSuccNodes()) {
