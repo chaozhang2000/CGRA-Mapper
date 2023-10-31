@@ -1,0 +1,23 @@
+{
+  "kernel"                : "kernel",
+	"targetLoopsID"					: [0],
+  "targetFunction"        : false,
+  "targetNested"          : false,
+  "doCGRAMapping"         : true,
+  "row"                   : 4,
+  "column"                : 4,
+  "precisionAware"        : true,
+  "heterogeneity"         : false,
+  "isTrimmedDemo"         : true,
+  "heuristicMapping"      : true,
+  "parameterizableCGRA"   : true,
+  "diagonalVectorization" : false,
+  "bypassConstraint"      : 4,
+  "isStaticElasticCGRA"   : false,
+  "ctrlMemConstraint"     : 200,
+  "regConstraint"         : 8,
+  "additionalFunc"        : {
+                              "load" : [0,4,8,12],
+                              "store": [0,4,8,12]
+                            }
+}

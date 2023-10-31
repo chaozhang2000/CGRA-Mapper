@@ -1,5 +1,5 @@
 {
-  "kernel"                : "kernel_mvt",
+  "kernel"                : "kernel",
 	"targetLoopsID"					: [0],
   "targetFunction"        : false,
   "targetNested"          : false,

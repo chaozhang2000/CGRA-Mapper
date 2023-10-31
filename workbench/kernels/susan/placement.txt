@@ -1,0 +1,12 @@
+    res = [["add21","phi0","getelementptr5"],
+        ["phi4","add8"],
+        ["icmp22","sext12"],
+        ["br23","sub13"],
+        ["phi2","phi1","getelementptr14"],
+        ["load6","getelementptr9","load10","load15"],
+        ["zext7","zext11","zext16"],
+        ["mul17"],
+        ["add18"],
+        ["phi3","mul19"],
+        ["add20"],
+        ["add21","phi0","getelementptr5"]]

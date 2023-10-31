@@ -1,0 +1,81 @@
+PlacementDone_Init:
+    res["add21"] = 0
+    res["phi4"] = 0
+    res["getelementptr5"] = 0
+    res["icmp22"] = 0
+    res["br23"] = 0
+    res["phi1"] = 0
+    res["phi2"] = 0
+    res["load6"] = 0
+    res["getelementptr9"] = 0
+    res["load10"] = 0
+    res["zext7"] = 0
+    res["zext11"] = 0
+    res["mul17"] = 0
+    res["add18"] = 0
+    res["mul19"] = 0
+    res["phi3"] = 0
+    res["add20"] = 0
+    res["phi0"] = 0
+    res["add8"] = 0
+    res["sext12"] = 0
+    res["sub13"] = 0
+    res["getelementptr14"] = 0
+    res["load15"] = 0
+    res["zext16"] = 0
+
+
+
+DependencyPredecessor_Init:
+    res["add21"] = ["phi4"]
+    res["phi4"] = ["add21", "br23"]
+    res["getelementptr5"] = ["phi2"]
+    res["icmp22"] = ["phi4", "br23"]
+    res["br23"] = ["icmp22"]
+    res["phi1"] = ["getelementptr9", "br23"]
+    res["phi2"] = ["getelementptr5", "br23"]
+    res["load6"] = ["phi2"]
+    res["getelementptr9"] = ["phi1"]
+    res["load10"] = ["phi1"]
+    res["zext7"] = ["load6"]
+    res["zext11"] = ["load10"]
+    res["mul17"] = ["zext16", "zext11"]
+    res["add18"] = ["mul17", "phi3"]
+    res["mul19"] = ["mul17", "add8"]
+    res["phi3"] = ["add18", "br23"]
+    res["add20"] = ["mul19", "phi0"]
+    res["phi0"] = ["add20", "br23"]
+    res["add8"] = ["phi0", "zext7"]
+    res["sext12"] = ["add8"]
+    res["sub13"] = ["sext12"]
+    res["getelementptr14"] = ["sub13", "br23"]
+    res["load15"] = ["getelementptr14"]
+    res["zext16"] = ["load15"]
+
+
+
+DependencySuccessor_Init:
+    res["add21"] = ["phi4"]
+    res["phi4"] = ["add21", "icmp22"]
+    res["getelementptr5"] = ["phi2"]
+    res["icmp22"] = ["br23"]
+    res["br23"] = ["phi0", "phi1", "phi2", "phi3", "phi4", "getelementptr14", "icmp22"]
+    res["phi1"] = ["getelementptr9", "load10"]
+    res["phi2"] = ["getelementptr5", "load6"]
+    res["load6"] = ["zext7"]
+    res["getelementptr9"] = ["phi1"]
+    res["load10"] = ["zext11"]
+    res["zext7"] = ["add8"]
+    res["zext11"] = ["mul17"]
+    res["mul17"] = ["add18", "mul19"]
+    res["add18"] = ["phi3"]
+    res["mul19"] = ["add20"]
+    res["phi3"] = ["add18"]
+    res["add20"] = ["phi0"]
+    res["phi0"] = ["add8", "add20"]
+    res["add8"] = ["sext12", "mul19"]
+    res["sext12"] = ["sub13"]
+    res["sub13"] = ["getelementptr14"]
+    res["getelementptr14"] = ["load15"]
+    res["load15"] = ["zext16"]
+    res["zext16"] = ["mul17"]

@@ -1,0 +1,12 @@
+0 0 0 0 
+0 0 0 0 
+0 0 0 0 
+0 0 0 1 
+tiles = 1
+links = 0
+4nodes = 0
+3nodes = 0
+2nodes = 0
+1nodes = 0
+
+II = 42

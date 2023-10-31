@@ -1,0 +1,66 @@
+PlacementDone_Init:
+    res["phi0"] = 0
+    res["getelementptr1"] = 0
+    res["getelementptr11"] = 0
+    res["add16"] = 0
+    res["load2"] = 0
+    res["load12"] = 0
+    res["icmp17"] = 0
+    res["br18"] = 0
+    res["load3"] = 0
+    res["getelementptr4"] = 0
+    res["load9"] = 0
+    res["load5"] = 0
+    res["load10"] = 0
+    res["fmul6"] = 0
+    res["fmul13"] = 0
+    res["fadd7"] = 0
+    res["fadd14"] = 0
+    res["store8"] = 0
+    res["store15"] = 0
+
+
+
+DependencyPredecessor_Init:
+    res["phi0"] = ["add16", "br18"]
+    res["getelementptr1"] = ["phi0"]
+    res["getelementptr11"] = ["phi0"]
+    res["add16"] = ["phi0"]
+    res["load2"] = ["getelementptr1"]
+    res["load12"] = ["getelementptr11"]
+    res["icmp17"] = ["add16", "br18"]
+    res["br18"] = ["icmp17"]
+    res["load3"] = ["br18"]
+    res["getelementptr4"] = ["phi0", "br18"]
+    res["load9"] = ["br18"]
+    res["load5"] = ["getelementptr4"]
+    res["load10"] = ["getelementptr4"]
+    res["fmul6"] = ["load3", "load5"]
+    res["fmul13"] = ["load10", "load12"]
+    res["fadd7"] = ["load2", "fmul6"]
+    res["fadd14"] = ["load9", "fmul13"]
+    res["store8"] = ["fadd7", "getelementptr1"]
+    res["store15"] = ["fadd14", "br18"]
+
+
+
+DependencySuccessor_Init:
+    res["phi0"] = ["getelementptr1", "getelementptr4", "getelementptr11", "add16"]
+    res["getelementptr1"] = ["load2", "store8"]
+    res["getelementptr11"] = ["load12"]
+    res["add16"] = ["phi0", "icmp17"]
+    res["load2"] = ["fadd7"]
+    res["load12"] = ["fmul13"]
+    res["icmp17"] = ["br18"]
+    res["br18"] = ["phi0", "load3", "getelementptr4", "load9", "store15", "icmp17"]
+    res["load3"] = ["fmul6"]
+    res["getelementptr4"] = ["load5", "load10"]
+    res["load9"] = ["fadd14"]
+    res["load5"] = ["fmul6"]
+    res["load10"] = ["fmul13"]
+    res["fmul6"] = ["fadd7"]
+    res["fmul13"] = ["fadd14"]
+    res["fadd7"] = ["store8"]
+    res["fadd14"] = ["store15"]
+    res["store8"] = ["N/A"]
+    res["store15"] = ["N/A"]

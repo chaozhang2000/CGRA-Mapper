@@ -1,0 +1,1398 @@
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+[function 'usage' is not in our target list]
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+[function 'getint' is not in our target list]
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+[function 'get_image' is not in our target list]
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+[function 'put_image' is not in our target list]
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+[function 'int_to_uchar' is not in our target list]
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+[function 'setup_brightness_lut' is not in our target list]
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+[function 'susan_principle' is not in our target list]
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+[function 'susan_principle_small' is not in our target list]
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+[function 'median' is not in our target list]
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+[function 'enlarge' is not in our target list]
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+==================================
+[function 'susan_smoothing' is one of our targets]
+*** current function: susan_smoothing
+ (ID: 0)
+ (ID: 1)
+ (ID: 2)
+ (ID: 3)
+ (ID: 4)
+ (ID: 5)
+ (ID: 6)
+ (ID: 7)
+ (ID: 8)
+ (ID: 9)
+ (ID: 10)
+ (ID: 11)
+ (ID: 12)
+ (ID: 13)
+ (ID: 14)
+ (ID: 15)
+ (ID: 16)
+ (ID: 17)
+ (ID: 18)
+ (ID: 19)
+ (ID: 20)
+ (ID: 21)
+ (ID: 22)
+ (ID: 23)
+==================================
+==================================
+==================================
+==================================
+==================================
+==================================
+==================================
+[reorder DFG along with the longest path]
+==================================
+[show opcode count]
+add : 4
+br : 1
+getelementptr : 3
+icmp : 1
+load : 3
+mul : 2
+phi : 5
+sext : 1
+sub : 1
+zext : 3
+DFG node count: 24; DFG edge count: 36; SIMD node count: 0
+==================================
+[generate dot for DFG]
+==================================
+[generate JSON for DFG]
+==================================
+[ResMII: 2]
+... number of cycles: 7 ...
+==================================
+[RecMII: 10]
+==================================
+[heuristic]
+----------------------------------------
+[DEBUG] start heuristic algorithm with II=10
+[DEBUG] schedule dfg node[21] onto fu[5] at cycle 0 within II: 10
+[DEBUG] setDFGNode 21 onto CGRANode 5 at cycle: 0
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[4] onto fu[6] at cycle 1 within II: 10
+[DEBUG] setDFGNode 4 onto CGRANode 6 at cycle: 1
+[DEBUG] in allocateReg() t_cycle: 0; i: 0 CGRA node: 6; link: 2 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[5]-->[6] (bypass:0) dfgNode: 21 at cycle 0
+[DEBUG] skip predecessor routing -- dfgNode: 21
+[DEBUG] in shareSameCycle is true: node 4
+[DEBUG] tryToRoute -- srcDFGNode: 4, srcCGRANode: 6; dstDFGNode: 21, dstCGRANode: 5; backEdge: 1
+[DEBUG] in shareSameCycle is true: node 21
+[DEBUG] check route size: 2
+[DEBUG] reset duration: 9 t_dstCycle: 0 previous: 1 II: 10
+[DEBUG] in allocateReg() t_cycle: 1; i: 0 CGRA node: 5; link: 3 duration 9
+[DEBUG] done reg allocation
+[DEBUG] occupy link[6]-->[5] (bypass:0) dfgNode: 4 at cycle 1
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[5] onto fu[10] at cycle 0 within II: 10
+[DEBUG] setDFGNode 5 onto CGRANode 10 at cycle: 0
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[22] onto fu[5] at cycle 2 within II: 10
+[DEBUG] setDFGNode 22 onto CGRANode 5 at cycle: 2
+[DEBUG] in allocateReg() t_cycle: 1; i: 1 CGRA node: 5; link: 3 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[6]-->[5] (bypass:0) dfgNode: 4 at cycle 1
+[DEBUG] skip predecessor routing -- dfgNode: 4
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[23] onto fu[6] at cycle 3 within II: 10
+[DEBUG] setDFGNode 23 onto CGRANode 6 at cycle: 3
+[DEBUG] in allocateReg() t_cycle: 2; i: 0 CGRA node: 6; link: 2 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[5]-->[6] (bypass:0) dfgNode: 22 at cycle 2
+[DEBUG] skip predecessor routing -- dfgNode: 22
+[DEBUG] in shareSameCycle is true: node 23
+[DEBUG] tryToRoute -- srcDFGNode: 23, srcCGRANode: 6; dstDFGNode: 4, dstCGRANode: 6; backEdge: 1
+[DEBUG] in shareSameCycle is true: node 4
+[DEBUG] check route size: 1
+[DEBUG] allocate for local reg maintain... duration=8 last cycle: 3
+[DEBUG] in allocateReg() t_cycle: 3; i: 1 CGRA node: 6; link: 4 duration 8
+[DEBUG] done reg allocation
+[DEBUG] in shareSameCycle is true: node 23
+[DEBUG] tryToRoute -- srcDFGNode: 23, srcCGRANode: 6; dstDFGNode: 22, dstCGRANode: 5; backEdge: 1
+[DEBUG] in shareSameCycle is true: node 22
+[DEBUG] check route size: 2
+[DEBUG] reset duration: 9 t_dstCycle: 2 previous: 3 II: 10
+[DEBUG] in allocateReg() t_cycle: 3; i: 2 CGRA node: 5; link: 3 duration 9
+[DEBUG] done reg allocation
+[DEBUG] occupy link[6]-->[5] (bypass:0) dfgNode: 23 at cycle 3
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[1] onto fu[10] at cycle 4 within II: 10
+[DEBUG] setDFGNode 1 onto CGRANode 10 at cycle: 4
+[DEBUG] in allocateReg() t_cycle: 3; i: 0 CGRA node: 10; link: 1 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[6]-->[10] (bypass:0) dfgNode: 23 at cycle 3
+[DEBUG] skip predecessor routing -- dfgNode: 23
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[2] onto fu[2] at cycle 4 within II: 10
+[DEBUG] setDFGNode 2 onto CGRANode 2 at cycle: 4
+[DEBUG] in allocateReg() t_cycle: 3; i: 0 CGRA node: 2; link: 0 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[6]-->[2] (bypass:0) dfgNode: 23 at cycle 3
+[DEBUG] tryToRoute -- srcDFGNode: 5, srcCGRANode: 10; dstDFGNode: 2, dstCGRANode: 2; backEdge: 0
+[DEBUG] in shareSameCycle is true: node 2
+[DEBUG] check route size: 3
+[DEBUG] occupy link[10]-->[6] (bypass:1) dfgNode: 5 at cycle 0
+[DEBUG] reset duration: 3 t_dstCycle: 4 previous: 1 II: 10
+[DEBUG] in allocateReg() t_cycle: 1; i: 1 CGRA node: 2; link: 0 duration 3
+[DEBUG] done reg allocation
+[DEBUG] occupy link[6]-->[2] (bypass:0) dfgNode: 5 at cycle 1
+[DEBUG] skip predecessor routing -- dfgNode: 23
+[DEBUG] in shareSameCycle is true: node 2
+[DEBUG] tryToRoute -- srcDFGNode: 2, srcCGRANode: 2; dstDFGNode: 5, dstCGRANode: 10; backEdge: 1
+[DEBUG] in shareSameCycle is true: node 5
+[DEBUG] check route size: 3
+[DEBUG] occupy link[2]-->[6] (bypass:1) dfgNode: 2 at cycle 4
+[DEBUG] reset duration: 5 t_dstCycle: 0 previous: 5 II: 10
+[DEBUG] in allocateReg() t_cycle: 5; i: 0 CGRA node: 10; link: 1 duration 5
+[DEBUG] done reg allocation
+[DEBUG] occupy link[6]-->[10] (bypass:0) dfgNode: 2 at cycle 5
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[6] onto fu[1] at cycle 5 within II: 10
+[DEBUG] setDFGNode 6 onto CGRANode 1 at cycle: 5
+[DEBUG] in allocateReg() t_cycle: 4; i: 0 CGRA node: 1; link: 3 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[2]-->[1] (bypass:0) dfgNode: 2 at cycle 4
+[DEBUG] skip predecessor routing -- dfgNode: 2
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[9] onto fu[9] at cycle 5 within II: 10
+[DEBUG] setDFGNode 9 onto CGRANode 9 at cycle: 5
+[DEBUG] in allocateReg() t_cycle: 4; i: 0 CGRA node: 9; link: 3 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[10]-->[9] (bypass:0) dfgNode: 1 at cycle 4
+[DEBUG] skip predecessor routing -- dfgNode: 1
+[DEBUG] in shareSameCycle is true: node 9
+[DEBUG] tryToRoute -- srcDFGNode: 9, srcCGRANode: 9; dstDFGNode: 1, dstCGRANode: 10; backEdge: 1
+[DEBUG] in shareSameCycle is true: node 1
+[DEBUG] check route size: 2
+[DEBUG] reset duration: 9 t_dstCycle: 4 previous: 5 II: 10
+[DEBUG] in allocateReg() t_cycle: 5; i: 1 CGRA node: 10; link: 2 duration 9
+[DEBUG] done reg allocation
+[DEBUG] occupy link[9]-->[10] (bypass:0) dfgNode: 9 at cycle 5
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[10] onto fu[11] at cycle 5 within II: 10
+[DEBUG] setDFGNode 10 onto CGRANode 11 at cycle: 5
+[DEBUG] in allocateReg() t_cycle: 4; i: 0 CGRA node: 11; link: 2 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[10]-->[11] (bypass:0) dfgNode: 1 at cycle 4
+[DEBUG] skip predecessor routing -- dfgNode: 1
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[7] onto fu[2] at cycle 6 within II: 10
+[DEBUG] setDFGNode 7 onto CGRANode 2 at cycle: 6
+[DEBUG] in allocateReg() t_cycle: 5; i: 0 CGRA node: 2; link: 2 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[1]-->[2] (bypass:0) dfgNode: 6 at cycle 5
+[DEBUG] skip predecessor routing -- dfgNode: 6
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[11] onto fu[7] at cycle 6 within II: 10
+[DEBUG] setDFGNode 11 onto CGRANode 7 at cycle: 6
+[DEBUG] in allocateReg() t_cycle: 5; i: 0 CGRA node: 7; link: 0 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[11]-->[7] (bypass:0) dfgNode: 10 at cycle 5
+[DEBUG] skip predecessor routing -- dfgNode: 10
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[17] onto fu[6] at cycle 7 within II: 10
+[DEBUG] setDFGNode 17 onto CGRANode 6 at cycle: 7
+[DEBUG] in allocateReg() t_cycle: 6; i: 0 CGRA node: 6; link: 3 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[7]-->[6] (bypass:0) dfgNode: 11 at cycle 6
+[DEBUG] skip predecessor routing -- dfgNode: 11
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[18] onto fu[7] at cycle 8 within II: 10
+[DEBUG] setDFGNode 18 onto CGRANode 7 at cycle: 8
+[DEBUG] in allocateReg() t_cycle: 7; i: 0 CGRA node: 7; link: 2 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[6]-->[7] (bypass:0) dfgNode: 17 at cycle 7
+[DEBUG] skip predecessor routing -- dfgNode: 17
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[19] onto fu[9] at cycle 9 within II: 10
+[DEBUG] setDFGNode 19 onto CGRANode 9 at cycle: 9
+[DEBUG] occupy link[6]-->[5] (bypass:1) dfgNode: 17 at cycle 7
+[DEBUG] in allocateReg() t_cycle: 8; i: 0 CGRA node: 9; link: 1 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[5]-->[9] (bypass:0) dfgNode: 17 at cycle 8
+[DEBUG] skip predecessor routing -- dfgNode: 17
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[3] onto fu[6] at cycle 9 within II: 10
+[DEBUG] setDFGNode 3 onto CGRANode 6 at cycle: 9
+[DEBUG] in allocateReg() t_cycle: 8; i: 0 CGRA node: 6; link: 3 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[7]-->[6] (bypass:0) dfgNode: 18 at cycle 8
+[DEBUG] skip predecessor routing -- dfgNode: 18
+[DEBUG] tryToRoute -- srcDFGNode: 23, srcCGRANode: 6; dstDFGNode: 3, dstCGRANode: 6; backEdge: 0
+[DEBUG] check route size: 1
+[DEBUG] allocate for local reg maintain... duration=6 last cycle: 3
+[DEBUG] in allocateReg() t_cycle: 3; i: 2 CGRA node: 6; link: 4 duration 6
+[DEBUG] done reg allocation
+[DEBUG] in shareSameCycle is true: node 3
+[DEBUG] tryToRoute -- srcDFGNode: 3, srcCGRANode: 6; dstDFGNode: 18, dstCGRANode: 7; backEdge: 1
+[DEBUG] in shareSameCycle is true: node 18
+[DEBUG] check route size: 2
+[DEBUG] reset duration: 9 t_dstCycle: 8 previous: 9 II: 10
+[DEBUG] in allocateReg() t_cycle: 9; i: 1 CGRA node: 7; link: 2 duration 9
+[DEBUG] done reg allocation
+[DEBUG] occupy link[6]-->[7] (bypass:0) dfgNode: 3 at cycle 9
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[20] onto fu[8] at cycle 10 within II: 10
+[DEBUG] setDFGNode 20 onto CGRANode 8 at cycle: 10
+[DEBUG] in allocateReg() t_cycle: 9; i: 0 CGRA node: 8; link: 3 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[9]-->[8] (bypass:0) dfgNode: 19 at cycle 9
+[DEBUG] skip predecessor routing -- dfgNode: 19
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[0] onto fu[10] at cycle 12 within II: 10
+[DEBUG] setDFGNode 0 onto CGRANode 10 at cycle: 12
+[DEBUG] occupy link[8]-->[9] (bypass:1) dfgNode: 20 at cycle 10
+[DEBUG] in allocateReg() t_cycle: 11; i: 0 CGRA node: 10; link: 2 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[9]-->[10] (bypass:0) dfgNode: 20 at cycle 11
+[DEBUG] skip predecessor routing -- dfgNode: 20
+[DEBUG] tryToRoute -- srcDFGNode: 23, srcCGRANode: 6; dstDFGNode: 0, dstCGRANode: 10; backEdge: 0
+[DEBUG] check route size: 2
+[DEBUG] reset duration: 9 t_dstCycle: 12 previous: 3 II: 10
+[DEBUG] in allocateReg() t_cycle: 3; i: 2 CGRA node: 10; link: 1 duration 9
+[DEBUG] done reg allocation
+[DEBUG] occupy link[6]-->[10] (bypass:0) dfgNode: 23 at cycle 3
+[DEBUG] in shareSameCycle is true: node 0
+[DEBUG] tryToRoute -- srcDFGNode: 0, srcCGRANode: 10; dstDFGNode: 20, dstCGRANode: 8; backEdge: 1
+[DEBUG] in shareSameCycle is true: node 20
+[DEBUG] check route size: 3
+[DEBUG] occupy link[10]-->[9] (bypass:1) dfgNode: 0 at cycle 12
+[DEBUG] reset duration: 7 t_dstCycle: 10 previous: 13 II: 10
+[DEBUG] in allocateReg() t_cycle: 13; i: 1 CGRA node: 8; link: 3 duration 7
+[DEBUG] done reg allocation
+[DEBUG] occupy link[9]-->[8] (bypass:0) dfgNode: 0 at cycle 13
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[8] onto fu[14] at cycle 13 within II: 10
+[DEBUG] setDFGNode 8 onto CGRANode 14 at cycle: 13
+[DEBUG] in allocateReg() t_cycle: 12; i: 0 CGRA node: 14; link: 1 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[10]-->[14] (bypass:0) dfgNode: 0 at cycle 12
+[DEBUG] skip predecessor routing -- dfgNode: 0
+[DEBUG] tryToRoute -- srcDFGNode: 7, srcCGRANode: 2; dstDFGNode: 8, dstCGRANode: 14; backEdge: 0
+[DEBUG] check route size: 4
+[DEBUG] occupy link[2]-->[6] (bypass:1) dfgNode: 7 at cycle 6
+[DEBUG] occupy link[6]-->[10] (bypass:1) dfgNode: 7 at cycle 7
+[DEBUG] reset duration: 5 t_dstCycle: 13 previous: 8 II: 10
+[DEBUG] in allocateReg() t_cycle: 8; i: 1 CGRA node: 14; link: 1 duration 5
+[DEBUG] done reg allocation
+[DEBUG] occupy link[10]-->[14] (bypass:0) dfgNode: 7 at cycle 8
+[DEBUG] in shareSameCycle is true: node 8
+[DEBUG] tryToRoute -- srcDFGNode: 8, srcCGRANode: 14; dstDFGNode: 19, dstCGRANode: 9; backEdge: 1
+[DEBUG] in shareSameCycle is true: node 19
+[DEBUG] check route size: 3
+[DEBUG] occupy link[14]-->[13] (bypass:1) dfgNode: 8 at cycle 13
+[DEBUG] reset duration: 5 t_dstCycle: 9 previous: 14 II: 10
+[DEBUG] in allocateReg() t_cycle: 14; i: 1 CGRA node: 9; link: 0 duration 5
+[DEBUG] done reg allocation
+[DEBUG] occupy link[13]-->[9] (bypass:0) dfgNode: 8 at cycle 14
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[12] onto fu[13] at cycle 14 within II: 10
+[DEBUG] setDFGNode 12 onto CGRANode 13 at cycle: 14
+[DEBUG] in allocateReg() t_cycle: 13; i: 0 CGRA node: 13; link: 3 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[14]-->[13] (bypass:0) dfgNode: 8 at cycle 13
+[DEBUG] skip predecessor routing -- dfgNode: 8
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[13] onto fu[14] at cycle 15 within II: 10
+[DEBUG] setDFGNode 13 onto CGRANode 14 at cycle: 15
+[DEBUG] in allocateReg() t_cycle: 14; i: 0 CGRA node: 14; link: 2 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[13]-->[14] (bypass:0) dfgNode: 12 at cycle 14
+[DEBUG] skip predecessor routing -- dfgNode: 12
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[14] onto fu[13] at cycle 16 within II: 10
+[DEBUG] setDFGNode 14 onto CGRANode 13 at cycle: 16
+[DEBUG] in allocateReg() t_cycle: 15; i: 0 CGRA node: 13; link: 3 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[14]-->[13] (bypass:0) dfgNode: 13 at cycle 15
+[DEBUG] skip predecessor routing -- dfgNode: 13
+[DEBUG] tryToRoute -- srcDFGNode: 23, srcCGRANode: 6; dstDFGNode: 14, dstCGRANode: 13; backEdge: 0
+[DEBUG] check route size: 4
+[DEBUG] occupy link[6]-->[5] (bypass:1) dfgNode: 23 at cycle 3
+[DEBUG] occupy link[5]-->[9] (bypass:1) dfgNode: 23 at cycle 4
+[DEBUG] reset duration: 1 t_dstCycle: 16 previous: 5 II: 10
+[DEBUG] in allocateReg() t_cycle: 5; i: 1 CGRA node: 13; link: 1 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[9]-->[13] (bypass:0) dfgNode: 23 at cycle 5
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[15] onto fu[9] at cycle 17 within II: 10
+[DEBUG] setDFGNode 15 onto CGRANode 9 at cycle: 17
+[DEBUG] in allocateReg() t_cycle: 16; i: 0 CGRA node: 9; link: 0 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[13]-->[9] (bypass:0) dfgNode: 14 at cycle 16
+[DEBUG] skip predecessor routing -- dfgNode: 14
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[16] onto fu[8] at cycle 18 within II: 10
+[DEBUG] setDFGNode 16 onto CGRANode 8 at cycle: 18
+[DEBUG] in allocateReg() t_cycle: 17; i: 0 CGRA node: 8; link: 3 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[9]-->[8] (bypass:0) dfgNode: 15 at cycle 17
+[DEBUG] skip predecessor routing -- dfgNode: 15
+[DEBUG] in shareSameCycle is true: node 16
+[DEBUG] tryToRoute -- srcDFGNode: 16, srcCGRANode: 8; dstDFGNode: 17, dstCGRANode: 6; backEdge: 1
+[DEBUG] in shareSameCycle is true: node 17
+[DEBUG] cannot route due to II is violated for backward cycle
+DEBUG target DFG node: 16 on fu: 8 failed, mapped succ DFG node: 17; return false
+[DEBUG] fail1 in schedule() II: 10
+[DEBUG] the failed path -- cycle: 18 CGRANode: 8
+[DEBUG] the failed path -- cycle: 17 CGRANode: 9
+----------------------------------------
+[DEBUG] start heuristic algorithm with II=11
+[DEBUG] schedule dfg node[21] onto fu[5] at cycle 0 within II: 11
+[DEBUG] setDFGNode 21 onto CGRANode 5 at cycle: 0
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[4] onto fu[6] at cycle 1 within II: 11
+[DEBUG] setDFGNode 4 onto CGRANode 6 at cycle: 1
+[DEBUG] in allocateReg() t_cycle: 0; i: 0 CGRA node: 6; link: 2 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[5]-->[6] (bypass:0) dfgNode: 21 at cycle 0
+[DEBUG] skip predecessor routing -- dfgNode: 21
+[DEBUG] in shareSameCycle is true: node 4
+[DEBUG] tryToRoute -- srcDFGNode: 4, srcCGRANode: 6; dstDFGNode: 21, dstCGRANode: 5; backEdge: 1
+[DEBUG] in shareSameCycle is true: node 21
+[DEBUG] check route size: 2
+[DEBUG] reset duration: 10 t_dstCycle: 0 previous: 1 II: 11
+[DEBUG] in allocateReg() t_cycle: 1; i: 0 CGRA node: 5; link: 3 duration 10
+[DEBUG] done reg allocation
+[DEBUG] occupy link[6]-->[5] (bypass:0) dfgNode: 4 at cycle 1
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[5] onto fu[9] at cycle 0 within II: 11
+[DEBUG] setDFGNode 5 onto CGRANode 9 at cycle: 0
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[22] onto fu[5] at cycle 2 within II: 11
+[DEBUG] setDFGNode 22 onto CGRANode 5 at cycle: 2
+[DEBUG] in allocateReg() t_cycle: 1; i: 1 CGRA node: 5; link: 3 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[6]-->[5] (bypass:0) dfgNode: 4 at cycle 1
+[DEBUG] skip predecessor routing -- dfgNode: 4
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[23] onto fu[6] at cycle 3 within II: 11
+[DEBUG] setDFGNode 23 onto CGRANode 6 at cycle: 3
+[DEBUG] in allocateReg() t_cycle: 2; i: 0 CGRA node: 6; link: 2 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[5]-->[6] (bypass:0) dfgNode: 22 at cycle 2
+[DEBUG] skip predecessor routing -- dfgNode: 22
+[DEBUG] in shareSameCycle is true: node 23
+[DEBUG] tryToRoute -- srcDFGNode: 23, srcCGRANode: 6; dstDFGNode: 4, dstCGRANode: 6; backEdge: 1
+[DEBUG] in shareSameCycle is true: node 4
+[DEBUG] check route size: 1
+[DEBUG] allocate for local reg maintain... duration=9 last cycle: 3
+[DEBUG] in allocateReg() t_cycle: 3; i: 1 CGRA node: 6; link: 4 duration 9
+[DEBUG] done reg allocation
+[DEBUG] in shareSameCycle is true: node 23
+[DEBUG] tryToRoute -- srcDFGNode: 23, srcCGRANode: 6; dstDFGNode: 22, dstCGRANode: 5; backEdge: 1
+[DEBUG] in shareSameCycle is true: node 22
+[DEBUG] check route size: 2
+[DEBUG] reset duration: 10 t_dstCycle: 2 previous: 3 II: 11
+[DEBUG] in allocateReg() t_cycle: 3; i: 2 CGRA node: 5; link: 3 duration 10
+[DEBUG] done reg allocation
+[DEBUG] occupy link[6]-->[5] (bypass:0) dfgNode: 23 at cycle 3
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[1] onto fu[10] at cycle 4 within II: 11
+[DEBUG] setDFGNode 1 onto CGRANode 10 at cycle: 4
+[DEBUG] in allocateReg() t_cycle: 3; i: 0 CGRA node: 10; link: 1 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[6]-->[10] (bypass:0) dfgNode: 23 at cycle 3
+[DEBUG] skip predecessor routing -- dfgNode: 23
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[2] onto fu[2] at cycle 4 within II: 11
+[DEBUG] setDFGNode 2 onto CGRANode 2 at cycle: 4
+[DEBUG] in allocateReg() t_cycle: 3; i: 0 CGRA node: 2; link: 0 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[6]-->[2] (bypass:0) dfgNode: 23 at cycle 3
+[DEBUG] tryToRoute -- srcDFGNode: 5, srcCGRANode: 9; dstDFGNode: 2, dstCGRANode: 2; backEdge: 0
+[DEBUG] in shareSameCycle is true: node 2
+[DEBUG] check route size: 4
+[DEBUG] occupy link[9]-->[5] (bypass:1) dfgNode: 5 at cycle 0
+[DEBUG] occupy link[5]-->[1] (bypass:1) dfgNode: 5 at cycle 1
+[DEBUG] reset duration: 2 t_dstCycle: 4 previous: 2 II: 11
+[DEBUG] in allocateReg() t_cycle: 2; i: 1 CGRA node: 2; link: 2 duration 2
+[DEBUG] done reg allocation
+[DEBUG] occupy link[1]-->[2] (bypass:0) dfgNode: 5 at cycle 2
+[DEBUG] skip predecessor routing -- dfgNode: 23
+[DEBUG] in shareSameCycle is true: node 2
+[DEBUG] tryToRoute -- srcDFGNode: 2, srcCGRANode: 2; dstDFGNode: 5, dstCGRANode: 9; backEdge: 1
+[DEBUG] in shareSameCycle is true: node 5
+[DEBUG] check route size: 4
+[DEBUG] occupy link[2]-->[1] (bypass:1) dfgNode: 2 at cycle 4
+[DEBUG] occupy link[1]-->[5] (bypass:1) dfgNode: 2 at cycle 5
+[DEBUG] reset duration: 5 t_dstCycle: 0 previous: 6 II: 11
+[DEBUG] in allocateReg() t_cycle: 6; i: 0 CGRA node: 9; link: 1 duration 5
+[DEBUG] done reg allocation
+[DEBUG] occupy link[5]-->[9] (bypass:0) dfgNode: 2 at cycle 6
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[6] onto fu[1] at cycle 5 within II: 11
+[DEBUG] setDFGNode 6 onto CGRANode 1 at cycle: 5
+[DEBUG] in allocateReg() t_cycle: 4; i: 0 CGRA node: 1; link: 3 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[2]-->[1] (bypass:0) dfgNode: 2 at cycle 4
+[DEBUG] skip predecessor routing -- dfgNode: 2
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[9] onto fu[9] at cycle 5 within II: 11
+[DEBUG] setDFGNode 9 onto CGRANode 9 at cycle: 5
+[DEBUG] in allocateReg() t_cycle: 4; i: 0 CGRA node: 9; link: 3 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[10]-->[9] (bypass:0) dfgNode: 1 at cycle 4
+[DEBUG] skip predecessor routing -- dfgNode: 1
+[DEBUG] in shareSameCycle is true: node 9
+[DEBUG] tryToRoute -- srcDFGNode: 9, srcCGRANode: 9; dstDFGNode: 1, dstCGRANode: 10; backEdge: 1
+[DEBUG] in shareSameCycle is true: node 1
+[DEBUG] check route size: 2
+[DEBUG] reset duration: 10 t_dstCycle: 4 previous: 5 II: 11
+[DEBUG] in allocateReg() t_cycle: 5; i: 1 CGRA node: 10; link: 2 duration 10
+[DEBUG] done reg allocation
+[DEBUG] occupy link[9]-->[10] (bypass:0) dfgNode: 9 at cycle 5
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[10] onto fu[11] at cycle 5 within II: 11
+[DEBUG] setDFGNode 10 onto CGRANode 11 at cycle: 5
+[DEBUG] in allocateReg() t_cycle: 4; i: 0 CGRA node: 11; link: 2 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[10]-->[11] (bypass:0) dfgNode: 1 at cycle 4
+[DEBUG] skip predecessor routing -- dfgNode: 1
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[7] onto fu[2] at cycle 6 within II: 11
+[DEBUG] setDFGNode 7 onto CGRANode 2 at cycle: 6
+[DEBUG] in allocateReg() t_cycle: 5; i: 0 CGRA node: 2; link: 2 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[1]-->[2] (bypass:0) dfgNode: 6 at cycle 5
+[DEBUG] skip predecessor routing -- dfgNode: 6
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[11] onto fu[10] at cycle 6 within II: 11
+[DEBUG] setDFGNode 11 onto CGRANode 10 at cycle: 6
+[DEBUG] in allocateReg() t_cycle: 5; i: 0 CGRA node: 10; link: 3 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[11]-->[10] (bypass:0) dfgNode: 10 at cycle 5
+[DEBUG] skip predecessor routing -- dfgNode: 10
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[17] onto fu[6] at cycle 7 within II: 11
+[DEBUG] setDFGNode 17 onto CGRANode 6 at cycle: 7
+[DEBUG] in allocateReg() t_cycle: 6; i: 0 CGRA node: 6; link: 0 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[10]-->[6] (bypass:0) dfgNode: 11 at cycle 6
+[DEBUG] skip predecessor routing -- dfgNode: 11
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[18] onto fu[7] at cycle 8 within II: 11
+[DEBUG] setDFGNode 18 onto CGRANode 7 at cycle: 8
+[DEBUG] in allocateReg() t_cycle: 7; i: 0 CGRA node: 7; link: 2 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[6]-->[7] (bypass:0) dfgNode: 17 at cycle 7
+[DEBUG] skip predecessor routing -- dfgNode: 17
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[19] onto fu[11] at cycle 9 within II: 11
+[DEBUG] setDFGNode 19 onto CGRANode 11 at cycle: 9
+[DEBUG] occupy link[6]-->[7] (bypass:1) dfgNode: 17 at cycle 7
+[DEBUG] in allocateReg() t_cycle: 8; i: 0 CGRA node: 11; link: 1 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[7]-->[11] (bypass:0) dfgNode: 17 at cycle 8
+[DEBUG] skip predecessor routing -- dfgNode: 17
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[3] onto fu[6] at cycle 9 within II: 11
+[DEBUG] setDFGNode 3 onto CGRANode 6 at cycle: 9
+[DEBUG] in allocateReg() t_cycle: 8; i: 0 CGRA node: 6; link: 3 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[7]-->[6] (bypass:0) dfgNode: 18 at cycle 8
+[DEBUG] skip predecessor routing -- dfgNode: 18
+[DEBUG] tryToRoute -- srcDFGNode: 23, srcCGRANode: 6; dstDFGNode: 3, dstCGRANode: 6; backEdge: 0
+[DEBUG] check route size: 1
+[DEBUG] allocate for local reg maintain... duration=6 last cycle: 3
+[DEBUG] in allocateReg() t_cycle: 3; i: 2 CGRA node: 6; link: 4 duration 6
+[DEBUG] done reg allocation
+[DEBUG] in shareSameCycle is true: node 3
+[DEBUG] tryToRoute -- srcDFGNode: 3, srcCGRANode: 6; dstDFGNode: 18, dstCGRANode: 7; backEdge: 1
+[DEBUG] in shareSameCycle is true: node 18
+[DEBUG] check route size: 2
+[DEBUG] reset duration: 10 t_dstCycle: 8 previous: 9 II: 11
+[DEBUG] in allocateReg() t_cycle: 9; i: 1 CGRA node: 7; link: 2 duration 10
+[DEBUG] done reg allocation
+[DEBUG] occupy link[6]-->[7] (bypass:0) dfgNode: 3 at cycle 9
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[20] onto fu[7] at cycle 10 within II: 11
+[DEBUG] setDFGNode 20 onto CGRANode 7 at cycle: 10
+[DEBUG] in allocateReg() t_cycle: 9; i: 0 CGRA node: 7; link: 0 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[11]-->[7] (bypass:0) dfgNode: 19 at cycle 9
+[DEBUG] skip predecessor routing -- dfgNode: 19
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[0] onto fu[6] at cycle 11 within II: 11
+[DEBUG] setDFGNode 0 onto CGRANode 6 at cycle: 11
+[DEBUG] in allocateReg() t_cycle: 10; i: 0 CGRA node: 6; link: 3 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[7]-->[6] (bypass:0) dfgNode: 20 at cycle 10
+[DEBUG] skip predecessor routing -- dfgNode: 20
+[DEBUG] tryToRoute -- srcDFGNode: 23, srcCGRANode: 6; dstDFGNode: 0, dstCGRANode: 6; backEdge: 0
+[DEBUG] check route size: 1
+[DEBUG] allocate for local reg maintain... duration=8 last cycle: 3
+[DEBUG] in allocateReg() t_cycle: 3; i: 3 CGRA node: 6; link: 4 duration 8
+[DEBUG] done reg allocation
+[DEBUG] in shareSameCycle is true: node 0
+[DEBUG] tryToRoute -- srcDFGNode: 0, srcCGRANode: 6; dstDFGNode: 20, dstCGRANode: 7; backEdge: 1
+[DEBUG] in shareSameCycle is true: node 20
+[DEBUG] check route size: 2
+[DEBUG] reset duration: 10 t_dstCycle: 10 previous: 11 II: 11
+[DEBUG] in allocateReg() t_cycle: 11; i: 2 CGRA node: 7; link: 2 duration 10
+[DEBUG] done reg allocation
+[DEBUG] occupy link[6]-->[7] (bypass:0) dfgNode: 0 at cycle 11
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[8] onto fu[10] at cycle 12 within II: 11
+[DEBUG] setDFGNode 8 onto CGRANode 10 at cycle: 12
+[DEBUG] in allocateReg() t_cycle: 11; i: 0 CGRA node: 10; link: 1 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[6]-->[10] (bypass:0) dfgNode: 0 at cycle 11
+[DEBUG] skip predecessor routing -- dfgNode: 0
+[DEBUG] tryToRoute -- srcDFGNode: 7, srcCGRANode: 2; dstDFGNode: 8, dstCGRANode: 10; backEdge: 0
+[DEBUG] check route size: 3
+[DEBUG] occupy link[2]-->[6] (bypass:1) dfgNode: 7 at cycle 6
+[DEBUG] reset duration: 5 t_dstCycle: 12 previous: 7 II: 11
+[DEBUG] in allocateReg() t_cycle: 7; i: 2 CGRA node: 10; link: 1 duration 5
+[DEBUG] done reg allocation
+[DEBUG] occupy link[6]-->[10] (bypass:0) dfgNode: 7 at cycle 7
+[DEBUG] in shareSameCycle is true: node 8
+[DEBUG] tryToRoute -- srcDFGNode: 8, srcCGRANode: 10; dstDFGNode: 19, dstCGRANode: 11; backEdge: 1
+[DEBUG] in shareSameCycle is true: node 19
+[DEBUG] check route size: 2
+[DEBUG] reset duration: 8 t_dstCycle: 9 previous: 12 II: 11
+[DEBUG] in allocateReg() t_cycle: 12; i: 1 CGRA node: 11; link: 2 duration 8
+[DEBUG] done reg allocation
+[DEBUG] occupy link[10]-->[11] (bypass:0) dfgNode: 8 at cycle 12
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[12] onto fu[14] at cycle 13 within II: 11
+[DEBUG] setDFGNode 12 onto CGRANode 14 at cycle: 13
+[DEBUG] in allocateReg() t_cycle: 12; i: 0 CGRA node: 14; link: 1 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[10]-->[14] (bypass:0) dfgNode: 8 at cycle 12
+[DEBUG] skip predecessor routing -- dfgNode: 8
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[13] onto fu[13] at cycle 14 within II: 11
+[DEBUG] setDFGNode 13 onto CGRANode 13 at cycle: 14
+[DEBUG] in allocateReg() t_cycle: 13; i: 0 CGRA node: 13; link: 3 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[14]-->[13] (bypass:0) dfgNode: 12 at cycle 13
+[DEBUG] skip predecessor routing -- dfgNode: 12
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[14] onto fu[14] at cycle 15 within II: 11
+[DEBUG] setDFGNode 14 onto CGRANode 14 at cycle: 15
+[DEBUG] in allocateReg() t_cycle: 14; i: 0 CGRA node: 14; link: 2 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[13]-->[14] (bypass:0) dfgNode: 13 at cycle 14
+[DEBUG] skip predecessor routing -- dfgNode: 13
+[DEBUG] tryToRoute -- srcDFGNode: 23, srcCGRANode: 6; dstDFGNode: 14, dstCGRANode: 14; backEdge: 0
+[DEBUG] check route size: 3
+[DEBUG] occupy link[6]-->[10] (bypass:1) dfgNode: 23 at cycle 3
+[DEBUG] reset duration: 0 t_dstCycle: 15 previous: 4 II: 11
+[DEBUG] reset duration is 0...
+[DEBUG] in allocateReg() t_cycle: 4; i: 1 CGRA node: 14; link: 1 duration 11
+[DEBUG] done reg allocation
+[DEBUG] occupy link[10]-->[14] (bypass:0) dfgNode: 23 at cycle 4
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[15] onto fu[13] at cycle 16 within II: 11
+[DEBUG] setDFGNode 15 onto CGRANode 13 at cycle: 16
+[DEBUG] in allocateReg() t_cycle: 15; i: 0 CGRA node: 13; link: 3 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[14]-->[13] (bypass:0) dfgNode: 14 at cycle 15
+[DEBUG] skip predecessor routing -- dfgNode: 14
+[DEBUG] success in schedule()
+[DEBUG] schedule dfg node[16] onto fu[12] at cycle 17 within II: 11
+[DEBUG] setDFGNode 16 onto CGRANode 12 at cycle: 17
+[DEBUG] in allocateReg() t_cycle: 16; i: 0 CGRA node: 12; link: 3 duration 1
+[DEBUG] done reg allocation
+[DEBUG] occupy link[13]-->[12] (bypass:0) dfgNode: 15 at cycle 16
+[DEBUG] skip predecessor routing -- dfgNode: 15
+[DEBUG] in shareSameCycle is true: node 16
+[DEBUG] tryToRoute -- srcDFGNode: 16, srcCGRANode: 12; dstDFGNode: 17, dstCGRANode: 6; backEdge: 1
+[DEBUG] in shareSameCycle is true: node 17
+[DEBUG] check route size: 5
+[DEBUG] occupy link[12]-->[8] (bypass:1) dfgNode: 16 at cycle 17
+[DEBUG] occupy link[8]-->[4] (bypass:1) dfgNode: 16 at cycle 18
+[DEBUG] occupy link[4]-->[5] (bypass:1) dfgNode: 16 at cycle 19
+[DEBUG] reset duration: 9 t_dstCycle: 7 previous: 20 II: 11
+[DEBUG] in allocateReg() t_cycle: 20; i: 4 CGRA node: 6; link: 2 duration 9
+[DEBUG] done reg allocation
+[DEBUG] occupy link[5]-->[6] (bypass:0) dfgNode: 16 at cycle 20
+[DEBUG] success in schedule()
+--------------------------- cycle:0 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [  5  ]   [     ]   [     ]
+             â†“         â†‘           
+[     ]   [ 21  ] â†’ [     ] â†’ [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:1 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                       â†‘           
+[     ]   [     ]   [     ] â†’ [     ]
+                                   
+[     ]   [     ] â† [  4  ]   [     ]
+             â†“                     
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:2 ---------------------------
+[     ]   [     ] â† [     ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [ 22  ] â†’ [     ]   [     ]
+                                   
+[     ]   [     ] â†’ [     ]   [     ]
+--------------------------- cycle:3 ---------------------------
+[     ]   [     ] â†’ [     ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+                       â†‘           
+[     ]   [     ] â† [ 23  ]   [     ]
+                       â†“           
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:4 ---------------------------
+[     ]   [     ] â† [     ]   [     ]
+                       â†‘           
+[     ]   [     ] â† [  1  ] â†’ [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ] â† [  2  ]   [     ]
+--------------------------- cycle:5 ---------------------------
+[     ] â† [     ]   [     ]   [     ]
+                                   
+[     ]   [  9  ] â†’ [     ] â† [ 10  ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+             â†‘                     
+[     ]   [  6  ] â†’ [     ]   [     ]
+--------------------------- cycle:6 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+   â†“                               
+[     ]   [     ]   [ 11  ]   [     ]
+             â†‘         â†“           
+[     ]   [     ]   [     ]   [     ]
+                       â†‘           
+[     ]   [     ]   [  7  ]   [     ]
+--------------------------- cycle:7 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+   â†“                   â†‘           
+[     ]   [     ]   [ 17  ] â†’ [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:8 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+                                 â†‘ 
+[     ] â†’ [     ]   [     ] â† [ 18  ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:9 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [ 19  ]
+                                 â†“ 
+[     ]   [     ] â†’ [  3  ] â†’ [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:10 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ]   [     ] â† [ 20  ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:11 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [  5  ]   [     ]   [     ]
+             â†“         â†‘           
+[     ]   [ 21  ] â†’ [  0  ] â†’ [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:12 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                       â†‘           
+[     ]   [     ]   [  8  ] â†’ [     ]
+                                   
+[     ]   [     ] â† [  4  ]   [     ]
+             â†“                     
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:13 ---------------------------
+[     ]   [     ] â† [ 12  ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [ 22  ] â†’ [     ]   [     ]
+                                   
+[     ]   [     ] â†’ [     ]   [     ]
+--------------------------- cycle:14 ---------------------------
+[     ]   [ 13  ] â†’ [     ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+                       â†‘           
+[     ]   [     ] â† [ 23  ]   [     ]
+                       â†“           
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:15 ---------------------------
+[     ]   [     ] â† [ 14  ]   [     ]
+                       â†‘           
+[     ]   [     ] â† [  1  ] â†’ [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ] â† [  2  ]   [     ]
+--------------------------- cycle:16 ---------------------------
+[     ] â† [ 15  ]   [     ]   [     ]
+                                   
+[     ]   [  9  ] â†’ [     ] â† [ 10  ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+             â†‘                     
+[     ]   [  6  ] â†’ [     ]   [     ]
+--------------------------- cycle:17 ---------------------------
+[ 16  ]   [     ]   [     ]   [     ]
+   â†“                               
+[     ]   [     ]   [ 11  ]   [     ]
+             â†‘         â†“           
+[     ]   [     ]   [     ]   [     ]
+                       â†‘           
+[     ]   [     ]   [  7  ]   [     ]
+--------------------------- cycle:18 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+   â†“                   â†‘           
+[     ]   [     ]   [ 17  ] â†’ [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:19 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+                                 â†‘ 
+[     ] â†’ [     ]   [     ] â† [ 18  ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:20 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [ 19  ]
+                                 â†“ 
+[     ]   [     ] â†’ [  3  ] â†’ [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:21 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ]   [     ] â† [ 20  ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:22 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [  5  ]   [     ]   [     ]
+             â†“         â†‘           
+[     ]   [ 21  ] â†’ [  0  ] â†’ [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:23 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                       â†‘           
+[     ]   [     ]   [  8  ] â†’ [     ]
+                                   
+[     ]   [     ] â† [  4  ]   [     ]
+             â†“                     
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:24 ---------------------------
+[     ]   [     ] â† [ 12  ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [ 22  ] â†’ [     ]   [     ]
+                                   
+[     ]   [     ] â†’ [     ]   [     ]
+--------------------------- cycle:25 ---------------------------
+[     ]   [ 13  ] â†’ [     ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+                       â†‘           
+[     ]   [     ] â† [ 23  ]   [     ]
+                       â†“           
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:26 ---------------------------
+[     ]   [     ] â† [ 14  ]   [     ]
+                       â†‘           
+[     ]   [     ] â† [  1  ] â†’ [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ] â† [  2  ]   [     ]
+--------------------------- cycle:27 ---------------------------
+[     ] â† [ 15  ]   [     ]   [     ]
+                                   
+[     ]   [  9  ] â†’ [     ] â† [ 10  ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+             â†‘                     
+[     ]   [  6  ] â†’ [     ]   [     ]
+--------------------------- cycle:28 ---------------------------
+[ 16  ]   [     ]   [     ]   [     ]
+   â†“                               
+[     ]   [     ]   [ 11  ]   [     ]
+             â†‘         â†“           
+[     ]   [     ]   [     ]   [     ]
+                       â†‘           
+[     ]   [     ]   [  7  ]   [     ]
+--------------------------- cycle:29 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+   â†“                   â†‘           
+[     ]   [     ]   [ 17  ] â†’ [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:30 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+                                 â†‘ 
+[     ] â†’ [     ]   [     ] â† [ 18  ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:31 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [ 19  ]
+                                 â†“ 
+[     ]   [     ] â†’ [  3  ] â†’ [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:32 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ]   [     ] â† [ 20  ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:33 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [  5  ]   [     ]   [     ]
+             â†“         â†‘           
+[     ]   [ 21  ] â†’ [  0  ] â†’ [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:34 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                       â†‘           
+[     ]   [     ]   [  8  ] â†’ [     ]
+                                   
+[     ]   [     ] â† [  4  ]   [     ]
+             â†“                     
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:35 ---------------------------
+[     ]   [     ] â† [ 12  ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [ 22  ] â†’ [     ]   [     ]
+                                   
+[     ]   [     ] â†’ [     ]   [     ]
+--------------------------- cycle:36 ---------------------------
+[     ]   [ 13  ] â†’ [     ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+                       â†‘           
+[     ]   [     ] â† [ 23  ]   [     ]
+                       â†“           
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:37 ---------------------------
+[     ]   [     ] â† [ 14  ]   [     ]
+                       â†‘           
+[     ]   [     ] â† [  1  ] â†’ [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ] â† [  2  ]   [     ]
+--------------------------- cycle:38 ---------------------------
+[     ] â† [ 15  ]   [     ]   [     ]
+                                   
+[     ]   [  9  ] â†’ [     ] â† [ 10  ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+             â†‘                     
+[     ]   [  6  ] â†’ [     ]   [     ]
+--------------------------- cycle:39 ---------------------------
+[ 16  ]   [     ]   [     ]   [     ]
+   â†“                               
+[     ]   [     ]   [ 11  ]   [     ]
+             â†‘         â†“           
+[     ]   [     ]   [     ]   [     ]
+                       â†‘           
+[     ]   [     ]   [  7  ]   [     ]
+--------------------------- cycle:40 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+   â†“                   â†‘           
+[     ]   [     ]   [ 17  ] â†’ [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:41 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+                                 â†‘ 
+[     ] â†’ [     ]   [     ] â† [ 18  ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:42 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [ 19  ]
+                                 â†“ 
+[     ]   [     ] â†’ [  3  ] â†’ [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:43 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [     ]   [     ] â† [ 20  ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+--------------------------- cycle:44 ---------------------------
+[     ]   [     ]   [     ]   [     ]
+                                   
+[     ]   [  5  ]   [     ]   [     ]
+             â†“         â†‘           
+[     ]   [ 21  ] â†’ [  0  ] â†’ [     ]
+                                   
+[     ]   [     ]   [     ]   [     ]
+[Mapping II: 11]
+==================================
+[Mapping Success]
+==================================
+[DEBUG] inside roi for CGRA node 5...
+[DEBUG] inside roi for CGRA node 1...
+[DEBUG] inside roi for CGRA node 10...
+[DEBUG] inside roi for CGRA node 1...
+[DEBUG] inside roi for CGRA node 5...
+[DEBUG] inside roi for CGRA node 6...
+[DEBUG] inside roi for CGRA node 8...
+[DEBUG] inside roi for CGRA node 4...
+[DEBUG] inside roi for CGRA node 7...
+[DEBUG] inside roi for CGRA node 5...
+[DEBUG] inside roi for CGRA node 5...
+[Output Json]
+==================================
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+[function 'edge_draw' is not in our target list]
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+[function 'susan_thin' is not in our target list]
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+[function 'susan_edges' is not in our target list]
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+[function 'susan_edges_small' is not in our target list]
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+[function 'corner_draw' is not in our target list]
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+[function 'susan_corners' is not in our target list]
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+[function 'susan_corners_quick' is not in our target list]
+Initialize opt latency for DFG nodes: 
+Initialize additional functionality on CGRA nodes: 
+load : [0,4,8,12]: 0 4 8 12 
+store : [0,4,8,12]: 0 4 8 12 
+BCÀŞ5     b0$JY¾fmû´_Q€L   !  ù4  !       #‘AÈI29’„%‹b€ EB’B28K
+2‚ˆHpÄ!#D‡ŒA’dÈ± CFˆ É2‚„*(*1|°\‘ ÈÈ   ‰      2"
+ d…$¤„$ã„¡LŒ„M„ÅÌ p‘4E”0ù¿ˆş)D4F Ğ 9Ì€Â”'ISD	“ÿ‹è/8!TÓ@	GISD	“ÿ‹èo!ñÀŒ ´÷HSD	“ÿ‹èÿ‰¥‡: ‚  ƒƒ †€*H ‚È ’H ¢È‹ ²È• ÂÈŒ ÒH‚ âÈƒ òÈ‚ I› É  "É‰ 2I BIˆ RI¡ bÉ rIµ ‚I˜ ’I§ ¢I· ²Éµ ÂI­ ÒI¦ âI òÉ“ * 	U@€ˆF Š`@GE ( ¤2ĞR! 
+¨© ôDP
+#())š*C€ UAÀ€®Ja ``P@Y¥    ­B H	 PW!Œ¢  èk aa$V )   "›#Ja$``Fg¥    ´b D	HIĞZ)ŒÌ¨­F a  ôV    Š+€”   Í@@J@   €ên‘¦ˆ&hœ      tW
+ <  Ê+€€”    íÁH€úÊ  Eeˆ¢ÀBDĞ` ¨p ‡‡„X  3RF €" 0Rã@@B:ä 1#æ T9Œ€Ã0Œ€ÃH@šÃˆ9d u&fİ}Q  x  J&øÿÿÿÿˆ 	‚ÒaÂAØ¡Ú€Â!Ø¡Æ!Øæ0‡p`‡y(€0y‡v(‡6€‡wHw ‡rÀŞÁÊ Ø¡æaÚ ä¡Æ!æ¡ÚÀà¡Â sv˜‡r ˆvHwhv(‡svh{(‡q ‡w‡6¸‡t z@  ÂŞ¡ÒÁÌaÚÀà¡Ú!è sv˜‡r wx‡6P‡zhxhzq`‡r˜ÀÂæ¡ ÂŞ¡Ü!ÜaÚÀà¡Ú!è sv˜‡r wx‡6˜‡t8w(rh}(yx‡yhs€‡6h‡p t Ì!ØaÊ ÜáÚ€ä!àÒÁÎ¡Ú!è z‡z(€˜z‡qX‡6€yxz(‡q ‡w‡6‡z0s(yhƒyH}(  ‚ÂAÎ¡è¡ÆêÀ<°ƒ6°: zy8‡r ‡60‡rz¨y(‡y Ö`ğØ`ÌæAØ`Ú¡ğÖ`æ¡Ø`æaÊAØ`ğî  è¡Ü¡Ú`à¡€s(w(yH‡q ˆzp‡ys(‡60xhƒvz@ÀÂæ¡ ¢æ¡Ú`ŞÁè¡ÌŞ!è0‡p`‡y(`Ã¬ÿÿÿÿ? ~ H9¤Ã<„ƒ8°C9´=„C:°CŒC8°;Ì`áÀóP aòíPm ïî@å €;¼ƒ;”@°C9ÌÃ<´<ÈC9ŒC:ÌC9´9ÀC;„9 æì0å îğmî`óĞæ mĞá@è ˜C8°Ã<”@¸Ã;´;„ƒ;ÌC˜<´A;„= `áÀóP áïĞóçàå@m å ï0m`ğĞíô€€9„;ÌC9 „;¼CĞƒ<„<ÀC:¸Ã9´A;„= @òPå ó@á0ëĞğ ï@å0ôğòĞâPæ`å m0é å à@ĞC8ÈÃ9”=´Á8ÀC= ø€vĞv@ Aá çPôĞæPá@õ å0ÀŒ>à¬9àÃ<È¬A;´>°ÁÌÃ<”¬Á<ÌC9È¬>àÁ =Ôƒ;”CŒ<Ôpåàå é0 Qî0á`åĞæ mĞá@è ˜C8°Ã<”@ÔÃ<”CÌÃ;˜=´9°Ã;„= æì0å l   … @
+@µaVŠÿÿÿÿ€rH‡yq`‡rhz‡t`‡6‡p`v˜ÀÂæ¡ Âä!Ú¡Ú Ş!ÜÊA wxw(€`‡r˜‡yhx‡r‡t˜‡rhs€‡vr Ì!ØaÊ ÜáÚ ÜÁæ¡ÌÚ ÂĞ0‡p`‡y(€p‡whww˜‡60xhƒvz@ÀÂæ¡ ÂŞ¡æ!ÎÁÊÚ@ÊAŞaÚÀà¡Ú!è sv˜‡r wx‡6 yx€‡tp‡shƒvz@€ä¡Ê æÂaÖ¡àAŞÊaèáä¡Ä¡ÌÁÊAÚ`ÒAÊÀ€ ‡p‡s(zhƒq€‡z ğì ì€ ‚ÂAÎ¡è¡Ì¡ÂêAÊa€5|À6XsÀ‡y6Xƒvh|`ƒ5˜‡y(6Xƒy˜‡r6X|Àƒ; z¨w(‡6x¨àÊÁÊAÒa ¢ÜaÂÁÊ¡ÌÚ ÂĞ0‡p`‡y(€¨‡y(‡6˜‡w0zhs`‡wz Ì!ØaÊØ02Æÿÿÿÿ€„Aé0á ìPm@áìĞãìÀó ˜C8°Ã<”@˜ƒ<„C;”CÀÃ;¤ƒ;ĞC9Èàïàå ìPó0m òPãóPm`ğĞá@€9„;ÌC9 D;¤ƒ;´;”Ã9„;´=”Ã8ĞÃ;ÈCÜC:=   áïĞéàæ0m`ğĞíô€€9„;ÌC9 „;¼C¨C=´<´=„ƒ8°C9Ì`áÀóP áïĞîî0m`ğĞíô€€9„;ÌC9 „;¼CÌC:œƒ;”9´>”ƒ<¼Ã<´9ÀC´C8Ğ: æì0å îğm@òğ éàçĞíô€ =ÈC=”@Ì=„Ã8¬CÀƒ<¼=”Ã8ĞÃ;ÈCˆC=˜ƒ9”ƒ<´Á<¤ƒ>”€ Aá çPôĞã õ àØAØ =„ƒ<œC9ĞC˜C9„=Ôƒ<”Ã< k0ø€l°æ€ó l°íĞøÀk0óPl°ó0å l°ø€w ôPîPm0ğPÀ9”ƒ;”ƒ<¤Ã8 D=¸Ã<„ƒ9”C˜<´A;„= `áÀóP QóPm0ï`ôĞæÀïô ˜C8°Ã<”°8`ÙÀ ÿÿÿÿ? m øğ€ôÁ"	 >Ø@(°l0– X RØ@0@
+ˆF HaƒáÀÂä€  Ú@@°l "X6 $ )l¸•éÿÿÿÿ  ? $ rH‡yq`‡rhz‡t`‡6‡p`v˜ÀÂæ¡ Âä!Ú¡Ú Ş!ÜÊA wxw(€`‡r˜‡yhx‡r‡t˜‡rhs€‡vr Ì!ØaÊ ÜáÚ ÜÁæ¡ÌÚ ÂĞ0‡p`‡y(€p‡whww˜‡60xhƒvz@ÀÂæ¡ ÂŞ¡æ!ÎÁÊÚ@ÊAŞaÚÀà¡Ú!è sv˜‡r wx‡6 yx€‡tp‡shƒvz@€ä¡Ê æÂaÖ¡àAŞÊaèáä¡Ä¡ÌÁÊAÚ`ÒAÊÀ€ ‡p‡s(zhƒq€‡z ğì ì€ ‚ÂAÎ¡è¡Ì¡ÂêAÊa€5|À6XsÀ‡y6Xƒvh|`ƒ5˜‡y(6Xƒy˜‡r6X|Àƒ; z¨w(‡6x¨àÊÁÊAÒa ¢ÜaÂÁÊ¡ÌÚ ÂĞ0‡p`‡y(€¨‡y(‡6˜‡w0zhs`‡wz Ì!ØaÊØ@P@
+ŒŠ €6œŒõÿÿÿÿà  9¤Ã<„ƒ8°C9´=„C:°CŒC8°;Ì`áÀóP aòíPm ïî@å €;¼ƒ;”@°C9ÌÃ<´<ÈC9ŒC:ÌC9´9ÀC;„9 æì0å íîĞìPçìĞöPã@ï mpé@ô€  „;¼C¤ƒ;˜Ã<´9ÀC´C8Ğ: æì0å îğm õĞğĞôâÀå0€9„;ÌC9 „;¼C¸C8¸Ã<´9ÀC´C8Ğ: æì0å îğm0épîPäĞúPòğóĞæ mĞá@è ˜C8°Ã<”@¸Ã;´=ÈC8À<¤ƒ;œC´C8Ğ: ô õP 1ôã°m òğôPã@ï m õ`æPòĞóúP  =„ƒ<œC9ĞCŒ<Ô€x`m`t ôòpå@m`åôPòPó ¬Á8à°Á˜>Ìƒ<°Á´C;à¬Á<ÌC9°ÁÌÃ<”ƒ°ÁàÜ@ĞC=¸C9´Á8ÀC= çPîPòã õàóæPm`ğĞíô€€9„;ÌC9 D=ÌC9´Á<¼ƒ9ĞC˜;¼C8Ğ`áÀóPÀã
+€¨6”öÿÿÿÿà€„Aé0á ìPm@áìĞãìÀó ˜C8°Ã<”@˜ƒ<„C;”CÀÃ;¤ƒ;ĞC9Èàïàå ìPó0m òPãóPm`ğĞá@€9„;ÌC9 D;¤ƒ;´;”Ã9„;´=”Ã8ĞÃ;ÈCÜC:=   áïĞéàæ0m`ğĞíô€€9„;ÌC9 „;¼C¨C=´<´=„ƒ8°C9Ì`áÀóP áïĞîî0m`ğĞíô€€9„;ÌC9 „;¼CÌC:œƒ;”9´>”ƒ<¼Ã<´9ÀC´C8Ğ: æì0å îğm@òğ éàçĞíô€ =ÈC=”@Ì=„Ã8¬CÀƒ<¼=”Ã8ĞÃ;ÈCˆC=˜ƒ9”ƒ<´Á<¤ƒ>”€ Aá çPôĞã õ àØAØ =„ƒ<œC9ĞC˜C9„=Ôƒ<”Ã< k0ø€l°æ€ó l°íĞøÀk0óPl°ó0å l°ø€w ôPîPm0ğPÀ9”ƒ;”ƒ<¤Ã8 D=¸Ã<„ƒ9”C˜<´A;„= `áÀóP QóPm0ï`ôĞæÀïô ˜C8°Ã<”°¡V²ÿÿÿÿ ? $ rH‡yq`‡rhz‡t`‡6‡p`v˜ÀÂæ¡ Âä!Ú¡Ú Ş!ÜÊA wxw(€`‡r˜‡yhx‡r‡t˜‡rhs€‡vr Ì!ØaÊ ÜáÚ ÜÁæ¡ÌÚ ÂĞ0‡p`‡y(€p‡whww˜‡60xhƒvz@ÀÂæ¡ ÂŞ¡æ!ÎÁÊÚ@ÊAŞaÚÀà¡Ú!è sv˜‡r wx‡6 yx€‡tp‡shƒvz@€ä¡Ê æÂaÖ¡àAŞÊaèáä¡Ä¡ÌÁÊAÚ`ÒAÊÀ€ ‡p‡s(zhƒq€‡z ğì ì€ ‚ÂAÎ¡è¡Ì¡ÂêAÊa€5|À6XsÀ‡y6Xƒvh|`ƒ5˜‡y(6Xƒy˜‡r6X|Àƒ; z¨w(‡6x¨àÊÁÊAÒa ¢ÜaÂÁÊ¡ÌÚ ÂĞ0‡p`‡y(€¨‡y(‡6˜‡w0zhs`‡wz Ì!ØaÊØ@hPmp¶ÿÿÿÿ€6 ü ø@ú  ƒ @ˆ ø`ƒáÀTJæûÿÿÿÿ€
+‚ÒaÂAØ¡Ú€Â!Ø¡Æ!Øæ0‡p`‡y(€0y‡v(‡6€‡wHw ‡rÀŞÁÊ Ø¡æaÚ ä¡Æ!æ¡ÚÀà¡Â sv˜‡r ˆvHwhv(‡svh{(‡q ‡w‡6¸‡t z@  ÂŞ¡ÒÁÌaÚÀà¡Ú!è sv˜‡r wx‡6P‡zhxhzq`‡r˜ÀÂæ¡ ÂŞ¡Ü!ÜaÚÀà¡Ú!è sv˜‡r wx‡6˜‡t8w(rh}(yx‡yhs€‡6h‡p t Ì!ØaÊ ÜáÚ€ä!àÒÁÎ¡Ú!è z‡z(€˜z‡qX‡6€yxz(‡q ‡w‡6‡z0s(yhƒyH}(  ‚ÂAÎ¡è¡ÆêÀ<°ƒ6°: zy8‡r ‡60‡rz¨y(‡y Ö`ğØ`ÌæAØ`Ú¡ğÖ`æ¡Ø`æaÊAØ`ğî  è¡Ü¡Ú`à¡€s(w(yH‡q ˆzp‡ys(‡60xhƒvz@ÀÂæ¡ ¢æ¡Ú`ŞÁè¡ÌŞ!è0‡p`‡y(`  0€X :Ø€ˆ $ÀTŒ10€¨6d@ Õ£`ª†ÀTˆ3(€eC­ Áÿÿÿÿ€ Ğ9¤Ã<„ƒ8°C9´=„C:°CŒC8°;Ì`áÀóP aòíPm ïî@å €;¼ƒ;”@°C9ÌÃ<´<ÈC9ŒC:ÌC9´9ÀC;„9 æì0å îğmî`óĞæ mĞá@è ˜C8°Ã<”@¸Ã;´;„ƒ;ÌC˜<´A;„= `áÀóP áïĞóçàå@m å ï0m`ğĞíô€€9„;ÌC9 „;¼CĞƒ<„<ÀC:¸Ã9´A;„= @òPå ó@á0ëĞğ ï@å0ôğòĞâPæ`å m0é å à@ĞC8ÈÃ9”=´Á8ÀC= ø€vĞv@ Aá çPôĞæPá@õ å0ÀŒ>à¬9àÃ<È¬A;´>°ÁÌÃ<”¬Á<ÌC9È¬>àÁ =Ôƒ;”CŒ<Ôpåàå é0 Qî0á`åĞæ mĞá@è ˜C8°Ã<”@ÔÃ<”CÌÃ;˜=´9°Ã;„= æì0å l Ò  ª†üÿÿÿÿ ø mpÖàÿÿÿÿÀ€? $€ê èƒ l`ÚàÿÿÿÿÀ€? $€ú`ÃápAŒ7øÿÿÿÿˆ iÿÿÿÿ? Ò"à6r g°˜ƒÿÿÿÿ 2Ø@Ğ $ˆ: €3ØpØ $Ğ†â‚  6xA°¡È!‚‡ÀA°Øƒ8ƒÀœÁ¢à6~P g    I  ?   ‚`Â Ä„ ˜ Ç„I”	ƒ0,
+a`g!Ë30(š@ñL&i‚!KCUC™0X—2AÀ	A6À.E›0l\7À.Å›0|`pM °Š&HˆA7A0Æ`‚`ìšP—‘Á„Â¸¨&ÖaãÒÎ`‚€ËÂHí&†L²4P&j0„5`ƒ	ALÜ`Bğ8ˆƒ	Læ`B@8 ƒ	ALàÀ&p0!¸ƒ	äÁAò`Â {P†8Øƒ:˜ ÀLú`‚ w0!Øƒ	LöÀ  &|À;ø; ƒ6€‡qhvHw¨|hƒsp‡zØ`
+åĞí åĞğ w z0r s m rpq s z0rĞğ w z`t v@mv@z`tĞæ€p q xĞî€zv s z`tĞ³r€J’C†Œ4Bö(	h|a‡…      @` ;$ã€†VH    €À vHÍ!®     ì¨ƒ^!	     Ø!m‡5ÀB     °Cƒb!	     Ø!¥Á¡²     ìàà †YH    €À vHwpX-$    @` ;$?8¸¡’  €    0€R)Ş`I  @   À‰0n!	     Ø!ÍÂa¸     ìtáƒ!’  €    0€R8d0èB     °CB‡Ã†]H    €À vHï0`/$    @` ;$y0Ğ`è…$      `‡„†¾     ìüÁ0ƒá’  €    0€Il0€C     °CR	Ã†pH    €À vH0aÀÁ I  @   ÀÉ&9Æ!	     Ø!ñ„A9$    @` ;$±0ì`(‡$      `‡„æ     ìÜÂĞƒá’  €    0€]|0 C     °CÒÃ†tH    €À vH a€Â I  @   ÀÉ4mX‡$      `‡Ä†6°C     0¤’B          `Hu)        @ Àª7ˆS `      € 0€!Ux©          ` CªóÀV€        À †TÿA¤   €    €©F¤h         R¡Èñ
+@         0¤zk€ (         `HU&É,        @ ÀÊMŠZ @     € 0€!Õœ© €       ` C*<1n€  @    À †T~Rä   €    €©FÅH         R¥J²  4       0¤’#€ `        `H…+L/  à      @ ÀŠ\¨_  à     € 0€!¾â         ` Cª}yÈ €  @    À †T*C         €©|¦"  &       RÍ‘  P       0¤Ê›c  ¨        `H:Y; `        À*ww  à     € 0€!ú$ñ          ` CªøQæ €  @    À †Tû³Ô    €    €©L(ª  6       RİĞ’  p       0¤£f  è        `HõFD? à     @ Àj¦}  à     € 0€!•)ÿ         @ ÀJ•Œ          `HKÆH        0¤²%¢$€         RéR@          0¤ú%F%€          R­S×@         €©Pªk	  È         À $6v§ È :  2˜LŒ	&GÆC‚Ğ,ÙŸË Òä~ÓAâ´;,Ïƒ Ç¦KA+ Ql‘…ZÃ°ûD¥İğ:”n‡ÏePiîR†ªA²>—A¥9ˆü.ÏAî7„ÛË qÚ–çAĞc„.‡Ée¹KAŠ%ÛásTšƒÒsĞ]şvŸAó´¾ìRÅY¨5»OtĞ»N‡×é t;|.—æ.qè ­)ÈCT"+D	Y­¦ µ†a÷‰ºËÓô2(İŸË ÒÜ¥ ­bzN»Çå/-/ÏÑ TÉœÑßo8}™ßrPÚM/ŸËrPX¦£ÛezzìR‰‚B3<_ƒæi}„Š¹j*rzN»Çå/-/ÏÑ«X¯DNèï7Hœ>ƒÌo9(İŸË T‰Œ/‘S.™¨D}¿Aí°;¿åî²|îR†ªAu>—u y}vƒxi·~nû@¼wî‚ŸÛ>Ğö§§ßîyWA(Úµæ hÚ~¿éè´ûj¿ÉeŠ\6‡ëlzŠTôi•A:P‘|.ÏAí7¹L&*µÆ hø–»Ëò9¨ı&—Ä¢¡0-—Aów]>.ƒÆord~ËAí·¼J»Íoy;LO¿İ °ø]§ƒæe:=í>ƒèè2ˆ–—çè7›<'ÕƒÄ££åå9ÚÒ„òôMw—çs-/ÏÑo6™
+³Ù ö›\ƒPä²9\gÓ{2XŠ`4Zd–—çhH"¦çô°{\ÑÑòòıf“Y yûı¦£Óî3¨ı&—Y ¹l×Ùô-BÕçe»Œ§ƒŞpzúí¥İsz9L™ßr™¦ƒfø¨¯S$£oĞšt ê¼2³ÃtĞ?µÃó5T&ŸËsĞ[š·ßo::í>ƒÚor™h´Znä|ƒàï9½—¿Çåù<í>ƒŞn]‰Óî°<*“ÏeP;¡äu÷Ô®Ñ sxN/ËS;P™|.ÏAí7¹L6Ú­8HªÎË sxN/ËA¨°›ªÏëa6;šÓÃbvYßrwYj¿Éå¨L>—[ìôº¿åî²4¯Ãáòò|~»Aî74Ëåé2ô®Ów ñ[î.Ëç ö›\&U‡–¤5Ãò5hü–»Ëòù«L>—ç {šÍÓî3»³Ãã5şN»ésPÚ=§—ÃdĞÛ³Ãã5è¦£Awtš^‰ßrrY¾ßrwY>½å 2ù\ƒÚor™t4Zpô¬Óáu:(íNÓÓa6¨ìF‡İãr»ì¦ƒÒíğ¹z»Ùùhü–»Ëò9è-•ÉçòÔ~“Ë ¹l×ÙtPz*“Ïå9¨ı&—SÄ£« ˜V§A'ÈZ–ÏÓo7HÆ¡†)P,—«µb¹Ü4¥—áè²4m§éhˆ(‚ªKhN/ÛË@s[»ŞxWxìª¯ÉG÷ ˜¦£Ër¼L®Ë 4Dƒx½Xô–ƒäåñ»O³Ë {šÙÃòtXÌ.ƒDô7=ÌšAx
+ƒÌìw˜®ÍËeı‰ÈesÚ]‹@óò˜~»]¤¡˜ó
+ËÏõvÙM™ßlöûvŸA-ºbÎ7(,?×Ûe7d~³Ùï{Ú}µÈP…@# …P…Q …±  —   3€Äáf=ˆC8„ÃŒB€yxs˜qæ íô€3BÂÁÎ¡f0=ˆC8„ƒÌ=ÈC=Œ=ÌxŒtp{yH‡ppzpvx‡p ‡Ììá0n0ãğğP3ÄŞ!Ø!Âaf0‰;¼ƒ;ĞC9´<¼ƒ<„;Ìğv`{h7h‡rh7€‡p‡p`v(vøvx‡w€‡_‡q‡r˜‡y˜,îğîàõÀì0bÈ¡ä¡Ì¡ä¡ÜaÊ!ÄÊaÖC9ÈC9˜C9ÈC9¸Ã8”C8ˆ;”Ã/¼ƒ<ü‚;Ô;°ÃÇi‡pX‡rpƒthx`‡t‡t ‡ÎSî òPäã@á ìP3 (ÜÁÂAÒ!ÜÜàäáêfQ8°C:œƒ;ÌP$v`{h7`‡wxx˜QLôğP3jÊaè!ŞÁ~ä¡Ì!ğaT…ƒ8ÌÃ;°C=ĞC9üÂ<äC;ˆÃ;°ÃŒÅ
+‡y˜‡w‡tz(r˜\ãìÀåPó0#ÁÒAäáØáŞfH;°ƒ=´ƒ„Ã8ŒC9ÌÃ<¸Á9ÈÃ;Ô<ÌH´qv`q‡qX‡ÛÆì`íàğ å0å öPnã0å0óàéàäPø0#âìaÂØáì!æ!Ä!Ø!è!f ;¼C=¸9”ƒ9ÌX¼ppwxzzH‡wp  y      rH Cˆ	r2H #Œ‘‘ÑD (d<12B!£¸0wJ,O„–¥    wchar_sizeUbuntu clang version 12.0.1-19ubuntu3any pointeromnipotent charSimple C/C++ TBAAllvm.loop.unroll.disableintllvm.loop.mustprogressllvm.loop.isvectorizedLVerDomain f]      0‚ °ÃĞ#†;Œ ï0‚`ÀÃ‚#†<Œ ó0Å@™ÁL1Tf0S–ŒÁÃec0Å€™ÁL1df0SšŒÁÃfc0ÅÀ™ÁÌ00A3C Ì3ÄçÌ0`àÌ0„A83ÆÃÎ3C€Ì $Ì€3C³C@d‘DÓC4ÃdğÌ0¤83i@ÑC4Ãd0 b b b b nànànànàn –%hà¸Å¹H¸¸¸Œ&(#66»6—¶7²:¶23¶°³¹Q.66»6—4²27ºQ‚  ©     
+r(‡w€zXp˜C=¸Ã8°C9ĞÃ‚æÆ¡èAÂÁæ!è!ŞÁ4ã`çPá ä@á çPô°€y(‡p`vx‡qz(rXpœÃ8´;¤ƒ=”   Ñ     Ì<¤ƒ;œ;”= ƒ<”C8Ã   a   M   A,   #   $0Ôeá†;u AD†;î0Ô¡k î`¸ÃP‡œÁd¸ƒáClĞ”á†;u¸ÁT†;î0Ôq`î`¸ÃP‡ÌÁe¸ƒáCtP˜á†;uØÁd†;î0Ôy î`¸ÃP‡ìÁf¸ƒáC|Ğœá†;À    #E„ ”Ä8#E„ ”8#E„ ”D8#E„ ”„8#E„ ”Ä8#E„ ”(8#E„ ”D(8#E„ ”„(8#E„ ”Ä(8#E„ ”)8#E„ ”D)8#E„ ”„)8#E„ ”Ä)8#…„ œ;8 a   R   H,      dP œPF5PĞŒ$0ÔEá†;uH“`¸ƒá0PaEQ    ñ0     +8ƒBŒ  30°C)tÈ!¤ã@V˜`Ä  BRašY‚` €¦æ Â„{F4 A0h^–g–  ’( #G€ ¼B/Ì2bP˜‚Á)ŒÃÂG(0Ü(d0Ë`ÁˆA€ ¤‚8P³Á@°1P†G`àˆ ` €ÀˆA€ ¤:hÃ'P0ÜLbpC°³‡Œg ‚`°
+êàMkÄ      [†$ƒ-C$½Á–“à  !1     ˆ@ \bH,   ‰Å  =LÀ˜0@    a   i   G,      $0ÔAUƒá†;PÁ 	uXa¸ƒá0PşPj$0Ôe…á†;A	ÀP‡¶†;î   #†„ ÔÂ-8ÊpC €Á,C DdÄàHƒƒWè…`‰F
+3A08…qXxÄ @ƒƒTĞbÄ @ƒƒTØ…âF‡npt¸!hÀà†@gˆ! –( #G„ ¼‚96bP˜A‚Á)°Å#„ ¤Â:4Ã„ÀˆA!©ÀÎ°¡0bP A‚A*´ÃCÀ `` ˆ@2bP¬A‚Á-¤C0l@ˆA@ #„ äB:—P7j ³…PNƒ#B^A‚ÌF
+3A08| 1(Ğ Á Ø!Ó€   [†!ƒ-Ã„Á–
+È`Ë`d°eÀ2Ø2dlº ¶a„    !1     £ ! ‘X0À=,Àƒ ô       a   K   E,      $0ÔAU‡á†;PÁ 	uXb¸ƒá0@C\—î`¸”A	ÀP‡÷)†;î0Ôa°î`¸ÃP‡u1†;î@ 3  #†„ Ô.<ËpC°€Á,C TdÄàHƒƒWğ…€‘F
+3A08r`xÄ aƒƒ\°…EIˆB^ŠDŠF6A0È\H´ÅÀ‰dÄ aƒƒ\Ø…+p’á†àƒYbÈ%
+ÈˆÁ‘!¯p³f‚`p
+íPñˆA!©Í>1    [†!ƒ-Ã„  !1     b „ ‰C ÜÃ‚! ìa! =     a   •   L,      0@5P	%@Œ£# Pş3    ñ0     +80ƒ18ƒD˜Áœ    ´ Œá%1ƒY†`	r1ˆáÆƒYDPX@`¸!¨È`–Á‚½€Ù9‚†™cpi!xœYb ÂĞƒá"*X&b ‚%Œ¡!n ¶[ÁäRÀ8†‚Â¦#n4˜n ’à–3€á†@ƒY†‚F
+ Á %Z¡1( ƒ–xb¸áªÀ`–1‚
+C5(* =Œb àA)f	
+c:c xÃ¨ ’Ã0:€Ğ c¸!Ì`ºA ‚á†Á@ƒéâ0inÎ f#è h!ƒB9: [Ä @‚˜eH6H;0tƒ!0ˆ¸€ `Ø€àƒ  †ö À`–aQ‚
+#Rà!é Â –À Dà†2€ Â1l@B  
+00Ü<`0Ë°(ÁúA@     [  ƒ-C!M[+ ƒ-C'½Á–A2Ø2Ä[†=Î`ËĞµe …€¶¦œÁ–!$
+   !1     † Ğ‹C ¬Å" µX0ÀY,(@ÄbÁ 9±` œX0ÀJ, „ (‰D #±`€X€Â Dñ`ÂPŠ@ z˜P Á ,† P&pLÀ      a   P   D,   	   dPˆEH@ Å@H@ac ‚ ‚ jƒ”@	    #E„ ÜB,=@a‚	 —CnX0˜e„` ÂøÈ  28´
+º )N$ƒ01(Ü Á@n!¸ ’/ƒ€¡M€ô !p†ˆ` |*n*0˜e‚` ÂØ9 2 €í‹*€É G
+7A0s. Éàğ2RÒ„€6 ‚! °!nÈ f!Ğ€  	   [!ƒ-Ã„Á–¡
+Î`Ë€IÕ–‚0Ø2˜Ap[†4* !1     †  ‹„ 3±`€˜X@@ †  ‰„ ô0a aÂ         a   Ò  I,   
+   dP0@f# Pu@5@ µPdPu@ e@%@ …0  ñ0     +80ƒ1X1ÄŒ   9	,B‘d` D'0b€¼A‚Á9ØĞpÃô˜Á,C€W=0Ü`EfĞ„ÊÁ@0‹@ ÁM$;Á"ƒ˜%*7Îé˜eƒ00D M€"³Ä@…Ã-€·dô R0,èÂ„¢pô áBB|„@Š€‚€@`€0ĞD(	’B=@h
+B H „„W! P!€À#€ <nĞ„@HÒB=@è
+B I =@@D’€A /!Ğ„2( "ô QJBä„@Ú    d ˆ0ĞD(	²C=@¨ƒ€‚€@ À !!ƒÀyB |P2 <èÂC=@Ä„€A ?!Ğ„R( &ô QJB$„@Z!   d ˆ0ĞD(	²D=@¨…€‚€@ À@} $ d`HAô ¡
+B H =@@D‚’€A O!Ğ„r( "ô Q	JBd„@Ú!   d ˆ0@H@ÈÀ p-‚è=„  z€ğ¨D ! d`HAô ¡
+B I =@@Ä‚’€A _!Ğ„’( "20 z€À!€À#€ <|Ñ„@.H²F=@¨‰€‚€@`À@½ $ d`HAô ¡'
+B H „„w# E@A@È  ğ` ^ô !PBä„@Ú"   d ˜0ĞD6(	²G=@¨‹€‚€@ À@İ $ d`HAô ¡/
+B H =@@Äƒ’€A !Ğ„Ò( "ô QJB$„@Z#   d ˆ0ĞD>(	²H=@¨€‚€@ À !!ƒÀ	B ¼P2 <èÂC=@D„„€A !Ğ„ò( &ô QJBd„@Ú#   d ˆ0ĞDF(	²I=@¨€‚€@ À@¡$ d`H'Aô ¡?
+B H „„÷$ H@A@È  ğ` ô !PB¤„@Z$   d ˜0ĞDN(	²J=@¨‘€‚€@ À !!ƒÀY	B <P2 <n^ÅfŒ"@XB ³b&ÃD À,kB*0€kâ+00Ü Ì	Ì2D€sr*00ÜØ	Ì2 B°§  k   [†0Î`ËPÁlÒ 8ƒ-Cg°eˆƒà¶tœÁ–‚3Ø2ôAp[†PÎ`ËP
+ÁlR!8ƒ-C+g°eˆ…à¶µœÁ–!‚3Ø2ğBp[pÎ`ËPÁlÒ!8ƒ-C;g°eˆ‡à¶õœÁ–!‚3Ø2ôCp[†Î`ËPÁlR"8ƒ-CKg°eˆ‰à¶4œÁ–'‚3Ø2ôDp[†°Î`ËPÁlÒ"8ƒ-[g°e€‹à¶uœÁ–!/‚3Ø2ôEp[†ĞÎ`Ë@ÁlP#8ƒ-Ckg°eˆà¶µœÁ–!7‚3Ø2ôFp[†ğÎ`ËPÁlÒ#8ƒ-C{g°eˆà¶õœÁ–!?‚3Ø2ğGp[	Î`ËP"ÁlR$8ƒ-C‹g°eˆ‘à¶5œÁ–!G‚3Ø2ôHp[†0	Î`Ë@&ÁlĞ$8ƒ-C›g°eˆ“à¶uœÁ–!O‚3Ø2ğIp[P	Î`Ëp*lXEzƒ-Ã«Hp !1     † ø™C ÜË‚! şdÁ g²`€Y0Àm,à-”ÁˆA€ÁçuÜ¦eØeUÔ$EĞã4Ì¢$ÈaÄ €Y,@,ğ† ğ‰„ 9±à „! 
+|X0@=,€&`L€˜0€      a   œ   I,   	   dP0@f# PdPP5@%@ …P¶E»0  	,:d` <'0b€¼A‚Á9ĞñÎpCÔ˜Á,C€Ã“c=@À¬ÈÀ@f„ÀëÄ±20ˆ$b–`¨0Ì@‹ƒ00D K€"³Ä@…ÃL=@è„¢iô ÁøèÖA=@(
+B AÀ@3 $ d`ØAô ¡	( "20$… z€@„  z€ğ¤!ƒ@VB \@A@È  	` H)P20¤… z€@!€@$€  yĞ„àHöB=@hƒ€‚€@`À@W $ d`XAô ¡
+B H „„Ù! ğA@A@È  ğ``¸!à4˜e(Œ yAˆ °ƒ)0 ³¦B8ÀÀpC `0ËpÂÂ8ÀÀpC0`0Ë€Á†C@    [.8ƒ-g°e ƒà¶hœÁ–‚3Ø2¼Ap[†9Î`ËpÁlö 8ƒ-Ãg°e…à¶¨œÁ–‚3Ø2ÀBp[ZÎ`ËpÁlv!8ƒ-ƒ8d°e0ÉÚ2¤ƒt !1  
+   † Ø‰„ 9±€€€&  &@L`        a   ¬   G,      dP@PdPEP¥På@ # dPPE 35°C)d °#Æ€ ¬B88F` ‰ ` @Ò„+   d ½rPÀ †ˆ@(€<¤\@A@È  zåğ”A6l@Â  ƒ ô A
+B Ñ+‡j¼a" Ç D ƒ2 Æ 20 ¨A@A@È  zåĞÍA0 xØd` =@€ƒ€‚€@ôÊaò †ˆ@( œ> ä@0 À@@ éB„ ¢Wl 
+s0l@Â äa =@ğƒ€‚€@ôÊ!Ná†ˆ@  dT20 B@A@È  zåp­ÀÃD À,A0Paè°€> WAp Pf	„
+@b Â ‹` 08è•ƒĞB@Àn(3˜eˆ W¡pÅ°0l@Ç Ì€!8Ãpƒ±€Á,C!¸ğ`ƒ
+ 0Ü  Ì2A@j 0¨ 
+\°
+”A Œg ‚`°
+g«°A@ !   [†$8ƒ-Á–á	Î`Ë d°e°‚3Ø2dl¾à¶bÁ–Á‚3Ø2¤A@[8Î`Ë0lì 8ƒ-Cd°eèƒà¶ Á–2Ø2¨B@[WÈ`Ëğ
+lfAÂ¶· e[\È`Ë    !1     ! şbÁ |±€@-°ˆ@ Pb Â@Æ$
+I, „ ¸‡„ ö°€ $‡Qƒ ô0a bÂ        a   Í   N,      0@f# P3     ñ0     +80ƒ1X1ÄŒÁŠAÌ`Vs`c   d Œá† 0ƒY†@ğ˜N éÌÃJb³ƒàrİ@2Ñ(˜%@* -È 	`` € ƒd` =@XÊˆd` =@‚LdÄ ƒƒvÀC0dÌ ˆÃB€³„Ì2Æ„]œÀ,AƒÜ À˜%H* ?î ¹ÀãÄ ¨ `0ˆ@Ò- 6 h$"ô a21$BÚa!Xr€qÀ Ì pD éÂ”ä’
+08D é¤b #H„ ´C>B¸7| ³T |pŒ3PèÃ1
+
+a ÃÁ˜Á,ƒÂ7øÏ,€H(q°P) Ì 0D S ÈÀ@z€À
+á
+20 ÀB0l@D , â 0pDà†X€¸@‚¤¸P°È@ é/ÃD@ bæ Ä ? á†!@ƒY†…	* QHŒÃ```¸! 0˜eh’` @	Ã$"€ Ã„9@å 00 @`Ø€8‡` †uHXqˆ $   [  ƒ-ÃÁ–
+Â`Ë°d°eè¤7Ø2ˆA@[†3È`ËÀAlä  ƒ-Cd°eĞƒ ¶£ ÁÁ–2Ø2ÌBp[†[Î`Ë€lÀ!8ƒ-9g°e0‡€¶é ÅÁ–¡$9Ø2¼C@[†xÈ`Ë lè! ƒ-C=a  !1     † PC ”Å‚'€@M,`$<Ã±F¢€Â @îaRÄ €=,@Œ‚„ ¨‡Å  =L`™0@2a dÂ Æ„!      a   w  s     0@ac ‚ ‚ èÿ€ Ş`@Cb0á†;uøÁt†;î0Ô
+¡àî`¸ÃP”c¸ƒáPdPEP¥På@f5@ac ‚ ‚ jƒÔ@…rA@9A@Tr  ñ0     +80ƒ1X1ÄŒÁŠAÌ`Vs`c°b 3ƒC˜Á¬ìÀÆ`Åpf0 35°C)ÌD ;ÂL °Ã(ÌD  ;ŒB~‡7l@a@ ÃÄğÀ°!x0Ü ¤†t’ aà 0İ¼A1Üp€0ËÁˆQ!¤°``Œe‚`P· #E„ ”.€ÁˆAa!§ĞfÀXĞÁ	\P;Ü¬7k`';Ë0ÁˆR!¤0e ¸AŒf‚`p
+#ÁŒÆ€ o ("Œk‚`pıŒ$r ‚`°òØÍ2…EÀnØÀf9²Ø^9x¡
+½røDÁzå £à½rRpƒ^9ˆA)B¯ÆÀŞ Wdp
+oĞ+‡2@…7 2 ³b@e 00ÀB ³L20ˆƒbBná%‚B¸ KB`¸¡Lf$¨ş€Q
+`ãÀ Y‚…à `` !0Ü°Ì2(r$êB	HæÀöÊAz¡zå°¾ 
+½ràƒ_P…^9ô8¨B¯ü À¡W «Ğ+P‡Uè•C(Ã*Œ ‚J¨¬…À˜%h*4@®e päZ0D ƒ
+28´8Ê G
+7A0´. É €2€ ,¾0l@0B ÜR0ÜÀœÌ20Kpap0Ü © ³	T ¢ ÔHT d ÔHTä¡ÔHT :¡´Hàà
+!0Üğ
+Ì2<N€Ã?€À,A !€Å8€ "³Ğ@…Ï|| õÌÇ7P!PO{|‡E²  ÈÀ@z€P„ "ƒè‚H³^Ä=@Pè ›H20 A‚h–@¨ æ€r‘h BØ(–ˆ*„: Œh HŠF¢
+`(–ˆf	¦
+@‘Ò`¨)š*E:¦
+@‘¾i °	i¦ )AD@È  	@ HKP2 ˆ$Ë" d!€ÀÀ@a(¸è-`¸AJ0˜e ¦ -\&0Ü ±Ì2TR€HM€ÀpCp`0Ë`yÁˆq «Ğ6(u ¼`  ô 
+B 1l@øBP iHğ    d ÃD8€Jh€@Ò„>( Ä°Q` d` =@…€‚€@é ŠÂj€@Ò„S( Ä°ÑA +¸‚`
+ €]€@ÒW( Ä°1Á ¤a =@…€‚€@ö *»Hn!   d Ã„>0KpT ¨`}Ü@…Á2ÖÆT hcUÜ,6P×£T¤s¯½rò( ÃE`³™ôÊ4Î£6 ‚a †â€Ym 00'n00˜eØ° ö€á†€5À`–¡ãlX& Ê,ÁE.0È% 
+\à4b`œ‚Á*Ü	mØÄ,Á7P€D¥6Ğ@à•ë@˜·!'pA³ß@ xL—A ô ÁÊcØ€¸! 0ÌÈ6 ¯Èp Á,åÀ˜%ƒ
+ÀDƒ
+€F* q0¨hÄ¡À ‡Ûá†"@ƒY†F‚
+ fŒ˜‰ƒ
+€_Œ˜‰ƒ
+A„Œ˜‰ƒ
+À†Œ”‰ƒá†á>Ì`–Æ @¡E``– p€@âE``– *ú!ƒyyƒ
+ "ƒyyƒ
+"ƒvyj‚ƒ!HúèB ô !@qD  @! ¤J@A@ÈÀ z€0#A’!% d`(&Aô ¡( D!$ d`˜&Aô 	( !ƒÀ7	B R@A@È  d20 <A1!! d`˜'Aô ( D4!$ d`*Aô a
+B AG@ÈÀ ĞT‚èB„ ¢Õ„àNHºJ=@ˆƒ€‚€@ô áğBBµ„@ğ    d t„w% øA@A@È  Pú0 Àà@ 3 À 0Ø@ 
+0p@ ƒ†^ƒY3pƒ`ÄÀ8ƒU›UI¼…X \20 ìB@A@È  †7	
+ éÂ/„ bØ€ˆ“` P©ÈÀ@z€@!€6 ê$  ü^¤éP2 ˆa"O‚@røÈÀ@z€à!€6 ú$( œ‡zÖ0@ÈÀ@z€P!€6 F%€4¤ùP2 ˆaÂT@åe@ é‚?„ bØ€P•` f	Î` @3øØ` Â /3ØØ` €13¨Ø`– * ã5¨0Øì5À`d` Wõ‚3 c¸¡Ì`–!Ô è•¾ìL1l@Ã Ä1 ³j0Phà¤Ápƒ¡€Á,Ã A€
+ØÀÀpC 2`0ËĞl`2 @àPf	Î€|`¯ ¸@fhÄÀ8ƒUX”1—Y‚7H“ ‰@2$ û!ì€À|d ë 0Hx d‡@’ Ñ!4€@qd Ã °È^ Ì…@’' ƒ›œÀ@"À ÀÀÀ€¸€h–à* Áü 2€ Ø…Üw! æÅÜÀ ÀÀ m@ n 4˜e(8Èl Æ,AT $3  ÌŒ ÌŒÌŒ8Ô7Ì2ˆ   †   [†"ƒ-ƒÁ–áÈ`ËPlâ  ƒ-Ãd°e…€¶²Á–‚3Ø2Œƒô[sà`ËpAlú!8ƒ-Mg°eÀ‰à¶=œÁ–¡,¤8Ø2¤…$[†¹Î`ËPlğ"8ƒ-ƒ^d°eğ‹à¶ Á–4‚3Ø2˜F@[ÕÎ`ËÀld#8ƒ-md°e¸à¶¹Á–¡7‚3Ø2üF@[†ôÈ`ËĞlÜ# ƒ-ƒ|HØ–¡>¤lËplò# ƒ-ƒ~d°e@‘à¶*Á–ÁE¤9Ø2¼H@[†‘è`Ë`&Alâ$8ƒ-Cg°eÈ“à¶|œÁ–T‚3Ø2ˆJp[S	Î`ËÀ*Ál`%8ƒ-Ã¬g°e¸•à¶¹œÁ–¡W‚3Ø2„Kp[†r	Î`Ë€.ÁlØ%8ƒ-ƒ»g°e—à¶$œÁ–Ád2Ø2¤Lp[†•	È`Ëğ2Álb& ƒ-CÍg°e¸™€¶;œÁ–¡g2Ø2ŒMp[†²	È`Ë€6ÁlÔ& ƒ-ƒÛg°e€›€¶zÁ–Áo2Ø2üM@[†Ñ‘°-ƒéHÙ–u2Ø2¨N@[†Õ	È`Ë ?Álè' ƒ-şHu°eÈŸ€¶!$Ù !1  k   † Ø£ v´` Z@PB† ¨C °Î‚! NgÁ ¦³`€ĞY0Àß,@op7† ›C ÄÍ‚! ØfÁ j³`€²Y0 Ø,`g 3† ¨™C ÌÌ‚! \fÁ *³€ ádƒ ı²€€€_Á  ÷²€€ ^à.@ÒeÁ ¸²€ V€"† 8‘C ˜È" „úX°FAB $ˆ|,(„àc!À{,0b ôX@`
+ ÛX0@m,`6@0¢± ø‹C ğÅc ‹„ `±@zœæ@! ˜Â%vbÁ 6±  ‚A¨‰G QĞÄD "(Œ™Xp)ÉÂ4ÎEÒDUÈaÄ @L, & ¬Ä‚! òaA! Á€
+†{˜P Á ÈÁ„! â`Â o0a€2˜0€L &ğMÀ›0À4a iÂ Ğ„! š	C ,† @     a   "  `     0@5@ U@A%@5@ 5PdPğÿÿÿ?t9@˜# dPeP
+ÅP”9@ EP¥P¤9‚ ‚ B# 0   ñ0  
+   +8PVq +9€ƒÄ˜ÁœÁ
+‚Ì`Î`C9    Ã·q2ÜhfpC ³A$dÄ€Ë00Tƒ p<ÈÀ@z€P³Â@…à
+ÁGT ¨|	a¸!2˜eˆ 	ƒ¼€‰ A36 3€ g0l@g ÃDpĞ„`éBÃ„Ğ„@†ˆ@ Ó„€† ABÀ°´A Ì=@xÜ P€á†`ƒY†BfŒoË<0Èëà 20è †9 ƒY†í.è 20ğ Z€ 
+ADAnHA†RƒeØà=Ğ œB Ì1ğT
+ƒAğÁ,A2Pa²YX!8¡¶®
+ÛXÎ…m‚,‡äÂ¶ ‚SHa[€`Á1¥°-@À…àSØ èB0Çp
+Ï-Ì1N9Ì1*Ì1*Ì1Ë9Ì1J*Ì1I*Ì1È-äµ¹h†á†€È ‰Ë¼ ‹1„f”%CÊ¡ëA,À,Á2†`ĞÃ,ÓcE=ô Á‚a" … ˜%hÆ’\˜ep`Ñ… ÄC0l@· ³Ï³³PŒ!,¼Ğz†ˆ@`– Cxøa–Aš‚1§z€pÁ°ôB ÌLc8Ì2PU0†…Cô!6 p€Y‚j¡‡Yë
+Æ¨qèB?ÃD00Kp!`ò0Ë€eÁÂ5=@ ‰`Ø€Ì! f	²«ƒ’€á†`À`–AK‚áSà0˜eø¶` C0‘ÃD|Ğ: 9@ÄÀm–€¨Ø*€Ç#6ÂpCd0ËĞyAyA,DX"6 y€Y¯Iàa00ÜÄÌ2|\°ô )   [†'8ƒ-ƒœÁ–Î`Ëg°eà‚3Ø2xÁlÂ 8ƒ-Ãg°e ƒà¶i i[Š\Îà ƒ-G8gpÔB[sÎà¨„¶íœÁQl9æ!8ƒ£:ØräCpG t°åø‡à:@è`ËQÁu€ĞÁ–c%‚38ê ¡ƒ-ÃKHr°e¸‰à¶=œÁ–A,¤9  !1     † ‘„ ú±@A€@ˆÂ8@cA1 B°† ˆ‹C ¸Å‚! ÎbÁ d±€€'„L, °‡Q’(ó4N=,h ¢0$QèaÂ ÜB ‚mÂ       a   ƒ  |     dPHP	A5PEP¥På@ 3 PP# PÈÅ@ ePP%@ U@f50@acæœ³æœ³æœÿ”C@1  ñ0     +80ƒ1X1ÄŒÁŠAÌ`Vs`c   3=°C)d °#Æ€ ¬<tz7|œÌ2{`x 0Ü ô ¼$éÒmĞ;‡ÄÀ wÊ€Aï8 ƒŞ90q ½shä zçàÌAôÎá¡ƒ0èTs0K T îÜT ¦ÄT ¨´Ì2zğT §—ô T ¡—ˆ0Pô] Â@wy€8Ô`P€@Ò„<(ÃAÁ,‘Aú€  `Üò€ˆ@’ô Áz€„á†àÈ €è
+„á†`È €À € $¤@A@n@2 ,è‚Ã„á† È €À"€ ®@A@nT2 ,è‚b„á†àÈ €À"€ ¹@A@nh2 ,è‚Ò„á† È €À"€a ğJ¢`cØ€ˆƒ\€Y‚<n€\ ƒY†#dƒ< z20 ¼C@À6 T!(€,¤òP 0†V ~ ¤öP 0†ˆW A@ é ‚> ŒaB‚6 ba
+ I$@ é ‚? Œa‚‚@V@	ÀàD ƒW æ20 ”D@À6 t! €,¤(P 0†^ ™ ¤,P 0†ˆ_
+ -„á† $È`–I‚aB@¢ †ˆt ‰6 Î$ µœ8a"@F'N`Ø€0‡€ ú6 Ğ! \@B†ˆs 8aâ‚˜%¸z€Pe@A@nR‚f”%6 â%`Ø€”(€aP‚ Ğ‹6 à! ÜÄâ†ˆw «“aâÀ%D`Ø€p‡  B‰6 à!€Y‚«=‘„á† &È`–i‚a`‚ †ˆ|€‰6 ê& ã -N`Ø€Ø‡  °R‹6 è!( Dƒ—aB‚À&D`Ø€¸‡` ğƒ‰6 ò! €Y‚«eÑ„á† 'È`–Áy‚aâpb †‘À‰6 ø' í .N`Ø€‰` 0äâ†ˆ~ éà&D`Ø€‰€ ğÃ	6 ü!( tœ8aB$‚˜%¸z€Ğq@A@nÂ‚f (6 J,`Ø€@	° €aB$À¢ Ğòâ†• Ó@/N`Ø€(‰` p~B†ˆ–
+ İ ,D`Ø€@‰€ PÀâ†–`–àêB]Èa¸!H2˜e¦`Ø€`	´ €aâ%Ğb †ˆ•@‹ÀT6 f"( lÑ8a‚%‚@T86 h" ì´a"&‚@S@‹6 j" €Y‚«}q„á† .È`–ª‚ab&àb †š€6 d.
+ M!5N`Ø€À‰` pTã†ˆ› gá-D`Ø€è‰  °àB† e.N`Ø€ğ‰` f	® ”ÆP†‚¼ ƒYë
+†À‹6 z/`Ø€Ø	¼ …Ø8a¢'ÀY6 Ä"  Ä…»a‚,‚ÀXÀ6 Æ" ì¼8aâ,‚˜%¸f	°
+#4´¹*€0Ğèä¨ 6N®
+àÒ@æB5d  ˜%È*ºÁ²l `°*¨ ìÉ* [2$èƒ^üF@Àn3˜nŠ`ºA9„T `º!Pdp†‚Û ƒY-Ònrf6,n@fÃf8/nP‹× ƒ[‹×€é†Ø„K‹08¸å.à‚İ€ÈÀ@z€ĞÁ° €Ò}œ 7½³Ü\TphÀ¼Ã˜ÁtÑÁpÃàf0İ@üG0Kà” xÀáÁf2t%€pv°©aİ@	à2œËl.C(İ@	 3œÌl2C İpÃL Ì2|uàà €Aˆ ` ô AD
+ÂpC`d@àñ" ô E
+ÂpCÀd@ T# €‹ˆ ` " ô !F
+ÂpCP"d@àá# ô áF
+ÂpC°"d@ dÁ `0ÀÀpC "`0Ë qÜfìYÍ^ è,CÄA0Ë dàÍ2˜Á`³f0Ë`e€Í˜Á@‰9ĞPÈĞĞÈ” fTh4f$¸D%æ`Ce€Cc`Cb€Cd0PğR¨Ñ°‘¨`À €™ˆÀm t M
+ F‡–ñqh'”A77"Ì2œA³hÀ6{rä`0'"€€@Ò„;	(ÃˆÁ,C°A€Åš€@Ò>	(ÃÁ˜ˆÁ,ƒ°A€
+ª€@Ò„P	(ÃšˆÁ,Ã°A€ª0*"€*€À,Ì2´Aˆ²B©ˆ ¬ X±r( ô aU
+ÂpC 'b0Ëày 
+ ô V
+ÂpCp'b0ËğyàB ô ¡V
+ÂpCÀ'b0Ë yT f°bğHt%6 U	€ ìJ¨À,Ad/Hz%   7±B ¸ˆ ç °d` =@(—€‚€0Üä
+d ¹Òu	(Ã¯A Ì¯€@Òx	(Ã¹A  0€Á ÃÁ¸€Á,ƒäAp‘±§5{ ³s†¹€ û"ˆ`ğ. ô d
+ÂpC@/d€Ë€@Ò„’	(ÃA¾ÁÁŠ+1/ ô e
+ÂpC 2d€!/ ô !f
+ÂpCP2dpF°7^,âÄÈ€@Ò„œ	(ÃAËºÊ€@ÒŸ	(ÃÌÁÁŞzM°¨0`° €Î€@Ò„´	(ÃAÏuHÜ&   7bCg{¦èAÁÎ2ĞA)Ò„º	†ˆ l ÷âg@`¸¡/şÆ¦öt‚á¿à4˜n"˜%ÈƒáY93˜e°ƒ<P4Ú0àÀ`4@ éè„á†€nÈ €@ÕÀ@5@ ƒ×¤¨P†¾!ƒ e£v@ Öf20 ÀN@A@nH‡2 |J20 ØN@A@nT‡2 |.À nÌGfî ƒ×¤àP†Ú!,ö¤åP†‚Ü!Ôr20 ¨O@A@n|‡ğ³ÈÀ@z€ğ>a¸!288€6€85h6€82(6€80`6€8<04 9904 9604 94p4 ÁæÀ`ÀàÀ`á† ~Ğ`–ò ÈR0 ¬P0l@û #õÃ3RCf0İ 67Ğˆü ÁtÁ,A4€İÙÕŞr„rDrr$r4rdrÄrÔrärôrxWà1Ğ rtrdrT|7ÈÈÈQÈ‘ÈÑÈ‘ÈÈQÈ‘ÈÑÈğ]ÁwÆ@c ÈÑÈ‘ÈQ€Ş à]ĞÅÉÍ™±µ¹½Áè g4€İÙÕéĞÈQÈ‘ÈÑÈ‘ÈÈQÈ‘ÈÑÈ^Az>Ãı Á,Ã Á@Àz“ ì	LT ´'0y€ÁÀpC°?h0Ë ìA0b`œ‚Á* SõÏ¾P@  Ç   [0Î`Ë@lÖ 8ƒ-Ãg°e ƒà¶yœÁ–Á‚3Ø2ŒBp[TÎ`ËĞ
+Áld!8ƒ-ƒ.d°eØ…€¶¾Á–á2Ø2ŒC@[rÈ`Ë€lÒ! ƒ-ƒ:d°ep‡€¶ïÁ–Á2Ø2ÜC@[}È`Ë°lş! ƒ-Hd°e‰à¶%Á–Á$2Ø2œD@[†”È`Ë°lZ" ƒ-ÃKd°eˆ‰€¶4œÁ–á&2Ø2àD@[†œÈ`Ë°lz" ƒ-ÃOd°e‹€¶cÁ–Á,‚3Ø2¤E@[µÈ`Ë°lÚ" ƒ-Ã[d°eˆ‹€¶sÁ–¡.2Ø2àEp[†½È`ËÀlú" ƒ-Ã_d°e€¶£Á–¡42Ø2œF@[ÕÎ`ËĞl\# ƒ-Ãkd°eˆ€¶³Á–¡62Ø2ÜF@[†ÜÈ`ËÀÁl~# ƒ-xd°e€¶ãÁ–¡<2Ø2œG@[†ôÈ`Ë°lÜ#8ƒ-C|d°e€¶óÁ–¡>2Ø2ÜG@[†üÈ`Ë°lú# ƒ-ˆg°e‘€¶$Á–¡D2Ø2œH@[†	È`Ë°"lZ$ ƒ-Ã‹d°eø‘€¶g"½Á–AM$8Ø2ÜIp[X	Î`Ë`+Ál~%8ƒ-C¹g°e ™€¶.œÁ–f‚3Ø2èLp[†³	Î`ËĞ6Álæ&8ƒ-CŞg°eØ›à¶œÁ–át‚3Ø2°Np[Ù	Î`Ë@>ÁlÒ'8ƒ-üg°e¨Ÿà¶ıœÁ–A„‚3Ø2´Pp[
+Î`Ë CÁlĞ(8ƒ-g°eÀ£à¶~œÁ–!•‚3Ø2¸Rp[†Y
+Î`Ë€KÁlê)8ƒ-ƒHIq°e@)I   !1  l   † P©D £´€ A ÌÑ‚! vhÁ ò³€ ávB ôÍ" µY0 Î,8` Š`d ÿ²€ !_0E@/:á²*
+“"HIÃ(ˆáqf™€,Ğ6xY°Ô$EÕã4	ra£@À…eÖ»,xˆÂ8DY˜fÀ]<DaH¢,L3Ğ.† @—C ˜Ë‚! leA"D Æ+† X•„ ¨²€@T ØÇ" ğX@àŠA ¼X@€0Š †·X@€Àb@-Ä @Z,PÃ(ˆ! ´XĞ(	rÅÂ@œÅ‚! ÌbÁ e±` ²XpDL, ¤zœ†	%A€£ a°‡nÀk i€g`e@c a Ÿ×q›–a—UQ“AÓ0 $ÈaÄõ°`IÃ(ˆA z˜ 1-Ä ’(4y0a 8˜PÀ˜Á„„À›0@6a l‚B…`€\† &      a   N  d     dP0@f# Pu@5@ µPdPu@ Q	e@%@ …0P°	U@ac­9ç¬9ç¬¹ÿ€`ŠŞd00F ‚ c ‚ Y@P@	@”Ì  ñ0     +80ƒ1X1ÄŒÁŠAÌ`Vs`c   I‹`"`'0b€¼A‚Á9œ7ŒÁg³ÁW7˜A˜AØ r0Lƒ0 ×@@ É60l4 "ƒ˜%*WF*™eƒ3 èB ˆÀ,1ÜPj`³ÅÃw°fĞ„>ˆÌƒ9 ÷`@ Á> ÈÀ@îä A@ ƒHÂ f	”
+ƒ†[B* wn	é‚$¤`8 ĞW(D\!èÂá„„w! !€À€` ˆ)P20‡ z€Ğ„ ‘ 	ªC=@ 
+B G =@xø -20œ‡ z€Ğ„ “ z€€ø%!ƒÀ}B eP2 Dèb”„G" ´A@A@È  	` ˆ;P20\‰ z€P!€@$€BB2„@ø    d x0Ğ„Gz€ø	!ƒÀB ¥P2 Lèb”„Ç" ´B@A@È  	` ˆKP20\‹ z€P!€@$€  6AI@ÈÀ p.‚èB/„ ‘ z€€ø%!ƒÀ½B åP2 Dèb”„G# ´C@A@È  	`€€A j!Ğz( ô áÁ‰ vAB@ÈÀ p6‚èB?„ “ z€€ø%!ƒÀİB %P2 D $ d`(Aô %
+B G =@xt£k20\ z€P!€À$€  ¶AI@ÈÀ p>‚èBO„ ‘ 	êG=@ ‹€‚€@àÀ@ÔèB`$„G$ ´E@A@È  0	` ˆ{P20\‘ z€P!€@$€  öAI@ÈÀ pF‚èB_„ ‘ z€€ø%!ƒÀ	B ¥P2 Dèb"”„Ç$ ´F@A@È  	` ˆ‹P20\“ z€P!€@$€BBr„@x#   d x0Ğ„GDz€ø	!ƒÀ=	B åP2 Lèb&”„G% ´G@A@È  	` ˆ›P20\• z€P!€@$€  vBI@ÈÀ pV‚èB„ ‘ 	êJ=@ ‘€‚€@àÀ@6éB`*$„Ç% ´H@A@È  0	` ˆ«P20\— z€P#!€@$€BBò„@x$   d x00Ü´‹Ì2 G€î"„@äÅL†ˆ@€Y×\` ×¤_``¸A0˜eHŒ Ce\``¸! 0˜e „` Âà¯b1˜eXÄÀO0¨@a]@ ƒ; €J ¤ ³Ì@…¡bËa0PÀØòÃAd`˜ Ğ„‘	( Ã¼˜Á,CŒ=@@™‚‚€Aô e‚á†¢^Ì`–ÁÁ‚ @M}!! d`x3Aô á( D!$ d`è3Aô Á	( 20,› z€P„  z€ğ”K‚˜!! d`è6Aô Á( 4#=@@r†’€A İ!Ğ3( D°!$ d`Ø7Aô ¡
+B Ñ„ãl	’N=@ ƒ€‚€@Ğ20T z€ !€À vn Êô !°B³„@F!   d =@8ú†€A î!ĞU( DÒ!$ d`>Aô !
+B Ñ„cu	¢O=@À…€‚€@ô áBBï„@~!   d =@8r‡€A ı!Ğs( !ƒ@ş	B ìP2 ˆ 4wÓ„à|H’P=@ ‡€‚€@ô ápBB+„@ö!   d t„c( „D@A@È  z€Ğ Pş!! d`˜CAô !%
+B Ñ„c„	‚Q=@€‰€‚€@Ğ204£ z€`!€èB>=@bˆ„€A !ĞŸ( D"$ d`XGAô ¡,
+B Ñ„ã‡	òQ=@`‹€‚€@ô á0#BB£„@æ"   d =@8Úˆ€A *!Ğ½( D:"$ d`KAô !4
+B AG@ÈÀ ğ–‚èÂi„ ¢õ !%B¿„@^#   d ”Óô Q%JBç„@n#   d =@8b‰€A ;!Ğß( D\"$ d`XOAô ¡<
+B AG@ÈÀ pŸ‚èÂz„ ƒº 8{Ô„àœH’T=@ €‚€@ô áp'BB+„@ö#   d t„c* „H@A@È  ğ$z°'æPĞ@!J0à©@šPÀ˜@á4` … 0(Àà¤D ß#?@ Q$=` … 0èÀà6@ º ™€XPP@¡@ T€‚À`Bà
+.xà<€ä .Xƒ¸à¤ı€Ü‚ÀÀ@ P öêpb$0hÀ @ ²døÒ#0À 7B ƒÛb#0XÀÀ4B ƒš ^0H	À`$@ ƒ~ î0À@@ ƒW ,¸`ô<@AÈàĞF
+(Á %ö+È SU-ƒ0¼@¯d¸! ˆY††Ğà¯À`–!‚‚d-ÕàĞNh– ¨8	ò×ànşŠ(¦‚AnB‹˜e˜¤`¸A-áŠĞâ‚nH/Ñ
+ -Î  f	¦
+€gƒÈ* İ"BBá\@ ñD @"€€ÈÀ@:€°^ c¸!]3˜e Â @xYB ƒõL˜¸@€¤óP 0†â%@ƒY†0¨œşë0ÈÀ€¾D +»&¸`€¤ıP 0†ö%0ƒY+%0è/À-	ÈÀ@:€Pb c¸ad4˜eƒ+èÂ‰™Ì°¨W Ì„AZFez€Ü	!ƒ@B $P2 ˆ şEH@ÈÀ pÇ‚èÂÊ„ ‚€A`˜!Ğ„˜	( DğêBÀb$„Ó, äL@A@È  00±èBc”„ã, „M@A@È  z€pì!!ƒ@<B hP2 ˆ bFH@ÈÀ ğÏ‚èÂÛ„ ‚€A`©!Ğ„º	( bv=@pF¬Aœ‘20tµ z€à7!€èÂg„„k- ”N@A@È  z€pü!!ƒ@^B ¬P2 ˆ ¦FH@ÈÀ pÜ‚èÂì„ ¢G«20T· z€ ;!€èÂAk„„ã- „O@A@È  èŞ[=@8Ÿ€‚€@ô ¡‘³ âÖ„`Üz€Ä[‚rëB`n=@ğ¬º‘20,¹ z€P?!€èÂñn„„Y. ğO@A@È  z€pØ!!ƒÀ™B #P2 ˆ ıFH@ÈÀ Pç‚è‚
+„ ¢É20» z€C!€èÂ±r„„Ñ. àP@A@È  èº]=@ğ¡€‚€@ô ¡Y· 9GB@ÈÀ Ğî‚è‚„ ƒ™»  aGI@ÈÀ Ğï‚è‚„ ¢Ú20,½ z€PG!€èÂñv„„Y/ ğQ@A@È  èÊ^=@¥€‚€@`ğv7ĞGæz€ø	!ƒÀİB «P2 ˆ ¥GH@ÈÀ Pü‚è‚,„ ‚€A ú!Ğ\
+( Æ^À k´`p0€AÀ ªwH»¼``Á `°À ¯'ø« ` 0€OÀ 6À` 0€AIÀ ø È`À0€9À à è`P0€A+À r `0€Áxs¨8è¬ 8Œà À 
+A` 
+ €'€ü!0€ğ¡0€-q0€C9À  „ n „` è|8o8'8èà À 
+A`°
+ €$0Ü ¡` ³\Z„Ï0B 7P2 z‹€A`Aô ¡§
+B At20œÃ  ŒU@A@È  (/By!Ğ„´
+( ùE@ÈÀ ğƒ z€ğV!€ Ñ–b„@ê*   d Xñì` 0€,0€Á7€µá0€jÀ ` `°À lÈ Æ‰ŸÀ iŒ	``#0€ŒÀ û¸``0€A^À dø`0€ÁJÀ $à`à0€AÀ `0Á@‡–¿ph'4Ü¤b@Ì2pZ0Ü ¤b Ì2p[0Ü 
+ï Át<©³Ü@	`–B&‚&lâ)`% y
+Z
+y
+Z
+
+íœc Ù^ €D t ƒ€€1Üà^Ì2ta }-!€<"€	t ƒ€€1Ü`_Ì2„àD’Á	`ğ_ €A>"€ÕI7€Át A$ƒ€€1Ü bÌ2|a Š)!€H"€[t A%ƒ€€1Ü€bÌ2„=@`É`Å†ˆ€ƒ ˜%|±}` _'nR1 ƒY1`Ì1``¸!`Å fÆ@	ƒ€ M  [†8Î`ËPÁlò 8ƒ-Cg°e…à¶¤œÁ–‚3Ø2´Bp[†XÎ`ËPÁlr!8ƒ-C/g°e‡à¶åœÁ–!‚3Ø2°Cp[xÎ`ËPÁlò!8ƒ-C?g°e‰à¶%œÁ–!%‚3Ø2´Dp[†˜Î`ËPÁlr"8ƒ-COg°e‹à¶dœÁ–-‚3Ø2´Ep[†¸Î`ËPÁlò"8ƒ-_g°e à¶¥œÁ–!5‚3Ø2´Fp[†ØÎ`Ë@Álp#8ƒ-Cog°eà¶åœÁ–!=‚3Ø2´Gp[†øÎ`ËPÁlò#8ƒ-Cg°e‘à¶%œÁ–!E‚3Ø2°Hp[	Î`ËP#Álr$8ƒ-Cg°e“à¶eœÁ–!M‚3Ø2´Ip[†8	Î`Ë@'Álğ$8ƒ-CŸg°e•à¶¥œÁ–!U‚3Ø2°Jp[X	Î`Ëp+lxEzƒ-Ã¯Hp°ep—€¶óœÁ–A_‚3Ø2øKp[†	Î`ËP2ÁlP&8ƒ-Ëg°eˆ™à¶5œÁ–!g‚3Ø2ôLp[°	Î`Ë@6ÁlÎ&8ƒ-ÃÚg°eh›à¶qœÁ–Án‚3Ø2èMp[†¾	Î`Ë:ÁlH'8ƒ-êg°eXà¶¯œÁ–Av‚3Ø2ØNp[†Ü	Î`ËĞ;Ál~'8ƒ-Ãøg°e8Ÿà¶ëœÁ–Á}‚3Ø2ÈOp[ú	Î`Ë€?Álø'8ƒ-g°e¡à¶'œÁ–!…‚3Ø2´Pp[†
+Î`ËPCÁlp(8ƒ-g°eø¡à¶cœÁ–ÁŒ‚3Ø2¨Qp[†6
+Î`ËGÁlè(8ƒ-g°eĞ£à¶~œÁ–A”‚3Ø2˜Rp[U
+Î`ËàJÁlb)8ƒ-C-g°eÀ¥à¶¼œÁ–Á—‚3Ø2ˆSp[†s
+Î`Ë°NÁlÜ)8ƒ-ƒ<g°e §à¶øœÁ–¡·2Ø2˜W@[†ø
+È`Ë _lü+8ƒ-ƒˆg°e0±à¶)œÁ–¡Å‚3Ø2¼Xp[†Î`ËpcÁlv,8ƒ-Ãg°e³à¶fœÁ–AÍ‚3Ø2´Yp[†8Î`Ë0gÁlî,8ƒ-Ÿg°e µà¶£œÁ–áÔ‚3Ø2¨Zp[WÎ`ËkÁlj-8ƒ-®g°eàµà¶¿œÁ–aÜ‚3Ø2”[p[†tÎ`Ë0oÁlî-8ƒ-ƒ¾g°eğ·à¶!œÁ–¡ä‚3Ø2 \p[–Î`ËğrÁlf.8ƒ-ƒÍg°eĞ¹à¶<œÁ–ì‚3Ø2]p[´Î`ËÀvÁlà.8ƒ-ÃÜg°e¸»à¶zœÁ–Áï‚3Ø2€^p[ÒÎ`ËzÁlZ/8ƒ-ìg°e ½à¶¶œÁ–A÷‚3Ø2Ø`œÁ–Aƒà¶<g°e Ã 8ƒ-ƒÁlÌ0Î`Ë€†Ap[6‚3Ø2¸aœÁ–Aƒà¶tg°eÀÃ 8ƒ-;lê1È`Ë ’A@[†”2Ø2´dœÁ–A&)¶5Hr  !1  y   † €Ï`! oˆ X1X@ B@ŠÁ" „7  a°€ áƒD 9, @Á` 	ˆ úo ‚ı-Àı°~ˆ Ğo ‚ø- @Ø½D ­·€ Áô üİ" „»[@€ wˆ Än ÂÎ- @¹D %·`€u[@@k† €µC ´×‚! bkÁ ¨µ` ÑZ0À^- ­`V† ø©©ğ@‘4Q@ DaH¢,LãTÖ…eÚÆuŞa c@e`g€i kÀmào q s@u`w€y {À}à 
+¡ 
+£@
+¥`
+§ğ? (#ÉŸÅ Àı, ~ı,0ˆ „öY0@h,À/Ğ† È‹E Ã],(@êbA Â0ÔbÀ@èÃ‚j’"èq&D!€Â%àÃ‚! îaÁ ö°€Qä0
+b B0 ô0 „`&0J‚1P„Á„"€›0@4a fÂ Ê„! 	C †        a     `     dP0@f# PdPP5@%@ …P¶E»0PÀ6F ³æœ³æœ³ö?Ğá¦èM# c ‚ğ7F ‚ ‚™Õ ”@À   ñ0     +80ƒ1X1ÄŒÁŠAÌ`Vs`c   É	,b™d` d'0b€¼A‚Á9ü‘ØpÃv™Á,CğÃf=@?20Y!02H10ƒ20ˆ$b–`¨0ô@‹ƒ0 èÂ ˆÀ,1PaÂ0F† …z€0!ƒèÂ=@0Ò€€A (!Ğ„"   d ¼ô ‰JB¨„@š€‚€@ À !!ƒÀWB T@A@È  ğ` OP20¼… z€À„ ‘ z€€¼!ƒÀ_B dP2 Dè’=@b„€A :!Ğ„6( &ô ÉJBğ„@ê    d ˆ0@H@ÈÀ ğ‚è„  †s@ƒY†ÂĞ„è Â=˜Â°0K``*¬7° ³ ,´7³ ³È7ÜI˜Á,Cò—ò Ãú`fĞ¨‡$ûÁ@°î20ˆ<b–@¨0ü#Yo–añ
+@¡@ ƒCz€ Y @ 0KÀT,²ÜM7P Èr7]I @€‰€€1Ü„„Ì24]Ğš (Dh"n0Jf+@”8b PÓ„ %H’E=@@
+B Ñ„ƒ&	®E=@x
+B „„å" X!€À#€ <p@A@ÈÀ P/‚è‚P2 ˆ qAA@ÈÀ 04‚èB„ ¢‡ô !B©„@Ú    d \!ĞD/(	ÆF=@¨ƒ€‚€@ € !!ƒ@ÜB |P2 ü @4È` …;€‚À  d@A@!€mÄ €BP‚E‚Â0SáĞ2Ã`C†‚˜ex¬`¸¡0˜eˆ  ™CKçĞNh– ¨8	R›g¸!¨¢˜na¸!¸b–a’‚áá6„+nƒOvºA?Ê#8B78€˜%˜* Ó‰i àŸˆPXÀ`>D Ù  à‚20 ğG@Ành‡Àf¨.@zXB şL˜¸@€¤$P 0†ê!@ƒY†®
+z€`"ø0l@ï ³]şz€ğ	!ƒÀ	B ÷P2 ˆ #BH@ÈÀ PG‚è‚?„ ‚€A ˜!Ğ’( DšèB€#=@~¢ÁŒ20T“ z€à!€èÂ¡#„„ã$ ÔD@A@È  èŞI=@Ø‰€‚€@ V0€Á@0€0€†À ^7j³ÚĞ20,• z€!€ 2®J=@x‹€‚€@ %0€$0€ZV‡vB@ÃA³7y"Ì2hY0Üp­L7˜Ê®³Ú@	@R^aB†WÖ@	 W—Iaz•™”…Âj€ ²"¹ €D t aW
+ Æpkf0Ë°uÒÆìŠ`Â„Àd` @—€€1Ü@Ì2t\Ğ„r¹a"h• ˜%èp7tp7â†„ò ƒY	°<z†ô ƒY†O	6Vb   X   [.8ƒ-g°e ƒà¶hœÁ–‚3Ø2¼Ap[†9Î`ËpÁlö 8ƒ-Ãg°e…à¶¨œÁ–‚3Ø2ÀBp[ZÎ`ËpÁlv!8ƒ-ƒ8d°e0é¶é ÁÁ–a$2Ø2œDp[†—Î`Ë0Áll"8ƒ-ƒNg°eè‰à¶aœÁ–¡,‚3Ø2¤Ep[¶Î`Ë Álè"8ƒ-^g°eà‹à¶ œÁ–a4‚3Ø2œFp[ûÈ`ËğlF$8ƒ-Ã‰g°eX‘à¶.œÁ–AF‚3Ø2ĞHp[	Î`Ëà#ÁlÄ$8ƒ-C™g°eH“à¶kœÁ–áM‚3Ø2èIp[?	Î`Ë *ÁlH%8ƒ-C¯d°e0—€¶êœÁ–á]¤8Ø2È‹$    !1  0   † ˜™C ÈÌ‚! ÂeA4@ Æ$ÊÂ4Î³" ˆ0LdA1@"† ‘ƒ"" A?`Š †úX0€Y,   ‹„ ?±`€X@àŠ „•X`0ú° Y”ŠáÈ‡C ÜÃ‚! ìabÄ  A=,(„èaÁ71
+B€¡›PÂ h† ˆ&ÀL@™0 1a€    a   |   E,      På0@5@ UPdPP# 0   ınh(…€1Ü,`0Ë@Ápƒ³€A¤£20Ya *Œ4ì ¨À‡4Ô èwƒ%|  À ¤ß†X Œ¤Ñ„@èBpÂ =@°aBÀ`Ø€° èBğô !Ğ†A€ Û°!h0l@[ ô !z€tÃ„Ğ@oØ€¼ 6 / ú` ß	iô»A„3  `7h ³„T×€Á@>\/ınx( Àd` =@ ƒ ßÆ¼ #éA .o ıNÈƒ ßz Ü c¸!À0˜e †`ã       [† Hƒ-¨Á–!
+Ö`Ë`g°eÀ‚3Ø2dÁl¸à¶^p[†/8ƒ-ƒg°e ƒà¶eœÁ–!‚4Ø2¬´mŞ Pƒ-k°e¸ƒà¶{¤Á–¡¤ !1     ˆ@ ÚbÁ b±€ 'ìar F PÔÃ‚! èaÂ Ã„!       a   s  º      dP0@f# Pµ@5@ uPdP
+u@ ¥@%@ …Pe@f5@‡# 6F ‚ ‚ ‚ø¿Œ€ ‚ ‚ şt8F ‚ ‚Á‚ 	PÄe6@UPP«@Cfpá†;A‘@9Ì    ñ0     +80ƒ1X1ÄŒÁŠAÌ`Vs`c   i‹b0"`0'0b€¼A‚Á9¤1Œk‚`pòd µ#Å„ Ü=HípC”Ì2¹Ü”7°Á˜AäÀĞÌ 20,ã @ É90œ7 "ƒ˜%*]ê0 ƒY†Ú 00D M€"Y @ 0K`Ì2¹@7øA˜ÁıA@‚‚ (ìd`IÄ,ATô0Ô`ğT ò0Ô`ğõ R0lè‚+„¢¯ô á BB»„@Š€‚€@``
+0Ğ(	C=@h
+B H „„Õ! P!€À#€ <uĞ„ HÎC=@è
+B I =@@À’€Aà>!Ğ„2( "ô AJB#„@Ú    d ˆ0Ğ(	®D=@¨ƒ€‚€@ À !!ƒ@™B |P2 <èÂÃ=@@‚„€AàN!Ğ„R( &ô A	JBc„@Z!   d ˆ0Ğ&(	®E=@¨…€‚€@ À@œ $ d`8Aô ¡
+B H =@@À‚’€Aà^!Ğ„r( "ô AJB£„@Ú!   d ˆ0@H@ÈÀ P5‚è=„  z€ğÈD¼ ! d`8Aô ¡
+B I =@@@ƒ’€Aàn!Ğ„’( "20 z€À!€À#€á†À7Ğ`–áø‚ @»Ñ„ 6H²G=@°‰€‚€@ ÀÀpC€h0Ë€|Aİ % d`XAô á'
+B I ÃA| Á,Cò”„û# œE@A@È  	``¸!È4˜eP¾ ‘iô !`B'„@â"   d ¨00ÜŒÌ2,_Ğ„¤>H	ÂH=@Ğ‹€‚€@`ÀÀpCÀ"h0ËÀ|Aÿ % d`˜#Aô a4
+B I ÃA Á,Có=@HN„”€A ˜!ĞÖ( &7>‚³Îô !RBk„@j#   d ˜00Üœ	Ì2<_Ğ„$GH	ÒI=@ğ€‚€@`ÀÀpC 'h0Ë }%!ƒ@>	B æP2 Dnğf¢/èBt"=@Ö„„€A ©!Ğø( *7¢‚³Òô !¡RB¯„@ò#   d ˜00Ü¬
+Ì2L_Ğ„¤OH	âJ=@‘€‚€@`ÀÀpC@+h0Ë@}AS!% d`.Aô aE
+B I ÃA¯ Á,Cõ”„Ó% ÌH@A@È  	``¸!(4˜e°¾ Qô !ÀBó„@z$   d ¨00Ü¼Ì2\_@I@ÈÀ p_‚èB™„ ‘ †‚{AƒYìz€¥!ƒ@’	B nP2 Ln@f²/@2aÀÀG` mD^D ñãen Kfn Ç fn å¢` W#'` ö€‚À @ ƒ›9–€T›€ôPB ƒ] @FzÀ?ù@!b0˜@ ƒñ ¤¾€èP@	@!ğ.à‚.Øâ\ˆN.èà‚;ˆÎ 0Mâ0À_B ƒ[ ^0°›À?PƒÀ @ 8 zF°Ø 0à‘À FB 	N$0 ‘À ?B ƒùî0xÀà,@ ƒŸ n0x	À %@ = *¸`à‚	ĞóD A0` OádàÙÁá†!ƒYí†
+ƒf6.HäĞF Á@%òÇğ&ƒC»!  Õà N( n(ü†H#§şÆo„È €gÀÀvD g P@ 20 €O@A@ÈÀ 0}‚èÂÌ„ â®Ö‘á† vˆÂpºAvbG¸@€ ×& ÒG0˜@ 9ü9ÈÀ@z€0?!ƒ@ş	B fP2 (¸5 nÊ‡H!§Ì§|„È €ğoÀ D ƒ3 „ƒ÷˜%èÒmÄÀ BTBD!~28´Êá Òà„€2 l 0P!n8ò‡H$§ô'„È €’u à.@ éB„Å( °N@A@È  pB£À |@ ƒÓRH†‚"RÃéj!á2  £¸ ¤lP20¬£ z€ğ;!€À€‚<ƒè0ˆ#87à!nÂˆH!§Ä(Œ„È €¸ Y‚n 8zØ* c‰-é‚(„W) ÔO@A@È  0	``¸!p#3˜eğ¾ Q)5B «ô?ÃD  –‰À¬A@#6 a p%æH.xê •Ğ°0Kğ¡
+… 
+ñ7:³``¨C¤ÃAÁ,!†LÅîàÂ@`A±;¸0Ë0bpC( Ìà6$H°`€C"€Æ :$ˆĞ`ÀC"€
+,Á >$Èô` F"€)Á b$	À,TtŒAİÜÂ@ c7·€@X§€€1ÜÀ’Ì2”Á-hH €8@à)  `7Ì2˜Á-XÔt 
+ Æpƒ˜Á,ÃÜB€	;@ğ)  `78Ì2 Á-@Ø§†€1Üf0Ë· ÔN Ğ„
+( ÃU`³jpRü@©€€1Üf0Ë°· vN Ğ„“
+( Ã]`³lpŠ€ ü@`©€€1Ü Ì2´Á-XÄt ¦
+ Æpƒf0Ëà·`‚R Ğš
+( Ãj˜Á,ÃÜBĞ„›j( Ãm˜Á,ÜB€PJ@v*  `7ÄA`³qpR8@ø©€€1ÜPÌ2ÈÁ-ˆt a¬
+ ÆpCf0Ë0· ˜`€S Ğ´
+( Ã~˜Á,ÜB€EK@Ø*  `7ˆB`³up&d@€«€€1Ü`
+Ì2ØÁ-@˜«†€1Ü
+Ì2ÜÁ-•t á®
+ ÆpC+f0Ë€· EW Ğ„½
+( Ã±˜Á,CÜB€ØO@ş*  `7ÔB`³zpâÂ\@F+  `7äB`³{pòZ@N+  `7ôB`³|p‚Ã_@V+  `7„C`³}p’C_@^+  `7”C€³·à¢k@f+  `7¤C€³·ğ²Ã]@n+  `7´C€³· 
+Ê>€ ¬@à­€€1Ü Ì2ÜB(X„t ¼
+ Æpƒ=h0Ëp¢`‚[ Ğò
+( Ãú Á,Ã-ŒBĞ„ój( Ãı Á,Ã-B€Pn@Ö+  `7„D€³·P
+Rè@x¯€€1ÜPÌ2Ü‚)ˆÍt a¾
+ ÆpCJh0Ëp§ KÈ`€^ Ğü
+( Ã. Á,Ã- B€Eo@ø+  `7ÈD€³·
+&ô@ ±€€1Ü`Ì2Ü‚*@±†€1ÜÌ2ÜÂ*Õt áÄ
+ ÆpCOh0Ëp¬ Eb Ğ„( Ãa Á,Ã-´B€Ø{@^,  `7”E€³·à
+ª[€ $@ ±€€1Ü Ì2ÜÂ+Xät Ç
+ Æpƒ[h0Ëp°`c Ğ( Ãr Á,Ã-ÄBĞ„k( Ãu Á,Ã-ÈB€PŒ@Æ,  `7äE€³·0R`@8³€€1ÜĞÌ2Ü-ˆ­t aÍ
+ ÆpChh0ËpµdiH¿Ø,x±a"˜±èwC›	3–© Ã„@¿ŞŒØ³a"`è Š¥ £ßrv„Ù°Ğ„c
+ F¿êLµa" zö„ ¢ßyæ°Ù°€´aj 0ÜôÌ2ØÂ-DwdÄ Iƒƒ\ 9ë±7F
+3A08…™S5¨ ¤à†àfàFà&ààæàÆà¦à†àfàFà&ààæàÆà¦à†àfàFà&ààæàÆà¦à†àfàFà&ààæàÆà¦à†àfàFà&ààæàÆà¦à†àfàFà&ààæàÆà¦à†P7â†şƒY\ ƒ` Â°10[¨ tG[n@fr!‚€–‚–€À…¤ß¦¤Ù°˜Ù Œn‚`Ğıf#…„ ôC¿ùØ–Y@ Ô   [†7Î`Ë0Álî 8ƒ-Ãg°eøƒà¶¢œÁ–Á‚3Ø2¬Bp[†WÎ`Ë0Áln!8ƒ-Ã.g°eø…à¶ãœÁ–á‚3Ø2¨Cp[wÎ`Ë0Álî!8ƒ-Ã>g°eø‡à¶#œÁ–á$‚3Ø2¬Dp[†—Î`Ë0Áln"8ƒ-ÃNg°eø‰à¶bœÁ–Á,‚3Ø2¬Ep[†·Î`Ë0Álî"8ƒ-ƒ^g°eğ‹à¶¥œÁ–!5‚3Ø2¼Fp[†ÙÎ`Ë€Álx#8ƒ-Ãxg°e8à¶íœÁ–!>‚3Ø2ÜGp[†ıÎ`Ë"ÁlJ$8ƒ-ÃŠg°ex‘à¶5œÁ–!G‚3Ø2øHp[1	Î`Ë&ÁlÚ$8ƒ-Ãœg°e¸“à¶}œÁ–!T‚3Ø2œJp[†U	Î`Ë +Álh%8ƒ-Ã®g°eø•à¶äœÁ–]‚3Ø2¸Kp[y	Î`Ë`;Ált'8ƒ-Cúg°ehŸà¶0œÁ–†‚3Ø2ŒQp[†3
+Î`Ë GÁlü(8ƒ-C)d°eH¥€¶­Á–A–¤7Ø2Ô’[w
+È`Ë@Olò) ƒ-ƒ?d°e©€¶'Á–¥2Ø2ÄT@[†›
+È`ËÀSlÂ* ƒ-CYd°eP«€¶oÁ–®2Ø2èU@[†¿
+È`Ë@ZlP+ ƒ-Ckd°e­€¶·Á–·2Ø2„W@[ó
+È`Ë°^là+ ƒ-C}d°eØ¯€¶ Á–¡Ä2Ø2¤X@[È`Ë0clp, ƒ-ƒd°e³€¶hÁ–Í2Ø2ÄY@[;È`Ë°glB- ƒ-ƒ©d°eXµ€¶¯Á–Ö2Ø2äZ@[_È`Ë0nAlÌ-Xƒ-ºj°eP·€¶ì°Á–Áİ2Ø2À[Ğ[yÎ`ËPolò-ƒ-ÈIq°e 9I¶(¤    !1     † È»G PŒİd 
+„“[€Da °n( ^m2…Â-@¢0€@ø¯È@ãµ`Ic 
+ ŒßZ@rpğnĞl°jhpfPd0b`ğy·ivY5Iô8³(	r1à[„(Œ£·(0Èa k-  ©E  C?-  @¥E  )-8 ˆ"ƒ DÁC† àŸ1@PØÏ‚! |g BÛ, @(›D *³€ !d àË5 ĞàÌ È`Ä Ààó:nÓ2ì²*j’"èqfQä0
+b‚ÒXPB „Æ‚! übA1@Ğ Œ‚òbA€0ÀÅ‚! ÄbÁ `±€À'D ƒà(€@h‰Ç@@ °ÄB€TXÀPÆ$Š Š }X 9³(I @a’#(ğaÈAÀÁ¸A°Á¨A Á˜AÁˆA€ÁçuÜ¦eØeUÔ$EĞã4Ì¢$ÈaÄ @=,HÀ(ˆAèaA.L˜ƒ@ˆÂ8DY˜Æy Hš¨Êº°LÛ¸ÎûÀ Ä`È ÌàĞ Ô`Ø Üàà €[˜0 L &\‹Â$â!“@ğMÀ˜0€      a   c  µ     dP0@f# PdPPµPõ@åPPdPPÈ# dPe@ E@%C ¥@åA eP°ê$0Ôagğî`¸	Ì    ñ0     +80ƒ1X1ÄŒÁŠAÌ`Vs`c   	‹\'İ	Œ o‚`pã@t7Üğmf0ËĞB0Üœô á820,ƒ20<20KƒRÕ @ ƒHÂ f	„
+Ã‚›Úf†ÍÁ`@ Cz€ğH "0K`Ì2´07Ì˜ÁÑ@Ö`°d`IÄ,7PağÂ°OÚ@ Ã>i=@P„— z€0
+!ƒè)=@8è€€A ,!Ğ„"   d èô áJB¸„@š€‚€@ À !!ƒÀ_B T@A@È  ğ` Oô !`Bè„@º€‚€@`À@Z $ d`Aô ¡
+B H =@@x’€A >!Ğ„6( "ô !JB „@ê    d ˆ0@H@ÈÀ ğ$‚è„  z€ğìBz ! d`Aô ¡
+B I =@@ø’€A N!Ğ„V( "ô !	JB`„@j!   d ˆ0Ğ„%(	¢E=@è…€‚€@ À@š $ d`Aô ¡
+B H =@@x‚’€A ^!Ğ„v( "20ü‹ z€@!€À#€ <1Ñ„€-H¢F=@è‡€‚€@`À@º $ d`Aô ¡$
+B H „„o# °D@A@È  ğ``¸!˜4˜e8´ lô !(Bá„@l"   d ¨00ÜôÌ2 ZĞ„Ä5H	ªG=@ø‰€‚€@`ÀÀpC`h0Ëh%!ƒ@ùB gP2 DnÜf-èBT=@Àƒ„€A !Ğ„¸( *7ø³‹ô !IRB%„@ô"   d ˜00Ü„Ì20ZĞ„D>H	ºH=@€‚€@`ÀÀpC "h0ËĞhA’ı % d`x#Aô 5
+B I ÃÁŒ Á,ƒ£=@HH„”€A ˜!Ğ„Ú( &7<‚³ô !iRBi„@|#   d ˜00Ü”	Ì2@Z@I@ÈÀ 0N‚è‚y„ ‘ †‚6AƒY†Hz€™H‚!! d`¸'Aô >
+B J ÃÁ Á,ƒ¤=@HĞ„”€A ©!Ğ„ü( &7 ‚³“ô !‰RB­„@D$   d ˜00Ü¤
+Ì2PZĞ„DOH	ÚJ=@X‘€‚€@`ÀÀpC +h0ËPi%!ƒ@_	B 3P2 Dntf,-èBT'=@X…„€A º!Ğ„	( *7ä‚³—P20„— z€P&!€@$€á†€]Ğ`–Ó‚ D½BA@ÈÀ 0_‚è‚›„ “ †‚zAƒY†LĞ^„è B¾àÉ°0K aŸ `Ÿ7«³›àª¬7®³„TàUÌÚ,T ¸UÌÚ,Ì2xª ğ.00K08¤Š 1/ €Áªˆ ğ´Š Ò/ €Á«ˆ *÷ÄŠ S20€Á¬ˆ :÷ÔŠ$ ³ß@…!b^›ÉÂ@ ^šÉ
+t af
+ ÆpC2f0Ë ² ! '@À™€€1Ü`f0Ë²`a2 Ğ	( ÃJ`³b &5@ ›€€1Üàf0Ë0²t al
+ ÆpC˜Á,ÈB€Í€@Î&  `7TÌ2”,H‘t am
+ ÆpC˜Á,ƒÈB€Î€@Ş&  `7tÌ2œ,(l Œt n
+ Æpƒf0Ë€²`!6 Ğ¼	( Ãf˜Á,CÈB€IÜ€@ø&  `7¨A`³j Aş¦¡ `7´A`³k Bp@€€1ÜÌ2°,Ht át
+ ÆpCf0ËĞ² F7 Ğ„Õ	( Ãy˜Á,ƒÈB€~`
+ €Áß€@`'  `7øA`³o ~@ €€1Ü 
+Ì2À,˜´t w
+ Æpƒ)f0Ë²t aw
+ ÆpC*f0Ë ² Ä: Ğ„ß	( Ã­˜Á,ÃÈB€ï€@Æ'  `7ÄB`³t b°@8Ÿ€€1ÜPÌ2Ô,ˆº@XŸ€€1ÜÌ2Ø,È¹@xŸ€€1ÜĞÌ2Ü,è@˜Ÿ€€1ÜÌ2à,Hä@¸Ÿ€€1ÜPÌ2ÈBˆô@ØŸ€€1ÜÌ2È‚Èè@øŸ€€1ÜĞÌ2ÈÂ(ø Ìt „
+ Æpƒ<h0Ë |`!? Ğ
+( Ãö Á,ƒ,ôA€I@X(  `7èC€³²àA^¨¡ `7ôC€³²ğB @˜¡€€1ÜÌ2È(HÁt á†
+ ÆpCIh0Ë ¡ FB Ğ„
+( Ã) Á,ƒ,ˆB€.! €Á@À(  `7¸D€³²0
+.@ £€€1Ü Ì2È)˜ôt 
+ ÆpƒMh0Ë ¥t a
+ ÆpCNh0Ë ¦ ÄC Ğ„7
+( Ã= Á,ƒ,œB€@æ(  `7„E€³²€
+b`@¸£€€1ÜPÌ2ÈB*¨l¬t 
+ ÆpƒZh0Ë ª`¡F ĞP
+( Ãn Á,ƒ,¬B€I@H)  `7ÈE€³²À
+AN©¡ `7ÔE€³²Ğ
+Bx@X¥€€1ÜÌ2È‚+H¡t á•
+ ÆpC_h0Ë ¯ ÆG Ğ„Y
+( Ã¡ Á,ƒ,ÀB¥a ın ¥ ”†ˆ€” ßµ$R¦ B0 ın¸%bœ†ˆ€5 ¼D„¢¿4„z€0NpAA@Èà ` çD„‰ z€°NdAA@Èà ` ï´„‰ z€0O;AA@Èà ` ÷„„‰ z€°O<AA@Èà ` ÿÄ„‰ z€0R4AA@Èà ` 'E„‰ z€°RøAA@Èà ` /…„‰ z€0S8AA@Èà ` 7õ„‰ z€°S/AA@Èà ` ?Å„‰ z€0V0AA@Èà ` g„‰ z€°V'AA@Èà ` ou„‰ z€0W4AA@Èà ` w…„‰ z€°W(AA@Èà `à³¢ ¤ß}¥g5l@Â Ğ-„ ‚J! d 4!€ 0 =!€ x ıB@È  ¨B A{2 Jƒ€@`4Á `ğÀ `Ğ„ L`°„ J`„ áC@È  ÈB A´2 …€@„ ‚T" d „!€ s ÑB@È  HB Õ~ J\ À\Á\ğÄN\ĞÄL\°­B@È  ¨'B u 0€xà0€B(À 
+ ÀÁ 
+A`` 
+`„ ±C@È  È&B Å †‚À ¢‚À 
+­ (´ €0€B˜`°€ J\ @vpˆQ Òï†36 a ²8€HŒ2 ~7ô˜j Ù°€0£f 0Ü˜Ì2Ä‚,„sdÄ Iƒƒ\@·31F
+3A08…{s3¨ ĞìĞÌĞ¬ĞŒĞlĞLĞ,ĞĞìĞÌĞ¬ĞŒĞlĞLĞ,ĞĞìĞÌĞ¬ĞŒĞlĞLĞ,ĞĞìĞÌĞ¬ĞŒĞlĞLĞ,ĞĞìĞÌĞ¬ĞŒĞlĞLĞ,ĞĞìĞÌĞ¬ĞŒĞlĞLĞ,ĞĞìC›¡1nÖffá*WëüL* YëYnŞfh: 77 b20~7¨Y`cÃDĞc°/   [5Î`ËàÁlä 8ƒ-ƒg°eĞƒà¶}œÁ–!‚3Ø2˜Bp[UÎ`Ëà
+Áld!8ƒ-ƒ-g°eĞ…à¶¾œÁ–A‚3Ø2”Cp[†tÎ`ËàÁlä!8ƒ-ƒ=g°eĞ‡à¶şœÁ–A$‚3Ø2˜Dp[•Î`ËàÁld"8ƒ-ƒMg°eĞ‰à¶=œÁ–!,‚3Ø2˜Ep[µÎ`ËàÁlä"8ƒ-C]g°eÈ‹à¶ œÁ–4‚3Ø2¨Fp[×Î`Ë0Áln#8ƒ-ƒog°eà¶èœÁ–=‚3Ø2ÈGp[ûÎ`ËÀÁl@$8ƒ-ƒ‰g°eP‘à¶0œÁ–F‚3Ø2äHp[†	Î`Ë@&ÁlĞ$8ƒ-ƒ›g°e“à¶xœÁ–O‚3Ø2ˆJp[S	Î`Ë°*Ál^%8ƒ-ƒ­g°eĞ•à¶¿œÁ–a\‚3Ø2¤Kp[†v	Î`Ë@/lòEzƒ-¿Hp°e¨™€¶;Á–l2Ø2”M@[†´	È`Ëà6læ& ƒ-Şd°eğ›€¶£Á–u2Ø2°N@[†Ø	È`Ë`;lv' ƒ-Cød°e0Ÿ€¶ëÁ–á}2Ø2ĞO@[†ü	È`Ëà?lF( ƒ-
+d°eh¡€¶2Á–á†2Ø2ğP@[1
+È`ËpFlØ( ƒ-d°e¨£€¶zÁ–á2Ø2”R@[U
+È`ËğJlf) ƒ-.d°eè¥€¶âÁ–2Ø2´S@[y
+È`Ë`Olö) ƒ-Hd°e(©€¶*¤Á–¡¥‚5Ø2¼T [†˜
+Î`Ë@SÁlp*8ƒ-Og°e «à¶dœÁ–­‚3Ø2°Up[¸
+Î`Ë@WÁlğ*8ƒ-_g°e ­à¶¤œÁ–µ‚3Ø2°Vp[Ø
+Î`Ë@[Álp+8ƒ-og°e ¯à¶äœÁ–½‚3Ø2°Wp[ø
+Î`Ë`_lî+8ƒ-C~g°eØ¯à¶ıœÁ–á¿‚3Ø2„Xp[†Î`ËPbÁlN,8ƒ-CŠg°e ±à¶6œÁ–Ç‚3Ø2èXp[Î`ËàcÁlÀ,8ƒ-ƒ˜g°e ³à¶fœÁ–aÎ‚3Ø2ÔYp[PÎ`Ë jÁlf-`ƒ-®m°eàµ ¶ã&ÅÁ–áÜ$9Ø2¬[ !1  ™   † è¹C ˜Û‚! ÈmÁ«µ ˆÂ á­pV† «C ğÔ‚! pjArDa 0S† X©C œÔ‚! @jÁ ü´ 9¢0€@¸§C ¼Ó‚! ÖiÁ ç´`€qZ0À--`–ÀJ† @¥É1…Â(-`pG† €£C °Ñ‚äˆÂ áŒ Q@ ¬Ğ‚äˆã„ĞÄ¼´¬¤œ”Œ„|^ÇmZ†]VEMR=NÃ,J‚FAB ˜Ğa 
+ã(¡J r@?† ˜e0b`ğy·ivY5Iô8³(	r1 † °‹C ÌÅ‚! äb‚Qƒ[,  8‹Â¢@¢0€DY¦q•X`	Æ ÓDÎ)É$Q%±  ‰!’! Â(X€Cˆ üaA Â a(€À8"É‡ˆø°€ä ààÜ Ø`Ô ĞàÌ È`Ä Ààó:nÓ2ì²*j’"èqfQä0
+b pZ†]VEMR=NÃ,J‚FAB ĞÃZ˜00…q ‰²0ó@‘4Q•ua™¶q÷AˆÁA˜Á A¨Á°A¸ÁÀA ²0a€oÂ Ü„JI„9Ã)"A
+&@›0€1a        a   h  ì  5   dP€ù+PdP0@‡c ‚(@¡P@i@™”r@x@qq@™•x@!z 	uhî`¸E Ğá 	uhÛg¸ƒáPE@…ˆP„H@ac ‚ ‚ jƒ” APÀ ™ A@Ô@Ù.íBÑ¦A%ãhÀ ”ÿ r Ì P@AÔ ”üÿÿÿ]æ ”A)C9Pæh ”B1æX‚ ‚ =    ñ0     +80ƒ1XAÄŒÁ¬ äÀÆàVs ¬è`Vu0+;0ƒ18ƒÄ˜ÁœÁ
+Ì`Î`‘f0g°! ƒA  3À¤0 ì0
+3 À£0ñ ;”B;b`œ‚Á*ÀD)Iìˆq «§$!°#Æ€ ¬‚L B„Àg ‚`°
+3!
+Áp)„Ì2B0b@ !¢€Ü„R
+Èˆ2 ³ ³(Ã¨P
+`0Ë`Á@pJ'1JÀ+T,!T «P¹„0PœBÂ@0
+[ÀT4!T {PÉ„0P¤BÅBÒY( „á†ÀÀ`– ‚ ³@A@È @†¹€ ê‡ÂŒ8@	‰D$”‘XH‚)‰Æ$¢Y‚j– š%¨f	ªY‚j– š%¨f	*LÄ†‚]@ƒY†Ç	FŠ2A0(‰”H…ƒÂBNÁ-ps0. ôB@ 10è Á $^"`…o¸!hb–ª‚Y‚
+¥u á†€Ğ`–a’‚ƒ¢BJB&^aÄ 0ƒƒS¸‹pà¤æP @F:A0‰›jA2 €Y‚jÄ€ BDÁ/x °BšÈ "ƒÇ;Xì@±ƒÄ;8ìÀ°ƒb ĞÂ˜ô ÒƒG=Xô@ÑƒD=8ôÀĞƒb ğÂ&?€üàñÆ?Pü aÄ?0ü (D…I QxD…EÚHD…CQ(Ê S La‚ÈS`àc1ÅS@Lá0ÃŠ2@U˜TR…GUXäCQ…DU8TÁP…b pÂ&W€\á¡ÆWP\!qÄW0\¡(;	Y da"ˆY`da‘EY@dáCŠ2À[˜l²…Ç[XlA±…Ä¼8ğÃğ“~ á†ÀĞ`–a°‚
+ <ª¨ ÌC ª
+@Dª¨ ÔC ª
+€=ª¨ ÜC ªŠ“pª* ù¨j¸á8	0nöNtºA%ˆ`˜Ö!.vĞXÂFŠ6A0¸ÕP‡ êÎ¡Í`F†ÙÆ• dphTœHa8bP¸A‚8´Fp<H‡—AÀô ¡Y†ˆ@ d\†{ ƒY†HbaH¹ 0( ÆˆR!ï15K°´ ƒv`\ H‚?œÀˆA±!·@ÁˆAÑ!·P%Ñ„ $2m–`¨0ºE´  ƒC»€ ¹ à„@2ÃƒÂBÄA=‚^B28¼¦O3l@B  ³ 0ÜÌÌ2p[”Ô7èA[€Á,ƒtÁpC¸>Y3ğ„ÄBÎa>0›Èjb¸ë	3˜eøÎ nğ|Âz€0Ø‚M€@2Ë g@ ÜäAN€@‘„AÌ„Á@…a/`e€ÁO€ †ô a	@d`–@*	ƒ™ ƒ 
+ô a
+(DÖ è‚qt„i# !€À 4` ÈkP20ä z€Ğ„ ‘ 	G=@ 
+B G =@xÒ€‚€Aàz!Ğ.   d ˆ0Ğ„5(ÎG=@ ƒ€‚€@ À@<èBğ$„ù# ´A@A@È  0	` È}P20$‘ z€P!€@$€BB+„@ø    d x00Ü˜Ì2ŒhBt aLaØ€„˜% L…á† À`–¡Ä @XXnffÎ ‚åBÈVzäa=òf	Î€Â`7äƒ‹˜Á,¬Cú`ÃûĞ#`0Ëài P 0ÜğÌ2´'Ä‡^P#;Ç H2ó!sô¡ÜÈ CPô1K°*©Áµ,¨Á´,a¨A³7ôÈv !‚&—Æ1Üf0İ ÁpÃ€ Át‘·¸	7Ì2°Á# ‚`Ğ´RŒ ‚AKØ
+1ÜpU`0Ë mT´”jÀ€¤Á ¤Â³o0l@ôƒŒÀ,Á:TÓm0P<o`´Á@¼Ñ@‰€1Üf0İ ÁpÃ` Átq˜Ø	7g ³pğÁ@ l ¼Á@ l€¼
+A`!€ˆÀe ÃÄK0Ë°qàFş@˜‰€€Aôˆ\ PĞ›8†ˆ@ DN†< ƒY†uˆƒ`Ä Xƒƒ[ ¹1@ğ ÁàX&“¹p“áÚH0  ³t0ÂˆÁÂ!õP2ÁOqA&xq³u0b°°A‚A=œŒ „\¬I^àÅ,A7äF«€Á,ÃØA0b€ !ó 2baì…^ÌÜÁpCn¼
+7ì¬˜Á	Î2à©d’;ÉĞ0— p4ò20 Ã,ATb€ßT t…ß†:!ƒY=Øƒ 	ƒ¼€‰ A‚p6 <	€ â2l@y ÃD'Ğ„`éB@.Ã„°'Ğ„ \†ˆ€O Ó„à\†ÁO ºÂŸÀ°üI ÌìAtÁÇ^``¸!¨0˜eàƒ<fú`¶ƒ¼ÛpÈÀ 0xnJ…fdÁ‚ÛYƒy ¤AĞ6†Ö  ƒá7Èà„@gdá‚SZE[€A
+ 0Çğ*Ğ¾2°ò*³ 0PaÀØ¬,´ Á‚@f[€€Áè²-@ĞƒàŒZÙ ğApÈËlü 8W¶ “+ÛQÎÑ•m)s»ò´ÌCàìÌCĞğËCÀÈÌC°ôÌC üÊCüÊC€¨K^›KfnÄ…’¸ÌºCtf–!D!Cv¦²ÁÈÀ,(Œ!j3Ë0
+¤Œ!kÓ„Z†ˆÀd`–€Æ’–™e(SÆ—é.ÃD20K`
+cLÙÌ2œ*c‹Ùô a‚a"`™ ˜%@…1„GnfRA‚1gnz€àÁ°¼L Ì¨Â‚d/³«À
+ÁBt/=@‡`Ø€d& f	Xa¡Â—Y†Vp…`Ê— C0l@5 ³®0†€•Ì,Ã+ÀB0†p™LÎ!6 œ	€YX¸:Ønö fb‚áSà0˜eXY:İğİè|ˆ…€İü€İú ba–`*„§Y¨ Z d„€0ÜÈÌ2ĞB-Iä±=@˜‡`Ø€È& f	j¡ÇßàÁ:00Ü¬	Ì2¬Ã,”2 ƒR`` ˆ@‚ÛœÀˆA±!· CÁˆAÑ!·0CsÓ„`nòVm–à*ŒîĞÍ2 €í‚.ä‚@J€É G
+7A0
+.èÉàğ2˜ <Í°€Nî€ÀpC:`0Ë€·$%µÃè²;`0Ë@¹PÙåBÈ!Œ‚¡:n#`7p¿c³º°Av1Üà¹Ì2€Ã.(˜7íC³¿ÀÁ	¢£˜ÏÎ1Œb>ƒéŒÎCé(è3È˜NéÌôÂ@…¡~¼põÂ@K ¼0õÂ@K¼ĞôÂî³@ ‚&—Æ1Üf0İ ÁpÃ€ Át‘·ü7Ì2øB/# ‚`ĞeTŒ ‚AKœ1ÜpU`0Ë ¿Tö·jà€ì‚á ì‚â³á0l@„ÁøÀ,Á:TS8¿0P<á`üÂ@„ƒñ@0ƒ€1Üf0İ ÁpÃ` Átq˜œ7g ³âÁ@ ¾ „Ã@ ¾€„
+A`!€ÁùˆÀe ÃÄ0Ë°ãàF4`ˆCì   ``„ î#(”A ô Aa" ‚á† À`–aÆ!n›Ò?‡ğ1#3še0‡rF–< A0ØYDÌ'Ø]˜%8‡ƒ%@ö¡–†Q¨…óxaf	Î¡ä“Fi´B á†À~À`–aĞ!nX›0ƒ  &„â`B Ì2¤ƒ:Æ¤8èĞ?	ö‰£`( ¨`€"ôO"~ìÈX#
+ HÒ†èB ô !ˆ£aB@¡ èB GÃ„B0l@) =@œ t4l@+ =@êhØ€v( †ˆ€… AÔ„à†Á… ÂÀ°¼P à”G0Ğ?‰ÿ!¥ÀŒ(  ÃAÁ,Ã:¤C0PaTêà’:ôOb„P)P%
+ ş HÎ èŸ
+µ’!J ¤D0l@l ¨œôO¢…d) #
+ ÈpCğC`0Ë°êtÁ•âˆB5$@¨† ÕÀ1@€ƒ]À)b‚ã@V¬fI†FŒ3 A0X°Ò¥10Î Á`ÀJ—hhÄÀ8ƒU «\ª¡…¥€¨   [†(ƒ-a°eƒà¶eœÁ–‚0Ø2˜B[†[Ş`ËPÁlğAª¶ù„Á–a2Ø2ğC@[†È`Ë ln"8ƒ-ƒNHÕ–á'‚0Ø2äEp[†¾Î`ËÁlJ#8ƒ-Cjg°e`à¶°œÁ–6‚3Ø2àFp[ŞÎ`Ë ÁlÊ#8ƒ-Czg°ehà¶ñœÁ–>‚3Ø2àGp[†ÿÈ`Ë0"’µe0éÚ2¤H@[‘¦-Ãd°e0	¶oœÁ–¡N2Ø2ğ‰[R	Î`ËP*µe@•€¶®œÁ–!V$jËP+AlÚ%8ƒ-½g°e°—à¶÷œÁ–A_‚3Ø2ğKp[†	Î`Ë2ÁlD&8ƒ-ÃÉHÚ–ân‚38ò`Ëñ7Áz€äÁ–£t‚38ô Éƒ-Çêgpè’[Ø	ÎàĞ$¶·œÁ¡Hl9z'8ƒC<ØrŒOp‡ y°åHŸà=@ò`ËĞ>Rlê'8ƒ-Ãşg°e !É¶!Á–A„2Ø2äPp[’ª-a°e£€¶g$M[<
+È`ËğGÒlP)8ƒ-ƒ+d°e¨%	¶½œÁ–Á—$jËNlÎ)8ƒ-ƒ:IÔ–‚0Ø2ĞS[
+Ô`Ë0RÁlP*8ƒ-ƒJg°eX©à¶.œÁ–¦‚3Ø2ÄTp[š
+Î`Ë`SÁln*8ƒ-ƒNi°eà)iÛ2üT [²
+Ö`ËpVÁlÔ*Hƒ-[IÛ–Á­‚0Ø2¼U[¸
+È`ËW    !1  º  êj! O-€¦@03µ` ˜Z@€€R† ø§Å €>- ŸpO† ˆ§C ÀÓ‚! Æi!@/- @Ø¥D  ¹´À €@niA!ÀPK¢`0fiÁ ±´ `¥ -(„ öh2B †-  ÀÑa 
+ã°ŸÅ Aü,à|@>† ŸD ²³à	%A£ h˜ÑYP0…q ‰²0OãLR…Î‚! şf Âİ,Àmƒ i³`€³Y0€Ù, lğ3† ™„ ,³€ Ae  Ìƒ a0™C ŒÌ‚! BfÁ BAh²@1Š#€!ÊdÁ c²À„  fdb ÁQÄ€¸È„(! ŒYÀ ‡‘Ä €Â"† 0‘C ÈÇ‚! Şc ‚{, `„ ë±`€ôX@€pˆ jcAÀàš9Œ‚–ÒXÀ(	r1@%A£ ! Fc£$ÈaÄ €h,Xä0
+b 40J‚FAB €ÆFIÃ(ˆA€¿X°$ÈaÄ €_,PÃ(ˆA€¾X A! ƒq s±@¢0€à@Ò`!À[,p@0E!†I˜¶X €p 1l± ‚¡²$y$ššh¡@)£8@AÂHr(ŒZ,8 "„"-,@AF‚>` ŠÄ8aašÈy e’(«âìê´l;‹U‚(B0 Ñ"MLcá<ĞX,pƒ Ğ6®ó>0eaç"i¢*ëÂ2a 
+ã@12(384H5`ƒ5‹0…q (Ó8`± B8€Âğ‰D ª°€ a4Da@ H¢,<±€ a' 
+`„œXPRQ‰rYdPfpŞ–…Œ mÄ¨ÁÂ4ià<PÔlào q Ms 7±`a8ˆ)eaã"›X C@ …$Š³0ÍÑA‘dMTõxŒAdf mÜ P’ ¢0;X €q I „²0CÀ`’ 
+„(Œ#ª.,³´Ceaçé¼™X a BF†r É Ó8ÒEËpdPÔTufphà©Á°A—ÕØç`  ˆb€‰D1ĞÁCˆ x‰0A!’(K,¨ƒÃ@@H”2 384H5X˜§q Ë´mØ Üàà ä`Ä Ààó:
+Jª¦9°.–Xp B0ÄJ,@ˆÂ8DY˜Æy SXĞ3Íâ ‘Ôî`SAUÖ…eÚ¦
+«€
+©ğğò0ôPöpøú°üĞşğ "1$Q&q(‘*±,Ñ.ñ02qÔ„MÜNä„NìOô„OüX„…XŒY”…YœZ¤…Z¬[´…[¼\Ä…\Ì]Ô…]Ü^ä…^ì_ÌM°ÂÀ	h„F_øÅ_ˆÆhFi˜Æi Fj¨Æj°†÷AˆÁAğFoøÆo€Gx´†k¼lÄ†lÌmÔ†mÜnä†nì†xŒy”‡yœz¤‡z¬{´‡{¼|Ä‡|Ì}Ô‡}Ü~ä‡~ìô‡üˆ„ˆˆŒ‰”ˆ‰œŠ¤ˆŠ¬‹´ˆ‹¼ŒÄˆŒÌÔˆÜäˆìôˆü˜„‰˜Œ	™”‰™œ	š¤‰š¬	›´‰›¼	œÄ‰œÌ	Ô‰Ü	ä‰ z²'|Ò'~ò' *¢2*	© AœA©˜Ê© Jª¨Êª°J«ĞAÌ«ØÁàAèÁğAøÁ«¨Á°A¸ÁÀAÈ¬ÄJ+¸Â+À‚¬ÌJ­ĞÊØÊ­àJ®èÊ®ğJ¯ø
+(„‚(Œ)”‚)œÂ¯€K¸ˆË¸K¹˜Ë¹ Kº¨Ëº°K»¸Ë»ÀK¼ÈË¼ĞK½ØË½àK¾èË¾ğK¿øË¿€LÈˆŒ22$S2&s2(“2*³2,Ó2.3/32334S36s3± 8“3:³3³@µ`·€¹ »À½à¿ á ã@å`ç€é ëÀî° 
+Á(‰C ìÃ‚! ôaÁK´ÂçÁ+8OÀ‚q$È¢ˆÁA,ÈÓ”Á,ĞB-¸B¦m\·
+¬`· Â@˜ÁàB.è¤ì/ôÂøüB„‚(€(„ƒ8¸)”Â8Œ9”ƒ)œ*¤‚9@ç€é ëÀíàï ñ ó@õ`÷€ù ûÀıàÿ 
+‘DMVo uq`"!s@#A%a|Ğ{w xàö')¡+Q°DKäÃTÉ¤‰ª¬Ó€m@
+eƒÎûÀ Ä 3 Œ#Ô`Ø ÜàĞàààş„h¢ìàö ò@è ä`ğ!ôaø¡üá@"$Db$H¢$Lâ$P"%Tb%X¢%\â%`"&db&P!.BAFáH¡LúÀş &lâ&p"'tb'x¢'|â'À",Äb,È¢,Ìâ,Ğ"-Ôb-Ø¢-Üâ-à"TaX¡\á`¡lÁ.î/òB.æ‚.ê"fáp!td¡|A>æƒ>êÃ>î?òC?öƒ?úÃ?şDBDDF„DJÄDNERDEV„EZÄ6n7rC7vƒ7zÃ7~<ÂC<Æƒ<ÊÃ<Î=ÒC=Öƒ=ÚÃ=Ş>âcxA/ö‚/úÂ/ş4BC4Fƒ4JÃ4N5RC5Vƒ5ZÃ5^6bC6fƒ6jãÀ!TDTj„iq‘‘‘‘	!‡á‘ñ‘q‡1‡Á9‡r@‡QI‡uhwxx`uˆy12)394I5Y6i7y8‰9™:©;¹<É=Ù>™z°¡("•Ré?1|X`B0 ÇEÒ„$Ó(Te]X¦m\ç}`b0dP†s¨Æ (A¢bQ$ã`Şa"Da Á”ÁC "€‡eÑ0Ê#ƒ“œÃ Ã’áPã@æ ê° ;´ƒ;¼<ÄÉÃ<ĞC=ØÃ=LPUÈÁàƒ•tpäAØ>”‚)èAp~ğ›
+¡°|€e¢0
+¤°üĞşğ» !!#AºPŞ) ‚IœJt¸¶p´P²0°®ğ
+¬Ğ
+ª°
+)¡+Á©Ğ.QÆKˆÁ”Ág€j°0i 21½à¼@5a7Á8‘:m°¿à<Ñ>ñ`bq cÁb „ =LˆAc!
+fHæqÖaÂ ê0a€t˜0À8L &ğ† ˜…	„ ²0a€8˜0ÀL &g0¡A”å0
+b ©&0       q      2"„!íHÂ[*³o2È8ó5±xSØ8£˜ı; !È“‰‚=½*è#<ƒ?’@ÄJ„AªE8ô	…D„[     e  á  ”ø      ¥     L      X       X   L   x      «     ¾            x          L       Ò      Ò      ÿÿÿÿ $  ×      ×      ÿÿÿÿ$  İ      İ      ÿÿÿÿ$  á      á      ÿÿÿÿ $  ç      ç      ÿÿÿÿ,  ÿ      ÿ      ÿÿÿÿ$            ÿÿÿÿ$            ÿÿÿÿ$            ÿÿÿÿ,  %  	   %  	   ÿÿÿÿ $  .     .     ÿÿÿÿ$  3     3     ÿÿÿÿ$  8     8     ÿÿÿÿ$  >     >     ÿÿÿÿ$  C     C     ÿÿÿÿ$  I  	   I  	   ÿÿÿÿ $  R     R     ÿÿÿÿ$  X     X     ÿÿÿÿ $  d     d     ÿÿÿÿ $  x     x     ÿÿÿÿˆ$  {     {     ÿÿÿÿ $  Š     Š     ÿÿÿÿ,            ÿÿÿÿ $  ³     ³     ÿÿÿÿ $  ¹     ¹     ÿÿÿÿ $  À     À     ÿÿÿÿ,  Ù     Ù     ÿÿÿÿ $  è  	   è  	   ÿÿÿÿ $  ñ  
+   ñ  
+   ÿÿÿÿ $  û     û     ÿÿÿÿ $            ÿÿÿÿ $            ÿÿÿÿ $  "     "     ÿÿÿÿ $  /     /     ÿÿÿÿ$  3     3     ÿÿÿÿ $  F     F     ÿÿÿÿ $  J     J     ÿÿÿÿ$  P     P     ÿÿÿÿ$  V     V     ÿÿÿÿ$  Z     Z     ÿÿÿÿˆ$  _     _     ÿÿÿÿ,  k     k     ÿÿÿÿ,  ˆ     ˆ     ÿÿÿÿ,                ÿÿÿÿ  Å  	         ÿÿÿÿ   Î  	         ÿÿÿÿ   ×  	         ÿÿÿÿ   à  	         ÿÿÿÿ   é  	   "      ÿÿÿÿ   ò  	   )      ÿÿÿÿ   û  	   0      ÿÿÿÿ     	   7      ÿÿÿÿ     	   >      ÿÿÿÿ     	   E      ÿÿÿÿ     	   L      ÿÿÿÿ   (  	   S      ÿÿÿÿ   1  	   Z      ÿÿÿÿ   :  	   a      ÿÿÿÿ   C  	   h      ÿÿÿÿ   L     o      ÿÿÿÿ   Q     r      ÿÿÿÿ   Y     x      ÿÿÿÿ   a     ~      ÿÿÿÿ   i     „      ÿÿÿÿ   q     Š      ÿÿÿÿ   y           ÿÿÿÿ        –      ÿÿÿÿ   ‰     œ      ÿÿÿÿ   ‘     ¢      ÿÿÿÿ   ™     ¨      ÿÿÿÿ   ¡     ®      ÿÿÿÿ   ©     ´      ÿÿÿÿ   ±     º      ÿÿÿÿ   ¹     À      ÿÿÿÿ   Á     Æ      ÿÿÿÿ   É     Ì      ÿÿÿÿ       ]  ø   ”±   stderr.str.13.str.14.str.15.str.16.str.17.str.18.str.19.str.20.str.21.str.22.str.23.str.24.str.25.str.28.str.29strstr.32str.33str.34str.35str.36str.37str.38str.39str.40str.41str.42str.43str.44str.45str.46str.47usageprintfexitgetintllvm.lifetime.start.p0i8getcfgetsfprintfllvm.lifetime.end.p0i8get_imagefopenfgetcmallocfreadfcloseput_imagefwriteint_to_ucharsetup_brightness_lutexpsusan_principlellvm.memset.p0i8.i64susan_principle_smallmedianenlargellvm.memcpy.p0i8.p0i8.i64susan_smoothingedge_drawsusan_thinsusan_edgessusan_edges_smallcorner_drawsusan_cornersfreesusan_corners_quickmainstrtodstrtolputssqrtfllvm.abs.i32llvm.vector.reduce.smin.v4i32llvm.vector.reduce.smax.v4i3212.0.1x86_64-pc-linux-gnususan.c.L.str.13.L.str.14.L.str.15.L.str.16.L.str.17.L.str.18.L.str.19.L.str.20.L.str.21.L.str.22.L.str.23.L.str.24.L.str.25.L.str.28.L.str.29.Lstr.Lstr.32.Lstr.33.Lstr.34.Lstr.35.Lstr.36.Lstr.37.Lstr.38.Lstr.39.Lstr.40.Lstr.41.Lstr.42.Lstr.43.Lstr.44.Lstr.45.Lstr.46.Lstr.47       [function 'main' is not in our target list]

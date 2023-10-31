@@ -1,0 +1,102 @@
+PlacementDone_Init:
+    res["add28"] = 0
+    res["icmp29"] = 0
+    res["br30"] = 0
+    res["phi0"] = 0
+    res["getelementptr3"] = 0
+    res["load4"] = 0
+    res["xor5"] = 0
+    res["xor27"] = 0
+    res["phi1"] = 0
+    res["phi2"] = 0
+    res["lshr6"] = 0
+    res["lshr9"] = 0
+    res["lshr15"] = 0
+    res["and21"] = 0
+    res["getelementptr7"] = 0
+    res["and10"] = 0
+    res["and16"] = 0
+    res["or22"] = 0
+    res["load8"] = 0
+    res["or11"] = 0
+    res["or17"] = 0
+    res["getelementptr23"] = 0
+    res["getelementptr12"] = 0
+    res["getelementptr18"] = 0
+    res["load24"] = 0
+    res["load13"] = 0
+    res["load19"] = 0
+    res["add14"] = 0
+    res["xor20"] = 0
+    res["add25"] = 0
+    res["and26"] = 0
+
+
+
+DependencyPredecessor_Init:
+    res["add28"] = ["phi0"]
+    res["icmp29"] = ["add28"]
+    res["br30"] = ["icmp29"]
+    res["phi0"] = ["add28", "br30"]
+    res["getelementptr3"] = ["phi0"]
+    res["load4"] = ["getelementptr3"]
+    res["xor5"] = ["load4", "phi2"]
+    res["xor27"] = ["xor5", "and26"]
+    res["phi1"] = ["xor27", "br30"]
+    res["phi2"] = ["phi1", "br30"]
+    res["lshr6"] = ["phi1"]
+    res["lshr9"] = ["phi1"]
+    res["lshr15"] = ["phi1"]
+    res["and21"] = ["phi1"]
+    res["getelementptr7"] = ["lshr6"]
+    res["and10"] = ["lshr9"]
+    res["and16"] = ["lshr15"]
+    res["or22"] = ["and21"]
+    res["load8"] = ["getelementptr7"]
+    res["or11"] = ["and10"]
+    res["or17"] = ["and16"]
+    res["getelementptr23"] = ["or22"]
+    res["getelementptr12"] = ["or11"]
+    res["getelementptr18"] = ["or17"]
+    res["load24"] = ["getelementptr23"]
+    res["load13"] = ["getelementptr12"]
+    res["load19"] = ["getelementptr18"]
+    res["add14"] = ["load13", "load8"]
+    res["xor20"] = ["add14", "load19"]
+    res["add25"] = ["xor20", "load24"]
+    res["and26"] = ["add25"]
+
+
+
+DependencySuccessor_Init:
+    res["add28"] = ["phi0", "icmp29"]
+    res["icmp29"] = ["br30"]
+    res["br30"] = ["phi0", "phi1", "phi2"]
+    res["phi0"] = ["getelementptr3", "add28"]
+    res["getelementptr3"] = ["load4"]
+    res["load4"] = ["xor5"]
+    res["xor5"] = ["xor27"]
+    res["xor27"] = ["phi1"]
+    res["phi1"] = ["phi2", "lshr6", "lshr9", "lshr15", "and21"]
+    res["phi2"] = ["xor5"]
+    res["lshr6"] = ["getelementptr7"]
+    res["lshr9"] = ["and10"]
+    res["lshr15"] = ["and16"]
+    res["and21"] = ["or22"]
+    res["getelementptr7"] = ["load8"]
+    res["and10"] = ["or11"]
+    res["and16"] = ["or17"]
+    res["or22"] = ["getelementptr23"]
+    res["load8"] = ["add14"]
+    res["or11"] = ["getelementptr12"]
+    res["or17"] = ["getelementptr18"]
+    res["getelementptr23"] = ["load24"]
+    res["getelementptr12"] = ["load13"]
+    res["getelementptr18"] = ["load19"]
+    res["load24"] = ["add25"]
+    res["load13"] = ["add14"]
+    res["load19"] = ["xor20"]
+    res["add14"] = ["xor20"]
+    res["xor20"] = ["add25"]
+    res["add25"] = ["and26"]
+    res["and26"] = ["xor27"]

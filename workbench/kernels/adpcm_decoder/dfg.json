@@ -1,0 +1,560 @@
+[
+  {
+    "fu"         : "Branch",
+    "id"         : 12,
+    "org_opt"    : "br",
+    "JSON_opt"   : "OPT_BRH",
+    "in_const"   : [],
+    "pre"         : [9],
+    "succ"       : [[15,16,17,18,19,20,21,22,23,24,25,26,27,28]]
+  },
+  {
+    "fu"         : "Alu",
+    "id"         : 18,
+    "org_opt"    : "xor",
+    "JSON_opt"   : "OPT_XOR",
+    "in_const"   : [0],
+    "pre"         : [0,14,12],
+    "succ"       : [[0]]
+  },
+  {
+    "fu"         : "Phi",
+    "id"         : 0,
+    "org_opt"    : "phi",
+    "JSON_opt"   : "OPT_PHI_CONST",
+    "in_const"   : [0],
+    "pre"         : [18,61],
+    "succ"       : [[8,18]]
+  },
+  {
+    "fu"         : "Comp",
+    "id"         : 8,
+    "org_opt"    : "icmp",
+    "JSON_opt"   : "OPT_EQ_CONST",
+    "in_const"   : [0],
+    "pre"         : [0],
+    "succ"       : [[9]]
+  },
+  {
+    "fu"         : "Branch",
+    "id"         : 9,
+    "org_opt"    : "br",
+    "JSON_opt"   : "OPT_BRH",
+    "in_const"   : [],
+    "pre"         : [8],
+    "succ"       : [[10,11,12,13,14]]
+  },
+  {
+    "fu"         : "Branch",
+    "id"         : 14,
+    "org_opt"    : "br",
+    "JSON_opt"   : "OPT_BRH",
+    "in_const"   : [],
+    "pre"         : [9],
+    "succ"       : [[15,16,17,18,19,20,21,22,23,24,25,26,27,28]]
+  },
+  {
+    "fu"         : "Alu",
+    "id"         : 25,
+    "org_opt"    : "getelementptr",
+    "JSON_opt"   : "OPT_ADD_CONST",
+    "in_const"   : [0],
+    "pre"         : [6,14,12],
+    "succ"       : [[6]]
+  },
+  {
+    "fu"         : "Alu",
+    "id"         : 27,
+    "org_opt"    : "add",
+    "JSON_opt"   : "OPT_ADD_CONST",
+    "in_const"   : [0],
+    "pre"         : [5,14,12],
+    "succ"       : [[5]]
+  },
+  {
+    "fu"         : "Phi",
+    "id"         : 5,
+    "org_opt"    : "phi",
+    "JSON_opt"   : "OPT_PHI_CONST",
+    "in_const"   : [0],
+    "pre"         : [27,61],
+    "succ"       : [[27,28]]
+  },
+  {
+    "fu"         : "Comp",
+    "id"         : 28,
+    "org_opt"    : "icmp",
+    "JSON_opt"   : "OPT_EQ_CONST",
+    "in_const"   : [0],
+    "pre"         : [5,14,12],
+    "succ"       : [[61]]
+  },
+  {
+    "fu"         : "Branch",
+    "id"         : 61,
+    "org_opt"    : "br",
+    "JSON_opt"   : "OPT_BRH",
+    "in_const"   : [],
+    "pre"         : [28],
+    "succ"       : [[0,1,2,3,4,5,6,7]]
+  },
+  {
+    "fu"         : "Phi",
+    "id"         : 6,
+    "org_opt"    : "phi",
+    "JSON_opt"   : "OPT_PHI_CONST",
+    "in_const"   : [0],
+    "pre"         : [25,61],
+    "succ"       : [[25,26]]
+  },
+  {
+    "fu"         : "Phi",
+    "id"         : 7,
+    "org_opt"    : "phi",
+    "JSON_opt"   : "OPT_PHI_CONST",
+    "in_const"   : [0],
+    "pre"         : [15,61],
+    "succ"       : [[10,11,15]]
+  },
+  {
+    "fu"         : "Alu",
+    "id"         : 10,
+    "org_opt"    : "getelementptr",
+    "JSON_opt"   : "OPT_ADD_CONST",
+    "in_const"   : [0],
+    "pre"         : [7,9],
+    "succ"       : [[15]]
+  },
+  {
+    "fu"         : "MemUnit",
+    "id"         : 11,
+    "org_opt"    : "load",
+    "JSON_opt"   : "OPT_LD",
+    "in_const"   : [],
+    "pre"         : [7,9],
+    "succ"       : [[29]]
+  },
+  {
+    "fu"         : "Phi",
+    "id"         : 15,
+    "org_opt"    : "phi",
+    "JSON_opt"   : "OPT_PHI",
+    "in_const"   : [],
+    "pre"         : [7,10,14,12],
+    "succ"       : [[7]]
+  },
+  {
+    "fu"         : "zext",
+    "id"         : 29,
+    "org_opt"    : "zext",
+    "JSON_opt"   : "OPT_EXT",
+    "in_const"   : [],
+    "pre"         : [11],
+    "succ"       : [[17,30]]
+  },
+  {
+    "fu"         : "Phi",
+    "id"         : 17,
+    "org_opt"    : "phi",
+    "JSON_opt"   : "OPT_PHI",
+    "in_const"   : [],
+    "pre"         : [1,29,14,12],
+    "succ"       : [[1]]
+  },
+  {
+    "fu"         : "Shift",
+    "id"         : 30,
+    "org_opt"    : "lshr",
+    "JSON_opt"   : "OPT_LSR_CONST",
+    "in_const"   : [0],
+    "pre"         : [29],
+    "succ"       : [[16]]
+  },
+  {
+    "fu"         : "Phi",
+    "id"         : 1,
+    "org_opt"    : "phi",
+    "JSON_opt"   : "OPT_PHI_CONST",
+    "in_const"   : [0],
+    "pre"         : [17,61],
+    "succ"       : [[13,17]]
+  },
+  {
+    "fu"         : "Logic",
+    "id"         : 13,
+    "org_opt"    : "and",
+    "JSON_opt"   : "OPT_AND",
+    "in_const"   : [0],
+    "pre"         : [1,9],
+    "succ"       : [[16]]
+  },
+  {
+    "fu"         : "Phi",
+    "id"         : 16,
+    "org_opt"    : "phi",
+    "JSON_opt"   : "OPT_PHI",
+    "in_const"   : [],
+    "pre"         : [13,30,14,12],
+    "succ"       : [[31,38,39,42,46]]
+  },
+  {
+    "fu"         : "zext",
+    "id"         : 31,
+    "org_opt"    : "zext",
+    "JSON_opt"   : "OPT_EXT",
+    "in_const"   : [],
+    "pre"         : [16],
+    "succ"       : [[32]]
+  },
+  {
+    "fu"         : "Logic",
+    "id"         : 38,
+    "org_opt"    : "and",
+    "JSON_opt"   : "OPT_AND",
+    "in_const"   : [0],
+    "pre"         : [16],
+    "succ"       : [[50]]
+  },
+  {
+    "fu"         : "Logic",
+    "id"         : 39,
+    "org_opt"    : "and",
+    "JSON_opt"   : "OPT_AND",
+    "in_const"   : [0],
+    "pre"         : [16],
+    "succ"       : [[40]]
+  },
+  {
+    "fu"         : "Logic",
+    "id"         : 42,
+    "org_opt"    : "and",
+    "JSON_opt"   : "OPT_AND",
+    "in_const"   : [0],
+    "pre"         : [16],
+    "succ"       : [[43]]
+  },
+  {
+    "fu"         : "Logic",
+    "id"         : 46,
+    "org_opt"    : "and",
+    "JSON_opt"   : "OPT_AND",
+    "in_const"   : [0],
+    "pre"         : [16],
+    "succ"       : [[47]]
+  },
+  {
+    "fu"         : "Alu",
+    "id"         : 32,
+    "org_opt"    : "getelementptr",
+    "JSON_opt"   : "OPT_ADD_CONST",
+    "in_const"   : [0,1],
+    "pre"         : [31],
+    "succ"       : [[33]]
+  },
+  {
+    "fu"         : "Comp",
+    "id"         : 40,
+    "org_opt"    : "icmp",
+    "JSON_opt"   : "OPT_EQ_CONST",
+    "in_const"   : [0],
+    "pre"         : [39],
+    "succ"       : [[21]]
+  },
+  {
+    "fu"         : "Comp",
+    "id"         : 43,
+    "org_opt"    : "icmp",
+    "JSON_opt"   : "OPT_EQ_CONST",
+    "in_const"   : [0],
+    "pre"         : [42],
+    "succ"       : [[44]]
+  },
+  {
+    "fu"         : "Comp",
+    "id"         : 47,
+    "org_opt"    : "icmp",
+    "JSON_opt"   : "OPT_EQ_CONST",
+    "in_const"   : [0],
+    "pre"         : [46],
+    "succ"       : [[48]]
+  },
+  {
+    "fu"         : "Comp",
+    "id"         : 50,
+    "org_opt"    : "icmp",
+    "JSON_opt"   : "OPT_EQ_CONST",
+    "in_const"   : [0],
+    "pre"         : [38],
+    "succ"       : [[52]]
+  },
+  {
+    "fu"         : "MemUnit",
+    "id"         : 33,
+    "org_opt"    : "load",
+    "JSON_opt"   : "OPT_LD",
+    "in_const"   : [],
+    "pre"         : [32],
+    "succ"       : [[19]]
+  },
+  {
+    "fu"         : "Alu",
+    "id"         : 19,
+    "org_opt"    : "add",
+    "JSON_opt"   : "OPT_ADD",
+    "in_const"   : [],
+    "pre"         : [33,2,14,12],
+    "succ"       : [[34,35]]
+  },
+  {
+    "fu"         : "Comp",
+    "id"         : 34,
+    "org_opt"    : "icmp",
+    "JSON_opt"   : "OPT_EQ_CONST",
+    "in_const"   : [0],
+    "pre"         : [19],
+    "succ"       : [[35]]
+  },
+  {
+    "fu"         : "Select",
+    "id"         : 35,
+    "org_opt"    : "select",
+    "JSON_opt"   : "OPT_SEL",
+    "in_const"   : [0],
+    "pre"         : [34,19],
+    "succ"       : [[36,37]]
+  },
+  {
+    "fu"         : "Comp",
+    "id"         : 36,
+    "org_opt"    : "icmp",
+    "JSON_opt"   : "OPT_EQ_CONST",
+    "in_const"   : [0],
+    "pre"         : [35],
+    "succ"       : [[37]]
+  },
+  {
+    "fu"         : "Select",
+    "id"         : 37,
+    "org_opt"    : "select",
+    "JSON_opt"   : "OPT_SEL",
+    "in_const"   : [0],
+    "pre"         : [36,35],
+    "succ"       : [[2,57]]
+  },
+  {
+    "fu"         : "Phi",
+    "id"         : 2,
+    "org_opt"    : "phi",
+    "JSON_opt"   : "OPT_PHI_CONST",
+    "in_const"   : [0],
+    "pre"         : [37,61],
+    "succ"       : [[19]]
+  },
+  {
+    "fu"         : "zext",
+    "id"         : 57,
+    "org_opt"    : "zext",
+    "JSON_opt"   : "OPT_EXT",
+    "in_const"   : [],
+    "pre"         : [37],
+    "succ"       : [[58]]
+  },
+  {
+    "fu"         : "Alu",
+    "id"         : 58,
+    "org_opt"    : "getelementptr",
+    "JSON_opt"   : "OPT_ADD_CONST",
+    "in_const"   : [0,1],
+    "pre"         : [57],
+    "succ"       : [[59]]
+  },
+  {
+    "fu"         : "MemUnit",
+    "id"         : 59,
+    "org_opt"    : "load",
+    "JSON_opt"   : "OPT_LD",
+    "in_const"   : [],
+    "pre"         : [58],
+    "succ"       : [[4]]
+  },
+  {
+    "fu"         : "Phi",
+    "id"         : 4,
+    "org_opt"    : "phi",
+    "JSON_opt"   : "OPT_PHI_CONST",
+    "in_const"   : [0],
+    "pre"         : [59,61],
+    "succ"       : [[20,21,22,23]]
+  },
+  {
+    "fu"         : "Shift",
+    "id"         : 20,
+    "org_opt"    : "ashr",
+    "JSON_opt"   : "OPT_ASR_CONST",
+    "in_const"   : [0],
+    "pre"         : [4,14,12],
+    "succ"       : [[41]]
+  },
+  {
+    "fu"         : "Select",
+    "id"         : 21,
+    "org_opt"    : "select",
+    "JSON_opt"   : "OPT_SEL",
+    "in_const"   : [0],
+    "pre"         : [40,4,14,12],
+    "succ"       : [[41]]
+  },
+  {
+    "fu"         : "Shift",
+    "id"         : 22,
+    "org_opt"    : "ashr",
+    "JSON_opt"   : "OPT_ASR_CONST",
+    "in_const"   : [0],
+    "pre"         : [4,14,12],
+    "succ"       : [[44]]
+  },
+  {
+    "fu"         : "Shift",
+    "id"         : 23,
+    "org_opt"    : "ashr",
+    "JSON_opt"   : "OPT_ASR_CONST",
+    "in_const"   : [0],
+    "pre"         : [4,14,12],
+    "succ"       : [[48]]
+  },
+  {
+    "fu"         : "Alu",
+    "id"         : 41,
+    "org_opt"    : "add",
+    "JSON_opt"   : "OPT_ADD",
+    "in_const"   : [],
+    "pre"         : [21,20],
+    "succ"       : [[45]]
+  },
+  {
+    "fu"         : "Select",
+    "id"         : 44,
+    "org_opt"    : "select",
+    "JSON_opt"   : "OPT_SEL",
+    "in_const"   : [0],
+    "pre"         : [43,22],
+    "succ"       : [[45]]
+  },
+  {
+    "fu"         : "Select",
+    "id"         : 48,
+    "org_opt"    : "select",
+    "JSON_opt"   : "OPT_SEL",
+    "in_const"   : [0],
+    "pre"         : [47,23],
+    "succ"       : [[49]]
+  },
+  {
+    "fu"         : "Alu",
+    "id"         : 45,
+    "org_opt"    : "add",
+    "JSON_opt"   : "OPT_ADD",
+    "in_const"   : [],
+    "pre"         : [41,44],
+    "succ"       : [[49]]
+  },
+  {
+    "fu"         : "Alu",
+    "id"         : 49,
+    "org_opt"    : "add",
+    "JSON_opt"   : "OPT_ADD",
+    "in_const"   : [],
+    "pre"         : [45,48],
+    "succ"       : [[51,52]]
+  },
+  {
+    "fu"         : "Alu",
+    "id"         : 51,
+    "org_opt"    : "sub",
+    "JSON_opt"   : "OPT_SUB_CONST",
+    "in_const"   : [0],
+    "pre"         : [49],
+    "succ"       : [[52]]
+  },
+  {
+    "fu"         : "Select",
+    "id"         : 52,
+    "org_opt"    : "select",
+    "JSON_opt"   : "OPT_SEL",
+    "in_const"   : [],
+    "pre"         : [50,49,51],
+    "succ"       : [[24]]
+  },
+  {
+    "fu"         : "Alu",
+    "id"         : 24,
+    "org_opt"    : "add",
+    "JSON_opt"   : "OPT_ADD",
+    "in_const"   : [],
+    "pre"         : [52,3,14,12],
+    "succ"       : [[53,54]]
+  },
+  {
+    "fu"         : "Comp",
+    "id"         : 53,
+    "org_opt"    : "icmp",
+    "JSON_opt"   : "OPT_EQ_CONST",
+    "in_const"   : [0],
+    "pre"         : [24],
+    "succ"       : [[54]]
+  },
+  {
+    "fu"         : "Select",
+    "id"         : 54,
+    "org_opt"    : "select",
+    "JSON_opt"   : "OPT_SEL",
+    "in_const"   : [0],
+    "pre"         : [53,24],
+    "succ"       : [[55,56]]
+  },
+  {
+    "fu"         : "Comp",
+    "id"         : 55,
+    "org_opt"    : "icmp",
+    "JSON_opt"   : "OPT_EQ_CONST",
+    "in_const"   : [0],
+    "pre"         : [54],
+    "succ"       : [[56]]
+  },
+  {
+    "fu"         : "Select",
+    "id"         : 56,
+    "org_opt"    : "select",
+    "JSON_opt"   : "OPT_SEL",
+    "in_const"   : [0],
+    "pre"         : [55,54],
+    "succ"       : [[3,60]]
+  },
+  {
+    "fu"         : "Phi",
+    "id"         : 3,
+    "org_opt"    : "phi",
+    "JSON_opt"   : "OPT_PHI_CONST",
+    "in_const"   : [0],
+    "pre"         : [56,61],
+    "succ"       : [[24]]
+  },
+  {
+    "fu"         : "Alu",
+    "id"         : 60,
+    "org_opt"    : "trunc",
+    "JSON_opt"   : "OPT_TRUNC",
+    "in_const"   : [],
+    "pre"         : [56],
+    "succ"       : [[26]]
+  },
+  {
+    "fu"         : "MemUnit",
+    "id"         : 26,
+    "org_opt"    : "store",
+    "JSON_opt"   : "OPT_STR",
+    "in_const"   : [],
+    "pre"         : [60,6,14,12],
+    "succ"       : [[]]
+  }
+]

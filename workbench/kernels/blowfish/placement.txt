@@ -1,0 +1,6 @@
+    res = [["lshr15","and10","add28","load4","or22","lshr6"],
+        ["and16","or11","icmp29","xor20","xor5","getelementptr7","getelementptr23"],
+        ["or17","getelementptr12","xor27","br30","load24","load8"],
+        ["getelementptr18","add25","phi1","load13","phi0"],
+        ["lshr9","load19","and21","and26","getelementptr3","phi2","add14"],
+        ["lshr15","and10","add28","load4","or22","lshr6"]]

@@ -1,0 +1,5 @@
+    res = [["phi0","store15","getelementptr4","fadd7"],
+        ["load9","getelementptr11","add16","load3","getelementptr1","load5","load10"],
+        ["load12","icmp17","store8","load2","fmul13"],
+        ["br18","fmul6","fadd14"],
+        ["phi0","store15","getelementptr4","fadd7"]]
