@@ -376,8 +376,8 @@ bool Mapper::schedule(CGRA* t_cgra, DFG* t_dfg, int t_II,
   fu->setDFGNode(t_dfgNode, (*t_path)[fu], t_II, t_isStaticElasticCGRA);
   m_mappingTiming[t_dfgNode] = (*t_path)[fu];
   // Route the dataflow onto the CGRA links across cycles.
-  CGRANode* onePredCGRANode;//TODO: what is this
-  int onePredCGRANodeTiming;//TODO: what is this
+  CGRANode* onePredCGRANode;//记录Path中第一个CGRA节点
+  int onePredCGRANodeTiming;//记录Path中第一个CGRA节点对应的cycle
   map<int, CGRANode*>::iterator previousIter;//TODO: what is this
   map<int, CGRANode*>::iterator next;//TODO: what is this
   if (reorderPath->size() > 0) {
@@ -387,7 +387,7 @@ bool Mapper::schedule(CGRA* t_cgra, DFG* t_dfg, int t_II,
   }
   map<int, CGRANode*>::reverse_iterator riter=reorderPath->rbegin();//要布的DFG和在path中对应的cycle
   bool generatedOut = true;
-	//对path从头向后布，直到最后的DFGNode,path的begin是上一个DFGNode
+	//对path从头向后布，直到最后的DFGNode,前面已经对执行目标节点的CGRANode进行了确定，下面过程实际就是对path上的CGRALink进行占据
   for (map<int, CGRANode*>::iterator iter=reorderPath->begin();
       iter!=reorderPath->end(); ++iter) {
     if (iter != reorderPath->begin()) {
@@ -409,8 +409,8 @@ bool Mapper::schedule(CGRA* t_cgra, DFG* t_dfg, int t_II,
       l->occupy(srcCGRANode->getMappedDFGNode(srcCycle),
                 (*previousIter).first, duration,
                 t_II, isBypass, generatedOut, t_isStaticElasticCGRA);
-      generatedOut = false;
-    } else {
+      generatedOut = false;//只有从path起始的节点对于CGRALink来说是数据输出
+    } else {//第一个节点对应的是起始的CGRA节点,记录path的第一个节点
       onePredCGRANode = (*iter).second;
       onePredCGRANodeTiming = (*iter).first;
     }
@@ -419,12 +419,13 @@ bool Mapper::schedule(CGRA* t_cgra, DFG* t_dfg, int t_II,
 	//对path布完，可以删除路径了
   delete reorderPath;
 
-	//考虑是否目标DFG节点的父节点是否已经被布，如果已被布则要进行操作
+	//考虑是否目标DFG节点的父节点是否已经被布，如果未被布则要进行操作
   // Try to route the path with other predecessors.
   // TODO: should consider the timing for static CGRA (two branches should
   //       joint at the same time or the register file size equals to 1)
   for (DFGNode* node: *t_dfgNode->getPredNodes()) {
     if (m_mapping.find(node) != m_mapping.end()) {
+			//遍历到的父节点是刚才路径上的那个节点，且已被布，则跳过操作。
       if (m_mapping[(node)] == onePredCGRANode and
           onePredCGRANode->getMappedDFGNode(onePredCGRANodeTiming)==node) {
         cout<<"[DEBUG] skip predecessor routing -- dfgNode: "<<node->getID()<<"\n";
@@ -440,7 +441,6 @@ bool Mapper::schedule(CGRA* t_cgra, DFG* t_dfg, int t_II,
     }
   }
 
-	//考虑是否目标DFG节点的子节点已被布，如果已被布则要进行操作。
   // Try to route the path with the mapped successors that are only in
   // certain cycle.
   for (DFGNode* node: *t_dfgNode->getSuccNodes()) {

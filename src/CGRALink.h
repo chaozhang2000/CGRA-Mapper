@@ -51,19 +51,17 @@ class CGRALink
 		 */
     bool* m_occupied;
 
-		/**this value record this CGRALink is bypass at a certain clock cycle.
+		/**this value record this CGRALink is bypass at a certain clock cycle.Bypass means the CGRALink is not at the begin or the end of a Path, the data in the CGRALink will not be send to the FU. just bypass to another CGRANode.
 		 *m_bypassed[cycle] = true;
 		 */
     bool* m_bypassed;
 
-		/**this value record this CGRALink is generatedOut at a certain clock cycle.
-		 * TODO: but I don't know what is generatedOut now.
+		/**this value record this CGRALink is generatedOut at a certain clock cycle.GeneratedOut means the CGRALink is at the begin of a Path, it's data is from the beginning CGRANode's FU.
 		 * m_generatedOut[cycle] = true;
 		 */
     bool* m_generatedOut;
 
-		/**this value record this CGRALink is arrived at a certain clock cycle.
-		 * TODO: but I don't know what is arrived now.
+		/**this value record this CGRALink is arrived at a certain clock cycle.Arrived means the CGRALink is at the end of a Path,it's data is end to the FU of CGRANode which is at the end of Path.
 		 * m_arrived[cycle] = true;
 		 */
     bool* m_arrived;
@@ -106,11 +104,11 @@ class CGRALink
     bool isOccupied(int, int, bool);
     bool canOccupy(DFGNode*, CGRANode*, int, int);
 
-		/** occupy the CGRALink,add value to m_dfgNodes,m_arrived,m_generatedOut,m_bypassed,m_occupyed.according to the params of function.
+		/** occupy the CGRALink when route the path,add value to m_dfgNodes,m_arrived,m_generatedOut,m_bypassed,m_occupyed.according to the params of function.
 		 * call m_dst's allocateReg() method if is not bypass,to allocate reg in CGRANode.
-		 * @param t_srcDFGNode : the srcDFGNode which will occupy this CGRALink
-		 * @param t_cycle : the clock cycle now
-		 * @param t_duration : 
+		 * @param t_srcDFGNode : the CGRALink is occupy on the Path to srcDFGNode
+		 * @param t_cycle : the clock cycle when this CGRALink is occupied
+		 * @param t_duration : Duration occupied
 		 * @param t_II : the value of II
 		 * @param t_isBypass : if this CGRALink is bypass in this clock cycle
 		 * @param t_isGeneratedOut : if this CGRALink is GeneratedOut in this clock cycle
