@@ -10,7 +10,14 @@
 
 #include "DFG.h"
 #include "CGRA.h"
+#include<chrono>
 
+class Profile {
+  public:
+    int II;
+    int II_compilation_time[30] = {0}; // micro seconds
+    Profile(){}
+};
 class Mapper {
   private:
     int m_maxMappingCycle;
@@ -33,7 +40,7 @@ class Mapper {
     int getResMII(DFG*, CGRA*);
     int getRecMII(DFG*);
     void constructMRRG(DFG*, CGRA*, int);
-    int heuristicMap(CGRA*, DFG*, int, bool);
+    Profile heuristicMap(CGRA*, DFG*, int, bool);
     int exhaustiveMap(CGRA*, DFG*, int, bool);
     map<CGRANode*, int>* calculateCost(CGRA*, DFG*, int, DFGNode*, CGRANode*);
     map<CGRANode*, int>* getPathWithMinCostAndConstraints(CGRA*, DFG*, int,

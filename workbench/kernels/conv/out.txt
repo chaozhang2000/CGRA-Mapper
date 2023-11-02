@@ -1,0 +1,12 @@
+code = 0xee00.txt	rows = 4	cols = 4	startMII = 4	II = 4 time = 9 
+code = 0xec80.txt	rows = 4	cols = 4	startMII = 4	II = 4 time = 7 
+code = 0x7e00.txt	rows = 4	cols = 4	startMII = 4	II = 4 time = 9 
+code = 0xfc00.txt	rows = 1	cols = 16	startMII = 4	II = 5 time = 2 6 
+code = 0xec00.txt	rows = 4	cols = 4	startMII = 4	II = 6 time = 6 2 7 
+code = 0xe440.txt	rows = 4	cols = 4	startMII = 4	II = 4 time = 9 
+code = 0xe880.txt	rows = 4	cols = 4	startMII = 4	II = 6 time = 2 4 6 
+code = 0xf800.txt	rows = 1	cols = 16	startMII = 4	II = 5 time = 2 5 
+code = 0xcc00.txt	rows = 4	cols = 4	startMII = 4	II = 5 time = 8 5 
+code = 0xe800.txt	rows = 4	cols = 4	startMII = 4	II = 6 time = 2 3 4 
+code = 0x6c00.txt	rows = 4	cols = 4	startMII = 4	II = 6 time = 2 6 5 
+code = 0xf000.txt	rows = 1	cols = 16	startMII = 4	II = 8 time = 2 3 3 5 8 

@@ -15,14 +15,5 @@
   "bypassConstraint"      : 4,
   "isStaticElasticCGRA"   : false,
   "ctrlMemConstraint"     : 200,
-  "regConstraint"         : 8,
-  "optLatency"            : {
-                              "load" : 1,
-                              "store": 1
-                            },
-  "optPipelined"          : ["load", "store"],
-  "additionalFunc"        : {
-                              "load" : [0,4,8,12],
-                              "store": [0,4,8,12]
-                            }
+  "regConstraint"         : 8
 }

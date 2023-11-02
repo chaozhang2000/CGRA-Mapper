@@ -1,20 +1,28 @@
 {
-"filename": "0x8e0000.txt","rc": {
-"rows": 6,
-"cols": 4
+"filename": "0xf000.txt","rc": {
+"rows": 1,
+"cols": 16
 },
 "tiles": {
 "0": {
-"disabled": true
+"disabled": false,
+"supportAllFUs": true,
+"accessMem": true
 },
 "1": {
-"disabled": true
+"disabled": false,
+"supportAllFUs": true,
+"accessMem": true
 },
 "2": {
-"disabled": true
+"disabled": false,
+"supportAllFUs": true,
+"accessMem": true
 },
 "3": {
-"disabled": true
+"disabled": false,
+"supportAllFUs": true,
+"accessMem": true
 },
 "4": {
 "disabled": true
@@ -51,63 +59,31 @@
 },
 "15": {
 "disabled": true
-},
-"16": {
-"disabled": false,
-"supportAllFUs": true,
-"accessMem": true
-},
-"17": {
-"disabled": false,
-"supportAllFUs": true,
-"accessMem": true
-},
-"18": {
-"disabled": false,
-"supportAllFUs": true,
-"accessMem": true
-},
-"19": {
-"disabled": true
-},
-"20": {
-"disabled": false,
-"supportAllFUs": true,
-"accessMem": true
-},
-"21": {
-"disabled": true
-},
-"22": {
-"disabled": true
-},
-"23": {
-"disabled": true
 }
 },
 "links": [
 {
-"srcTile":16,
-"dstTile":20
+"srcTile":0,
+"dstTile":1
 },
 {
-"srcTile":16,
-"dstTile":17
+"srcTile":1,
+"dstTile":0
 },
 {
-"srcTile":17,
-"dstTile":16
+"srcTile":1,
+"dstTile":2
 },
 {
-"srcTile":17,
-"dstTile":18
+"srcTile":2,
+"dstTile":1
 },
 {
-"srcTile":18,
-"dstTile":17
+"srcTile":2,
+"dstTile":3
 },
 {
-"srcTile":20,
-"dstTile":16
+"srcTile":3,
+"dstTile":2
 }]
 }

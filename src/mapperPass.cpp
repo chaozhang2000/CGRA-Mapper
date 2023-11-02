@@ -22,6 +22,7 @@
 
 using namespace llvm;
 using namespace std;
+using namespace chrono;
 using json = nlohmann::json;
 
 void addDefaultKernels(map<string, list<int>*>*);
@@ -229,7 +230,56 @@ namespace {
         cout << "==================================\n";
         if (heuristicMapping) {
           cout << "[heuristic]\n";
-          II = mapper->heuristicMap(cgra, dfg, II, isStaticElasticCGRA);
+          streambuf* orig_buf = cout.rdbuf();
+          cout.rdbuf(NULL);
+          Profile exp[20];
+          typedef std::chrono::high_resolution_clock Clock;
+          auto t1 = Clock::now();//计时开始
+          for(int i=0; i<20; i++){ //repeat 20 times
+            exp[i] = mapper->heuristicMap(cgra, dfg, II, isStaticElasticCGRA);
+          } 
+          cout.rdbuf(orig_buf);
+          auto t2 = Clock::now();//计时结束
+          std::cout <<"Running heuristicMap() for 20 times, the average compilation time is "<<std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1000000 / 20 <<"ms"<< '\n';
+
+          // print the profile results
+					int min_i = 0;
+					int min_II;
+          for(int i=0; i<20; i++){
+						if(i == 0) min_II = exp[i].II;
+						else {
+							if(exp[i].II <=min_II) {min_II = exp[i].II;min_i = i;}
+						}	
+					}
+					//display
+						std::cout << "code = "<<filename<<" ";
+						cout << "rows = "<<rows<<" ";
+						cout << "cols = "<<columns<<" ";
+						if(ResMII >= RecMII)cout << "startII = "<<ResMII<<" ";
+						else cout << "startMII = "<<RecMII<<" ";
+            std::cout <<"II = "<<exp[min_i].II<<" time = ";
+            for(int j=0; j<30; j++){
+							if(exp[min_i].II_compilation_time[j]!=0)
+              std::cout << exp[min_i].II_compilation_time[j]<<" ";
+            }
+            std::cout << endl;
+						//out to file
+						ofstream file("out.txt",std::ios::app);
+						if(file.is_open()){
+						file << "code = "<<filename<<"\t";
+						file<< "rows = "<<rows<<"\t";
+						file<< "cols = "<<columns<<"\t";
+						if(ResMII >= RecMII)file << "startII = "<<ResMII<<"\t";
+						else file << "startMII = "<<RecMII<<"\t";
+            file <<"II = "<<exp[min_i].II<<" time = ";
+            for(int j=0; j<30; j++){
+							if(exp[min_i].II_compilation_time[j]!=0)
+              file << exp[min_i].II_compilation_time[j]<<" ";
+            }
+            file << endl;
+										
+						}
+
         } else {
           cout << "[exhaustive]\n";
           II = mapper->exhaustiveMap(cgra, dfg, II, isStaticElasticCGRA);
@@ -249,11 +299,11 @@ namespace {
       if (II == -1)
         cout << "[fail]\n";
       else {
-        mapper->showSchedule(cgra, dfg, II, isStaticElasticCGRA, parameterizableCGRA);
+      //  mapper->showSchedule(cgra, dfg, II, isStaticElasticCGRA, parameterizableCGRA);
         cout << "==================================\n";
         cout << "[Mapping Success]\n";
         cout << "==================================\n";
-        mapper->generateJSON(cgra, dfg, II, isStaticElasticCGRA);
+       // mapper->generateJSON(cgra, dfg, II, isStaticElasticCGRA);
         cout << "[Output Json]\n";
       }
       cout << "=================================="<<endl;

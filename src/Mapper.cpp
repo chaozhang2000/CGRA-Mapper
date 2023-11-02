@@ -1201,25 +1201,15 @@ bool Mapper::tryToRoute(CGRA* t_cgra, DFG* t_dfg, int t_II,
   return true;
 }
 
-int Mapper::heuristicMap(CGRA* t_cgra, DFG* t_dfg, int t_II,
+Profile Mapper::heuristicMap(CGRA* t_cgra, DFG* t_dfg, int t_II,
     bool t_isStaticElasticCGRA) {
   bool fail = false;
+   Profile exp;
+  int cnt = 0;
   while (1) {
-    cout<<"----------------------------------------\n";
-    cout<<"[DEBUG] start heuristic algorithm with II="<<t_II<<"\n";
-		if(t_II >= 50){
-						cout<<"II>50 break";
-						ifstream src("./output/"+m_filename);
-						ofstream dst("./err/"+m_filename);
-						if(src&&dst){
-										dst << src.rdbuf();
-										src.close();
-										dst.close();
-										string filename ="./output/"+m_filename; 
-										remove(filename.c_str());
-						}
-						assert(0);}
     int cycle = 0;
+    typedef std::chrono::high_resolution_clock Clock;
+    auto t1 = Clock::now();//计时结束
     constructMRRG(t_dfg, t_cgra, t_II);
     fail = false;
     for (list<DFGNode*>::iterator dfgNode=t_dfg->nodes.begin();
@@ -1267,6 +1257,10 @@ int Mapper::heuristicMap(CGRA* t_cgra, DFG* t_dfg, int t_II,
         break;
       }
     }
+        auto t2 = Clock::now();//计时结束
+        exp.II_compilation_time[cnt] = std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1000000;
+
+    cnt++;
     if (!fail)
       break;
     else if (t_isStaticElasticCGRA) {
@@ -1274,10 +1268,14 @@ int Mapper::heuristicMap(CGRA* t_cgra, DFG* t_dfg, int t_II,
     }
     ++t_II;
   }
-  if (!fail)
-    return t_II;
+  if (!fail){
+    exp.II = t_II;
+    return exp;
+    // return t_II;
+  }
   else
-    return -1;
+    return exp;
+  // return t_II;
 }
 
 int Mapper::exhaustiveMap(CGRA* t_cgra, DFG* t_dfg, int t_II,
