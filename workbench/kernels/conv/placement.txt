@@ -1,5 +1,7 @@
-    res = [["udiv2","urem3","bitcast7","add14","add13","getelementptr9"],
-        ["load8","zext4","phi1","icmp15","bitcast10"],
-        ["zext5","br16","load11"],
-        ["phi0","getelementptr6","mul12"],
-        ["udiv2","urem3","bitcast7","add14","add13","getelementptr9"]]
+    res = [["zext5","add14"],
+        ["getelementptr9","icmp15","getelementptr6"],
+        ["bitcast7","bitcast10","br16"],
+        ["mul12","phi0","load11","load8"],
+        ["udiv2","add13"],
+        ["zext4","phi1","urem3"],
+        ["zext5","add14"]]

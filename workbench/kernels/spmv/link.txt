@@ -1,0 +1,72 @@
+PlacementDone_Init:
+    res["phi1"] = 0
+    res["add18"] = 0
+    res["icmp19"] = 0
+    res["br20"] = 0
+    res["phi0"] = 0
+    res["getelementptr2"] = 0
+    res["getelementptr4"] = 0
+    res["getelementptr10"] = 0
+    res["add17"] = 0
+    res["load3"] = 0
+    res["load5"] = 0
+    res["load11"] = 0
+    res["sext6"] = 0
+    res["sext12"] = 0
+    res["getelementptr7"] = 0
+    res["getelementptr13"] = 0
+    res["load8"] = 0
+    res["load14"] = 0
+    res["mul9"] = 0
+    res["add15"] = 0
+    res["store16"] = 0
+
+
+
+DependencyPredecessor_Init:
+    res["phi1"] = ["add18", "br20"]
+    res["add18"] = ["phi1"]
+    res["icmp19"] = ["add18"]
+    res["br20"] = ["icmp19"]
+    res["phi0"] = ["add17", "br20"]
+    res["getelementptr2"] = ["phi0"]
+    res["getelementptr4"] = ["phi0"]
+    res["getelementptr10"] = ["phi0"]
+    res["add17"] = ["phi0"]
+    res["load3"] = ["getelementptr2"]
+    res["load5"] = ["getelementptr4"]
+    res["load11"] = ["getelementptr10"]
+    res["sext6"] = ["load5"]
+    res["sext12"] = ["load11"]
+    res["getelementptr7"] = ["sext6"]
+    res["getelementptr13"] = ["sext12"]
+    res["load8"] = ["getelementptr7"]
+    res["load14"] = ["getelementptr13"]
+    res["mul9"] = ["load8", "load3"]
+    res["add15"] = ["load14", "mul9"]
+    res["store16"] = ["add15", "getelementptr13"]
+
+
+
+DependencySuccessor_Init:
+    res["phi1"] = ["add18"]
+    res["add18"] = ["phi1", "icmp19"]
+    res["icmp19"] = ["br20"]
+    res["br20"] = ["phi0", "phi1"]
+    res["phi0"] = ["getelementptr2", "getelementptr4", "getelementptr10", "add17"]
+    res["getelementptr2"] = ["load3"]
+    res["getelementptr4"] = ["load5"]
+    res["getelementptr10"] = ["load11"]
+    res["add17"] = ["phi0"]
+    res["load3"] = ["mul9"]
+    res["load5"] = ["sext6"]
+    res["load11"] = ["sext12"]
+    res["sext6"] = ["getelementptr7"]
+    res["sext12"] = ["getelementptr13"]
+    res["getelementptr7"] = ["load8"]
+    res["getelementptr13"] = ["load14", "store16"]
+    res["load8"] = ["mul9"]
+    res["load14"] = ["add15"]
+    res["mul9"] = ["add15"]
+    res["add15"] = ["store16"]
+    res["store16"] = ["N/A"]

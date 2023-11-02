@@ -1,0 +1,14 @@
+1 0 0 0 
+1 1 1 0 
+0 0 0 0 
+0 0 0 0 
+0 0 0 0 
+0 0 0 0 
+tiles = 4
+links = 6
+4nodes = 0
+3nodes = 0
+2nodes = 2
+1nodes = 2
+
+II = 8
