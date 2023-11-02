@@ -1,9 +1,5 @@
-    res = [["phi1","store16","sext6","load11"],
-        ["sext12","add18","getelementptr7"],
-        ["icmp19","getelementptr13","load8"],
-        ["load14","br20"],
-        ["mul9","phi0"],
-        ["getelementptr2","add17"],
-        ["getelementptr4","load3"],
-        ["add15","load5","getelementptr10"],
-        ["phi1","store16","sext6","load11"]]
+    res = [["phi1","load11","mul9","phi0"],
+        ["sext6","add18","sext12","getelementptr2","add17"],
+        ["getelementptr7","icmp19","add15","getelementptr4","getelementptr13","load3"],
+        ["getelementptr10","load8","br20","load14","load5","store16"],
+        ["phi1","load11","mul9","phi0"]]

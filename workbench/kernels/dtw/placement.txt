@@ -1,11 +1,6 @@
-    res = [["sub5","phi0","bitcast27"],
-        ["call6","trunc22","add29"],
-        ["icmp30","icmp17"],
-        ["select18","br31","add21"],
-        ["store28","icmp19","add1"],
-        ["add13","getelementptr10","select20"],
-        ["getelementptr2","getelementptr14","bitcast11","add23"],
-        ["add24","bitcast3","bitcast15","getelementptr7"],
-        ["bitcast8","load16","load4","sext25"],
-        ["getelementptr26","load9","load12"],
-        ["sub5","phi0","bitcast27"]]
+    res = [["getelementptr14","icmp17","getelementptr2","phi0","add23","select20"],
+        ["bitcast3","trunc22","getelementptr10","add29","call6","getelementptr7","add24"],
+        ["icmp30","bitcast15","add21","select18","bitcast11","sext25","bitcast8"],
+        ["store28","icmp19","load4","getelementptr26","br31","load16"],
+        ["bitcast27","sub5","load12","add13","add1","load9"],
+        ["getelementptr14","icmp17","getelementptr2","phi0","add23","select20"]]

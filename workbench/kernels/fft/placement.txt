@@ -1,12 +1,5 @@
-    res = [["store33","bitcast6","phi0","getelementptr9"],
-        ["bitcast10","add39","load7","store38"],
-        ["icmp40","bitcast32","fmul8","bitcast21"],
-        ["store22","br41","store27","load11"],
-        ["fmul12","fmul14","add1","fmul15"],
-        ["fadd16","getelementptr17","getelementptr28"],
-        ["trunc2","bitcast23","bitcast18","fsub31"],
-        ["bitcast26","bitcast37","load19","add3"],
-        ["bitcast34","fsub13","fadd36"],
-        ["load24","sext4","fadd25","bitcast29"],
-        ["load30","fsub20","getelementptr5","load35"],
-        ["store33","bitcast6","phi0","getelementptr9"]]
+    res = [["store22","load19","getelementptr5","bitcast23","load11","phi0","add1","fadd16","load35","fadd25","load7"],
+        ["fmul15","bitcast6","fmul12","trunc2","getelementptr9","load24","fsub31","add39","fsub20","getelementptr28","store27"],
+        ["add3","bitcast32","getelementptr17","fadd36","icmp40","fmul14","bitcast29","fmul8","bitcast37"],
+        ["sext4","bitcast26","bitcast10","bitcast18","bitcast21","bitcast34","fsub13","br41","store38","load30","store33"],
+        ["store22","load19","getelementptr5","bitcast23","load11","phi0","add1","fadd16","load35","fadd25","load7"]]

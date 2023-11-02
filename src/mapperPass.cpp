@@ -230,6 +230,7 @@ namespace {
         if (heuristicMapping) {
           cout << "[heuristic]\n";
           II = mapper->heuristicMap(cgra, dfg, II, isStaticElasticCGRA);
+
         } else {
           cout << "[exhaustive]\n";
           II = mapper->exhaustiveMap(cgra, dfg, II, isStaticElasticCGRA);
@@ -255,6 +256,28 @@ namespace {
         cout << "==================================\n";
         mapper->generateJSON(cgra, dfg, II, isStaticElasticCGRA);
         cout << "[Output Json]\n";
+
+				ofstream file("./output/"+filename);
+					int cnt = 0;
+			file <<":{";
+    for (DFGNode* dfgNode: (*dfg).nodes) {
+						cnt++;
+			if (cnt == (*dfg).nodes.size())
+				file<<"\'"<<dfgNode->getOpcodeName()<<dfgNode->getID()<<"\':"<<"cgea.Tiles["<<(*mapper).m_mapping[dfgNode]->getID()<<"]},"<<endl;
+			else 
+			file<<"\'"<<dfgNode->getOpcodeName()<<dfgNode->getID()<<"\':"<<"cgea.Tiles["<<(*mapper).m_mapping[dfgNode]->getID()<<"],"<<endl;
+		}
+			file << endl;
+			file <<":{";
+			cnt = 0;
+    for (DFGNode* dfgNode: (*dfg).nodes) {
+						cnt++;
+			if (cnt == (*dfg).nodes.size())
+				file<<"\'"<<dfgNode->getOpcodeName()<<dfgNode->getID()<<"\':"<<(*mapper).m_mappingTiming[dfgNode]<<"},"<<endl;
+			else 
+			file<<"\'"<<dfgNode->getOpcodeName()<<dfgNode->getID()<<"\':"<<(*mapper).m_mappingTiming[dfgNode]<<","<<endl;
+		}
+
       }
       cout << "=================================="<<endl;
 
