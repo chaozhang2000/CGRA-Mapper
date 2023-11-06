@@ -169,6 +169,11 @@ class CGRANode {
     list<CGRALink*>* getOutLinks();
     CGRALink* getInLink(CGRANode*);
     CGRALink* getOutLink(CGRANode*);
+
+		/**this function return the list of neighbor CGRANodes of this node.
+		 * return the m_neighbors
+		 * if the m_neighbors is nut Null return the m_neighbors,if it is NULL,search the m_outlinks getConnectedNode() function to push neighbor CGRANodes to to the m_neighbors.
+		 */
     list<CGRANode*>* getNeighbors();
 
 		/**The function to construct MRRG in CGRANode Class

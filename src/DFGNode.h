@@ -52,6 +52,9 @@ class DFGNode {
     list<DFGNode*>* m_predNodes;
 
     list<DFGNode*>* m_patternNodes;
+		
+		/**the list to record this DFGNode is in which cycle(环)
+		 */
     list<int>* m_cycleID;
 
 		/**this variable is used to record if this DFGNode have been mapped
@@ -175,16 +178,29 @@ class DFGNode {
     DFGNode* getPatternRoot();
     list<DFGNode*>* getPatternNodes();
     void setCritical();
-    void addCycleID(int);
+
+		/** push t_cycleID to the m_cycleID
+		 *  @param t_cycleID : the ID of the cycle(环)
+		 */
+		void addCycleID(int t_cycleID);
+
     bool isCritical();
     int getCycleID();
+
+		/** return the pointer of the list m_cycleID
+		 */
     list<int>* getCycleIDs();
     void addPredicatee(DFGNode*);
     list<DFGNode*>* getPredicatees();
     void setPredicatee();
     bool isPredicatee();
     bool isPredicater();
-    bool shareSameCycle(DFGNode*);
+
+		/** judge if the DFGNode t_node and this DFGNode is in the same cycle(环)
+		 *  @return : if the t_node and this DFGNode is in the same cycle return true 
+		 */
+		bool shareSameCycle(DFGNode* t_node);
+
     void setExecLatency(int);
     bool isMultiCycleExec();
     int getExecLatency();

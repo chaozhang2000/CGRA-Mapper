@@ -144,6 +144,8 @@ class DFG {
 		 */
     list<list<DFGEdge*>*>* calculateCycles();
 
+		/** this function return the m_cycleNodeLists which record the cycle(环) in DFG.
+		 */
     list<list<DFGNode*>*>* getCycleLists();
     int getID(DFGNode*);
     bool isLoad(DFGNode*);

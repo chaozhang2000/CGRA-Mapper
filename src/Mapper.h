@@ -25,8 +25,24 @@ class Mapper {
     map<CGRANode*, int>* dijkstra_search(CGRA*, DFG*, int, DFGNode*,
                                          DFGNode*, CGRANode*);
     int getMaxMappingCycle();
-    bool tryToRoute(CGRA*, DFG*, int, DFGNode*, CGRANode*,
-                    DFGNode*, CGRANode*, int, bool, bool);
+
+		/** This function do tryToRoute,every DFGNode may have more then one father DFGNode or child DFGNode,when we map a DFGNode in schedule() function, it's father DFGNode or child DFGNode may have been mapped before,this function try to route the mapped father DFGNode's data to this DFGNode or try to route this DFGNode's data to it's mapped child DFGNode.
+		 * try to route the date from srcCGRAnode which has mapped srcDFGNode to the dstCGRANode which mapped dstDFGNode.
+		 * in this function we first find a shortest path from srcCGRANode to dstCGRANode,then occupy the CGRALinks in this Path.
+		 * @param t_caga : the pointer to the CGRA 
+		 * @param t_dfg : the pointer to the DFG
+		 * @param t_II : the value of II
+		 * @param t_srcDFGNode : the pointer of srcDFGNode
+		 * @param t_srcCGRANode : the pointer of srcCGRANode
+		 * @param t_dstDFGNode : the pointer of dstDFGNode
+		 * @param t_dstCGRANode : the pointer of dstCGRANode
+		 * @param t_dstCycle : the dstDFGNode has been mapped on dstCGRANode at which cycle.
+		 * @param t_isBackedge : TODO
+		 * @param t_isStaticElasticCGRA : is always false now
+		 * @return : the reordered paths
+		 */
+		bool tryToRoute(CGRA* t_cgra, DFG* t_dfg, int t_II, DFGNode* t_srcDFGNode, CGRANode* t_srcCGRANode, DFGNode* t_dstDFGNode,CGRANode* t_dstCGRANode, int t_dstCycle, bool t_isBackedge,bool t_isStaticElasticCGRA);
+
     list<DFGNode*>* getMappedDFGNodes(DFG*, CGRANode*);
     map<int, CGRANode*>* getReorderPath(map<CGRANode*, int>*);
     bool DFSMap(CGRA*, DFG*, int, list<DFGNode*>*, list<map<CGRANode*, int>*>*, bool);
@@ -84,7 +100,7 @@ class Mapper {
 
     int exhaustiveMap(CGRA*, DFG*, int, bool);
 
-		/**This function try to map t_dfgNode to t_fu, if successed, return the path, else return NULL
+		/**This function try to find a path from a CGRANode which map t_dfgNode's pre Node to the t_fu which will map t_dfgNode.if the path is found, return the path, else return NULL
 		 * @param t_caga : the pointer to the CGRA 
 		 * @param t_dfg : the pointer to the DFG
 		 * @param t_II : the value of II

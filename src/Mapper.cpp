@@ -357,8 +357,8 @@ map<CGRANode*, int>* Mapper::calculateCost(CGRA* t_cgra, DFG* t_dfg,
 
 /**
  * what is in  this function:
- * 1.map the t_dfgNode to the right CGRANode.which CGRANode the dfgNode should mapped to is record at the end of t_path.
- * 2.
+ * 1.map the path from a pre DFGNode to t_dfgNode.
+ * 2.search the mapped pre DFGNode and the mapped suc DFGNode,and route the date form mapped DFGNode to this DFGNode or route the data from this DFGNode to mapped suc DFGNode. there are total two situation, first, the father DFGNode is mapped,and now is mapping the child DFGNode, in this situation, we need to route the father DFGNode to the child DFGNode.second situation,the child DFGNode is mapped,and now is mapping the father DFGNode,in this this situation ,we need to route the father DFGNode to the child DFGNode,too. By doing this,we make sure that every DFGEdge is mapped.
  */
 bool Mapper::schedule(CGRA* t_cgra, DFG* t_dfg, int t_II,
     DFGNode* t_dfgNode, map<CGRANode*, int>* t_path, bool t_isStaticElasticCGRA) {
@@ -419,11 +419,12 @@ bool Mapper::schedule(CGRA* t_cgra, DFG* t_dfg, int t_II,
 	//对path布完，可以删除路径了
   delete reorderPath;
 
-	//考虑是否目标DFG节点的父节点是否已经被布，如果未被布则要进行操作
+	//考虑目标DFG节点的父节点,如果已经有父节点被布了，则需要对其进行考虑
   // Try to route the path with other predecessors.
   // TODO: should consider the timing for static CGRA (two branches should
   //       joint at the same time or the register file size equals to 1)
   for (DFGNode* node: *t_dfgNode->getPredNodes()) {
+					//已经有父节点被布
     if (m_mapping.find(node) != m_mapping.end()) {
 			//遍历到的父节点是刚才路径上的那个节点，且已被布，则跳过操作。
       if (m_mapping[(node)] == onePredCGRANode and
@@ -981,22 +982,27 @@ bool Mapper::tryToRoute(CGRA* t_cgra, DFG* t_dfg, int t_II,
   map<CGRANode*, CGRANode*> previous;
   timing[t_srcCGRANode] = m_mappingTiming[t_srcDFGNode];
   // Check whether the II is violated on each cycle.
+	// 这段代码是从环的角度来考虑，来排除错误情况，而后续的实现中不会有这样的情况，所以此处的阅读价值相对较小。
   if (t_srcDFGNode->shareSameCycle(t_dstDFGNode)) {
     list<list<DFGNode*>*>* dfgNodeCycles = t_dfg->getCycleLists();
     for (list<DFGNode*>* cycle: *dfgNodeCycles) {
+			//判断所遍历的环中同时包括srcDFGNode和dstDFGNode
       bool foundSrc = (find(cycle->begin(), cycle->end(), t_srcDFGNode) != cycle->end());
       bool foundDst = (find(cycle->begin(), cycle->end(), t_dstDFGNode) != cycle->end());
       if (!foundSrc or !foundDst) {
         continue;
       }
+			//if find a cycle which the srcDFGNode and dstDFGNode both belong to.
       int totalTime = 0;
-      DFGNode* lastDFGNode = cycle->back();
+      DFGNode* lastDFGNode = cycle->back();//上一个DFGNode,由于下面的dfgnode从cycle的头开始遍历，所以第一个dfgNode的上一个DFGNode是cycle中的最后一个DFGNode.
       for (DFGNode* dfgNode: *cycle) {
+				//如果环中当前的node和上一个node有没被布的则跳出循环,认为这个环还没完全被布没法判断，对本个环的检查认为没有问题,跳出本层循环，回到外层循环检查下一个环。
         if (m_mappingTiming.find(dfgNode) == m_mappingTiming.end() or
             m_mappingTiming.find(lastDFGNode) == m_mappingTiming.end()) {
           totalTime = 0;
           break;
         } else {
+					//对于可能完整的cycle,当前Node已经被布，上一个也已被布，计算totalTime
           int t1 = m_mappingTiming[lastDFGNode];
           int t2 = m_mappingTiming[dfgNode];
           while (t1 >= t2) {
@@ -1006,12 +1012,14 @@ bool Mapper::tryToRoute(CGRA* t_cgra, DFG* t_dfg, int t_II,
         }
         lastDFGNode = dfgNode;
       }
+			//如果环中完整部分的totalTime>II则认为是不合法的，直接返回失败
       if (totalTime > t_II) {
         cout<<"[DEBUG] cannot route due to II is violated for backward cycle"<<endl;
         return false;
       }
     }
   }
+	//给distance，timing，previous，searchPool结构赋初值timing[t_srcDFGNode]的初始化在前面已进行
   for (int i=0; i<t_cgra->getRows(); ++i) {
     for (int j=0; j<t_cgra->getColumns(); ++j) {
       CGRANode* node = t_cgra->nodes[i][j];
@@ -1025,10 +1033,13 @@ bool Mapper::tryToRoute(CGRA* t_cgra, DFG* t_dfg, int t_II,
       searchPool.push_back(t_cgra->nodes[i][j]);
     }
   }
+	//给起始CGRANode的距离赋值为0,作为路径的起始
   distance[t_srcCGRANode] = 0;
+	//在searchPool中进行寻找，每次删除一个cost最小的CGRA节点，第一个被删除的是srcCGRANode,然后会遍历srcCGRANode节点的所有邻节点，当distance比原来小时修改其distance，从srcCGRANode到此节点的难易程度即其cost，所以第二次删除的一定是srcCGRANode中的一个邻节点，同样会修改这个节点的邻节点的cost,直到找到目标CGRANode时退出。每次都记录一个previous，即记录当前节点的上一个节点是哪个，即记录了一条路径。
   while (searchPool.size()!=0) {
     int minCost = m_maxMappingCycle + 1;
     CGRANode* minNode;
+		//在searchPool中对所有的CGRANode进行遍历，寻找到distance最小的node,第一次必是srcCGRANode
     for (CGRANode* currentNode: searchPool) {
       if (distance[currentNode] < minCost) {
         minCost = distance[currentNode];
@@ -1066,6 +1077,7 @@ bool Mapper::tryToRoute(CGRA* t_cgra, DFG* t_dfg, int t_II,
   }
 
   // Construct the shortest path for routing.
+	//根据previous来生成一条从srcCGRANode到dstCGRANode的路径
   map<CGRANode*, int> path;
   CGRANode* u = t_dstCGRANode;
   if (previous[u] != NULL or u == t_srcCGRANode) {
